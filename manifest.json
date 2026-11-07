@@ -1,0 +1,80 @@
+[
+  {
+    "code": "AR",
+    "name": "Argentina",
+    "city": "Buenos Aires",
+    "color": "#267594",
+    "shape": "ticket",
+    "icon": "sun",
+    "serial": "ARG · EZE",
+    "file": "svg/ar.svg",
+    "cleanFile": "svg/clean/ar.svg",
+    "bytes": 3374,
+    "cleanBytes": 1420
+  },
+  {
+    "code": "BR",
+    "name": "Brasil",
+    "city": "Rio de Janeiro",
+    "color": "#ad6016",
+    "shape": "oval",
+    "icon": "mountain",
+    "serial": "BRA · GIG",
+    "file": "svg/br.svg",
+    "cleanFile": "svg/clean/br.svg",
+    "bytes": 3256,
+    "cleanBytes": 1302
+  },
+  {
+    "code": "IT",
+    "name": "Italia",
+    "city": "Roma",
+    "color": "#316249",
+    "shape": "round",
+    "icon": "arch",
+    "serial": "ITA · FCO",
+    "file": "svg/it.svg",
+    "cleanFile": "svg/clean/it.svg",
+    "bytes": 3222,
+    "cleanBytes": 1268
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "city": "Tokyo",
+    "color": "#b33743",
+    "shape": "square",
+    "icon": "torii",
+    "serial": "JPN · HND",
+    "file": "svg/jp.svg",
+    "cleanFile": "svg/clean/jp.svg",
+    "bytes": 3309,
+    "cleanBytes": 1355
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "city": "New York",
+    "color": "#354a7b",
+    "shape": "hexagon",
+    "icon": "star",
+    "serial": "USA · JFK",
+    "file": "svg/us.svg",
+    "cleanFile": "svg/clean/us.svg",
+    "bytes": 3221,
+    "cleanBytes": 1267
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "city": "Paris",
+    "color": "#745377",
+    "shape": "diamond",
+    "icon": "tower",
+    "serial": "FRA · CDG",
+    "file": "svg/fr.svg",
+    "cleanFile": "svg/clean/fr.svg",
+    "bytes": 3246,
+    "cleanBytes": 1292
+  }
+]

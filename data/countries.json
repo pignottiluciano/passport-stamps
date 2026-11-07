@@ -1,0 +1,8 @@
+[
+  {"code":"AR","name":"Argentina","city":"Buenos Aires","color":"#267594","shape":"ticket","icon":"sun","serial":"ARG · EZE"},
+  {"code":"BR","name":"Brasil","city":"Rio de Janeiro","color":"#ad6016","shape":"oval","icon":"mountain","serial":"BRA · GIG"},
+  {"code":"IT","name":"Italia","city":"Roma","color":"#316249","shape":"round","icon":"arch","serial":"ITA · FCO"},
+  {"code":"JP","name":"Japan","city":"Tokyo","color":"#b33743","shape":"square","icon":"torii","serial":"JPN · HND"},
+  {"code":"US","name":"United States","city":"New York","color":"#354a7b","shape":"hexagon","icon":"star","serial":"USA · JFK"},
+  {"code":"FR","name":"France","city":"Paris","color":"#745377","shape":"diamond","icon":"tower","serial":"FRA · CDG"}
+]
