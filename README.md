@@ -16,6 +16,10 @@ npm run preview
 
 Abrí http://127.0.0.1:4173/preview/. También podés abrir `preview/index.html` directamente en el navegador.
 
+## Prueba de tinta
+
+Hay una [comparación experimental de tres acabados](experiments/ink/README.md) para los seis países. Se genera con `node experiments/ink/build.mjs` y se abre en `/experiments/ink/` con el mismo servidor. Los originales y el contenido del paquete npm no cambian.
+
 ## Archivos
 
 | País | Tinta | Limpio |

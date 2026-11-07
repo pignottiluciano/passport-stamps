@@ -1,0 +1,140 @@
+[
+  {
+    "code": "AR",
+    "name": "Argentina",
+    "clean": {
+      "bytes": 1420,
+      "gzipBytes": 732
+    },
+    "current": {
+      "bytes": 3374,
+      "gzipBytes": 1262,
+      "file": "../../svg/ar.svg"
+    },
+    "stamped": {
+      "bytes": 2383,
+      "gzipBytes": 1093,
+      "file": "svg/ar-stamped.svg"
+    },
+    "worn": {
+      "bytes": 2381,
+      "gzipBytes": 1094,
+      "file": "svg/ar-worn.svg"
+    }
+  },
+  {
+    "code": "BR",
+    "name": "Brasil",
+    "clean": {
+      "bytes": 1302,
+      "gzipBytes": 673
+    },
+    "current": {
+      "bytes": 3256,
+      "gzipBytes": 1208,
+      "file": "../../svg/br.svg"
+    },
+    "stamped": {
+      "bytes": 2265,
+      "gzipBytes": 1040,
+      "file": "svg/br-stamped.svg"
+    },
+    "worn": {
+      "bytes": 2263,
+      "gzipBytes": 1041,
+      "file": "svg/br-worn.svg"
+    }
+  },
+  {
+    "code": "IT",
+    "name": "Italia",
+    "clean": {
+      "bytes": 1268,
+      "gzipBytes": 611
+    },
+    "current": {
+      "bytes": 3222,
+      "gzipBytes": 1138,
+      "file": "../../svg/it.svg"
+    },
+    "stamped": {
+      "bytes": 2231,
+      "gzipBytes": 978,
+      "file": "svg/it-stamped.svg"
+    },
+    "worn": {
+      "bytes": 2229,
+      "gzipBytes": 978,
+      "file": "svg/it-worn.svg"
+    }
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "clean": {
+      "bytes": 1355,
+      "gzipBytes": 665
+    },
+    "current": {
+      "bytes": 3309,
+      "gzipBytes": 1190,
+      "file": "../../svg/jp.svg"
+    },
+    "stamped": {
+      "bytes": 2318,
+      "gzipBytes": 1033,
+      "file": "svg/jp-stamped.svg"
+    },
+    "worn": {
+      "bytes": 2316,
+      "gzipBytes": 1033,
+      "file": "svg/jp-worn.svg"
+    }
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "clean": {
+      "bytes": 1267,
+      "gzipBytes": 636
+    },
+    "current": {
+      "bytes": 3221,
+      "gzipBytes": 1162,
+      "file": "../../svg/us.svg"
+    },
+    "stamped": {
+      "bytes": 2230,
+      "gzipBytes": 999,
+      "file": "svg/us-stamped.svg"
+    },
+    "worn": {
+      "bytes": 2228,
+      "gzipBytes": 1002,
+      "file": "svg/us-worn.svg"
+    }
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "clean": {
+      "bytes": 1292,
+      "gzipBytes": 662
+    },
+    "current": {
+      "bytes": 3246,
+      "gzipBytes": 1183,
+      "file": "../../svg/fr.svg"
+    },
+    "stamped": {
+      "bytes": 2255,
+      "gzipBytes": 1029,
+      "file": "svg/fr-stamped.svg"
+    },
+    "worn": {
+      "bytes": 2253,
+      "gzipBytes": 1030,
+      "file": "svg/fr-worn.svg"
+    }
+  }
+]

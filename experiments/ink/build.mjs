@@ -1,0 +1,46 @@
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { gzipSync } from 'node:zlib';
+
+// Isolated visual experiment. Does not change the published artwork or manifest.
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const here = resolve(root, 'experiments/ink');
+const countries = JSON.parse(await readFile(resolve(root, 'manifest.json'), 'utf8'));
+await mkdir(resolve(here,'svg'), {recursive:true});
+const styles = [
+  {key:'stamped', label:'Estampado', frequency:'.67', slope:'10', intercept:'-2.4', pressure:'.013 .021', pressureSlope:'1', pressureIntercept:'.5', displacement:'.85', blur:'.17'},
+  {key:'worn', label:'Gastado', frequency:'.5', slope:'10', intercept:'-3.3', pressure:'.019 .027', pressureSlope:'1.8', pressureIntercept:'-.05', displacement:'1.15', blur:'.12'}
+];
+function finish(svg, country, s) {
+  const id = `ink-${country.code.toLowerCase()}-${s.key}`;
+  // Local ink density at two scales: fine paper grain + broad pressure variation.
+  // Grain modulates alpha only; the paper remains completely transparent.
+  const defs = `<defs><filter id="${id}" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="${s.frequency}" numOctaves="3" seed="17" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0"/><feComponentTransfer><feFuncA type="linear" slope="${s.slope}" intercept="${s.intercept}"/></feComponentTransfer><feComposite in="SourceGraphic" operator="in" result="porous"/><feTurbulence type="fractalNoise" baseFrequency="${s.pressure}" numOctaves="2" seed="41" result="pressure"/><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0"/><feComponentTransfer><feFuncA type="linear" slope="${s.pressureSlope}" intercept="${s.pressureIntercept}"/></feComponentTransfer><feComposite in="porous" operator="in" result="ink"/><feDisplacementMap in="ink" in2="pressure" scale="${s.displacement}" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation="${s.blur}"/></filter></defs>`;
+  if (!svg.includes('<g color=')) throw Error(`Unknown SVG structure: ${country.code}`);
+  return svg.replace('<g color=', `${defs}<g filter="url(#${id})" color=`);
+}
+const measure = (content) => ({bytes:Buffer.byteLength(content), gzipBytes:gzipSync(content,{level:9}).length});
+const metrics = [];
+for (const c of countries) {
+  const clean = await readFile(resolve(root,c.cleanFile),'utf8');
+  const current = await readFile(resolve(root,c.file),'utf8');
+  const record = {code:c.code,name:c.name,clean:measure(clean),current:{...measure(current),file:`../../${c.file}`}};
+  for (const s of styles) {
+    const content = finish(clean,c,s);
+    const file = `svg/${c.code.toLowerCase()}-${s.key}.svg`;
+    if (Buffer.byteLength(content)>10240) throw Error(`Over budget: ${file}`);
+    await writeFile(resolve(here,file),content);
+    record[s.key] = {...measure(content),file};
+  }
+  metrics.push(record);
+}
+await writeFile(resolve(here,'metrics.json'),JSON.stringify(metrics,null,2)+'\n');
+const kb = bytes => (bytes/1000).toFixed(2)+' KB';
+const columns = [{key:'current',title:'01 / Sutil actual',copy:'El punto de partida: líneas nítidas con pequeños cortes.'},{key:'stamped',title:'02 / Estampado',copy:'Grano fino, presión desigual y bordes apenas absorbidos.'},{key:'worn',title:'03 / Gastado',copy:'Más poros y zonas con poca tinta, como una almohadilla seca.'}];
+const panels = metrics.map((c,i)=>`<section class="country" id="${c.code.toLowerCase()}"${i ? ' hidden' : ''}><div class="cards">${columns.map(s=>`<article><div class="caption"><span>${s.title}</span><span>${kb(c[s.key].bytes)}</span></div><div class="paper"><img src="${c[s.key].file}" width="400" height="300" alt="${c.name}, acabado ${s.title}"/></div><div class="details"><p>${s.copy}</p><a href="${c[s.key].file}" download>Descargar SVG ↗</a></div><div class="small"><span>A 140 px</span><img src="${c[s.key].file}" width="140" height="105" alt="${c.name} a tamaño pequeño"/></div></article>`).join('')}</div></section>`).join('');
+const rows = metrics.map(c=>`<tr><th scope="row">${c.code} · ${c.name}</th><td>${kb(c.clean.bytes)}</td><td>${kb(c.current.bytes)}</td><td>${kb(c.stamped.bytes)}</td><td>${kb(c.worn.bytes)}</td></tr>`).join('');
+const totals = Object.fromEntries(['clean','current','stamped','worn'].map(k=>[k,metrics.reduce((sum,c)=>sum+c[k].bytes,0)]));
+await writeFile(resolve(here,'index.html'),`<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prueba de tinta — Passport Stamps</title><style>*{box-sizing:border-box}body{margin:0;background:#eeece5;color:#27312f;font:14px/1.6 Arial,Helvetica,sans-serif}main{max-width:1440px;margin:auto;padding:28px 32px 40px}header{display:flex;justify-content:space-between;border-bottom:1px solid #c9cbc0;padding-bottom:16px;font-size:10px;letter-spacing:2px;text-transform:uppercase}a{color:inherit;text-underline-offset:4px}h1{font:normal 52px/1.1 Georgia,serif;letter-spacing:-2px;margin:32px 0 14px}h1 em{color:#a0543d}.intro{max-width:660px;color:#59625c;margin:0 0 22px}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}button{font:inherit;cursor:pointer;border:1px solid #bfc3b7;background:transparent;padding:7px 13px;color:inherit;border-radius:3px}button[aria-pressed=true]{background:#2d433c;border-color:#2d433c;color:#fff}button:focus-visible,a:focus-visible{outline:2px solid #a0543d;outline-offset:4px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}article{background:#fbf9f2;border:1px solid #d4d6ca;min-width:0}.caption{padding:15px;display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:1px;text-transform:uppercase}.paper{background:#fffdf7;background-image:radial-gradient(#897b6110 .65px,transparent .65px);background-size:4px 4px;padding:2px 8px}.paper img{display:block;width:100%;height:auto}.details{padding:12px 16px 16px}.details p{margin:0 0 8px;color:#687169;font-size:12px;min-height:38px}.details a{font-size:11px}.small{border-top:1px solid #e1e3d7;display:flex;align-items:center;justify-content:space-around;padding:6px 10px;font-size:10px;letter-spacing:1px;color:#677368}.small img{object-fit:contain}h2{font:normal 28px Georgia,serif;margin:32px 0 12px}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px;background:#f9f8f2}th,td{padding:11px 14px;border-bottom:1px solid #dedfd3;text-align:right;white-space:nowrap}th:first-child{text-align:left}thead th{font-size:10px;letter-spacing:1px;text-transform:uppercase}tfoot{font-weight:bold}.note{color:#657166;max-width:820px;font-size:12px;margin-top:16px}footer{margin-top:26px;border-top:1px solid #c9cbc0;padding-top:15px;font-size:10px;letter-spacing:1px;text-transform:uppercase}@media(max-width:800px){.cards{grid-template-columns:1fr}main{padding:22px 16px}.paper{max-width:520px;margin:auto}h1{font-size:42px}.details p{min-height:0}.caption{font-size:10px}header{letter-spacing:1px}.small{justify-content:center;gap:30px}}</style><main><header><span>Passport Stamps / Laboratorio de tinta</span><a href="../../preview/">Ver colección original ↗</a></header><h1>Menos perfecto.<br><em>Más estampado.</em></h1><p class="intro">Mismo dibujo, tres acabados. Compará el grano, la presión y la legibilidad. El fondo de papel pertenece a esta página: los SVG siguen siendo transparentes.</p><nav class="controls" aria-label="Elegir país">${metrics.map((c,i)=>`<button type="button" data-country="${c.code.toLowerCase()}" aria-pressed="${i===0}">${c.code} · ${c.name}</button>`).join('')}</nav>${panels}<h2>Lo que pesa cada acabado</h2><div class="table-scroll"><table><thead><tr><th scope="col">País</th><th scope="col">Limpio</th><th scope="col">Sutil actual</th><th scope="col">Estampado</th><th scope="col">Gastado</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><th scope="row">Los seis juntos</th>${['clean','current','stamped','worn'].map(k=>`<td>${kb(totals[k])}</td>`).join('')}</tr></tfoot></table></div><p class="note">Peso real de los archivos sin compresión; 1 KB = 1.000 bytes. Los filtros generan el grano al dibujar: menos bytes no implica menos trabajo de renderizado. Los nuevos acabados son pruebas y todavía no reemplazan a los originales. La tipografía no cambió en este experimento.</p><footer>Estudio 01 · Sin bitmaps incrustados · Sin descargas externas</footer></main><script>const buttons=document.querySelectorAll('[data-country]');for(const button of buttons)button.addEventListener('click',()=>{for(const b of buttons)b.setAttribute('aria-pressed',String(b===button));for(const section of document.querySelectorAll('.country'))section.hidden=section.id!==button.dataset.country;});</script></html>\n`);
+console.table(metrics.map(c=>({country:c.code,clean:c.clean.bytes,current:c.current.bytes,stamped:c.stamped.bytes,worn:c.worn.bytes,stampedGzip:c.stamped.gzipBytes,wornGzip:c.worn.gzipBytes})));
+console.log('Totals (raw bytes):',totals);
