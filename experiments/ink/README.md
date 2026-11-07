@@ -1,6 +1,6 @@
 # Estudio de tinta 01
 
-Comparación de los seis diseños con su acabado sutil original, un acabado estampado y otro gastado. **Gastado es el acabado elegido para la colección principal.** Los originales sutiles se conservan en `baseline/`; la comparación no depende del acabado principal actual. Esta prueba no se incluye en el paquete npm.
+Comparación de los seis diseños con su acabado sutil original, un acabado estampado y otro gastado. **Gastado es el acabado elegido para la colección principal.** Los originales sutiles se conservan en `baseline/`, con sus fuentes limpias históricas en `baseline/clean/`; la comparación mantiene las composiciones anteriores y no depende del dibujo ni del acabado principal actual. Mendoza no forma parte de esta prueba histórica. Esta prueba no se incluye en el paquete npm.
 
 ## Reproducir
 

@@ -7,11 +7,15 @@
     "shape": "ticket",
     "icon": "sun",
     "serial": "ARG · EZE",
+    "id": "ar",
+    "kind": "country",
+    "countryName": "Argentina",
+    "iconLabel": "Sol",
     "finish": "worn",
     "file": "svg/ar.svg",
     "cleanFile": "svg/clean/ar.svg",
-    "bytes": 2381,
-    "cleanBytes": 1420
+    "bytes": 2597,
+    "cleanBytes": 1636
   },
   {
     "code": "BR",
@@ -19,13 +23,17 @@
     "city": "Rio de Janeiro",
     "color": "#ad6016",
     "shape": "oval",
-    "icon": "mountain",
+    "icon": "christ",
     "serial": "BRA · GIG",
+    "id": "br",
+    "kind": "country",
+    "countryName": "Brasil",
+    "iconLabel": "Cristo Redentor",
     "finish": "worn",
     "file": "svg/br.svg",
     "cleanFile": "svg/clean/br.svg",
-    "bytes": 2263,
-    "cleanBytes": 1302
+    "bytes": 2296,
+    "cleanBytes": 1335
   },
   {
     "code": "IT",
@@ -33,13 +41,17 @@
     "city": "Roma",
     "color": "#316249",
     "shape": "round",
-    "icon": "arch",
+    "icon": "colosseum",
     "serial": "ITA · FCO",
+    "id": "it",
+    "kind": "country",
+    "countryName": "Italia",
+    "iconLabel": "Coliseo",
     "finish": "worn",
     "file": "svg/it.svg",
     "cleanFile": "svg/clean/it.svg",
-    "bytes": 2229,
-    "cleanBytes": 1268
+    "bytes": 2471,
+    "cleanBytes": 1510
   },
   {
     "code": "JP",
@@ -47,13 +59,17 @@
     "city": "Tokyo",
     "color": "#b33743",
     "shape": "square",
-    "icon": "torii",
+    "icon": "fuji",
     "serial": "JPN · HND",
+    "id": "jp",
+    "kind": "country",
+    "countryName": "Japan",
+    "iconLabel": "Monte Fuji",
     "finish": "worn",
     "file": "svg/jp.svg",
     "cleanFile": "svg/clean/jp.svg",
-    "bytes": 2316,
-    "cleanBytes": 1355
+    "bytes": 2303,
+    "cleanBytes": 1342
   },
   {
     "code": "US",
@@ -61,13 +77,17 @@
     "city": "New York",
     "color": "#354a7b",
     "shape": "hexagon",
-    "icon": "star",
+    "icon": "liberty",
     "serial": "USA · JFK",
+    "id": "us",
+    "kind": "country",
+    "countryName": "United States",
+    "iconLabel": "Estatua de la Libertad",
     "finish": "worn",
     "file": "svg/us.svg",
     "cleanFile": "svg/clean/us.svg",
-    "bytes": 2228,
-    "cleanBytes": 1267
+    "bytes": 2479,
+    "cleanBytes": 1518
   },
   {
     "code": "FR",
@@ -77,10 +97,32 @@
     "shape": "diamond",
     "icon": "tower",
     "serial": "FRA · CDG",
+    "id": "fr",
+    "kind": "country",
+    "countryName": "France",
+    "iconLabel": "Torre Eiffel",
     "finish": "worn",
     "file": "svg/fr.svg",
     "cleanFile": "svg/clean/fr.svg",
-    "bytes": 2253,
-    "cleanBytes": 1292
+    "bytes": 2261,
+    "cleanBytes": 1300
+  },
+  {
+    "id": "ar-mendoza",
+    "code": "AR",
+    "kind": "destination",
+    "name": "Mendoza",
+    "countryName": "Argentina",
+    "city": "Mendoza",
+    "color": "#86435e",
+    "shape": "ticket",
+    "icon": "vineyard",
+    "iconLabel": "Uvas y cordillera de los Andes",
+    "serial": "ARG · MDZ",
+    "finish": "worn",
+    "file": "svg/ar-mendoza.svg",
+    "cleanFile": "svg/clean/ar-mendoza.svg",
+    "bytes": 2568,
+    "cleanBytes": 1591
   }
 ]

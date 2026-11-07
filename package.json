@@ -2,7 +2,7 @@
   "name": "@passport-stamps/core",
   "version": "0.1.0",
   "private": true,
-  "description": "Lightweight, original passport-style country stamps in SVG",
+  "description": "Lightweight, original passport-style country and destination stamps in SVG",
   "type": "module",
   "license": "MIT",
   "files": ["svg", "manifest.json", "README.md", "LICENSE"],

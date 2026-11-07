@@ -7,12 +7,12 @@ import { styles, finish } from '../../scripts/ink.mjs';
 // Isolated visual experiment. Does not change the published artwork or manifest.
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const here = resolve(root, 'experiments/ink');
-const countries = JSON.parse(await readFile(resolve(root, 'manifest.json'), 'utf8'));
+const countries = JSON.parse(await readFile(resolve(root, 'manifest.json'), 'utf8')).filter(c => c.kind !== 'destination');
 await mkdir(resolve(here,'svg'), {recursive:true});
 const measure = (content) => ({bytes:Buffer.byteLength(content), gzipBytes:gzipSync(content,{level:9}).length});
 const metrics = [];
 for (const c of countries) {
-  const clean = await readFile(resolve(root,c.cleanFile),'utf8');
+  const clean = await readFile(resolve(here,`baseline/clean/${c.code.toLowerCase()}.svg`),'utf8');
   const baselineFile = `baseline/${c.code.toLowerCase()}.svg`;
   const current = await readFile(resolve(here,baselineFile),'utf8');
   const record = {code:c.code,name:c.name,clean:measure(clean),current:{...measure(current),file:baselineFile}};

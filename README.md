@@ -1,12 +1,12 @@
 # Passport Stamps
 
-Colección original de sellos de viaje en SVG, pensada para webs, apps y mapas de países visitados. Primera edición: Argentina, Brasil, Italia, Japón, Estados Unidos y Francia.
+Biblioteca original de sellos de viaje para webs, apps y mapas. SVG independientes de cualquier framework, con fondo transparente y dos acabados: **gastado** (principal) y **limpio**.
 
-Cada destino tiene una composición propia y dos acabados: **gastado** como acabado principal de tinta y **limpio** sin textura. Fondo transparente, sin imágenes incrustadas, fuentes descargables ni dependencias de ejecución.
+La primera colección reúne seis países y Mendoza como destino de Argentina. Cada sello tiene su propia composición y un símbolo vectorial original, sin imágenes incrustadas ni recursos externos.
 
 ## Ver la colección
 
-Requiere Node.js 20+ para generar/verificar archivos y Python 3 para el servidor opcional. No requiere instalar paquetes.
+Node.js 20+ para generar y verificar. Python 3 para el servidor opcional. No requiere instalar paquetes.
 
 ```sh
 npm run build
@@ -14,52 +14,63 @@ npm run check
 npm run preview
 ```
 
-Abrí http://127.0.0.1:4173/preview/. También podés abrir `preview/index.html` directamente en el navegador.
+Abrí http://127.0.0.1:4173/preview/ o directamente `preview/index.html`.
 
-## Prueba de tinta
+## Colección
 
-Hay una [comparación experimental de tres acabados](experiments/ink/README.md) para los seis países. Se genera con `node experiments/ink/build.mjs` y se abre en `/experiments/ink/` con el mismo servidor. El acabado gastado fue elegido para la colección principal. La prueba conserva los SVG sutiles originales como referencia histórica.
+| ID | Tipo | País o destino | Símbolo | Gastado | Limpio |
+| --- | --- | --- | --- | --- | --- |
+| `ar` | País | Argentina | Sol | [SVG](svg/ar.svg) | [SVG](svg/clean/ar.svg) |
+| `br` | País | Brasil | Cristo Redentor | [SVG](svg/br.svg) | [SVG](svg/clean/br.svg) |
+| `it` | País | Italia | Coliseo | [SVG](svg/it.svg) | [SVG](svg/clean/it.svg) |
+| `jp` | País | Japón | Monte Fuji | [SVG](svg/jp.svg) | [SVG](svg/clean/jp.svg) |
+| `us` | País | Estados Unidos | Estatua de la Libertad | [SVG](svg/us.svg) | [SVG](svg/clean/us.svg) |
+| `fr` | País | Francia | Torre Eiffel | [SVG](svg/fr.svg) | [SVG](svg/clean/fr.svg) |
+| `ar-mendoza` | Destino | Mendoza, Argentina | Uvas y Andes | [SVG](svg/ar-mendoza.svg) | [SVG](svg/clean/ar-mendoza.svg) |
 
-## Archivos
+En los sellos de país, el país es protagonista y una ciudad aparece como referencia secundaria. Los destinos tienen un sello propio con su país de pertenencia. La elección de un monumento es una referencia cultural de diseño, no un símbolo nacional oficial.
 
-| País | Gastado (principal) | Limpio |
-| --- | --- | --- |
-| Argentina | [ar.svg](svg/ar.svg) | [ar.svg](svg/clean/ar.svg) |
-| Brasil | [br.svg](svg/br.svg) | [br.svg](svg/clean/br.svg) |
-| Italia | [it.svg](svg/it.svg) | [it.svg](svg/clean/it.svg) |
-| Japón | [jp.svg](svg/jp.svg) | [jp.svg](svg/clean/jp.svg) |
-| Estados Unidos | [us.svg](svg/us.svg) | [us.svg](svg/clean/us.svg) |
-| Francia | [fr.svg](svg/fr.svg) | [fr.svg](svg/clean/fr.svg) |
+Los gastados pesan aproximadamente **2,26–2,60 KB** cada uno, sin compresión HTTP; 1 KB = 1.000 bytes. El generador rechaza archivos mayores de 10 KiB. `manifest.json` contiene las rutas y los pesos exactos.
 
-Los archivos limpios pesan aproximadamente **1,27–1,42 KB** y los gastados **2,23–2,38 KB** (1 KB = 1.000 bytes) sin compresión HTTP. `manifest.json` registra el peso exacto, país, ciudad, color y rutas. El generador rechaza archivos mayores de 10 KiB.
+## Usar en React, Angular o HTML
 
-## Usar en una web o en Angular
-
-Copiá los SVG que necesites a los assets públicos de tu aplicación. No hace falta un componente ni una dependencia de Angular para mostrar una imagen.
+Copiá los archivos que necesites a los assets públicos de tu aplicación. No hace falta un componente específico.
 
 ```html
-<img src="/stamps/ar.svg" alt="Argentina — Buenos Aires" width="240" height="180">
+<img src="/stamps/ar-mendoza.svg" alt="Mendoza, Argentina — Uvas y Andes" width="240" height="180">
 ```
 
-En Angular 20+, por ejemplo, copiá `svg/ar.svg` a `public/stamps/ar.svg`. En una lista, usá `manifest.json` como catálogo y cargá solo los destinos visibles.
+En Angular 20+, por ejemplo, copiá el SVG a `public/stamps/ar-mendoza.svg`. React admite el mismo elemento de imagen. El paquete no depende de ninguno de los frameworks.
 
-Todos comparten un `viewBox` de 400 × 300 con espacio transparente alrededor del diseño. El texto permanece editable y usa fuentes del sistema: Arial/Helvetica, Georgia y la fuente japonesa disponible. Puede haber diferencias tipográficas entre plataformas. Esta edición prioriza peso y edición; no promete una reproducción idéntica en todos los sistemas.
+Los textos usan fuentes del sistema (Arial/Helvetica, Georgia y una fuente japonesa disponible), por lo que puede haber diferencias entre plataformas. Las letras todavía no están convertidas a curvas. Todos los SVG tienen un lienzo de 400 × 300 y espacio transparente alrededor del sello.
 
-Para modificar un color, editá el dato en `data/countries.json` y regenerá. Un SVG usado mediante `<img>` no hereda el color CSS de la página.
+## Catálogo y estructura
 
-## Sumar países y editar diseños
+- `data/stamps.json`: datos de países y destinos, color, forma y símbolo.
+- `scripts/build.mjs`: símbolos, composiciones y generación de archivos.
+- `scripts/ink.mjs`: acabado gastado determinista compartido con las pruebas.
+- `svg/` y `svg/clean/`: entregables generados, incluidos en Git para uso directo.
+- `manifest.json`: catálogo con metadatos y tamaños reales.
+- `preview/`: galería estática, sin framework ni JavaScript de aplicación.
 
-- `data/countries.json`: códigos de país de dos letras, nombre, ciudad, color, forma, símbolo y código decorativo.
-- `scripts/build.mjs`: formas y símbolos vectoriales originales; `composition()` define la composición de cada país.
-- `svg/` y `svg/clean/`: entregables generados, incluidos en Git para usarlos directamente.
-- `preview/`: catálogo estático, sin framework ni JavaScript en el navegador.
+Cada entrada tiene un `id` único: `ar` para un país, `ar-mendoza` para un destino. `code` es el código ISO del país al que pertenece; por eso Argentina y Mendoza comparten `code: "AR"`. Usá **`id` como clave** en listas y búsquedas.
 
-Para sumar un país, agregá sus datos y una composición explícita en el generador; luego corré `npm run build` y `npm run check`. El generador aplica filtros SVG deterministas para simular poros, presión desigual y absorción de tinta. `scripts/ink.mjs` comparte el tratamiento con el experimento; no incorpora bitmaps ni recursos externos. Compartimos el sistema de dibujo, pero cada destino tiene su propia distribución.
+`kind` distingue `country` de `destination`. `countryName` identifica al país, `city` la ciudad de referencia, `icon` el dibujo interno e `iconLabel` su descripción. `file` y `cleanFile` apuntan a los entregables. Las rutas anteriores de los seis países siguen vigentes.
 
-No editar los SVG generados directamente: la próxima generación reemplaza esos cambios. Si insertás el mismo SVG varias veces como código inline, asigná identificadores únicos a sus títulos y filtros; usar `<img>` evita conflictos de IDs.
+## Editar o sumar sellos
 
-## Alcance y licencia
+Agregá los datos en `data/stamps.json` y una composición explícita en `composition()` del generador. Dibujá un símbolo simple y reconocible, revisá el SVG en grande y en pequeño, y corré `npm run build` seguido de `npm run check`.
 
-Diseños decorativos originales inspirados en sellos de viaje. Los códigos de aeropuertos son detalles gráficos: estos sellos no representan documentos ni marcas migratorias oficiales. No se copiaron ni vectorizaron los recursos de referencia.
+No edites los SVG generados directamente: regenerar reemplaza esos cambios. Para cambiar un color, editá los datos y regenerá. Un SVG mostrado con `<img>` no hereda el color CSS de la página.
 
-Código y arte bajo [MIT](LICENSE), incluido uso comercial. El paquete está marcado como privado para evitar publicaciones accidentales; todavía no está publicado en npm ni vinculado a un remoto de Git.
+Los filtros simulan poros, variación de presión y absorción sin agregar un fondo de papel. Su peso reducido no equivale a costo de renderizado nulo. Antes de usar muchos sellos juntos, probalos en los dispositivos de destino. Si insertás SVG como código inline repetido, asigná IDs únicos a títulos y filtros; con `<img>` no hay conflictos entre documentos.
+
+## Prueba histórica de tinta
+
+La [comparación de acabados](experiments/ink/README.md) conserva los seis diseños anteriores y sus medidas. Se reproduce con `node experiments/ink/build.mjs` y se abre en `/experiments/ink/`. Se mantienen sus dibujos históricos para que los resultados sigan siendo comparables; Mendoza no forma parte de esa prueba. Los experimentos no se distribuyen en el paquete npm.
+
+## Licencia y distribución
+
+Código y arte bajo [MIT](LICENSE), incluido uso comercial. Los dibujos son originales: no se copiaron ni vectorizaron recursos de terceros. Son sellos decorativos, no documentos ni marcas migratorias oficiales.
+
+El paquete sigue privado, sin publicar en npm ni vincular a un remoto de Git. Distribuye SVG, catálogo y documentación; el generador se mantiene en el repositorio.
