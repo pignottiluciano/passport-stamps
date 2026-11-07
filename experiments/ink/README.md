@@ -1,6 +1,6 @@
 # Estudio de tinta 01
 
-Comparación de los seis diseños con su acabado actual, un acabado estampado y otro gastado. Los originales de `svg/` y el catálogo de distribución permanecen intactos. Esta prueba no se incluye en el paquete npm.
+Comparación de los seis diseños con su acabado sutil original, un acabado estampado y otro gastado. **Gastado es el acabado elegido para la colección principal.** Los originales sutiles se conservan en `baseline/`; la comparación no depende del acabado principal actual. Esta prueba no se incluye en el paquete npm.
 
 ## Reproducir
 
@@ -18,7 +18,7 @@ Abrí http://127.0.0.1:4173/experiments/ink/ y elegí un país. Cada acabado se 
 
 `metrics.json` registra bytes reales y tamaño gzip de cada archivo. La tabla de la página muestra KB decimales (1 KB = 1.000 bytes), sin compresión HTTP. Los tamaños gzip son una medición de compresión local, no una afirmación de que el servidor de vista previa use gzip.
 
-| País | Limpio (B) | Sutil actual (B) | Estampado (B) | Gastado (B) |
+| País | Limpio (B) | Sutil original (B) | Estampado (B) | Gastado (B) |
 | --- | ---: | ---: | ---: | ---: |
 | AR | 1420 | 3374 | 2383 | 2381 |
 | BR | 1302 | 3256 | 2265 | 2263 |
@@ -28,7 +28,7 @@ Abrí http://127.0.0.1:4173/experiments/ink/ y elegí un país. Cada acabado se 
 | FR | 1292 | 3246 | 2255 | 2253 |
 | **Total** | **7904** | **19628** | **13682** | **13670** |
 
-Los dos acabados nuevos pesan aproximadamente un 30% menos que el sutil actual. El sutil actual enumera muchos cortes como paths; los nuevos describen el grano con un filtro compacto. El gastado tiene casi el mismo peso que el estampado porque cambia los parámetros, no agrega geometría.
+Los dos acabados nuevos pesan aproximadamente un 30% menos que el sutil original. El sutil original enumera muchos cortes como paths; los nuevos describen el grano con un filtro compacto. El gastado tiene casi el mismo peso que el estampado porque cambia los parámetros, no agrega geometría.
 
 ## Tratamiento visual
 
@@ -38,7 +38,7 @@ La tipografía es la misma que en los originales para aislar el efecto de tinta;
 
 ## Observaciones y límites
 
-Se revisaron visualmente los seis países y sus miniaturas en el navegador integrado, además del selector de país. El estampado conserva mejor los detalles pequeños; el gastado pierde parte de los textos secundarios. Mi elección inicial para uso general es estampado; gastado funciona mejor a tamaños mayores.
+Se revisaron visualmente los seis países y sus miniaturas en el navegador integrado, además del selector de país. El estampado conserva mejor los detalles pequeños; el gastado pierde parte de los textos secundarios. Se eligió gastado por preferencia visual del usuario; a tamaños pequeños pierde más detalle secundario que estampado.
 
 Se verificaron XML, títulos, referencias locales de filtros y ausencia de imágenes incrustadas o recursos externos. La generación es determinista y `npm run check` sigue verificando los originales.
 

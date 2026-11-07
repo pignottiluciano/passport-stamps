@@ -1,6 +1,7 @@
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
+import { styles, finish } from './ink.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const countries = JSON.parse(await readFile(resolve(root, 'data/countries.json'), 'utf8'));
@@ -37,35 +38,27 @@ function composition(c) {
     default: throw Error(`Missing composition: ${c.code}`);
   }
 }
-function distress() {
-  // Deterministic, sparse ink gaps; no bitmap texture or expensive SVG filters.
-  let seed = 421;
-  const random = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-  return Array.from({length:65}, () => {
-    const x = Math.round(25+random()*350), y = Math.round(20+random()*260);
-    return `<path d="M${x} ${y}l${(1+random()*3).toFixed(1)} -1"/>`;
-  }).join('');
+function stamp(c) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-labelledby="title-${c.code}"><title id="title-${c.code}">${xml(c.name)} — ${xml(c.city)} passport stamp</title><g color="${c.color}" fill="currentColor" font-family="Arial,Helvetica,sans-serif" text-anchor="middle"><g fill="none" stroke="currentColor">${frames[c.shape]}</g>${composition(c)}</g></svg>\n`;
 }
-function stamp(c, textured = true) {
-  const id = `ink-${c.code.toLowerCase()}`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-labelledby="title-${c.code}"><title id="title-${c.code}">${xml(c.name)} — ${xml(c.city)} passport stamp</title>${textured ? `<defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="300"><path fill="#fff" d="M0 0H400V300H0Z"/><g fill="none" stroke="#000" stroke-width="1.4" stroke-linecap="round">${distress()}</g></mask></defs>` : ''}<g color="${c.color}" fill="currentColor" font-family="Arial,Helvetica,sans-serif" text-anchor="middle"${textured ? ` mask="url(#${id})"` : ''}><g fill="none" stroke="currentColor">${frames[c.shape]}</g>${composition(c)}</g></svg>\n`;
-}
+const wornStyle = styles.find(style => style.key === 'worn');
 const files = new Map();
 const seen = new Set();
 const manifest = countries.map(c => {
   if (!/^[A-Z]{2}$/.test(c.code) || seen.has(c.code) || !frames[c.shape] || !icons[c.icon]) throw Error(`Invalid or duplicate country: ${c.code}`);
   seen.add(c.code);
   const filename = c.code.toLowerCase();
-  const textured = stamp(c), clean = stamp(c, false);
+  const clean = stamp(c);
+  const textured = finish(clean, c, wornStyle);
   for (const [path, content] of [[`svg/${filename}.svg`,textured],[`svg/clean/${filename}.svg`,clean]]) {
     if (Buffer.byteLength(content) > 10240) throw Error(`${path} exceeds the 10 KiB budget`);
     files.set(path, content);
   }
-  return {...c, file:`svg/${filename}.svg`, cleanFile:`svg/clean/${filename}.svg`, bytes:Buffer.byteLength(textured), cleanBytes:Buffer.byteLength(clean)};
+  return {...c, finish:'worn', file:`svg/${filename}.svg`, cleanFile:`svg/clean/${filename}.svg`, bytes:Buffer.byteLength(textured), cleanBytes:Buffer.byteLength(clean)};
 });
 files.set('manifest.json', JSON.stringify(manifest,null,2)+'\n');
-const cards = manifest.map(c => `<article><div class="meta"><span>${c.code} / ${xml(c.name)}</span><span>${(c.bytes/1024).toFixed(1)} KB</span></div><div class="art"><img src="../${c.file}" alt="Sello de ${xml(c.name)}, ${xml(c.city)}" width="400" height="300"></div><footer><span>${xml(c.city)}</span><div><a href="../${c.file}" download="${c.code.toLowerCase()}.svg">SVG con tinta ↗</a><a href="../${c.cleanFile}" download="${c.code.toLowerCase()}-clean.svg">Limpio ↗</a></div></footer></article>`).join('');
-files.set('preview/index.html', `<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Passport Stamps — Primera colección</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e8;color:#242d31;font-family:Arial,Helvetica,sans-serif}main{max-width:1300px;margin:auto;padding:42px 48px 32px}.top{display:flex;justify-content:space-between;border-bottom:1px solid #c7c9c0;padding-bottom:18px;font-size:11px;letter-spacing:2px;text-transform:uppercase}.intro{display:flex;justify-content:space-between;align-items:end;margin:36px 0 32px;gap:24px}h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-3px;font-size:64px;line-height:1;margin:0}h1 em{color:#9b4e39}p{font-size:14px;line-height:1.6;max-width:340px;margin:0;color:#59615f}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}article{background:#fcfaf5;border:1px solid #d9d9ce;border-radius:3px;overflow:hidden}.meta{padding:15px 18px;display:flex;justify-content:space-between;text-transform:uppercase;font-size:10px;letter-spacing:1.5px;color:#626a66}.art{padding:0 10px}.art img{display:block;width:100%;height:auto}footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e4db;margin:0 18px;padding:14px 0;font-size:11px;gap:10px}footer div{display:flex;gap:12px}a{color:#414f4c;text-underline-offset:4px}a:hover{color:#a14732}a:focus-visible{outline:2px solid #a14732;outline-offset:4px}.bottom{display:flex;justify-content:space-between;gap:20px;font-size:10px;color:#6b726d;margin-top:24px;letter-spacing:1px;text-transform:uppercase}@media(max-width:950px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:48px}.intro{align-items:start;flex-direction:column}}@media(max-width:580px){main{padding:24px 18px}.grid{grid-template-columns:1fr}h1{font-size:44px}.top{font-size:9px;letter-spacing:1px}.bottom{flex-direction:column}}</style><main><div class="top"><span>Passport Stamps / Biblioteca de sellos</span><span>Vol. 01 — Seis destinos</span></div><div class="intro"><h1>El mundo,<br><em>en tinta.</em></h1><p>Una colección original de sellos de viaje.<br>SVG livianos, fondo transparente y dos acabados: tinta sutil o líneas limpias.</p></div><div class="grid">${cards}</div><div class="bottom"><span>AR · BR · IT · JP · US · FR</span><span>Sin dependencias · Licencia MIT · v0.1.0</span></div></main></html>\n`);
+const cards = manifest.map(c => `<article><div class="meta"><span>${c.code} / ${xml(c.name)}</span><span>${(c.bytes/1000).toFixed(2)} KB</span></div><div class="art"><img src="../${c.file}" alt="Sello de ${xml(c.name)}, ${xml(c.city)}" width="400" height="300"></div><footer><span>${xml(c.city)}</span><div><a href="../${c.file}" download="${c.code.toLowerCase()}.svg">SVG gastado ↗</a><a href="../${c.cleanFile}" download="${c.code.toLowerCase()}-clean.svg">Limpio ↗</a></div></footer></article>`).join('');
+files.set('preview/index.html', `<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Passport Stamps — Primera colección</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e8;color:#242d31;font-family:Arial,Helvetica,sans-serif}main{max-width:1300px;margin:auto;padding:42px 48px 32px}.top{display:flex;justify-content:space-between;border-bottom:1px solid #c7c9c0;padding-bottom:18px;font-size:11px;letter-spacing:2px;text-transform:uppercase}.intro{display:flex;justify-content:space-between;align-items:end;margin:36px 0 32px;gap:24px}h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-3px;font-size:64px;line-height:1;margin:0}h1 em{color:#9b4e39}p{font-size:14px;line-height:1.6;max-width:340px;margin:0;color:#59615f}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}article{background:#fcfaf5;border:1px solid #d9d9ce;border-radius:3px;overflow:hidden}.meta{padding:15px 18px;display:flex;justify-content:space-between;text-transform:uppercase;font-size:10px;letter-spacing:1.5px;color:#626a66}.art{padding:0 10px}.art img{display:block;width:100%;height:auto}footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e4db;margin:0 18px;padding:14px 0;font-size:11px;gap:10px}footer div{display:flex;gap:12px}a{color:#414f4c;text-underline-offset:4px}a:hover{color:#a14732}a:focus-visible{outline:2px solid #a14732;outline-offset:4px}.bottom{display:flex;justify-content:space-between;gap:20px;font-size:10px;color:#6b726d;margin-top:24px;letter-spacing:1px;text-transform:uppercase}@media(max-width:950px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:48px}.intro{align-items:start;flex-direction:column}}@media(max-width:580px){main{padding:24px 18px}.grid{grid-template-columns:1fr}h1{font-size:44px}.top{font-size:9px;letter-spacing:1px}.bottom{flex-direction:column}}</style><main><div class="top"><span>Passport Stamps / Biblioteca de sellos</span><span>Vol. 01 — Seis destinos</span></div><div class="intro"><h1>El mundo,<br><em>en tinta.</em></h1><p>Una colección original de sellos de viaje.<br>SVG livianos, fondo transparente y dos acabados: tinta gastada o líneas limpias.</p></div><div class="grid">${cards}</div><div class="bottom"><span>AR · BR · IT · JP · US · FR</span><span>Sin dependencias · Licencia MIT · v0.1.0</span></div></main></html>\n`);
 for (const [path, content] of files) {
   const full = resolve(root,path);
   if (check) {

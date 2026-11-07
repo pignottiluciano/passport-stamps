@@ -9,7 +9,7 @@
     "current": {
       "bytes": 3374,
       "gzipBytes": 1262,
-      "file": "../../svg/ar.svg"
+      "file": "baseline/ar.svg"
     },
     "stamped": {
       "bytes": 2383,
@@ -32,7 +32,7 @@
     "current": {
       "bytes": 3256,
       "gzipBytes": 1208,
-      "file": "../../svg/br.svg"
+      "file": "baseline/br.svg"
     },
     "stamped": {
       "bytes": 2265,
@@ -55,7 +55,7 @@
     "current": {
       "bytes": 3222,
       "gzipBytes": 1138,
-      "file": "../../svg/it.svg"
+      "file": "baseline/it.svg"
     },
     "stamped": {
       "bytes": 2231,
@@ -78,7 +78,7 @@
     "current": {
       "bytes": 3309,
       "gzipBytes": 1190,
-      "file": "../../svg/jp.svg"
+      "file": "baseline/jp.svg"
     },
     "stamped": {
       "bytes": 2318,
@@ -101,7 +101,7 @@
     "current": {
       "bytes": 3221,
       "gzipBytes": 1162,
-      "file": "../../svg/us.svg"
+      "file": "baseline/us.svg"
     },
     "stamped": {
       "bytes": 2230,
@@ -124,7 +124,7 @@
     "current": {
       "bytes": 3246,
       "gzipBytes": 1183,
-      "file": "../../svg/fr.svg"
+      "file": "baseline/fr.svg"
     },
     "stamped": {
       "bytes": 2255,

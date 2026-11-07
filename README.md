@@ -2,7 +2,7 @@
 
 Colección original de sellos de viaje en SVG, pensada para webs, apps y mapas de países visitados. Primera edición: Argentina, Brasil, Italia, Japón, Estados Unidos y Francia.
 
-Cada destino tiene una composición propia y dos acabados: **tinta** con desgaste sutil y **limpio** sin textura. Fondo transparente, sin imágenes incrustadas, fuentes descargables ni dependencias de ejecución.
+Cada destino tiene una composición propia y dos acabados: **gastado** como acabado principal de tinta y **limpio** sin textura. Fondo transparente, sin imágenes incrustadas, fuentes descargables ni dependencias de ejecución.
 
 ## Ver la colección
 
@@ -18,11 +18,11 @@ Abrí http://127.0.0.1:4173/preview/. También podés abrir `preview/index.html`
 
 ## Prueba de tinta
 
-Hay una [comparación experimental de tres acabados](experiments/ink/README.md) para los seis países. Se genera con `node experiments/ink/build.mjs` y se abre en `/experiments/ink/` con el mismo servidor. Los originales y el contenido del paquete npm no cambian.
+Hay una [comparación experimental de tres acabados](experiments/ink/README.md) para los seis países. Se genera con `node experiments/ink/build.mjs` y se abre en `/experiments/ink/` con el mismo servidor. El acabado gastado fue elegido para la colección principal. La prueba conserva los SVG sutiles originales como referencia histórica.
 
 ## Archivos
 
-| País | Tinta | Limpio |
+| País | Gastado (principal) | Limpio |
 | --- | --- | --- |
 | Argentina | [ar.svg](svg/ar.svg) | [ar.svg](svg/clean/ar.svg) |
 | Brasil | [br.svg](svg/br.svg) | [br.svg](svg/clean/br.svg) |
@@ -31,7 +31,7 @@ Hay una [comparación experimental de tres acabados](experiments/ink/README.md) 
 | Estados Unidos | [us.svg](svg/us.svg) | [us.svg](svg/clean/us.svg) |
 | Francia | [fr.svg](svg/fr.svg) | [fr.svg](svg/clean/fr.svg) |
 
-Los archivos limpios pesan aproximadamente **1,2–1,4 KiB** y los de tinta **3,1–3,3 KiB** sin compresión HTTP. `manifest.json` registra el peso exacto, país, ciudad, color y rutas. El generador rechaza archivos mayores de 10 KiB.
+Los archivos limpios pesan aproximadamente **1,27–1,42 KB** y los gastados **2,23–2,38 KB** (1 KB = 1.000 bytes) sin compresión HTTP. `manifest.json` registra el peso exacto, país, ciudad, color y rutas. El generador rechaza archivos mayores de 10 KiB.
 
 ## Usar en una web o en Angular
 
@@ -54,9 +54,9 @@ Para modificar un color, editá el dato en `data/countries.json` y regenerá. Un
 - `svg/` y `svg/clean/`: entregables generados, incluidos en Git para usarlos directamente.
 - `preview/`: catálogo estático, sin framework ni JavaScript en el navegador.
 
-Para sumar un país, agregá sus datos y una composición explícita en el generador; luego corré `npm run build` y `npm run check`. El generador usa máscaras vectoriales con pequeñas interrupciones de tinta deterministas: no incorpora bitmaps ni filtros de ruido. Compartimos el sistema de dibujo, pero cada destino tiene su propia distribución.
+Para sumar un país, agregá sus datos y una composición explícita en el generador; luego corré `npm run build` y `npm run check`. El generador aplica filtros SVG deterministas para simular poros, presión desigual y absorción de tinta. `scripts/ink.mjs` comparte el tratamiento con el experimento; no incorpora bitmaps ni recursos externos. Compartimos el sistema de dibujo, pero cada destino tiene su propia distribución.
 
-No editar los SVG generados directamente: la próxima generación reemplaza esos cambios. Si insertás el mismo SVG varias veces como código inline, asigná identificadores únicos a sus títulos y máscaras; usar `<img>` evita conflictos de IDs.
+No editar los SVG generados directamente: la próxima generación reemplaza esos cambios. Si insertás el mismo SVG varias veces como código inline, asigná identificadores únicos a sus títulos y filtros; usar `<img>` evita conflictos de IDs.
 
 ## Alcance y licencia
 

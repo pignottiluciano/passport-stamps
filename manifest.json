@@ -7,9 +7,10 @@
     "shape": "ticket",
     "icon": "sun",
     "serial": "ARG · EZE",
+    "finish": "worn",
     "file": "svg/ar.svg",
     "cleanFile": "svg/clean/ar.svg",
-    "bytes": 3374,
+    "bytes": 2381,
     "cleanBytes": 1420
   },
   {
@@ -20,9 +21,10 @@
     "shape": "oval",
     "icon": "mountain",
     "serial": "BRA · GIG",
+    "finish": "worn",
     "file": "svg/br.svg",
     "cleanFile": "svg/clean/br.svg",
-    "bytes": 3256,
+    "bytes": 2263,
     "cleanBytes": 1302
   },
   {
@@ -33,9 +35,10 @@
     "shape": "round",
     "icon": "arch",
     "serial": "ITA · FCO",
+    "finish": "worn",
     "file": "svg/it.svg",
     "cleanFile": "svg/clean/it.svg",
-    "bytes": 3222,
+    "bytes": 2229,
     "cleanBytes": 1268
   },
   {
@@ -46,9 +49,10 @@
     "shape": "square",
     "icon": "torii",
     "serial": "JPN · HND",
+    "finish": "worn",
     "file": "svg/jp.svg",
     "cleanFile": "svg/clean/jp.svg",
-    "bytes": 3309,
+    "bytes": 2316,
     "cleanBytes": 1355
   },
   {
@@ -59,9 +63,10 @@
     "shape": "hexagon",
     "icon": "star",
     "serial": "USA · JFK",
+    "finish": "worn",
     "file": "svg/us.svg",
     "cleanFile": "svg/clean/us.svg",
-    "bytes": 3221,
+    "bytes": 2228,
     "cleanBytes": 1267
   },
   {
@@ -72,9 +77,10 @@
     "shape": "diamond",
     "icon": "tower",
     "serial": "FRA · CDG",
+    "finish": "worn",
     "file": "svg/fr.svg",
     "cleanFile": "svg/clean/fr.svg",
-    "bytes": 3246,
+    "bytes": 2253,
     "cleanBytes": 1292
   }
 ]
