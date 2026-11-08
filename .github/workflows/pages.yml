@@ -1,0 +1,47 @@
+name: Publish gallery
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run check
+      - uses: actions/configure-pages@v5
+      - name: Prepare static gallery
+        run: |
+          mkdir -p work/pages
+          cp -R preview svg work/pages/
+          cp manifest.json destinations.json LICENSE work/pages/
+          cp docs/pages-index.html work/pages/index.html
+          touch work/pages/.nojekyll
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: work/pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy gallery
+        id: deployment
+        uses: actions/deploy-pages@v4

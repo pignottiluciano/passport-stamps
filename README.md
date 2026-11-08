@@ -12,7 +12,7 @@ npm run check
 npm run preview
 ```
 
-Abrí http://127.0.0.1:4173/preview/. La galería permite buscar por nombre en español o inglés, código y símbolo; filtrar por región y recorrer páginas de 24 sellos. En destinos, el filtro cambia de región a país. También se puede abrir `preview/index.html` directamente.
+Abrí la [galería pública](https://pignottiluciano.github.io/passport-stamps/preview/). Para verla en tu computadora después de ejecutar `npm run preview`, abrí http://127.0.0.1:4173/preview/. La galería permite buscar por nombre en español o inglés, código y símbolo; filtrar por región y recorrer páginas de 24 sellos. En destinos, el filtro cambia de región a país. También se puede abrir `preview/index.html` directamente.
 
 Se requiere Node.js 20+ para generar/verificar y Python 3 solo para el servidor opcional. No hay paquetes que instalar ni dependencias de ejecución.
 
@@ -31,7 +31,7 @@ Las rutas de los seis países iniciales siguen vigentes. Los sellos de país ya 
 
 La colección tiene **238 destinos y 476 SVG** (gastados y limpios): 20 de Argentina y 218 de Europa. Los gastados pesan entre **2.018 y 2.594 bytes**; juntos suman **524.562 bytes**. [Lista completa y descargas individuales](docs/DESTINATIONS.md).
 
-Abrí la [galería de destinos](http://127.0.0.1:4173/preview/?collection=destinations). El filtro permite elegir entre los 40 países representados. También hay enlaces directos por país, por ejemplo `/preview/?collection=destinations&country=AR`.
+Abrí la [galería de destinos](https://pignottiluciano.github.io/passport-stamps/preview/?collection=destinations). El filtro permite elegir entre los 40 países representados. También hay enlaces directos por país, por ejemplo `/preview/?collection=destinations&country=AR`.
 
 Los nombres grandes del arte respetan las formas locales (MÜNCHEN, FIRENZE, MARSEILLE); la galería mantiene nombres comunes en español y aliases para buscar. `ar-cordoba` y `es-cordoba` son archivos distintos con símbolos propios.
 
@@ -47,7 +47,7 @@ Copiá los SVG que necesites a los assets públicos de tu aplicación:
 
 React admite el mismo elemento; Angular 20+ puede servir el archivo desde `public/stamps/jp.svg`. No se requiere un componente específico. Si más adelante se necesitan controles propios de un framework, podrán usar los mismos recursos.
 
-El paquete está preparado como `@lucianopignotti/passport-stamps` para distribuir archivos y catálogos por subrutas con acceso público. La versión `0.1.0` está en preparación y todavía no se publicó en npm. El código fuente está en [GitHub](https://github.com/pignottiluciano/passport-stamps).
+El paquete está preparado como `@lucianopignotti/passport-stamps` para distribuir archivos y catálogos por subrutas con acceso público. La instalación se realiza con `npm install @lucianopignotti/passport-stamps` cuando la versión publicada esté disponible en el registro. El código fuente está en [GitHub](https://github.com/pignottiluciano/passport-stamps).
 
 ```text
 @lucianopignotti/passport-stamps/svg/jp.svg
