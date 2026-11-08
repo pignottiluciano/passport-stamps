@@ -1,0 +1,892 @@
+[
+  {
+    "id": "pt-lisbon",
+    "name": "Lisboa",
+    "code": "PT"
+  },
+  {
+    "id": "pt-porto",
+    "name": "Oporto",
+    "code": "PT"
+  },
+  {
+    "id": "pt-coimbra",
+    "name": "Coímbra",
+    "code": "PT"
+  },
+  {
+    "id": "pt-braga",
+    "name": "Braga",
+    "code": "PT"
+  },
+  {
+    "id": "pt-guimaraes",
+    "name": "Guimarães",
+    "code": "PT"
+  },
+  {
+    "id": "pt-aveiro",
+    "name": "Aveiro",
+    "code": "PT"
+  },
+  {
+    "id": "pt-evora",
+    "name": "Évora",
+    "code": "PT"
+  },
+  {
+    "id": "pt-faro",
+    "name": "Faro",
+    "code": "PT"
+  },
+  {
+    "id": "gb-london",
+    "name": "Londres",
+    "code": "GB"
+  },
+  {
+    "id": "gb-edinburgh",
+    "name": "Edimburgo",
+    "code": "GB"
+  },
+  {
+    "id": "gb-glasgow",
+    "name": "Glasgow",
+    "code": "GB"
+  },
+  {
+    "id": "gb-cardiff",
+    "name": "Cardiff",
+    "code": "GB"
+  },
+  {
+    "id": "gb-belfast",
+    "name": "Belfast",
+    "code": "GB"
+  },
+  {
+    "id": "gb-york",
+    "name": "York",
+    "code": "GB"
+  },
+  {
+    "id": "gb-bath",
+    "name": "Bath",
+    "code": "GB"
+  },
+  {
+    "id": "gb-oxford",
+    "name": "Oxford",
+    "code": "GB"
+  },
+  {
+    "id": "gb-cambridge",
+    "name": "Cambridge",
+    "code": "GB"
+  },
+  {
+    "id": "gb-liverpool",
+    "name": "Liverpool",
+    "code": "GB"
+  },
+  {
+    "id": "gb-manchester",
+    "name": "Manchester",
+    "code": "GB"
+  },
+  {
+    "id": "gb-bristol",
+    "name": "Bristol",
+    "code": "GB"
+  },
+  {
+    "id": "ie-dublin",
+    "name": "Dublín",
+    "code": "IE"
+  },
+  {
+    "id": "ie-cork",
+    "name": "Cork",
+    "code": "IE"
+  },
+  {
+    "id": "ie-galway",
+    "name": "Galway",
+    "code": "IE"
+  },
+  {
+    "id": "ie-kilkenny",
+    "name": "Kilkenny",
+    "code": "IE"
+  },
+  {
+    "id": "ie-limerick",
+    "name": "Limerick",
+    "code": "IE"
+  },
+  {
+    "id": "nl-amsterdam",
+    "name": "Ámsterdam",
+    "code": "NL"
+  },
+  {
+    "id": "nl-rotterdam",
+    "name": "Róterdam",
+    "code": "NL"
+  },
+  {
+    "id": "nl-utrecht",
+    "name": "Utrecht",
+    "code": "NL"
+  },
+  {
+    "id": "nl-the-hague",
+    "name": "La Haya",
+    "code": "NL"
+  },
+  {
+    "id": "nl-delft",
+    "name": "Delft",
+    "code": "NL"
+  },
+  {
+    "id": "nl-leiden",
+    "name": "Leiden",
+    "code": "NL"
+  },
+  {
+    "id": "nl-maastricht",
+    "name": "Maastricht",
+    "code": "NL"
+  },
+  {
+    "id": "be-brussels",
+    "name": "Bruselas",
+    "code": "BE"
+  },
+  {
+    "id": "be-bruges",
+    "name": "Brujas",
+    "code": "BE"
+  },
+  {
+    "id": "be-ghent",
+    "name": "Gante",
+    "code": "BE"
+  },
+  {
+    "id": "be-antwerp",
+    "name": "Amberes",
+    "code": "BE"
+  },
+  {
+    "id": "be-leuven",
+    "name": "Lovaina",
+    "code": "BE"
+  },
+  {
+    "id": "lu-luxembourg",
+    "name": "Luxemburgo",
+    "code": "LU"
+  },
+  {
+    "id": "ch-lucerne",
+    "name": "Lucerna",
+    "code": "CH"
+  },
+  {
+    "id": "ch-zurich",
+    "name": "Zúrich",
+    "code": "CH"
+  },
+  {
+    "id": "ch-bern",
+    "name": "Berna",
+    "code": "CH"
+  },
+  {
+    "id": "ch-geneva",
+    "name": "Ginebra",
+    "code": "CH"
+  },
+  {
+    "id": "ch-basel",
+    "name": "Basilea",
+    "code": "CH"
+  },
+  {
+    "id": "ch-lugano",
+    "name": "Lugano",
+    "code": "CH"
+  },
+  {
+    "id": "at-vienna",
+    "name": "Viena",
+    "code": "AT"
+  },
+  {
+    "id": "at-salzburg",
+    "name": "Salzburgo",
+    "code": "AT"
+  },
+  {
+    "id": "at-innsbruck",
+    "name": "Innsbruck",
+    "code": "AT"
+  },
+  {
+    "id": "at-graz",
+    "name": "Graz",
+    "code": "AT"
+  },
+  {
+    "id": "at-linz",
+    "name": "Linz",
+    "code": "AT"
+  },
+  {
+    "id": "cz-prague",
+    "name": "Praga",
+    "code": "CZ"
+  },
+  {
+    "id": "cz-brno",
+    "name": "Brno",
+    "code": "CZ"
+  },
+  {
+    "id": "cz-cesky-krumlov",
+    "name": "Český Krumlov",
+    "code": "CZ"
+  },
+  {
+    "id": "cz-karlovy-vary",
+    "name": "Karlovy Vary",
+    "code": "CZ"
+  },
+  {
+    "id": "pl-krakow",
+    "name": "Cracovia",
+    "code": "PL"
+  },
+  {
+    "id": "pl-warsaw",
+    "name": "Varsovia",
+    "code": "PL"
+  },
+  {
+    "id": "pl-gdansk",
+    "name": "Gdansk",
+    "code": "PL"
+  },
+  {
+    "id": "pl-wroclaw",
+    "name": "Breslavia",
+    "code": "PL"
+  },
+  {
+    "id": "pl-poznan",
+    "name": "Poznan",
+    "code": "PL"
+  },
+  {
+    "id": "pl-torun",
+    "name": "Toruń",
+    "code": "PL"
+  },
+  {
+    "id": "hu-budapest",
+    "name": "Budapest",
+    "code": "HU"
+  },
+  {
+    "id": "hu-eger",
+    "name": "Eger",
+    "code": "HU"
+  },
+  {
+    "id": "hu-pecs",
+    "name": "Pécs",
+    "code": "HU"
+  },
+  {
+    "id": "sk-bratislava",
+    "name": "Bratislava",
+    "code": "SK"
+  },
+  {
+    "id": "sk-kosice",
+    "name": "Košice",
+    "code": "SK"
+  },
+  {
+    "id": "sk-banska-stiavnica",
+    "name": "Banská Štiavnica",
+    "code": "SK"
+  },
+  {
+    "id": "si-ljubljana",
+    "name": "Liubliana",
+    "code": "SI"
+  },
+  {
+    "id": "si-maribor",
+    "name": "Maribor",
+    "code": "SI"
+  },
+  {
+    "id": "si-piran",
+    "name": "Piran",
+    "code": "SI"
+  },
+  {
+    "id": "hr-dubrovnik",
+    "name": "Dubrovnik",
+    "code": "HR"
+  },
+  {
+    "id": "hr-split",
+    "name": "Split",
+    "code": "HR"
+  },
+  {
+    "id": "hr-zagreb",
+    "name": "Zagreb",
+    "code": "HR"
+  },
+  {
+    "id": "hr-zadar",
+    "name": "Zadar",
+    "code": "HR"
+  },
+  {
+    "id": "hr-rovinj",
+    "name": "Rovinj",
+    "code": "HR"
+  },
+  {
+    "id": "me-kotor",
+    "name": "Kotor",
+    "code": "ME"
+  },
+  {
+    "id": "me-budva",
+    "name": "Budva",
+    "code": "ME"
+  },
+  {
+    "id": "me-cetinje",
+    "name": "Cetinje",
+    "code": "ME"
+  },
+  {
+    "id": "ba-mostar",
+    "name": "Mostar",
+    "code": "BA"
+  },
+  {
+    "id": "ba-sarajevo",
+    "name": "Sarajevo",
+    "code": "BA"
+  },
+  {
+    "id": "rs-belgrade",
+    "name": "Belgrado",
+    "code": "RS"
+  },
+  {
+    "id": "rs-novi-sad",
+    "name": "Novi Sad",
+    "code": "RS"
+  },
+  {
+    "id": "al-tirana",
+    "name": "Tirana",
+    "code": "AL"
+  },
+  {
+    "id": "al-berat",
+    "name": "Berat",
+    "code": "AL"
+  },
+  {
+    "id": "al-gjirokaster",
+    "name": "Gjirokastër",
+    "code": "AL"
+  },
+  {
+    "id": "mk-skopje",
+    "name": "Skopie",
+    "code": "MK"
+  },
+  {
+    "id": "mk-ohrid",
+    "name": "Ohrid",
+    "code": "MK"
+  },
+  {
+    "id": "gr-athens",
+    "name": "Atenas",
+    "code": "GR"
+  },
+  {
+    "id": "gr-thessaloniki",
+    "name": "Tesalónica",
+    "code": "GR"
+  },
+  {
+    "id": "gr-nafplio",
+    "name": "Nauplia",
+    "code": "GR"
+  },
+  {
+    "id": "gr-chania",
+    "name": "La Canea",
+    "code": "GR"
+  },
+  {
+    "id": "gr-rhodes",
+    "name": "Ciudad de Rodas",
+    "code": "GR"
+  },
+  {
+    "id": "mt-valletta",
+    "name": "La Valeta",
+    "code": "MT"
+  },
+  {
+    "id": "mt-mdina",
+    "name": "Mdina",
+    "code": "MT"
+  },
+  {
+    "id": "mt-birgu",
+    "name": "Birgu",
+    "code": "MT"
+  },
+  {
+    "id": "ro-bucharest",
+    "name": "Bucarest",
+    "code": "RO"
+  },
+  {
+    "id": "ro-brasov",
+    "name": "Brașov",
+    "code": "RO"
+  },
+  {
+    "id": "ro-sibiu",
+    "name": "Sibiu",
+    "code": "RO"
+  },
+  {
+    "id": "ro-sighisoara",
+    "name": "Sighișoara",
+    "code": "RO"
+  },
+  {
+    "id": "bg-sofia",
+    "name": "Sofía",
+    "code": "BG"
+  },
+  {
+    "id": "bg-plovdiv",
+    "name": "Plovdiv",
+    "code": "BG"
+  },
+  {
+    "id": "bg-varna",
+    "name": "Varna",
+    "code": "BG"
+  },
+  {
+    "id": "bg-veliko-tarnovo",
+    "name": "Veliko Tarnovo",
+    "code": "BG"
+  },
+  {
+    "id": "dk-copenhagen",
+    "name": "Copenhague",
+    "code": "DK"
+  },
+  {
+    "id": "dk-aarhus",
+    "name": "Aarhus",
+    "code": "DK"
+  },
+  {
+    "id": "dk-odense",
+    "name": "Odense",
+    "code": "DK"
+  },
+  {
+    "id": "se-stockholm",
+    "name": "Estocolmo",
+    "code": "SE"
+  },
+  {
+    "id": "se-gothenburg",
+    "name": "Gotemburgo",
+    "code": "SE"
+  },
+  {
+    "id": "se-malmo",
+    "name": "Malmö",
+    "code": "SE"
+  },
+  {
+    "id": "se-uppsala",
+    "name": "Uppsala",
+    "code": "SE"
+  },
+  {
+    "id": "no-bergen",
+    "name": "Bergen",
+    "code": "NO"
+  },
+  {
+    "id": "no-oslo",
+    "name": "Oslo",
+    "code": "NO"
+  },
+  {
+    "id": "no-trondheim",
+    "name": "Trondheim",
+    "code": "NO"
+  },
+  {
+    "id": "no-stavanger",
+    "name": "Stavanger",
+    "code": "NO"
+  },
+  {
+    "id": "no-tromso",
+    "name": "Tromsø",
+    "code": "NO"
+  },
+  {
+    "id": "fi-helsinki",
+    "name": "Helsinki",
+    "code": "FI"
+  },
+  {
+    "id": "fi-turku",
+    "name": "Turku",
+    "code": "FI"
+  },
+  {
+    "id": "fi-tampere",
+    "name": "Tampere",
+    "code": "FI"
+  },
+  {
+    "id": "fi-porvoo",
+    "name": "Porvoo",
+    "code": "FI"
+  },
+  {
+    "id": "fi-rovaniemi",
+    "name": "Rovaniemi",
+    "code": "FI"
+  },
+  {
+    "id": "is-reykjavik",
+    "name": "Reikiavik",
+    "code": "IS"
+  },
+  {
+    "id": "is-akureyri",
+    "name": "Akureyri",
+    "code": "IS"
+  },
+  {
+    "id": "ee-tallinn",
+    "name": "Tallin",
+    "code": "EE"
+  },
+  {
+    "id": "ee-tartu",
+    "name": "Tartu",
+    "code": "EE"
+  },
+  {
+    "id": "lv-riga",
+    "name": "Riga",
+    "code": "LV"
+  },
+  {
+    "id": "lv-cesis",
+    "name": "Cēsis",
+    "code": "LV"
+  },
+  {
+    "id": "lt-vilnius",
+    "name": "Vilna",
+    "code": "LT"
+  },
+  {
+    "id": "lt-kaunas",
+    "name": "Kaunas",
+    "code": "LT"
+  },
+  {
+    "id": "ad-andorra-la-vella",
+    "name": "Andorra la Vella",
+    "code": "AD"
+  },
+  {
+    "id": "li-vaduz",
+    "name": "Vaduz",
+    "code": "LI"
+  },
+  {
+    "id": "sm-san-marino",
+    "name": "Ciudad de San Marino",
+    "code": "SM"
+  },
+  {
+    "id": "mc-monaco",
+    "name": "Mónaco",
+    "code": "MC"
+  },
+  {
+    "id": "es-malaga",
+    "name": "Málaga",
+    "code": "ES"
+  },
+  {
+    "id": "es-san-sebastian",
+    "name": "San Sebastián",
+    "code": "ES"
+  },
+  {
+    "id": "es-salamanca",
+    "name": "Salamanca",
+    "code": "ES"
+  },
+  {
+    "id": "es-cadiz",
+    "name": "Cádiz",
+    "code": "ES"
+  },
+  {
+    "id": "es-zaragoza",
+    "name": "Zaragoza",
+    "code": "ES"
+  },
+  {
+    "id": "es-burgos",
+    "name": "Burgos",
+    "code": "ES"
+  },
+  {
+    "id": "es-girona",
+    "name": "Girona",
+    "code": "ES"
+  },
+  {
+    "id": "es-tarragona",
+    "name": "Tarragona",
+    "code": "ES"
+  },
+  {
+    "id": "es-palma",
+    "name": "Palma",
+    "code": "ES"
+  },
+  {
+    "id": "es-alicante",
+    "name": "Alicante",
+    "code": "ES"
+  },
+  {
+    "id": "es-santander",
+    "name": "Santander",
+    "code": "ES"
+  },
+  {
+    "id": "es-oviedo",
+    "name": "Oviedo",
+    "code": "ES"
+  },
+  {
+    "id": "fr-annecy",
+    "name": "Annecy",
+    "code": "FR"
+  },
+  {
+    "id": "fr-toulouse",
+    "name": "Toulouse",
+    "code": "FR"
+  },
+  {
+    "id": "fr-reims",
+    "name": "Reims",
+    "code": "FR"
+  },
+  {
+    "id": "fr-lille",
+    "name": "Lille",
+    "code": "FR"
+  },
+  {
+    "id": "fr-nantes",
+    "name": "Nantes",
+    "code": "FR"
+  },
+  {
+    "id": "fr-rennes",
+    "name": "Rennes",
+    "code": "FR"
+  },
+  {
+    "id": "fr-dijon",
+    "name": "Dijon",
+    "code": "FR"
+  },
+  {
+    "id": "fr-rouen",
+    "name": "Rouen",
+    "code": "FR"
+  },
+  {
+    "id": "fr-aix-en-provence",
+    "name": "Aix-en-Provence",
+    "code": "FR"
+  },
+  {
+    "id": "fr-saint-malo",
+    "name": "Saint-Malo",
+    "code": "FR"
+  },
+  {
+    "id": "fr-tours",
+    "name": "Tours",
+    "code": "FR"
+  },
+  {
+    "id": "fr-montpellier",
+    "name": "Montpellier",
+    "code": "FR"
+  },
+  {
+    "id": "de-bamberg",
+    "name": "Bamberg",
+    "code": "DE"
+  },
+  {
+    "id": "de-rothenburg-ob-der-tauber",
+    "name": "Rothenburg ob der Tauber",
+    "code": "DE"
+  },
+  {
+    "id": "de-bremen",
+    "name": "Bremen",
+    "code": "DE"
+  },
+  {
+    "id": "de-leipzig",
+    "name": "Leipzig",
+    "code": "DE"
+  },
+  {
+    "id": "de-stuttgart",
+    "name": "Stuttgart",
+    "code": "DE"
+  },
+  {
+    "id": "de-bonn",
+    "name": "Bonn",
+    "code": "DE"
+  },
+  {
+    "id": "de-aachen",
+    "name": "Aquisgrán",
+    "code": "DE"
+  },
+  {
+    "id": "de-potsdam",
+    "name": "Potsdam",
+    "code": "DE"
+  },
+  {
+    "id": "de-regensburg",
+    "name": "Ratisbona",
+    "code": "DE"
+  },
+  {
+    "id": "de-wurzburg",
+    "name": "Wurzburgo",
+    "code": "DE"
+  },
+  {
+    "id": "de-trier",
+    "name": "Tréveris",
+    "code": "DE"
+  },
+  {
+    "id": "de-freiburg",
+    "name": "Friburgo de Brisgovia",
+    "code": "DE"
+  },
+  {
+    "id": "it-turin",
+    "name": "Turín",
+    "code": "IT"
+  },
+  {
+    "id": "it-genoa",
+    "name": "Génova",
+    "code": "IT"
+  },
+  {
+    "id": "it-palermo",
+    "name": "Palermo",
+    "code": "IT"
+  },
+  {
+    "id": "it-matera",
+    "name": "Matera",
+    "code": "IT"
+  },
+  {
+    "id": "it-bergamo",
+    "name": "Bérgamo",
+    "code": "IT"
+  },
+  {
+    "id": "it-padua",
+    "name": "Padua",
+    "code": "IT"
+  },
+  {
+    "id": "it-lucca",
+    "name": "Lucca",
+    "code": "IT"
+  },
+  {
+    "id": "it-ravenna",
+    "name": "Rávena",
+    "code": "IT"
+  },
+  {
+    "id": "it-lecce",
+    "name": "Lecce",
+    "code": "IT"
+  },
+  {
+    "id": "it-catania",
+    "name": "Catania",
+    "code": "IT"
+  },
+  {
+    "id": "it-siracusa",
+    "name": "Siracusa",
+    "code": "IT"
+  },
+  {
+    "id": "it-cagliari",
+    "name": "Cagliari",
+    "code": "IT"
+  }
+]

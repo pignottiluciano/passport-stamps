@@ -2,7 +2,7 @@
   "name": "@passport-stamps/core",
   "version": "0.1.0",
   "private": true,
-  "description": "193 countries and 60 destinations as lightweight passport-style SVG stamps",
+  "description": "193 countries and 238 destinations as lightweight passport-style SVG stamps",
   "type": "module",
   "license": "MIT",
   "files": [

@@ -1,6 +1,6 @@
 # Passport Stamps
 
-**193 países miembros de la ONU y 60 destinos** en SVG originales con acabado de tinta gastada. Los sellos de países no contienen nombres de ciudades ni códigos de aeropuertos. Cada archivo tiene fondo transparente y una alternativa limpia.
+**193 países miembros de la ONU y 238 destinos** en SVG originales con acabado de tinta gastada. Los sellos de países no contienen nombres de ciudades ni códigos de aeropuertos. Cada archivo tiene fondo transparente y una alternativa limpia.
 
 La colección de países usa 129 motivos de arquitectura, naturaleza y cultura; algunos se comparten entre países. Los diseños combinan seis familias de marcos, composiciones adaptadas al nombre y una paleta de tintas. Los motivos son decisiones de diseño, no emblemas nacionales oficiales.
 
@@ -21,7 +21,7 @@ Se requiere Node.js 20+ para generar/verificar y Python 3 solo para el servidor 
 - `svg/ar.svg`: acabado gastado, principal.
 - `svg/clean/ar.svg`: alternativa limpia.
 - `manifest.json`: **193 países**, sin ciudades ni destinos mezclados.
-- `destinations.json`: **60 destinos**, separados de los países: Argentina (20), España (10), Francia (10), Alemania (10) e Italia (10).
+- `destinations.json`: **238 destinos** de 40 países, separados del catálogo de miembros de la ONU.
 
 Los 193 SVG gastados pesan **416.716 bytes en total** (416,72 KB sin compresión), entre **1.976 y 2.829 bytes por país**. El generador impone un máximo de 10 KiB por archivo. El catálogo registra las medidas exactas.
 
@@ -29,9 +29,9 @@ Las rutas de los seis países iniciales siguen vigentes. Los sellos de país ya 
 
 ## Destinos
 
-La colección inicial tiene **60 destinos y 120 SVG** (gastados y limpios). Los gastados pesan entre **2.033 y 2.568 bytes**; juntos suman **133.603 bytes**. [Lista completa y descargas individuales](docs/DESTINATIONS.md).
+La colección tiene **238 destinos y 476 SVG** (gastados y limpios): 20 de Argentina y 218 de Europa. Los gastados pesan entre **2.018 y 2.594 bytes**; juntos suman **524.562 bytes**. [Lista completa y descargas individuales](docs/DESTINATIONS.md).
 
-Abrí la [galería de destinos](http://127.0.0.1:4173/preview/?collection=destinations). El filtro permite elegir Argentina, España, Francia, Alemania o Italia. También hay enlaces directos por país, por ejemplo `/preview/?collection=destinations&country=AR`.
+Abrí la [galería de destinos](http://127.0.0.1:4173/preview/?collection=destinations). El filtro permite elegir entre los 40 países representados. También hay enlaces directos por país, por ejemplo `/preview/?collection=destinations&country=AR`.
 
 Los nombres grandes del arte respetan las formas locales (MÜNCHEN, FIRENZE, MARSEILLE); la galería mantiene nombres comunes en español y aliases para buscar. `ar-cordoba` y `es-cordoba` son archivos distintos con símbolos propios.
 
@@ -67,10 +67,10 @@ Los países tienen `name` y `countryName` para mostrar en español, `officialNam
 
 ## Estructura y edición
 
-- `data/stamps.json`: decisiones editoriales y visuales, con los 193 países y los 60 destinos.
+- `data/stamps.json`: decisiones editoriales y visuales, con los 193 países y los 238 destinos.
 - `data/un-members.json`: lista de membresía y códigos contrastados con la ONU, con fuente y fecha.
 - `scripts/icons.mjs`: motivos de los países.
-- `scripts/destination-icons.mjs`: siluetas originales de los nuevos destinos.
+- `scripts/destination-icons.mjs` y `scripts/europe-icons.mjs`: siluetas originales de los destinos.
 - `scripts/build.mjs`: marcos, composiciones, nombres y exportaciones.
 - `scripts/ink.mjs`: textura de tinta determinista.
 - `scripts/gallery.mjs`: galería de documentación.

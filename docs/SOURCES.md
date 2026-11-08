@@ -23,7 +23,7 @@ La ONU se cita como fuente de los hechos de membresía, no como autora ni avalis
 
 ## Destinos: referencias de monumentos y alcance
 
-La selección de 60 lugares fue acordada con el usuario: 20 de Argentina y 10 de cada uno de España, Francia, Alemania e Italia. No es una clasificación oficial de importancia turística.
+La selección de 238 lugares fue acordada con el usuario: los 60 iniciales y una ampliación de 178 ciudades europeas. No es una clasificación oficial de importancia turística.
 
 Referencias primarias consultadas para asociaciones y nombres:
 
@@ -37,3 +37,16 @@ Referencias primarias consultadas para asociaciones y nombres:
 - [Italia.it: Alberobello y los trulli](https://www.italia.it/en/puglia/things-to-do/alberobello).
 
 Estas fuentes sirven como referencias factuales, no como fuentes de ilustraciones. Las siluetas SVG se dibujaron para esta colección, sin descargar ni vectorizar sus fotografías o gráficos. `associationNote` aclara hitos del entorno que no están dentro de la ciudad; Mont-Saint-Michel se clasifica como destino monumental.
+
+## Ampliación europea
+
+La ampliación incorpora 178 destinos y 124 motivos nuevos originales, con reutilización de siluetas cuando corresponde. Los rótulos del arte usan formas locales; los nombres y aliases del catálogo permiten buscar en español y sin diacríticos. Las siluetas son interpretaciones simplificadas, no reproducciones arquitectónicas exactas.
+
+Referencias factuales adicionales consultadas:
+
+- [Visit Portugal: Aveiro](https://www.visitportugal.com/en/destinos/aveiro/73753), moliceiros.
+- [Visit Copenhagen: Nyhavn](https://www.visitcopenhagen.com/copenhagen/planning/nyhavn-gdk474735).
+- [Visit Ljubljana: Dragon Bridge](https://www.visitljubljana.com/en/poi/dragon-bridge).
+- [Slovenia.info: Ljubljana](https://www.slovenia.info/en/places-to-go/regions/ljubljana-central-slovenia/ljubljana).
+
+No se copiaron recursos gráficos de estas fuentes.

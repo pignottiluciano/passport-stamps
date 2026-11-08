@@ -26,3 +26,15 @@ La revisión visual se realizó en el navegador integrado. No es una validación
 - Vista móvil a 390 px: un sello por fila, sin desbordamiento horizontal observado.
 
 Los 60 gastados suman 133.603 bytes; rango de 2.033 a 2.568 bytes por SVG. El paquete sigue sin publicar en npm.
+
+## Ampliación: 178 destinos europeos
+
+- Catálogo total: 238 destinos de 40 países, 193 países de la ONU y 862 SVG entre ambos acabados.
+- Cobertura exacta de los 178 IDs, nombres y códigos acordados mediante una referencia fija en `tests/fixtures/europe-expanded.json`; se preservan los 60 destinos anteriores.
+- `npm run check`: cinco pruebas de catálogo y reproducción exacta de los archivos generados.
+- Los 862 SVG se analizaron como XML. Los 506 SVG anteriores y el catálogo de países se compararon con Git y permanecen idénticos.
+- Revisión visual de los 178 nuevos destinos en las páginas 3–10 de la galería. Los nombres largos y los rótulos de países respetan los marcos.
+- Verificados filtros de Portugal, Reino Unido, Polonia, Dinamarca, España y Mónaco; búsquedas sin diacríticos de København, Wrocław, Tromsø y Rothenburg.
+- Vista móvil a 390 px sin desbordamiento horizontal observado.
+
+Los 178 nuevos gastados suman 390.959 bytes y pesan entre 2.018 y 2.594 bytes cada uno. Los 238 destinos gastados suman 524.562 bytes. No se midió el costo gráfico de los filtros en todos los dispositivos. El paquete sigue privado y sin publicar.

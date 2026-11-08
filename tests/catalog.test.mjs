@@ -33,7 +33,7 @@ test('country artwork has no city/airport labels', async () => {
   }
 });
 
-test('all 60 agreed destinations are separate, unique, and assigned to the right country', () => {
+test('the original destinations remain and all 178 European additions are present exactly once', async () => {
   const expected = {
     AR:'buenos-aires cordoba rosario mendoza mar-del-plata la-plata santa-fe salta san-miguel-de-tucuman purmamarca cafayate puerto-iguazu posadas bariloche san-martin-de-los-andes villa-la-angostura puerto-madryn el-calafate el-chalten ushuaia',
     ES:'madrid barcelona sevilla granada cordoba valencia bilbao santiago-de-compostela segovia toledo',
@@ -42,9 +42,13 @@ test('all 60 agreed destinations are separate, unique, and assigned to the right
     IT:'rome florence venice milan pisa naples verona bologna siena alberobello'
   };
   const ids = Object.entries(expected).flatMap(([code,slugs])=>slugs.split(' ').map(slug=>code.toLowerCase()+'-'+slug));
-  assert.equal(destinations.length,60);
-  assert.equal(new Set(destinations.map(c=>c.id)).size,60);
-  assert.deepEqual(destinations.map(c=>c.id).sort(),ids.sort());
+  const additions=JSON.parse(await read('tests/fixtures/europe-expanded.json'));
+  assert.equal(additions.length,178);
+  const allIds=[...ids,...additions.map(c=>c.id)];
+  assert.equal(destinations.length,238);
+  assert.equal(new Set(destinations.map(c=>c.id)).size,238);
+  assert.deepEqual(destinations.map(c=>c.id).sort(),allIds.sort());
+  for(const requested of additions){const actual=destinations.find(c=>c.id===requested.id);assert.equal(actual.name,requested.name);assert.equal(actual.code,requested.code);}
   for (const c of destinations) {
     const parent=countries.find(country=>country.code===c.code);
     assert.ok(parent);

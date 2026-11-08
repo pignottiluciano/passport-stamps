@@ -4,9 +4,10 @@ import { resolve, dirname } from 'node:path';
 import { styles, finish } from './ink.mjs';
 import { icons as countryIcons } from './icons.mjs';
 import { destinationIcons } from './destination-icons.mjs';
+import { europeIcons } from './europe-icons.mjs';
 import { galleryPage } from './gallery.mjs';
 
-const icons = {...countryIcons, ...destinationIcons};
+const icons = {...countryIcons, ...destinationIcons, ...europeIcons};
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const stamps = JSON.parse(await readFile(resolve(root, 'data/stamps.json'), 'utf8'));
@@ -46,7 +47,8 @@ function standardComposition(c, footer = c.shape === 'diamond' ? c.code : c.seri
   // Tall destination landmarks stay below the ticket's dotted inner border.
   const destinationTicket = c.kind === 'destination' && c.shape === 'ticket';
   const scale = destinationTicket ? .64 : c.icon === 'liberty' || c.icon === 'oryx' ? .68 : .79;
-  return icon(c.icon,200,destinationTicket ? 110 : 103,scale)+line(143,200-width/2,200+width/2)+headings+label(footer,239,10,'letter-spacing="2"');
+  const footerAttributes = c.kind === 'destination' && footer.length > 12 ? 'letter-spacing="1" textLength="100" lengthAdjust="spacingAndGlyphs"' : 'letter-spacing="2"';
+  return icon(c.icon,200,destinationTicket ? 110 : 103,scale)+line(143,200-width/2,200+width/2)+headings+label(footer,239,10,footerAttributes);
 }
 function composition(c) {
   switch (c.id) {
@@ -84,7 +86,7 @@ const destinations = manifest.filter(c => c.kind === 'destination');
 files.set('manifest.json', JSON.stringify(countries,null,2)+'\n');
 files.set('destinations.json', JSON.stringify(destinations,null,2)+'\n');
 const destinationGroups = [...new Set(destinations.map(c=>c.code))];
-files.set('docs/DESTINATIONS.md', '# Destinos — Colección inicial\n\n60 destinos: 20 en Argentina y 10 en cada uno de España, Francia, Alemania e Italia. Todos tienen versión gastada y limpia.\n\n' + destinationGroups.map(code=>{
+files.set('docs/DESTINATIONS.md', `# Catálogo de destinos\n\n${destinations.length} destinos en ${destinationGroups.length} países. Todos tienen versión gastada y limpia.\n\n` + destinationGroups.map(code=>{
   const group=destinations.filter(c=>c.code===code);
   return `## ${group[0].countryName} (${group.length})\n\n| Destino | Símbolo | Gastado | Limpio |\n| --- | --- | --- | --- |\n`+group.map(c=>`| ${c.name} | ${c.iconLabel} | [SVG](../${c.file}) | [SVG](../${c.cleanFile}) |`).join('\n');
 }).join('\n\n') + '\n\n## Referencias del entorno\n\n' + destinations.filter(c=>c.associationNote).map(c=>`- **${c.name}:** ${c.associationNote}`).join('\n') + '\n\nMont-Saint-Michel está clasificado como destino monumental. Los dibujos son interpretaciones simplificadas; algunos hitos representan el entorno turístico, no el casco urbano. Ver [fuentes](SOURCES.md).\n');
