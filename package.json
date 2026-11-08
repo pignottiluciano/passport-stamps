@@ -2,11 +2,29 @@
   "name": "@passport-stamps/core",
   "version": "0.1.0",
   "private": true,
-  "description": "Lightweight, original passport-style country and destination stamps in SVG",
+  "description": "193 UN member countries as lightweight passport-style SVG stamps",
   "type": "module",
   "license": "MIT",
-  "files": ["svg", "manifest.json", "README.md", "LICENSE"],
-  "exports": {"./svg/*": "./svg/*", "./manifest.json": "./manifest.json"},
-  "scripts": {"build": "node scripts/build.mjs", "check": "node scripts/build.mjs --check", "preview": "python3 -m http.server 4173 --bind 127.0.0.1"},
-  "engines": {"node": ">=20"}
+  "files": [
+    "svg",
+    "manifest.json",
+    "destinations.json",
+    "README.md",
+    "LICENSE",
+    "docs/SOURCES.md",
+    "data/un-members.json"
+  ],
+  "exports": {
+    "./svg/*": "./svg/*",
+    "./manifest.json": "./manifest.json",
+    "./destinations.json": "./destinations.json"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check && node --test tests/catalog.test.mjs",
+    "preview": "python3 -m http.server 4173 --bind 127.0.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
 }

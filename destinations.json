@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ar-mendoza",
+    "code": "AR",
+    "kind": "destination",
+    "name": "Mendoza",
+    "countryName": "Argentina",
+    "city": "Mendoza",
+    "color": "#86435e",
+    "shape": "ticket",
+    "icon": "vineyard",
+    "iconLabel": "Uvas y cordillera de los Andes",
+    "serial": "ARG · MDZ",
+    "finish": "worn",
+    "file": "svg/ar-mendoza.svg",
+    "cleanFile": "svg/clean/ar-mendoza.svg",
+    "bytes": 2568,
+    "cleanBytes": 1591
+  }
+]

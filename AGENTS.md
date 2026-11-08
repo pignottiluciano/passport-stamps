@@ -2,7 +2,7 @@
 
 This repository is a framework-independent SVG asset library. Keep the asset build dependency-free. The static preview is documentation, not an application.
 
-- Country data lives in `data/stamps.json`; layouts and original vector art live in `scripts/build.mjs`.
+- Country data lives in `data/stamps.json`; layouts live in `scripts/build.mjs`, vector motifs in `scripts/icons.mjs`, and the gallery in `scripts/gallery.mjs`.
 - Generated SVGs, the manifest and preview are checked into Git. Run `npm run build` after editing sources, then `npm run check`.
 - Keep each SVG below 10 KiB. Use the approved worn treatment from `scripts/ink.mjs` for main SVGs; retain clean alternatives. Avoid embedded images or external resources.
 - Preserve transparent backgrounds and accessible SVG titles. Avoid external resources.
@@ -12,3 +12,5 @@ This repository is a framework-independent SVG asset library. Keep the asset bui
 For future application code: use Angular 20+, standalone components, TypeScript strict mode, Signals when appropriate, and computed() before effect(). Avoid effect() unless necessary. Keep components focused, business logic in services, no duplicated code or unnecessary abstractions. Favor maintainability, clean architecture and SOLID; explain architectural decisions briefly.
 
 Catalog IDs are unique: country IDs use lowercase ISO codes (`ar`); destination IDs prefix the parent country (`ar-mendoza`). `code` remains the parent country ISO code. Use `kind` to distinguish countries from destinations. Existing country asset paths must stay stable.
+
+The primary `manifest.json` must contain exactly the 193 countries verified in `data/un-members.json`. No city fields or airport labels belong in country assets. Saved destinations (currently Mendoza) are exported separately as `destinations.json`. Keep the historical ink experiment bound to its frozen baseline, not the growing main catalog.
