@@ -14,3 +14,15 @@ Revisada el 7 de noviembre de 2026.
 Los 193 gastados suman 416.716 bytes sin compresión. El menor pesa 1.976 bytes y el mayor 2.829 bytes.
 
 La revisión visual se realizó en el navegador integrado. No es una validación de la tipografía en todas las plataformas ni un benchmark de renderizado. El paquete no se publicó en npm.
+
+
+## Ampliación: 60 destinos
+
+- Cobertura exacta de la lista acordada: AR 20, ES 10, FR 10, DE 10 e IT 10; 60 IDs únicos y 120 SVG de destinos.
+- Cinco controles automáticos mediante `npm run check`, incluyendo pertenencia al país, región y separación de catálogos; las dos Córdoba tienen motivos distintos.
+- Los 506 SVG de la colección completa se analizaron como XML. Se compararon los archivos de los 193 países y el SVG de Mendoza con el commit anterior: no cambiaron.
+- Revisión visual de las tres páginas de destinos; ajuste de los hitos altos en marcos rectangulares para evitar el borde punteado. Revisión posterior de Mont-Saint-Michel y Füssen.
+- Verificados filtros de los cinco países, búsqueda `cordoba` con dos resultados y uno al filtrar España, alias `Munich`, búsqueda `fussen`, enlace directo a España, regreso a los 193 países y filtro regional Europa.
+- Vista móvil a 390 px: un sello por fila, sin desbordamiento horizontal observado.
+
+Los 60 gastados suman 133.603 bytes; rango de 2.033 a 2.568 bytes por SVG. El paquete sigue sin publicar en npm.

@@ -2,7 +2,7 @@
   "name": "@passport-stamps/core",
   "version": "0.1.0",
   "private": true,
-  "description": "193 UN member countries as lightweight passport-style SVG stamps",
+  "description": "193 countries and 60 destinations as lightweight passport-style SVG stamps",
   "type": "module",
   "license": "MIT",
   "files": [
@@ -12,7 +12,8 @@
     "README.md",
     "LICENSE",
     "docs/SOURCES.md",
-    "data/un-members.json"
+    "data/un-members.json",
+    "docs/DESTINATIONS.md"
   ],
   "exports": {
     "./svg/*": "./svg/*",

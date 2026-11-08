@@ -2,8 +2,11 @@ import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
 import { styles, finish } from './ink.mjs';
-import { icons } from './icons.mjs';
+import { icons as countryIcons } from './icons.mjs';
+import { destinationIcons } from './destination-icons.mjs';
 import { galleryPage } from './gallery.mjs';
+
+const icons = {...countryIcons, ...destinationIcons};
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const stamps = JSON.parse(await readFile(resolve(root, 'data/stamps.json'), 'utf8'));
@@ -27,22 +30,23 @@ const label = (value, y, size = 14, extra = '') => text(value, 200, y, size, ext
 const line = (y, x1 = 105, x2 = 295) => `<path d="M${x1} ${y}H${x2}" fill="none" stroke="currentColor" stroke-width="1.5"/>`;
 const icon = (name, x, y, scale = 1) => `<g transform="translate(${x} ${y}) scale(${scale})" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${icons[name]}</g>`;
 // Names wrap into at most three lines. Explicit text widths keep long names inside frames.
-function countryComposition(c) {
+function standardComposition(c, footer = c.shape === 'diamond' ? c.code : c.serial) {
   const lines = [];
   for (const word of c.label.split(' ')) {
     if (!lines.length || (lines.at(-1) + ' ' + word).length > 14) lines.push(word);
     else lines[lines.length - 1] += ' ' + word;
   }
-  if (lines.length > 3) throw Error(`Country label needs a shorter display form: ${c.id}`);
+  if (lines.length > 3) throw Error(`Stamp label needs a shorter display form: ${c.id}`);
   const widths = {ticket:294,oval:270,round:206,square:192,hexagon:272,diamond:210};
   const width = widths[c.shape];
   const first = lines.length === 1 ? 184 : lines.length === 2 ? 171 : 165;
   const spacing = lines.length === 3 ? 23 : 29;
   const size = lines.length === 1 ? 42 : lines.length === 2 ? 31 : 24;
   const headings = lines.map((value,i) => label(value, first+i*spacing, size, `font-family="${c.shape === 'square' || c.shape === 'oval' ? 'Arial,Helvetica,sans-serif' : 'Georgia,serif'}" font-weight="700" textLength="${Math.min(width, Math.round(value.length*size*.65))}" lengthAdjust="spacingAndGlyphs"`)).join('');
-  const scale = c.icon === 'liberty' || c.icon === 'oryx' ? .68 : .79;
-  const footer = c.shape === 'diamond' ? c.code : c.serial;
-  return icon(c.icon,200,103,scale)+line(143,200-width/2,200+width/2)+headings+label(footer,239,10,'letter-spacing="2"');
+  // Tall destination landmarks stay below the ticket's dotted inner border.
+  const destinationTicket = c.kind === 'destination' && c.shape === 'ticket';
+  const scale = destinationTicket ? .64 : c.icon === 'liberty' || c.icon === 'oryx' ? .68 : .79;
+  return icon(c.icon,200,destinationTicket ? 110 : 103,scale)+line(143,200-width/2,200+width/2)+headings+label(footer,239,10,'letter-spacing="2"');
 }
 function composition(c) {
   switch (c.id) {
@@ -53,7 +57,7 @@ function composition(c) {
     case 'us': return icon(c.icon,200,91,.86)+label('UNITED STATES',161,29,'font-family="Georgia,serif" font-weight="700" textLength="274" lengthAdjust="spacingAndGlyphs"')+line(177,78,322)+label('WELCOME',203,17,'letter-spacing="4"')+label('★  ★  ★  ★  ★',229,16,'letter-spacing="5"')+label(c.serial,251,10,'letter-spacing="2"');
     case 'fr': return icon(c.icon,200,91,.88)+line(139,123,277)+label('FRANCE',179,36,'font-family="Georgia,serif" font-weight="700" letter-spacing="2"')+line(193,123,277)+label('BON VOYAGE',217,12,'letter-spacing="4"')+label(c.code,237,10,'letter-spacing="3"');
     case 'ar-mendoza': return label('ARGENTINA',79,13,'letter-spacing="4"')+icon(c.icon,200,117,.9)+line(163,53,347)+label('MENDOZA',199,39,'font-family="Georgia,serif" font-weight="700" letter-spacing="2"')+label('TIERRA DEL VINO · ANDES',224,12,'letter-spacing="1.5"')+text(c.serial,53,81,10,'text-anchor="start"');
-    default: if (c.kind === 'country') return countryComposition(c); throw Error(`Missing composition: ${c.id}`);
+    default: if (c.kind === 'country') return standardComposition(c); if (c.kind === 'destination') return standardComposition(c, c.countryLabel); throw Error(`Missing composition: ${c.id}`);
   }
 }
 function stamp(c) {
@@ -64,6 +68,7 @@ const files = new Map();
 const seen = new Set();
 const manifest = stamps.map(c => {
   if (!/^[A-Z]{2}$/.test(c.code) || !/^[a-z]{2}(?:-[a-z0-9]+)*$/.test(c.id) || (c.kind === 'country' ? c.id !== c.code.toLowerCase() : !c.id.startsWith(c.code.toLowerCase() + '-')) || seen.has(c.id) || !['country','destination'].includes(c.kind) || !frames[c.shape] || !icons[c.icon]) throw Error(`Invalid or duplicate stamp: ${c.id}`);
+  if (c.kind === 'destination' && (!expectedMembers.has(c.code) || !c.countryLabel || !c.label)) throw Error(`Invalid destination metadata: ${c.id}`);
   seen.add(c.id);
   const filename = c.id;
   const clean = stamp(c);
@@ -78,6 +83,11 @@ const countries = manifest.filter(c => c.kind === 'country');
 const destinations = manifest.filter(c => c.kind === 'destination');
 files.set('manifest.json', JSON.stringify(countries,null,2)+'\n');
 files.set('destinations.json', JSON.stringify(destinations,null,2)+'\n');
+const destinationGroups = [...new Set(destinations.map(c=>c.code))];
+files.set('docs/DESTINATIONS.md', '# Destinos — Colección inicial\n\n60 destinos: 20 en Argentina y 10 en cada uno de España, Francia, Alemania e Italia. Todos tienen versión gastada y limpia.\n\n' + destinationGroups.map(code=>{
+  const group=destinations.filter(c=>c.code===code);
+  return `## ${group[0].countryName} (${group.length})\n\n| Destino | Símbolo | Gastado | Limpio |\n| --- | --- | --- | --- |\n`+group.map(c=>`| ${c.name} | ${c.iconLabel} | [SVG](../${c.file}) | [SVG](../${c.cleanFile}) |`).join('\n');
+}).join('\n\n') + '\n\n## Referencias del entorno\n\n' + destinations.filter(c=>c.associationNote).map(c=>`- **${c.name}:** ${c.associationNote}`).join('\n') + '\n\nMont-Saint-Michel está clasificado como destino monumental. Los dibujos son interpretaciones simplificadas; algunos hitos representan el entorno turístico, no el casco urbano. Ver [fuentes](SOURCES.md).\n');
 files.set('preview/index.html', galleryPage(countries, destinations));
 for (const [path, content] of files) {
   const full = resolve(root,path);
@@ -97,4 +107,5 @@ if (check) {
 }
 const bytes = countries.map(c => c.bytes);
 console.log(`Countries: ${countries.length}; worn SVGs: ${Math.min(...bytes)}–${Math.max(...bytes)} B; total: ${bytes.reduce((a,b)=>a+b,0)} B.`);
-console.log(`${check ? 'Verified' : 'Built'} ${countries.length} countries + ${destinations.length} saved destination, ${stamps.length*2} SVGs; all under 10 KiB.`);
+console.log(`${check ? 'Verified' : 'Built'} ${countries.length} countries + ${destinations.length} destinations, ${stamps.length*2} SVGs; all under 10 KiB.`);
+if (destinations.length) console.log(`Destination worn SVGs: ${Math.min(...destinations.map(c=>c.bytes))}–${Math.max(...destinations.map(c=>c.bytes))} B; total: ${destinations.reduce((sum,c)=>sum+c.bytes,0)} B.`);
