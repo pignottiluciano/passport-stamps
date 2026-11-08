@@ -45,3 +45,7 @@ npm publication and website deployment are independent. This document is not evi
 - A packed consumer compiled an Angular template and React JSX against the installed package exports and strict TypeScript declarations. The installed core rendered Mendoza with an integrated date.
 - Development versions: Angular 20.3.35, React 19.3.1, TypeScript 5.9.3. This is not a test matrix across every supported framework version.
 - Framework dependencies are optional peers. SVG-only and core consumers do not need either framework. Dated compositions are generated into lazy modules; the 862 static SVG files remain unchanged.
+
+## Travel journal design
+
+The gallery uses the selected Travel journal layout and Warm Stone palette, with a stamp composition in the hero, country/destination catalog, framework code switcher, and complete Angular/React documentation. Browser checks confirmed React snippet switching, code and SVG copy feedback, destination search, stamp permalinks, documentation navigation, and the live dated preview. The existing asset paths and library component behavior are unchanged.

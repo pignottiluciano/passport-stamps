@@ -118,6 +118,16 @@ async function copy(value, description) {
 
 document.querySelector('#copy-view').addEventListener('click', () => copy(location.href, 'View link'));
 document.querySelector('#copy-install').addEventListener('click', () => copy('npm install @lucianopignotti/passport-stamps', 'Install command'));
+const quickExamples = {
+  angular: "import { PassportStampComponent } from\n  '@lucianopignotti/passport-stamps/angular';\n\n// Add PassportStampComponent to imports.\n<passport-stamp\n  country=\"AR\"\n  city=\"Mendoza\"\n  date=\"2026-11-07\"\n  [size]=\"280\"\n/>",
+  react: "import { PassportStamp } from\n  '@lucianopignotti/passport-stamps/react';\n\n<PassportStamp\n  country=\"AR\"\n  city=\"Mendoza\"\n  date=\"2026-11-07\"\n  size={280}\n/>"
+};
+for (const button of document.querySelectorAll('[data-framework]')) button.addEventListener('click', () => {
+  document.querySelector('#quick-example').textContent = quickExamples[button.dataset.framework];
+  for (const other of document.querySelectorAll('[data-framework]')) other.setAttribute('aria-pressed', String(other === button));
+});
+document.querySelector('#copy-example').addEventListener('click',()=>copy(document.querySelector('#quick-example').textContent,'Code example'));
+
 document.querySelector('#copy-close').addEventListener('click', () => copyDialog.close());
 document.querySelector('#catalog').addEventListener('click', async event => {
   const button = event.target.closest('button[data-copy-svg]');
