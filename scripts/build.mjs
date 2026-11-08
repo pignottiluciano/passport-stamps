@@ -91,6 +91,7 @@ files.set('docs/DESTINATIONS.md', `# Destination catalog\n\n${destinations.lengt
   return `## ${group[0].countryName} (${group.length})\n\n| Destination | Symbol | Worn | Clean |\n| --- | --- | --- | --- |\n`+group.map(c=>`| ${c.name} | ${c.iconLabel} | [SVG](../${c.file}) | [SVG](../${c.cleanFile}) |`).join('\n');
 }).join('\n\n') + '\n\n## Surrounding-area references\n\n' + destinations.filter(c=>c.associationNote).map(c=>`- **${c.name}:** ${c.associationNote}`).join('\n') + '\n\nMont-Saint-Michel is classified as a landmark destination. Drawings are simplified interpretations; some landmarks represent the surrounding tourist area rather than the city center. See [sources](SOURCES.md).\n');
 files.set('preview/index.html', galleryPage(countries, destinations));
+files.set('preview/gallery.js', await readFile(resolve(root, 'scripts/gallery-client.js'), 'utf8'));
 for (const [path, content] of files) {
   const full = resolve(root,path);
   if (check) {

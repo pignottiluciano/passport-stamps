@@ -95,7 +95,15 @@ npm run preview
 
 Open `http://127.0.0.1:4173/preview/` for local development. The public gallery is available on [GitHub Pages](https://pignottiluciano.github.io/passport-stamps/).
 
-The gallery supports search, region or country filters, and pages of 24 stamps. Direct destination links accept `?collection=destinations&country=AR`. The static gallery can also be opened from `preview/index.html`.
+The gallery includes installation examples for React with Vite, Angular 20+, and HTML. Each card lets you choose a worn or clean finish and copy its SVG source, alongside the existing downloads. If clipboard access is denied, a dialog provides the text for manual copying. SVG copying requires HTTP or HTTPS; local file previews can still use download links.
+
+Search, region or country filters, and pagination are encoded in the URL. Use **Copy view link** to share the current results. Examples:
+
+- `?collection=destinations&country=AR&q=mendoza`: filtered destination results.
+- `?region=Europe&page=2`: the second page of European countries.
+- `?stamp=ar-mendoza`: a single stamp, with a button to return to the full collection.
+
+The static gallery can also be opened from `preview/index.html`.
 
 ## Contributing
 
@@ -107,7 +115,8 @@ Update source files rather than generated SVGs:
 - `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`: destination motifs.
 - `scripts/build.mjs`: layouts, SVG generation, catalogs, and destination documentation.
 - `scripts/ink.mjs`: deterministic ink treatment.
-- `scripts/gallery.mjs`: static gallery.
+- `scripts/gallery.mjs`: static gallery markup and styles.
+- `scripts/gallery-client.js`: clipboard actions and shareable gallery state, copied to `preview/gallery.js` by the build.
 - `tests/catalog.test.mjs`: coverage, metadata, resource, and size contracts.
 
 Run `npm run build` and `npm run check`, then inspect your artwork in the gallery. Preserve stable IDs and paths, transparent backgrounds, accessible titles, clean alternatives, and the 10 KiB limit. Keep documentation and descriptive metadata in English; local-language artwork labels and proper names are intentional.

@@ -28,3 +28,12 @@ The initial npm candidate was packed, installed in a disposable local project, a
 Visual review uses the integrated browser. It does not establish typography parity across platforms or rendering performance across devices. SVG filter cost has not been benchmarked in all browsers, design tools, PDF renderers, or React Native. Use clean alternatives when filters are unsuitable.
 
 npm publication and website deployment are independent. This document is not evidence that a particular version is currently available in the registry.
+
+## Gallery usability update
+
+- Installation examples are available in an expandable section for React with Vite, Angular 20+, and HTML.
+- Browser checks confirmed successful copy feedback for the install command, view link, and clean SVG.
+- The Córdoba search with Spain selected was restored after reload. Opening its stamp link displayed only that stamp; Back returned to the earlier search.
+- The Europe region and page 2 were restored after reload, showing 25–43 of 43 countries.
+- A 390 px viewport showed no horizontal document overflow, including with usage examples expanded. Code samples scroll inside their containers.
+- The manual-copy fallback and SVG loading-error message are implemented; denied clipboard permissions and network failures were not simulated in this browser review.
