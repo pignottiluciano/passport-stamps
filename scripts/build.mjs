@@ -86,10 +86,10 @@ const destinations = manifest.filter(c => c.kind === 'destination');
 files.set('manifest.json', JSON.stringify(countries,null,2)+'\n');
 files.set('destinations.json', JSON.stringify(destinations,null,2)+'\n');
 const destinationGroups = [...new Set(destinations.map(c=>c.code))];
-files.set('docs/DESTINATIONS.md', `# Catálogo de destinos\n\n${destinations.length} destinos en ${destinationGroups.length} países. Todos tienen versión gastada y limpia.\n\n` + destinationGroups.map(code=>{
+files.set('docs/DESTINATIONS.md', `# Destination catalog\n\n${destinations.length} destinations across ${destinationGroups.length} countries. Every stamp includes worn and clean versions.\n\n` + destinationGroups.map(code=>{
   const group=destinations.filter(c=>c.code===code);
-  return `## ${group[0].countryName} (${group.length})\n\n| Destino | Símbolo | Gastado | Limpio |\n| --- | --- | --- | --- |\n`+group.map(c=>`| ${c.name} | ${c.iconLabel} | [SVG](../${c.file}) | [SVG](../${c.cleanFile}) |`).join('\n');
-}).join('\n\n') + '\n\n## Referencias del entorno\n\n' + destinations.filter(c=>c.associationNote).map(c=>`- **${c.name}:** ${c.associationNote}`).join('\n') + '\n\nMont-Saint-Michel está clasificado como destino monumental. Los dibujos son interpretaciones simplificadas; algunos hitos representan el entorno turístico, no el casco urbano. Ver [fuentes](SOURCES.md).\n');
+  return `## ${group[0].countryName} (${group.length})\n\n| Destination | Symbol | Worn | Clean |\n| --- | --- | --- | --- |\n`+group.map(c=>`| ${c.name} | ${c.iconLabel} | [SVG](../${c.file}) | [SVG](../${c.cleanFile}) |`).join('\n');
+}).join('\n\n') + '\n\n## Surrounding-area references\n\n' + destinations.filter(c=>c.associationNote).map(c=>`- **${c.name}:** ${c.associationNote}`).join('\n') + '\n\nMont-Saint-Michel is classified as a landmark destination. Drawings are simplified interpretations; some landmarks represent the surrounding tourist area rather than the city center. See [sources](SOURCES.md).\n');
 files.set('preview/index.html', galleryPage(countries, destinations));
 for (const [path, content] of files) {
   const full = resolve(root,path);

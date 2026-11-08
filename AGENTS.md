@@ -14,3 +14,5 @@ For future application code: use Angular 20+, standalone components, TypeScript 
 Catalog IDs are unique: country IDs use lowercase ISO codes (`ar`); destination IDs prefix the parent country (`ar-mendoza`). `code` remains the parent country ISO code. Use `kind` to distinguish countries from destinations. Existing country asset paths must stay stable.
 
 The primary `manifest.json` must contain exactly the 193 countries verified in `data/un-members.json`. No city fields or airport labels belong in country assets. The 238 agreed destinations (20 in Argentina and 218 in Europe across 39 countries) are exported separately as `destinations.json`. Keep the historical ink experiment bound to its frozen baseline, not the growing main catalog.
+
+Keep public documentation, gallery controls, descriptive catalog metadata, and accessible SVG titles in English. Local-language artwork labels, proper place names, and multilingual search aliases are intentional.

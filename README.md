@@ -1,10 +1,91 @@
 # Passport Stamps
 
-**193 países miembros de la ONU y 238 destinos** en SVG originales con acabado de tinta gastada. Los sellos de países no contienen nombres de ciudades ni códigos de aeropuertos. Cada archivo tiene fondo transparente y una alternativa limpia.
+Original, lightweight passport-style SVG stamps for **193 UN member states and 238 destinations**. Worn ink, transparent backgrounds, and a clean alternative for every stamp.
 
-La colección de países usa 129 motivos de arquitectura, naturaleza y cultura; algunos se comparten entre países. Los diseños combinan seis familias de marcos, composiciones adaptadas al nombre y una paleta de tintas. Los motivos son decisiones de diseño, no emblemas nacionales oficiales.
+[Browse the gallery](https://pignottiluciano.github.io/passport-stamps/) · [Destinations](https://pignottiluciano.github.io/passport-stamps/preview/?collection=destinations) · [Source code](https://github.com/pignottiluciano/passport-stamps)
 
-## Ver y descargar
+## Install
+
+```sh
+npm install @lucianopignotti/passport-stamps
+```
+
+One framework-independent asset package. No runtime dependencies. Works with React, Angular, Vue, or plain HTML.
+
+## Use a stamp
+
+Copy the SVG files you need into your application's public assets:
+
+```html
+<img src="/stamps/ar-mendoza.svg" alt="Mendoza — grapes and Andes Mountains" width="400" height="300">
+```
+
+With Vite, including React or Vue projects using Vite, import a file URL:
+
+```jsx
+import mendozaUrl from '@lucianopignotti/passport-stamps/svg/ar-mendoza.svg';
+
+export function MendozaStamp() {
+  return <img src={mendozaUrl} alt="Mendoza — grapes and Andes Mountains" width={400} height={300} />;
+}
+```
+
+SVG import behavior depends on your build tool. An SVG asset is not a React component. Copying files into public assets works across frameworks.
+
+For Angular 20+, add this entry to your build target's `assets` array in `angular.json`, alongside existing entries:
+
+```json
+{
+  "glob": "**/*.svg",
+  "input": "node_modules/@lucianopignotti/passport-stamps/svg",
+  "output": "/stamps/"
+}
+```
+
+Then use `<img src="stamps/ar-mendoza.svg" alt="Mendoza — grapes and Andes Mountains">`. Copy individual files instead if you only need a few stamps. Installing the library does not automatically send every SVG to the browser.
+
+## Package contents
+
+| Path | Contents |
+| --- | --- |
+| `svg/ar.svg` | Worn country stamp |
+| `svg/ar-mendoza.svg` | Worn destination stamp |
+| `svg/clean/ar-mendoza.svg` | Clean alternative |
+| `manifest.json` | Exactly 193 UN member states |
+| `destinations.json` | 238 destinations across 40 countries |
+
+Countries and destinations have separate catalogs. Country stamps contain no city names or airport codes. The destination collection covers 20 places in Argentina and 218 in Europe. [Full destination list and individual downloads](docs/DESTINATIONS.md).
+
+All 862 SVGs have a `400 × 300` viewBox. They contain no embedded bitmaps, scripts, or external resources. Every file stays below 10 KiB; exact uncompressed sizes are recorded in the catalogs. Worn files are typically around 2–3 KB each.
+
+## Catalog fields
+
+Use `id` as the unique key: `ar` for Argentina, `ar-mendoza` for Mendoza. `code` is the uppercase ISO country code, including for destinations. `kind` distinguishes `country` from `destination`.
+
+- `name` and `countryName`: English display names; proper local names are retained where appropriate.
+- `label` and `countryLabel`: lettering in the artwork, which may use a local language.
+- `officialName`: country name from the membership reference.
+- `region`: Africa, Americas, Asia, Europe, or Oceania; a navigation grouping, not an official political classification.
+- `icon` and `iconLabel`: motif identifier and English description.
+- `shape` and `color`: frame family and ink color.
+- `file`, `cleanFile`, `bytes`, and `cleanBytes`: asset paths and uncompressed sizes.
+- Destinations also include `adminArea` and `destinationType`; some include `aliases`, `associationNote`, or `landmarkLocality`.
+
+Aliases include alternative spellings and some previous Spanish names. The two Córdoba destinations have separate IDs and symbols. Mont-Saint-Michel is a landmark destination; the Füssen entry explains that Neuschwanstein is in nearby Schwangau. Natural motifs may represent a destination's wider surroundings.
+
+## Rendering notes
+
+Artwork uses six frame families and original architectural, cultural, and natural motifs. Some motifs are shared. These are decorative designs, not official national emblems or immigration documents.
+
+Text remains editable and uses system fonts, including Arial/Helvetica, Georgia, and an available Japanese font. It is not converted to outlines, so typography can vary between platforms.
+
+Worn SVGs use deterministic filters to simulate pores, uneven pressure, and ink absorption. Small file size does not guarantee low rendering cost; performance has not been benchmarked across all devices. Clean variants omit these effects.
+
+SVG files displayed with `<img>` do not inherit page text color. If you inline the same SVG more than once, assign unique IDs to titles, filters, and their references. Each `<img>` otherwise has its own document.
+
+## Build and preview locally
+
+Requires Node.js 20+; Python 3 is only needed for the optional local server. No dependency installation is required for the asset generator.
 
 ```sh
 npm run build
@@ -12,88 +93,35 @@ npm run check
 npm run preview
 ```
 
-Abrí la [galería pública](https://pignottiluciano.github.io/passport-stamps/preview/). Para verla en tu computadora después de ejecutar `npm run preview`, abrí http://127.0.0.1:4173/preview/. La galería permite buscar por nombre en español o inglés, código y símbolo; filtrar por región y recorrer páginas de 24 sellos. En destinos, el filtro cambia de región a país. También se puede abrir `preview/index.html` directamente.
+Open `http://127.0.0.1:4173/preview/` for local development. The public gallery is available on [GitHub Pages](https://pignottiluciano.github.io/passport-stamps/).
 
-Se requiere Node.js 20+ para generar/verificar y Python 3 solo para el servidor opcional. No hay paquetes que instalar ni dependencias de ejecución.
+The gallery supports search, region or country filters, and pages of 24 stamps. Direct destination links accept `?collection=destinations&country=AR`. The static gallery can also be opened from `preview/index.html`.
 
-## Archivos y peso
+## Contributing
 
-- `svg/ar.svg`: acabado gastado, principal.
-- `svg/clean/ar.svg`: alternativa limpia.
-- `manifest.json`: **193 países**, sin ciudades ni destinos mezclados.
-- `destinations.json`: **238 destinos** de 40 países, separados del catálogo de miembros de la ONU.
+Update source files rather than generated SVGs:
 
-Los 193 SVG gastados pesan **416.716 bytes en total** (416,72 KB sin compresión), entre **1.976 y 2.829 bytes por país**. El generador impone un máximo de 10 KiB por archivo. El catálogo registra las medidas exactas.
+- `data/stamps.json`: editorial metadata and visual decisions.
+- `data/un-members.json`: verified membership reference, source, and date.
+- `scripts/icons.mjs`: country motifs.
+- `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`: destination motifs.
+- `scripts/build.mjs`: layouts, SVG generation, catalogs, and destination documentation.
+- `scripts/ink.mjs`: deterministic ink treatment.
+- `scripts/gallery.mjs`: static gallery.
+- `tests/catalog.test.mjs`: coverage, metadata, resource, and size contracts.
 
-Las rutas de los seis países iniciales siguen vigentes. Los sellos de país ya no muestran Buenos Aires, Río, Roma, Tokio, Nueva York ni París: los monumentos pueden seguir representando al país. Mendoza conserva su archivo `svg/ar-mendoza.svg`, dentro del catálogo de destinos; no forma parte del conteo de países.
+Run `npm run build` and `npm run check`, then inspect your artwork in the gallery. Preserve stable IDs and paths, transparent backgrounds, accessible titles, clean alternatives, and the 10 KiB limit. Keep documentation and descriptive metadata in English; local-language artwork labels and proper names are intentional.
 
-## Destinos
+The primary catalog must match the verified UN membership reference exactly. Add cities and other destinations to the separate destination catalog. Update the membership reference explicitly before changing country coverage.
 
-La colección tiene **238 destinos y 476 SVG** (gastados y limpios): 20 de Argentina y 218 de Europa. Los gastados pesan entre **2.018 y 2.594 bytes**; juntos suman **524.562 bytes**. [Lista completa y descargas individuales](docs/DESTINATIONS.md).
+GitHub Pages verifies and deploys the gallery on pushes to `main`. npm releases are separate; changing repository documentation does not update an already published npm version.
 
-Abrí la [galería de destinos](https://pignottiluciano.github.io/passport-stamps/preview/?collection=destinations). El filtro permite elegir entre los 40 países representados. También hay enlaces directos por país, por ejemplo `/preview/?collection=destinations&country=AR`.
+## Historical ink study
 
-Los nombres grandes del arte respetan las formas locales (MÜNCHEN, FIRENZE, MARSEILLE); la galería mantiene nombres comunes en español y aliases para buscar. `ar-cordoba` y `es-cordoba` son archivos distintos con símbolos propios.
+The [ink experiment](experiments/ink/README.md) preserves six earlier compositions, including their historical city labels. Its measurements do not describe the current collection. Regenerate it with `node experiments/ink/build.mjs`. It is excluded from the npm package.
 
-Los destinos agregan `countryLabel`, `adminArea`, `destinationType` y, cuando corresponde, `aliases`, `associationNote` o `landmarkLocality`. Mont-Saint-Michel es un destino monumental; el sello de Füssen indica que Neuschwanstein se encuentra en Schwangau. Los motivos naturales pueden representar el entorno turístico del destino.
+## Sources and license
 
-## React, Angular, Vue o HTML
+Country coverage was checked on **November 7, 2026** against the [UN member states list](https://www.un.org/about-us/member-states). See [sources and scope](docs/SOURCES.md) and [validation notes](docs/VALIDATION.md).
 
-Copiá los SVG que necesites a los assets públicos de tu aplicación:
-
-```html
-<img src="/stamps/jp.svg" alt="Japón — Monte Fuji" width="240" height="180">
-```
-
-React admite el mismo elemento; Angular 20+ puede servir el archivo desde `public/stamps/jp.svg`. No se requiere un componente específico. Si más adelante se necesitan controles propios de un framework, podrán usar los mismos recursos.
-
-El paquete está preparado como `@lucianopignotti/passport-stamps` para distribuir archivos y catálogos por subrutas con acceso público. La instalación se realiza con `npm install @lucianopignotti/passport-stamps` cuando la versión publicada esté disponible en el registro. El código fuente está en [GitHub](https://github.com/pignottiluciano/passport-stamps).
-
-```text
-@lucianopignotti/passport-stamps/svg/jp.svg
-@lucianopignotti/passport-stamps/manifest.json
-@lucianopignotti/passport-stamps/destinations.json
-```
-
-La resolución de una importación de SVG depende del compilador de cada aplicación; copiarlo a sus assets públicos es la opción directa e independiente del framework. El generador vive en Git y no se incluye en el paquete de recursos.
-
-## Datos e identificadores
-
-Cada país usa su código ISO en minúscula como `id` (`ar`, `jp`, `ca`). Los destinos usan prefijo del país (`ar-mendoza`). `code` mantiene el ISO en mayúscula. Usá **`id` como clave**.
-
-Los países tienen `name` y `countryName` para mostrar en español, `officialName` según la fuente de membresía y `label` para el texto del sello. Las etiquetas del arte usan nombres comunes en inglés y conservan los rótulos de los seis diseños iniciales. Los nombres largos se distribuyen en hasta tres líneas.
-
-`region` usa cinco agrupaciones geográficas para navegar: Africa, Americas, Asia, Europe y Oceania. No pretende reproducir una clasificación política. `icon` y `iconLabel` identifican el motivo, `shape` el marco, `file` y `cleanFile` las rutas, y `bytes` y `cleanBytes` el peso sin comprimir.
-
-## Estructura y edición
-
-- `data/stamps.json`: decisiones editoriales y visuales, con los 193 países y los 238 destinos.
-- `data/un-members.json`: lista de membresía y códigos contrastados con la ONU, con fuente y fecha.
-- `scripts/icons.mjs`: motivos de los países.
-- `scripts/destination-icons.mjs` y `scripts/europe-icons.mjs`: siluetas originales de los destinos.
-- `scripts/build.mjs`: marcos, composiciones, nombres y exportaciones.
-- `scripts/ink.mjs`: textura de tinta determinista.
-- `scripts/gallery.mjs`: galería de documentación.
-- `tests/catalog.test.mjs`: contratos de cobertura, países sin ciudades, recursos y tamaños.
-
-Para editar un símbolo o una composición, cambiá las fuentes y corré `npm run build` y `npm run check`. No edites los SVG generados directamente: regenerar reemplaza esos cambios. Para cambiar un color, editá los datos y regenerá.
-
-Antes de incorporar países al catálogo principal, actualizá explícitamente la referencia de membresía. No se agregan territorios u observadores para completar el número. Otros destinos pertenecen al catálogo separado.
-
-## Renderizado
-
-Todos los SVG usan un `viewBox` de 400 × 300. No tienen bitmaps incrustados ni descargas externas. Los filtros simulan poros, presión desigual y absorción de tinta. Las semillas son fijas para mantener el mismo aspecto entre generaciones.
-
-La fuente sigue siendo editable y usa Arial/Helvetica, Georgia y una fuente japonesa disponible. Todavía no se convirtió a curvas; la tipografía puede variar entre plataformas. Un SVG mostrado con `<img>` no hereda el color CSS de la página.
-
-Si se inserta código SVG inline repetido, hay que asignar IDs únicos a títulos y filtros. Con `<img>` cada archivo tiene su propio documento. Los filtros compactos ahorran bytes, pero no se midió su costo gráfico en todos los dispositivos. Las variantes limpias permiten usar el arte sin esos filtros.
-
-## Historial de tinta
-
-La [prueba de acabados](experiments/ink/README.md) conserva las seis composiciones anteriores, incluidos sus nombres de ciudades históricos. Sus medidas no describen la colección actual de 193 países. Se regenera con `node experiments/ink/build.mjs` y se abre en `/experiments/ink/`. No se distribuye como parte del paquete.
-
-## Fuente y licencia
-
-La cobertura se verificó el **7 de noviembre de 2026** contra la [lista oficial de miembros de la ONU](https://www.un.org/about-us/member-states). [Fuentes y alcance](docs/SOURCES.md).
-
-Código y arte bajo [MIT](LICENSE), incluido uso comercial. Los dibujos son originales: no se copiaron ni vectorizaron los gráficos de la ONU ni recursos de terceros. Estos sellos son decorativos y no representan documentos ni marcas migratorias oficiales.
+Code and original artwork are licensed under [MIT](LICENSE), including commercial use. No UN graphics or third-party artwork were copied or traced. These decorative stamps do not represent official documents or border-control marks.

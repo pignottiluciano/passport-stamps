@@ -1,17 +1,17 @@
 [
   {
     "id": "pt-lisbon",
-    "name": "Lisboa",
+    "name": "Lisbon",
     "code": "PT"
   },
   {
     "id": "pt-porto",
-    "name": "Oporto",
+    "name": "Porto",
     "code": "PT"
   },
   {
     "id": "pt-coimbra",
-    "name": "Coímbra",
+    "name": "Coimbra",
     "code": "PT"
   },
   {
@@ -41,12 +41,12 @@
   },
   {
     "id": "gb-london",
-    "name": "Londres",
+    "name": "London",
     "code": "GB"
   },
   {
     "id": "gb-edinburgh",
-    "name": "Edimburgo",
+    "name": "Edinburgh",
     "code": "GB"
   },
   {
@@ -101,7 +101,7 @@
   },
   {
     "id": "ie-dublin",
-    "name": "Dublín",
+    "name": "Dublin",
     "code": "IE"
   },
   {
@@ -126,12 +126,12 @@
   },
   {
     "id": "nl-amsterdam",
-    "name": "Ámsterdam",
+    "name": "Amsterdam",
     "code": "NL"
   },
   {
     "id": "nl-rotterdam",
-    "name": "Róterdam",
+    "name": "Rotterdam",
     "code": "NL"
   },
   {
@@ -141,7 +141,7 @@
   },
   {
     "id": "nl-the-hague",
-    "name": "La Haya",
+    "name": "The Hague",
     "code": "NL"
   },
   {
@@ -161,57 +161,57 @@
   },
   {
     "id": "be-brussels",
-    "name": "Bruselas",
+    "name": "Brussels",
     "code": "BE"
   },
   {
     "id": "be-bruges",
-    "name": "Brujas",
+    "name": "Bruges",
     "code": "BE"
   },
   {
     "id": "be-ghent",
-    "name": "Gante",
+    "name": "Ghent",
     "code": "BE"
   },
   {
     "id": "be-antwerp",
-    "name": "Amberes",
+    "name": "Antwerp",
     "code": "BE"
   },
   {
     "id": "be-leuven",
-    "name": "Lovaina",
+    "name": "Leuven",
     "code": "BE"
   },
   {
     "id": "lu-luxembourg",
-    "name": "Luxemburgo",
+    "name": "Luxembourg",
     "code": "LU"
   },
   {
     "id": "ch-lucerne",
-    "name": "Lucerna",
+    "name": "Lucerne",
     "code": "CH"
   },
   {
     "id": "ch-zurich",
-    "name": "Zúrich",
+    "name": "Zurich",
     "code": "CH"
   },
   {
     "id": "ch-bern",
-    "name": "Berna",
+    "name": "Bern",
     "code": "CH"
   },
   {
     "id": "ch-geneva",
-    "name": "Ginebra",
+    "name": "Geneva",
     "code": "CH"
   },
   {
     "id": "ch-basel",
-    "name": "Basilea",
+    "name": "Basel",
     "code": "CH"
   },
   {
@@ -221,12 +221,12 @@
   },
   {
     "id": "at-vienna",
-    "name": "Viena",
+    "name": "Vienna",
     "code": "AT"
   },
   {
     "id": "at-salzburg",
-    "name": "Salzburgo",
+    "name": "Salzburg",
     "code": "AT"
   },
   {
@@ -246,7 +246,7 @@
   },
   {
     "id": "cz-prague",
-    "name": "Praga",
+    "name": "Prague",
     "code": "CZ"
   },
   {
@@ -266,12 +266,12 @@
   },
   {
     "id": "pl-krakow",
-    "name": "Cracovia",
+    "name": "Kraków",
     "code": "PL"
   },
   {
     "id": "pl-warsaw",
-    "name": "Varsovia",
+    "name": "Warsaw",
     "code": "PL"
   },
   {
@@ -281,7 +281,7 @@
   },
   {
     "id": "pl-wroclaw",
-    "name": "Breslavia",
+    "name": "Wrocław",
     "code": "PL"
   },
   {
@@ -326,7 +326,7 @@
   },
   {
     "id": "si-ljubljana",
-    "name": "Liubliana",
+    "name": "Ljubljana",
     "code": "SI"
   },
   {
@@ -391,7 +391,7 @@
   },
   {
     "id": "rs-belgrade",
-    "name": "Belgrado",
+    "name": "Belgrade",
     "code": "RS"
   },
   {
@@ -416,7 +416,7 @@
   },
   {
     "id": "mk-skopje",
-    "name": "Skopie",
+    "name": "Skopje",
     "code": "MK"
   },
   {
@@ -426,32 +426,32 @@
   },
   {
     "id": "gr-athens",
-    "name": "Atenas",
+    "name": "Athens",
     "code": "GR"
   },
   {
     "id": "gr-thessaloniki",
-    "name": "Tesalónica",
+    "name": "Thessaloniki",
     "code": "GR"
   },
   {
     "id": "gr-nafplio",
-    "name": "Nauplia",
+    "name": "Nafplio",
     "code": "GR"
   },
   {
     "id": "gr-chania",
-    "name": "La Canea",
+    "name": "Chania",
     "code": "GR"
   },
   {
     "id": "gr-rhodes",
-    "name": "Ciudad de Rodas",
+    "name": "Rhodes Town",
     "code": "GR"
   },
   {
     "id": "mt-valletta",
-    "name": "La Valeta",
+    "name": "Valletta",
     "code": "MT"
   },
   {
@@ -466,7 +466,7 @@
   },
   {
     "id": "ro-bucharest",
-    "name": "Bucarest",
+    "name": "Bucharest",
     "code": "RO"
   },
   {
@@ -486,7 +486,7 @@
   },
   {
     "id": "bg-sofia",
-    "name": "Sofía",
+    "name": "Sofia",
     "code": "BG"
   },
   {
@@ -506,7 +506,7 @@
   },
   {
     "id": "dk-copenhagen",
-    "name": "Copenhague",
+    "name": "Copenhagen",
     "code": "DK"
   },
   {
@@ -521,12 +521,12 @@
   },
   {
     "id": "se-stockholm",
-    "name": "Estocolmo",
+    "name": "Stockholm",
     "code": "SE"
   },
   {
     "id": "se-gothenburg",
-    "name": "Gotemburgo",
+    "name": "Gothenburg",
     "code": "SE"
   },
   {
@@ -591,7 +591,7 @@
   },
   {
     "id": "is-reykjavik",
-    "name": "Reikiavik",
+    "name": "Reykjavík",
     "code": "IS"
   },
   {
@@ -601,7 +601,7 @@
   },
   {
     "id": "ee-tallinn",
-    "name": "Tallin",
+    "name": "Tallinn",
     "code": "EE"
   },
   {
@@ -621,7 +621,7 @@
   },
   {
     "id": "lt-vilnius",
-    "name": "Vilna",
+    "name": "Vilnius",
     "code": "LT"
   },
   {
@@ -641,12 +641,12 @@
   },
   {
     "id": "sm-san-marino",
-    "name": "Ciudad de San Marino",
+    "name": "City of San Marino",
     "code": "SM"
   },
   {
     "id": "mc-monaco",
-    "name": "Mónaco",
+    "name": "Monaco",
     "code": "MC"
   },
   {
@@ -801,7 +801,7 @@
   },
   {
     "id": "de-aachen",
-    "name": "Aquisgrán",
+    "name": "Aachen",
     "code": "DE"
   },
   {
@@ -811,32 +811,32 @@
   },
   {
     "id": "de-regensburg",
-    "name": "Ratisbona",
+    "name": "Regensburg",
     "code": "DE"
   },
   {
     "id": "de-wurzburg",
-    "name": "Wurzburgo",
+    "name": "Würzburg",
     "code": "DE"
   },
   {
     "id": "de-trier",
-    "name": "Tréveris",
+    "name": "Trier",
     "code": "DE"
   },
   {
     "id": "de-freiburg",
-    "name": "Friburgo de Brisgovia",
+    "name": "Freiburg im Breisgau",
     "code": "DE"
   },
   {
     "id": "it-turin",
-    "name": "Turín",
+    "name": "Turin",
     "code": "IT"
   },
   {
     "id": "it-genoa",
-    "name": "Génova",
+    "name": "Genoa",
     "code": "IT"
   },
   {
@@ -851,7 +851,7 @@
   },
   {
     "id": "it-bergamo",
-    "name": "Bérgamo",
+    "name": "Bergamo",
     "code": "IT"
   },
   {
@@ -866,7 +866,7 @@
   },
   {
     "id": "it-ravenna",
-    "name": "Rávena",
+    "name": "Ravenna",
     "code": "IT"
   },
   {
@@ -881,7 +881,7 @@
   },
   {
     "id": "it-siracusa",
-    "name": "Siracusa",
+    "name": "Syracuse",
     "code": "IT"
   },
   {

@@ -1,7 +1,7 @@
 // Shared deterministic ink treatments. No raster textures or external resources.
 export const styles = [
-  {key:'stamped', label:'Estampado', frequency:'.67', slope:'10', intercept:'-2.4', pressure:'.013 .021', pressureSlope:'1', pressureIntercept:'.5', displacement:'.85', blur:'.17'},
-  {key:'worn', label:'Gastado', frequency:'.5', slope:'10', intercept:'-3.3', pressure:'.019 .027', pressureSlope:'1.8', pressureIntercept:'-.05', displacement:'1.15', blur:'.12'}
+  {key:'stamped', label:'Stamped', frequency:'.67', slope:'10', intercept:'-2.4', pressure:'.013 .021', pressureSlope:'1', pressureIntercept:'.5', displacement:'.85', blur:'.17'},
+  {key:'worn', label:'Worn', frequency:'.5', slope:'10', intercept:'-3.3', pressure:'.019 .027', pressureSlope:'1.8', pressureIntercept:'-.05', displacement:'1.15', blur:'.12'}
 ];
 export function finish(svg, country, s) {
   const id = `ink-${(country.id ?? country.code.toLowerCase())}-${s.key}`;
