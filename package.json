@@ -1,7 +1,6 @@
 {
-  "name": "@passport-stamps/core",
+  "name": "@lucianopignotti/passport-stamps",
   "version": "0.1.0",
-  "private": true,
   "description": "193 countries and 238 destinations as lightweight passport-style SVG stamps",
   "type": "module",
   "license": "MIT",
@@ -23,9 +22,30 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check && node --test tests/catalog.test.mjs",
-    "preview": "python3 -m http.server 4173 --bind 127.0.0.1"
+    "preview": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "prepack": "npm run check"
   },
   "engines": {
     "node": ">=20"
+  },
+  "author": "Luciano Pignotti",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pignottiluciano/passport-stamps.git"
+  },
+  "homepage": "https://github.com/pignottiluciano/passport-stamps#readme",
+  "bugs": {
+    "url": "https://github.com/pignottiluciano/passport-stamps/issues"
+  },
+  "keywords": [
+    "svg",
+    "passport",
+    "stamps",
+    "travel",
+    "countries",
+    "cities"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

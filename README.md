@@ -47,12 +47,12 @@ Copiá los SVG que necesites a los assets públicos de tu aplicación:
 
 React admite el mismo elemento; Angular 20+ puede servir el archivo desde `public/stamps/jp.svg`. No se requiere un componente específico. Si más adelante se necesitan controles propios de un framework, podrán usar los mismos recursos.
 
-El paquete está preparado para distribuir archivos y catálogos por subrutas. Sigue **privado y sin publicar**: no se verificó disponibilidad del nombre ni se creó un remoto de Git.
+El paquete está preparado como `@lucianopignotti/passport-stamps` para distribuir archivos y catálogos por subrutas con acceso público. La versión `0.1.0` está en preparación y todavía no se publicó en npm. El código fuente está en [GitHub](https://github.com/pignottiluciano/passport-stamps).
 
 ```text
-@passport-stamps/core/svg/jp.svg
-@passport-stamps/core/manifest.json
-@passport-stamps/core/destinations.json
+@lucianopignotti/passport-stamps/svg/jp.svg
+@lucianopignotti/passport-stamps/manifest.json
+@lucianopignotti/passport-stamps/destinations.json
 ```
 
 La resolución de una importación de SVG depende del compilador de cada aplicación; copiarlo a sus assets públicos es la opción directa e independiente del framework. El generador vive en Git y no se incluye en el paquete de recursos.
