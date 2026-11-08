@@ -24,7 +24,7 @@
   },
   {
     "code": "BR",
-    "name": "Brasil",
+    "name": "Brazil",
     "clean": {
       "bytes": 1302,
       "gzipBytes": 673
@@ -47,7 +47,7 @@
   },
   {
     "code": "IT",
-    "name": "Italia",
+    "name": "Italy",
     "clean": {
       "bytes": 1268,
       "gzipBytes": 611
