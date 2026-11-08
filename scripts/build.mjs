@@ -62,8 +62,14 @@ function composition(c) {
     default: if (c.kind === 'country') return standardComposition(c); if (c.kind === 'destination') return standardComposition(c, c.countryLabel); throw Error(`Missing composition: ${c.id}`);
   }
 }
-function stamp(c) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-labelledby="title-${c.id}"><title id="title-${c.id}">${xml(c.name)} — ${xml(c.iconLabel)} passport stamp</title><g color="${c.color}" fill="currentColor" font-family="Arial,Helvetica,sans-serif" text-anchor="middle"><g fill="none" stroke="currentColor">${frames[c.shape]}</g>${composition(c)}</g></svg>\n`;
+function datedComposition(c) {
+  // Reserve a separate date row inside every frame. Existing undated artwork is unchanged.
+  const base = standardComposition({...c, kind:'destination'}, c.kind === 'country' ? c.code : c.countryLabel);
+  // Shift and compress only the composition, leaving the frame and date at full size.
+  return `<g transform="translate(0 -2) scale(1 .9)">${base}</g>` + label('__PASSPORT_DATE__',239,11,'font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1"');
+}
+function stamp(c, dated = false) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-labelledby="title-${c.id}"><title id="title-${c.id}">${xml(c.name)} — ${xml(c.iconLabel)} passport stamp${dated ? ", __PASSPORT_DATE__" : ""}</title><g color="${c.color}" fill="currentColor" font-family="Arial,Helvetica,sans-serif" text-anchor="middle"><g fill="none" stroke="currentColor">${dated ? frames[c.shape].replace("M43 67H357M43 233H357", "M43 67H357") : frames[c.shape]}</g>${dated ? datedComposition(c) : composition(c)}</g></svg>\n`;
 }
 const wornStyle = styles.find(style => style.key === 'worn');
 const files = new Map();
@@ -74,6 +80,9 @@ const manifest = stamps.map(c => {
   seen.add(c.id);
   const filename = c.id;
   const clean = stamp(c);
+  const datedClean = stamp(c, true);
+  const datedWorn = finish(datedClean, c, wornStyle);
+  files.set(`src/core/art/${c.id}.ts`, 'export const artwork = ' + JSON.stringify({clean, worn:finish(clean,c,wornStyle), datedClean, datedWorn}) + ';\n');
   const textured = finish(clean, c, wornStyle);
   for (const [path, content] of [[`svg/${filename}.svg`,textured],[`svg/clean/${filename}.svg`,clean]]) {
     if (Buffer.byteLength(content) > 10240) throw Error(`${path} exceeds the 10 KiB budget`);
@@ -83,6 +92,9 @@ const manifest = stamps.map(c => {
 });
 const countries = manifest.filter(c => c.kind === 'country');
 const destinations = manifest.filter(c => c.kind === 'destination');
+const compactCatalog = manifest.map(c=>({id:c.id,code:c.code,kind:c.kind,name:c.name,label:c.label,iconLabel:c.iconLabel,aliases:c.aliases??[]}));
+files.set('src/core/generated/catalog.ts', 'export const catalog: ReadonlyArray<{id:string;code:string;kind:string;name:string;label:string;iconLabel:string;aliases:readonly string[]}> = '+JSON.stringify(compactCatalog)+';\n');
+files.set('src/core/generated/loaders.ts', 'export const loaders: Record<string, () => Promise<{artwork:{clean:string;worn:string;datedClean:string;datedWorn:string}}>> = {\n'+manifest.map(c=>JSON.stringify(c.id)+': () => import("../art/'+c.id+'.js")').join(',\n')+'\n};\n');
 files.set('manifest.json', JSON.stringify(countries,null,2)+'\n');
 files.set('destinations.json', JSON.stringify(destinations,null,2)+'\n');
 const destinationGroups = [...new Set(destinations.map(c=>c.code))];

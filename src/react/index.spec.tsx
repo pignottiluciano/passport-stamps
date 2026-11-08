@@ -1,0 +1,22 @@
+import {afterEach,describe,it,expect} from 'vitest';
+import {cleanup,render,screen,waitFor} from '@testing-library/react';
+import {PassportStamp} from '@lucianopignotti/passport-stamps/react';
+
+describe('React PassportStamp',()=>{
+  afterEach(cleanup);
+  it('reacts to property changes and renders a date inside the SVG',async()=>{
+    const {rerender}=render(<PassportStamp country="AR" />);
+    await screen.findByRole('img',{name:/Argentina/});
+    rerender(<PassportStamp country="AR" city="Mendoza" date="2026-11-07" variant="clean" size={320} />);
+    const img=await screen.findByRole('img',{name:/Mendoza.*07 NOV 2026/}) as HTMLImageElement;
+    expect(decodeURIComponent(img.src)).toContain('>07 NOV 2026</text>');
+    expect(decodeURIComponent(img.src)).not.toContain('<filter');
+    expect(img.parentElement?.style.width).toBe('320px');
+  });
+  it('falls back to a country for unknown cities and exposes invalid dates',async()=>{
+    const {rerender}=render(<PassportStamp country="FR" city="Unknown city" />);
+    await screen.findByRole('img',{name:/France/});
+    rerender(<PassportStamp country="FR" date="2026-02-30" />);
+    await waitFor(()=>expect(screen.getByRole('alert').textContent).toContain('valid calendar date'));
+  });
+});

@@ -1,0 +1,9 @@
+{
+  "name": "@lucianopignotti/passport-stamps-angular-build",
+  "version": "0.1.1",
+  "peerDependencies": {
+    "@angular/core": ">=20 <23",
+    "@lucianopignotti/passport-stamps": "*"
+  },
+  "sideEffects": false
+}

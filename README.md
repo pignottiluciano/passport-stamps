@@ -10,39 +10,90 @@ Original, lightweight passport-style SVG stamps for **193 UN member states and 2
 npm install @lucianopignotti/passport-stamps
 ```
 
-One framework-independent asset package. No runtime dependencies. Works with React, Angular, Vue, or plain HTML.
+The package provides standalone SVG assets, a framework-independent renderer, and optional Angular and React components. Import only the entry point you need; Angular and React are optional peers. This component API is prepared for the next npm release and has not been published yet.
 
-## Use a stamp
+## Angular 20+
 
-Copy the SVG files you need into your application's public assets:
+```ts
+import { Component } from '@angular/core';
+import { PassportStampComponent } from '@lucianopignotti/passport-stamps/angular';
+
+@Component({
+  selector: 'app-example',
+  imports: [PassportStampComponent],
+  template: `
+    <passport-stamp country="AR" />
+    <passport-stamp country="AR" city="Mendoza" date="2026-11-07" />
+    <passport-stamp [country]="country" [city]="city" [date]="date" [size]="280" variant="clean" />
+  `
+})
+export class ExampleComponent {
+  country = 'AR';
+  city = 'Mendoza';
+  date = '2026-11-07';
+}
+```
+
+No NgModule, assets configuration, HTTP provider, or SVG loader is needed. The component uses signal inputs, computed values, and a resource for asynchronous artwork loading. It is built with Angular 20 partial compilation for consumers on Angular 20–22.
+
+## React 18+
+
+```jsx
+import { PassportStamp } from '@lucianopignotti/passport-stamps/react';
+
+export function Example() {
+  return (
+    <>
+      <PassportStamp country="AR" />
+      <PassportStamp country="AR" city="Mendoza" date="2026-11-07" />
+      <PassportStamp country="FR" city="Paris" variant="clean" size={280} />
+    </>
+  );
+}
+```
+
+Props can come from state or your application's data. The component is a client entry point, loads asynchronously, and displays loading or error text. On server-rendered React pages, the image appears after client loading. React 18 and 19 are supported; behavior was tested with React 19.3.1.
+
+## Properties
+
+| Property | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `country` | `string` | Required | ISO alpha-2 code recommended, such as `AR`. Country names and known aliases also work. |
+| `city` | `string` | None | Destination name, slug, alias, or full ID such as `ar-mendoza`. |
+| `date` | `string` | None | Valid calendar date in `YYYY-MM-DD` format, printed inside the stamp as `07 NOV 2026`. |
+| `variant` | `'worn'` or `'clean'` | `'worn'` | Ink treatment. |
+| `size` | `number` | `240` | Width in pixels; height follows the 4:3 viewBox. In Angular, bind numbers with `[size]="280"`. |
+| `alt` | `string` | Generated description | Optional accessible image text. |
+
+Without a city, the country stamp is used. A city must belong to the selected country; an unknown city falls back to the country stamp. Unknown countries, invalid dates, and invalid variants produce explicit errors. Size must be positive and finite. The core error type, `PassportStampError`, includes a stable `code`.
+
+Dates are calendar strings, not timestamps. No timezone conversion occurs. Omitting the date preserves the original artwork. A date selects an adapted composition with a dedicated date row inside the frame; dated country compositions may differ from their original undated layouts.
+
+Components load a single design module on demand. Build tools may emit multiple lazy chunks, but only requested designs load at runtime. Each image uses an isolated SVG data URL, so repeated stamps do not share filter IDs. Sites with a Content Security Policy must allow `data:` in their image policy. Components do not require a CDN or public asset-copy configuration.
+
+## Plain HTML, Vue, or direct SVG assets
+
+Copy only the files you need into your public assets:
 
 ```html
 <img src="/stamps/ar-mendoza.svg" alt="Mendoza — grapes and Andes Mountains" width="400" height="300">
 ```
 
-With Vite, including React or Vue projects using Vite, import a file URL:
+Vite also supports importing `@lucianopignotti/passport-stamps/svg/ar-mendoza.svg` as an asset URL. Direct SVG files retain their existing paths; dynamic dates belong to the component and renderer API.
 
-```jsx
-import mendozaUrl from '@lucianopignotti/passport-stamps/svg/ar-mendoza.svg';
+## Framework-independent renderer
 
-export function MendozaStamp() {
-  return <img src={mendozaUrl} alt="Mendoza — grapes and Andes Mountains" width={400} height={300} />;
-}
+```js
+import { createStampImage } from '@lucianopignotti/passport-stamps';
+
+const image = await createStampImage({
+  country: 'AR', city: 'Mendoza', date: '2026-11-07', variant: 'worn'
+});
+// image: { id, src, alt, fallback }
+// Assign image.src and image.alt to an img element.
 ```
 
-SVG import behavior depends on your build tool. An SVG asset is not a React component. Copying files into public assets works across frameworks.
-
-For Angular 20+, add this entry to your build target's `assets` array in `angular.json`, alongside existing entries:
-
-```json
-{
-  "glob": "**/*.svg",
-  "input": "node_modules/@lucianopignotti/passport-stamps/svg",
-  "output": "/stamps/"
-}
-```
-
-Then use `<img src="stamps/ar-mendoza.svg" alt="Mendoza — grapes and Andes Mountains">`. Copy individual files instead if you only need a few stamps. Installing the library does not automatically send every SVG to the browser.
+`resolveStamp()` supports synchronous selection and validation; `formatStampDate()` validates date strings. Rendering does not require DOM access.
 
 ## Package contents
 
@@ -85,9 +136,10 @@ SVG files displayed with `<img>` do not inherit page text color. If you inline t
 
 ## Build and preview locally
 
-Requires Node.js 20+; Python 3 is only needed for the optional local server. No dependency installation is required for the asset generator.
+Use Node.js 22.12+ for development and Python 3 for the optional local server. Run `npm ci` first to install the locked build and test tools. The asset generator itself remains dependency-free; component compilation uses TypeScript and ng-packagr.
 
 ```sh
+npm ci
 npm run build
 npm run check
 npm run preview
@@ -95,7 +147,7 @@ npm run preview
 
 Open `http://127.0.0.1:4173/preview/` for local development. The public gallery is available on [GitHub Pages](https://pignottiluciano.github.io/passport-stamps/).
 
-The gallery includes installation examples for React with Vite, Angular 20+, and HTML. Each card lets you choose a worn or clean finish and copy its SVG source, alongside the existing downloads. If clipboard access is denied, a dialog provides the text for manual copying. SVG copying requires HTTP or HTTPS; local file previews can still use download links.
+The gallery includes separate Angular and React component instructions, a property reference, a live preview, and direct HTML examples. Each card lets you choose a worn or clean finish and copy its SVG source, alongside the existing downloads. If clipboard access is denied, a dialog provides the text for manual copying. SVG copying requires HTTP or HTTPS; local file previews can still use download links.
 
 Search, region or country filters, and pagination are encoded in the URL. Use **Copy view link** to share the current results. Examples:
 
@@ -115,6 +167,10 @@ Update source files rather than generated SVGs:
 - `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`: destination motifs.
 - `scripts/build.mjs`: layouts, SVG generation, catalogs, and destination documentation.
 - `scripts/ink.mjs`: deterministic ink treatment.
+- `src/core/index.ts`: shared typed selection, date validation, and lazy rendering.
+- `src/angular/`: standalone Angular component and packaging configuration.
+- `src/react/`: React component.
+- `scripts/build-library.mjs`: component compiler. Generated `dist/` and core artwork modules are rebuilt and are not checked into Git.
 - `scripts/gallery.mjs`: static gallery markup and styles.
 - `scripts/gallery-client.js`: clipboard actions and shareable gallery state, copied to `preview/gallery.js` by the build.
 - `tests/catalog.test.mjs`: coverage, metadata, resource, and size contracts.

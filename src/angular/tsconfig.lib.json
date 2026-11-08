@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@lucianopignotti/passport-stamps": [
+        "../../dist/core/index.d.ts"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+    "compilationMode": "partial"
+  },
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}

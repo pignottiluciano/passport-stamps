@@ -1,0 +1,34 @@
+import {afterEach,describe,it,expect} from 'vitest';
+import {TestBed} from '@angular/core/testing';
+import {provideZonelessChangeDetection} from '@angular/core';
+import {PassportStampComponent} from '@lucianopignotti/passport-stamps/angular';
+
+describe('Angular PassportStampComponent',()=>{
+  afterEach(()=>TestBed.resetTestingModule());
+  it('updates country, city, date, variant and size through inputs',async()=>{
+    TestBed.configureTestingModule({imports:[PassportStampComponent],providers:[provideZonelessChangeDetection()]});
+    const fixture=TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country','AR');
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').alt).toContain('Argentina');
+    fixture.componentRef.setInput('city','Mendoza');
+    fixture.componentRef.setInput('date','2026-11-07');
+    fixture.componentRef.setInput('variant','clean');
+    fixture.componentRef.setInput('size',320);
+    await fixture.whenStable();
+    const img:HTMLImageElement=fixture.nativeElement.querySelector('img');
+    expect(img.alt).toContain('Mendoza');
+    expect(img.alt).toContain('07 NOV 2026');
+    expect(decodeURIComponent(img.src)).toContain('>07 NOV 2026</text>');
+    expect(decodeURIComponent(img.src)).not.toContain('<filter');
+    expect(fixture.nativeElement.style.width).toBe('320px');
+  });
+  it('shows errors and recovers when the invalid input is corrected',async()=>{
+    TestBed.configureTestingModule({imports:[PassportStampComponent],providers:[provideZonelessChangeDetection()]});
+    const fixture=TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country','INVALID');await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('[role=alert]').textContent).toContain('Unknown country');
+    fixture.componentRef.setInput('country','FR');await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').alt).toContain('France');
+  });
+});

@@ -37,3 +37,11 @@ npm publication and website deployment are independent. This document is not evi
 - The Europe region and page 2 were restored after reload, showing 25–43 of 43 countries.
 - A 390 px viewport showed no horizontal document overflow, including with usage examples expanded. Code samples scroll inside their containers.
 - The manual-copy fallback and SVG loading-error message are implemented; denied clipboard permissions and network failures were not simulated in this browser review.
+
+## Property-driven components
+
+- Seven shared-core tests verify country and city selection, country-constrained aliases, unknown-city fallback, explicit errors, calendar dates including leap years, variants, sizes, unchanged undated SVG content, and date text inside SVG artwork.
+- Four framework tests use the compiled Angular and React adapters in jsdom. They verify prop/input changes, dated images, clean treatment, sizing, invalid input feedback, and recovery. Angular uses zoneless TestBed and the public signal inputs.
+- A packed consumer compiled an Angular template and React JSX against the installed package exports and strict TypeScript declarations. The installed core rendered Mendoza with an integrated date.
+- Development versions: Angular 20.3.35, React 19.3.1, TypeScript 5.9.3. This is not a test matrix across every supported framework version.
+- Framework dependencies are optional peers. SVG-only and core consumers do not need either framework. Dated compositions are generated into lazy modules; the 862 static SVG files remain unchanged.

@@ -2,3 +2,7 @@
 node_modules/
 *.tgz
 work/
+
+dist/
+src/core/art/
+src/core/generated/

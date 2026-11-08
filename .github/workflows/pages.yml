@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: npm ci
+      - run: npm run build
       - run: npm run check
       - uses: actions/configure-pages@v5
       - name: Prepare static gallery
@@ -27,6 +29,8 @@ jobs:
           mkdir -p work/pages
           cp -R preview svg work/pages/
           cp manifest.json destinations.json LICENSE work/pages/
+          mkdir -p work/pages/dist
+          cp -R dist/core work/pages/dist/
           cp docs/pages-index.html work/pages/index.html
           touch work/pages/.nojekyll
       - uses: actions/upload-pages-artifact@v4

@@ -1,6 +1,6 @@
 # Passport Stamps
 
-This repository is a framework-independent SVG asset library. Keep the asset build dependency-free. The static preview is documentation, not an application.
+This repository is a framework-independent SVG asset library. Keep the asset generator dependency-free; optional framework adapters use the locked development tools. The static preview is documentation, not an application.
 
 - Country data lives in `data/stamps.json`; layouts live in `scripts/build.mjs`, country motifs in `scripts/icons.mjs`, destination motifs in `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`, and the gallery in `scripts/gallery.mjs` and `scripts/gallery-client.js`.
 - Generated SVGs, the manifest and preview are checked into Git. Run `npm run build` after editing sources, then `npm run check`.
@@ -16,3 +16,5 @@ Catalog IDs are unique: country IDs use lowercase ISO codes (`ar`); destination 
 The primary `manifest.json` must contain exactly the 193 countries verified in `data/un-members.json`. No city fields or airport labels belong in country assets. The 238 agreed destinations (20 in Argentina and 218 in Europe across 39 countries) are exported separately as `destinations.json`. Keep the historical ink experiment bound to its frozen baseline, not the growing main catalog.
 
 Keep public documentation, gallery controls, descriptive catalog metadata, and accessible SVG titles in English. Local-language artwork labels, proper place names, and multilingual search aliases are intentional.
+
+Framework adapters live in src/angular and src/react and share the typed renderer in src/core. Run npm ci, npm run build, and npm run check for a clean checkout. Keep all existing asset paths and undated SVG output stable. Generated dist and core artwork sources are ignored and rebuilt. Dates must use the dated composition, never overlap original lettering.

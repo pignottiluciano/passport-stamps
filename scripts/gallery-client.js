@@ -138,3 +138,40 @@ document.querySelector('#catalog').addEventListener('click', async event => {
   }
 });
 restoreLocation();
+
+// The interactive example uses the same lazy core renderer as both framework adapters.
+const demo = document.querySelector('#stamp-demo');
+const demoCountry = document.querySelector('#demo-country');
+function updateCitySuggestions() {
+  document.querySelector('#demo-cities').replaceChildren(...articles
+    .filter(card => card.dataset.kind === 'destination' && card.dataset.code === demoCountry.value)
+    .map(card => new Option(card.querySelector('.stamp-name').textContent.slice(5))));
+}
+let demoRequest = 0;
+async function updateDemo(event) {
+  event?.preventDefault();
+  const request = ++demoRequest;
+  const message = document.querySelector('#demo-status');
+  const image = document.querySelector('#demo-image');
+  const button = demo.querySelector('button');
+  image.hidden = true;
+  button.disabled = true;
+  message.textContent = 'Loading stamp…';
+  try {
+    const {createStampImage} = await import('../dist/core/index.js');
+    const result = await createStampImage({country:demoCountry.value,city:document.querySelector('#demo-city').value,date:document.querySelector('#demo-date').value,variant:document.querySelector('#demo-variant').value});
+    if (request !== demoRequest) return;
+    image.src = result.src;
+    image.alt = result.alt;
+    image.hidden = false;
+    message.textContent = result.fallback ? 'This city is not in the catalog yet. Showing the country stamp.' : result.alt;
+  } catch (error) {
+    if (request === demoRequest) message.textContent = error instanceof Error ? error.message : 'Could not load the stamp.';
+  } finally {
+    if (request === demoRequest) button.disabled = false;
+  }
+}
+demo.addEventListener('submit', updateDemo);
+demoCountry.addEventListener('change',()=>{document.querySelector('#demo-city').value='';updateCitySuggestions();});
+document.querySelector('#component-demo').addEventListener('toggle',event=>{if(event.target.open && !demoRequest) updateDemo();});
+updateCitySuggestions();
