@@ -167,29 +167,33 @@ button:disabled {
 }
 .stamp-sheet {
   position:relative;
+  width:100%;
   min-height:350px;
+  aspect-ratio:1.42;
   background:var(--color-soft);
   border-radius:4px;
   overflow:hidden
 }
 .stamp-sheet img {
   position:absolute;
-  width:64%;
+  width:52%;
   height:auto
 }
 .stamp-sheet img:first-child {
-  top:-8px;
-  left:-25px;
+  top:2%;
+  left:2%;
   transform:rotate(-13deg)
 }
 .stamp-sheet img:nth-child(2) {
-  top:80px;
-  right:-25px;
+  z-index:1;
+  width:56%;
+  top:34%;
+  right:2%;
   transform:rotate(12deg)
 }
 .stamp-sheet img:nth-child(3) {
-  bottom:-40px;
-  left:4px;
+  bottom:0;
+  left:3%;
   transform:rotate(-5deg)
 }
 .collection-facts {

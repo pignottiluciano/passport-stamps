@@ -2,7 +2,7 @@ import { validateCatalogAliases } from './validate-catalog.mjs';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
-import { styles, finish } from './ink.mjs';
+import { catalogWornStyle, finish } from './ink.mjs';
 import { icons as countryIcons } from './icons.mjs';
 import { destinationIcons } from './destination-icons.mjs';
 import { europeIcons } from './europe-icons.mjs';
@@ -72,9 +72,6 @@ function datedComposition(c) {
 function stamp(c, dated = false) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-labelledby="title-${c.id}"><title id="title-${c.id}">${xml(c.name)} — ${xml(c.iconLabel)} passport stamp${dated ? ", __PASSPORT_DATE__" : ""}</title><g color="${c.color}" fill="currentColor" font-family="Arial,Helvetica,sans-serif" text-anchor="middle"><g fill="none" stroke="currentColor">${dated ? frames[c.shape].replace("M43 67H357M43 233H357", "M43 67H357") : frames[c.shape]}</g>${dated ? datedComposition(c) : composition(c)}</g></svg>\n`;
 }
-const wornStyle = styles.find(style => style.key === 'worn');
-// WebKit blurs small lettering when the final Gaussian blur is applied.
-const datedWornStyle = { ...wornStyle, blur: undefined };
 const files = new Map();
 const seen = new Set();
 const manifest = stamps.map(c => {
@@ -84,8 +81,8 @@ const manifest = stamps.map(c => {
   const filename = c.id;
   const clean = stamp(c);
   const datedClean = stamp(c, true);
-  const datedWorn = finish(datedClean, c, datedWornStyle);
-  const textured = finish(clean, c, wornStyle);
+  const datedWorn = finish(datedClean, c, catalogWornStyle);
+  const textured = finish(clean, c, catalogWornStyle);
   const artwork = { clean, worn: textured, datedClean, datedWorn };
   for (const [variant, svg] of Object.entries(artwork)) {
     if (Buffer.byteLength(svg) > 10240) throw Error(`${c.id} (${variant}) exceeds the 10 KiB budget`);
@@ -117,7 +114,7 @@ files.set('docs/DESTINATIONS.md', `# Destination catalog\n\n${destinations.lengt
 files.set('preview/index.html', galleryPage(countries, destinations));
 files.set('preview/gallery.css', await readFile(resolve(root, 'scripts/gallery.css'), 'utf8'));
 const heroStamp = stamps.find(c=>c.id==='ar-mendoza');
-files.set('preview/hero-mendoza.svg', finish(stamp(heroStamp,true), heroStamp, datedWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
+files.set('preview/hero-mendoza.svg', finish(stamp(heroStamp,true), heroStamp, catalogWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
 files.set('preview/gallery.js', await readFile(resolve(root, 'scripts/gallery-client.js'), 'utf8'));
 for (const [path, content] of files) {
   const full = resolve(root,path);

@@ -41,7 +41,7 @@ The follow-up Chrome measurement used the same procedure after the catalog index
 
 The same comparison sheet was reviewed in Chrome and Safari on macOS. The clean samples showed matching line breaks and fit across the six sampled frames. The large difference in the original worn samples came from Safari's rendering of the Gaussian blur, reproduced by toggling only that filter primitive on the Mendoza stamp. The updated dated filter keeps the worn texture and improves its clarity in Safari.
 
-Keep the existing text and font families. Converting labels to paths was unnecessary for the observed difference and would require a separate measurement of the resulting file sizes. Fonts may still vary across operating systems. The legacy undated worn files retain their original filter, which can appear softer in Safari. Use clean artwork when small lettering matters.
+Keep the existing text and font families. Converting labels to paths was unnecessary for the observed difference and would require a separate measurement of the resulting file sizes. Fonts may still vary across operating systems. The 0.2.0 undated worn files kept their original filter, which can appear softer in Safari. The revised catalog treatment uses grain and pressure to vary opacity in both dated and undated stamps. Removing blur and displacement keeps contours sharper, and a less aggressive grain helps preserve narrow strokes.
 
 ## Package size budgets
 

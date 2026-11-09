@@ -80,6 +80,7 @@ test('SVG export includes the date and preserves the selected ink finish', async
     assert.match(svg, /<title[^>]*>.*07 NOV 2026<\/title>/);
     assert.match(svg, /<text[^>]*>07 NOV 2026<\/text>/);
     assert.equal(/<filter\b/.test(svg), variant === 'worn');
+    assert.doesNotMatch(svg, /<(?:feGaussianBlur|feDisplacementMap)\b/);
   }
 });
 

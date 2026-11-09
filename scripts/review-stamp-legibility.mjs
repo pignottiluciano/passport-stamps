@@ -1,7 +1,9 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { finish, styles } from './ink.mjs';
 import { createStampSvg } from '../dist/core/index.js';
 
 const date = '2026-11-07';
+const legacyWorn = styles.find(style => style.key === 'worn');
 const widths = [64, 96, 140];
 const catalog = [];
 for (const file of ['manifest.json', 'destinations.json']) {
@@ -21,9 +23,8 @@ async function comparison(dated) {
     const options = { country: stamp.code, city: stamp.kind === 'destination' ? stamp.id : undefined, date: dated ? date : undefined };
     const worn = await createStampSvg(options);
     const clean = await createStampSvg({ ...options, variant: 'clean' });
-    const previous = worn.replace(/<text x="200" y="235" font-size="16"[^>]*>07 NOV 2026<\/text>/,
-      '<text x="200" y="239" font-size="11" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1">07 NOV 2026</text>')
-      .replace('</filter>', '<feGaussianBlur stdDeviation=".12"/></filter>');
+    const previous = finish(clean, stamp, legacyWorn).replace(/<text x="200" y="235" font-size="16"[^>]*>07 NOV 2026<\/text>/,
+      '<text x="200" y="239" font-size="11" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1">07 NOV 2026</text>');
     if (dated && !worn.includes('font-size="16"')) throw Error('The previous date row could not be reconstructed.');
     const designs = dated ? [previous, worn, clean] : [worn, clean];
     const cells = widths.map(width => designs.map((svg, i) =>
