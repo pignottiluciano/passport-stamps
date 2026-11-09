@@ -19,7 +19,7 @@
     "finish": "worn",
     "file": "svg/af.svg",
     "cleanFile": "svg/clean/af.svg",
-    "bytes": 2174,
+    "bytes": 2026,
     "cleanBytes": 1213
   },
   {
@@ -39,7 +39,7 @@
     "finish": "worn",
     "file": "svg/al.svg",
     "cleanFile": "svg/clean/al.svg",
-    "bytes": 2204,
+    "bytes": 2056,
     "cleanBytes": 1243
   },
   {
@@ -62,7 +62,7 @@
     "finish": "worn",
     "file": "svg/de.svg",
     "cleanFile": "svg/clean/de.svg",
-    "bytes": 2154,
+    "bytes": 2006,
     "cleanBytes": 1193
   },
   {
@@ -82,7 +82,7 @@
     "finish": "worn",
     "file": "svg/ad.svg",
     "cleanFile": "svg/clean/ad.svg",
-    "bytes": 2071,
+    "bytes": 1923,
     "cleanBytes": 1110
   },
   {
@@ -102,7 +102,7 @@
     "finish": "worn",
     "file": "svg/ao.svg",
     "cleanFile": "svg/clean/ao.svg",
-    "bytes": 2177,
+    "bytes": 2029,
     "cleanBytes": 1216
   },
   {
@@ -125,7 +125,7 @@
     "finish": "worn",
     "file": "svg/ag.svg",
     "cleanFile": "svg/clean/ag.svg",
-    "bytes": 2215,
+    "bytes": 2067,
     "cleanBytes": 1254
   },
   {
@@ -148,7 +148,7 @@
     "finish": "worn",
     "file": "svg/sa.svg",
     "cleanFile": "svg/clean/sa.svg",
-    "bytes": 2054,
+    "bytes": 1906,
     "cleanBytes": 1093
   },
   {
@@ -171,7 +171,7 @@
     "finish": "worn",
     "file": "svg/dz.svg",
     "cleanFile": "svg/clean/dz.svg",
-    "bytes": 2044,
+    "bytes": 1896,
     "cleanBytes": 1083
   },
   {
@@ -191,7 +191,7 @@
     "finish": "worn",
     "file": "svg/ar.svg",
     "cleanFile": "svg/clean/ar.svg",
-    "bytes": 2598,
+    "bytes": 2450,
     "cleanBytes": 1637
   },
   {
@@ -211,7 +211,7 @@
     "finish": "worn",
     "file": "svg/am.svg",
     "cleanFile": "svg/clean/am.svg",
-    "bytes": 1980,
+    "bytes": 1832,
     "cleanBytes": 1019
   },
   {
@@ -231,7 +231,7 @@
     "finish": "worn",
     "file": "svg/au.svg",
     "cleanFile": "svg/clean/au.svg",
-    "bytes": 2199,
+    "bytes": 2051,
     "cleanBytes": 1238
   },
   {
@@ -251,7 +251,7 @@
     "finish": "worn",
     "file": "svg/at.svg",
     "cleanFile": "svg/clean/at.svg",
-    "bytes": 2175,
+    "bytes": 2027,
     "cleanBytes": 1214
   },
   {
@@ -274,7 +274,7 @@
     "finish": "worn",
     "file": "svg/az.svg",
     "cleanFile": "svg/clean/az.svg",
-    "bytes": 2119,
+    "bytes": 1971,
     "cleanBytes": 1158
   },
   {
@@ -294,7 +294,7 @@
     "finish": "worn",
     "file": "svg/bs.svg",
     "cleanFile": "svg/clean/bs.svg",
-    "bytes": 2132,
+    "bytes": 1984,
     "cleanBytes": 1171
   },
   {
@@ -317,7 +317,7 @@
     "finish": "worn",
     "file": "svg/bd.svg",
     "cleanFile": "svg/clean/bd.svg",
-    "bytes": 2079,
+    "bytes": 1931,
     "cleanBytes": 1118
   },
   {
@@ -337,7 +337,7 @@
     "finish": "worn",
     "file": "svg/bb.svg",
     "cleanFile": "svg/clean/bb.svg",
-    "bytes": 2116,
+    "bytes": 1968,
     "cleanBytes": 1155
   },
   {
@@ -360,7 +360,7 @@
     "finish": "worn",
     "file": "svg/bh.svg",
     "cleanFile": "svg/clean/bh.svg",
-    "bytes": 2129,
+    "bytes": 1981,
     "cleanBytes": 1168
   },
   {
@@ -383,7 +383,7 @@
     "finish": "worn",
     "file": "svg/be.svg",
     "cleanFile": "svg/clean/be.svg",
-    "bytes": 2161,
+    "bytes": 2013,
     "cleanBytes": 1200
   },
   {
@@ -406,7 +406,7 @@
     "finish": "worn",
     "file": "svg/bz.svg",
     "cleanFile": "svg/clean/bz.svg",
-    "bytes": 2193,
+    "bytes": 2045,
     "cleanBytes": 1232
   },
   {
@@ -429,7 +429,7 @@
     "finish": "worn",
     "file": "svg/bj.svg",
     "cleanFile": "svg/clean/bj.svg",
-    "bytes": 2059,
+    "bytes": 1911,
     "cleanBytes": 1098
   },
   {
@@ -452,7 +452,7 @@
     "finish": "worn",
     "file": "svg/by.svg",
     "cleanFile": "svg/clean/by.svg",
-    "bytes": 2128,
+    "bytes": 1980,
     "cleanBytes": 1167
   },
   {
@@ -472,7 +472,7 @@
     "finish": "worn",
     "file": "svg/bo.svg",
     "cleanFile": "svg/clean/bo.svg",
-    "bytes": 2167,
+    "bytes": 2019,
     "cleanBytes": 1206
   },
   {
@@ -495,7 +495,7 @@
     "finish": "worn",
     "file": "svg/ba.svg",
     "cleanFile": "svg/clean/ba.svg",
-    "bytes": 2343,
+    "bytes": 2195,
     "cleanBytes": 1382
   },
   {
@@ -518,7 +518,7 @@
     "finish": "worn",
     "file": "svg/bw.svg",
     "cleanFile": "svg/clean/bw.svg",
-    "bytes": 2180,
+    "bytes": 2032,
     "cleanBytes": 1219
   },
   {
@@ -541,7 +541,7 @@
     "finish": "worn",
     "file": "svg/br.svg",
     "cleanFile": "svg/clean/br.svg",
-    "bytes": 2300,
+    "bytes": 2152,
     "cleanBytes": 1339
   },
   {
@@ -564,7 +564,7 @@
     "finish": "worn",
     "file": "svg/bn.svg",
     "cleanFile": "svg/clean/bn.svg",
-    "bytes": 2160,
+    "bytes": 2012,
     "cleanBytes": 1199
   },
   {
@@ -584,7 +584,7 @@
     "finish": "worn",
     "file": "svg/bg.svg",
     "cleanFile": "svg/clean/bg.svg",
-    "bytes": 2166,
+    "bytes": 2018,
     "cleanBytes": 1205
   },
   {
@@ -604,7 +604,7 @@
     "finish": "worn",
     "file": "svg/bf.svg",
     "cleanFile": "svg/clean/bf.svg",
-    "bytes": 2082,
+    "bytes": 1934,
     "cleanBytes": 1121
   },
   {
@@ -624,7 +624,7 @@
     "finish": "worn",
     "file": "svg/bi.svg",
     "cleanFile": "svg/clean/bi.svg",
-    "bytes": 2111,
+    "bytes": 1963,
     "cleanBytes": 1150
   },
   {
@@ -647,7 +647,7 @@
     "finish": "worn",
     "file": "svg/bt.svg",
     "cleanFile": "svg/clean/bt.svg",
-    "bytes": 2235,
+    "bytes": 2087,
     "cleanBytes": 1274
   },
   {
@@ -670,7 +670,7 @@
     "finish": "worn",
     "file": "svg/cv.svg",
     "cleanFile": "svg/clean/cv.svg",
-    "bytes": 2119,
+    "bytes": 1971,
     "cleanBytes": 1158
   },
   {
@@ -693,7 +693,7 @@
     "finish": "worn",
     "file": "svg/kh.svg",
     "cleanFile": "svg/clean/kh.svg",
-    "bytes": 2193,
+    "bytes": 2045,
     "cleanBytes": 1232
   },
   {
@@ -716,7 +716,7 @@
     "finish": "worn",
     "file": "svg/cm.svg",
     "cleanFile": "svg/clean/cm.svg",
-    "bytes": 2093,
+    "bytes": 1945,
     "cleanBytes": 1132
   },
   {
@@ -739,7 +739,7 @@
     "finish": "worn",
     "file": "svg/ca.svg",
     "cleanFile": "svg/clean/ca.svg",
-    "bytes": 2187,
+    "bytes": 2039,
     "cleanBytes": 1226
   },
   {
@@ -762,7 +762,7 @@
     "finish": "worn",
     "file": "svg/qa.svg",
     "cleanFile": "svg/clean/qa.svg",
-    "bytes": 2044,
+    "bytes": 1896,
     "cleanBytes": 1083
   },
   {
@@ -782,7 +782,7 @@
     "finish": "worn",
     "file": "svg/td.svg",
     "cleanFile": "svg/clean/td.svg",
-    "bytes": 2039,
+    "bytes": 1891,
     "cleanBytes": 1078
   },
   {
@@ -805,7 +805,7 @@
     "finish": "worn",
     "file": "svg/cz.svg",
     "cleanFile": "svg/clean/cz.svg",
-    "bytes": 2135,
+    "bytes": 1987,
     "cleanBytes": 1174
   },
   {
@@ -825,7 +825,7 @@
     "finish": "worn",
     "file": "svg/cl.svg",
     "cleanFile": "svg/clean/cl.svg",
-    "bytes": 2099,
+    "bytes": 1951,
     "cleanBytes": 1138
   },
   {
@@ -845,7 +845,7 @@
     "finish": "worn",
     "file": "svg/cn.svg",
     "cleanFile": "svg/clean/cn.svg",
-    "bytes": 2217,
+    "bytes": 2069,
     "cleanBytes": 1256
   },
   {
@@ -868,7 +868,7 @@
     "finish": "worn",
     "file": "svg/cy.svg",
     "cleanFile": "svg/clean/cy.svg",
-    "bytes": 2196,
+    "bytes": 2048,
     "cleanBytes": 1235
   },
   {
@@ -888,7 +888,7 @@
     "finish": "worn",
     "file": "svg/co.svg",
     "cleanFile": "svg/clean/co.svg",
-    "bytes": 2110,
+    "bytes": 1962,
     "cleanBytes": 1149
   },
   {
@@ -911,7 +911,7 @@
     "finish": "worn",
     "file": "svg/km.svg",
     "cleanFile": "svg/clean/km.svg",
-    "bytes": 2068,
+    "bytes": 1920,
     "cleanBytes": 1107
   },
   {
@@ -934,7 +934,7 @@
     "finish": "worn",
     "file": "svg/cg.svg",
     "cleanFile": "svg/clean/cg.svg",
-    "bytes": 2402,
+    "bytes": 2254,
     "cleanBytes": 1441
   },
   {
@@ -957,7 +957,7 @@
     "finish": "worn",
     "file": "svg/kp.svg",
     "cleanFile": "svg/clean/kp.svg",
-    "bytes": 2080,
+    "bytes": 1932,
     "cleanBytes": 1119
   },
   {
@@ -980,7 +980,7 @@
     "finish": "worn",
     "file": "svg/kr.svg",
     "cleanFile": "svg/clean/kr.svg",
-    "bytes": 2173,
+    "bytes": 2025,
     "cleanBytes": 1212
   },
   {
@@ -1000,7 +1000,7 @@
     "finish": "worn",
     "file": "svg/cr.svg",
     "cleanFile": "svg/clean/cr.svg",
-    "bytes": 2170,
+    "bytes": 2022,
     "cleanBytes": 1209
   },
   {
@@ -1020,7 +1020,7 @@
     "finish": "worn",
     "file": "svg/ci.svg",
     "cleanFile": "svg/clean/ci.svg",
-    "bytes": 2150,
+    "bytes": 2002,
     "cleanBytes": 1189
   },
   {
@@ -1043,7 +1043,7 @@
     "finish": "worn",
     "file": "svg/hr.svg",
     "cleanFile": "svg/clean/hr.svg",
-    "bytes": 2092,
+    "bytes": 1944,
     "cleanBytes": 1131
   },
   {
@@ -1063,7 +1063,7 @@
     "finish": "worn",
     "file": "svg/cu.svg",
     "cleanFile": "svg/clean/cu.svg",
-    "bytes": 2086,
+    "bytes": 1938,
     "cleanBytes": 1125
   },
   {
@@ -1086,7 +1086,7 @@
     "finish": "worn",
     "file": "svg/dk.svg",
     "cleanFile": "svg/clean/dk.svg",
-    "bytes": 2110,
+    "bytes": 1962,
     "cleanBytes": 1149
   },
   {
@@ -1106,7 +1106,7 @@
     "finish": "worn",
     "file": "svg/dm.svg",
     "cleanFile": "svg/clean/dm.svg",
-    "bytes": 2164,
+    "bytes": 2016,
     "cleanBytes": 1203
   },
   {
@@ -1126,7 +1126,7 @@
     "finish": "worn",
     "file": "svg/ec.svg",
     "cleanFile": "svg/clean/ec.svg",
-    "bytes": 2139,
+    "bytes": 1991,
     "cleanBytes": 1178
   },
   {
@@ -1149,7 +1149,7 @@
     "finish": "worn",
     "file": "svg/eg.svg",
     "cleanFile": "svg/clean/eg.svg",
-    "bytes": 2042,
+    "bytes": 1894,
     "cleanBytes": 1081
   },
   {
@@ -1169,7 +1169,7 @@
     "finish": "worn",
     "file": "svg/sv.svg",
     "cleanFile": "svg/clean/sv.svg",
-    "bytes": 2130,
+    "bytes": 1982,
     "cleanBytes": 1169
   },
   {
@@ -1192,7 +1192,7 @@
     "finish": "worn",
     "file": "svg/ae.svg",
     "cleanFile": "svg/clean/ae.svg",
-    "bytes": 2207,
+    "bytes": 2059,
     "cleanBytes": 1246
   },
   {
@@ -1212,7 +1212,7 @@
     "finish": "worn",
     "file": "svg/er.svg",
     "cleanFile": "svg/clean/er.svg",
-    "bytes": 2149,
+    "bytes": 2001,
     "cleanBytes": 1188
   },
   {
@@ -1235,7 +1235,7 @@
     "finish": "worn",
     "file": "svg/sk.svg",
     "cleanFile": "svg/clean/sk.svg",
-    "bytes": 2032,
+    "bytes": 1884,
     "cleanBytes": 1071
   },
   {
@@ -1258,7 +1258,7 @@
     "finish": "worn",
     "file": "svg/si.svg",
     "cleanFile": "svg/clean/si.svg",
-    "bytes": 2093,
+    "bytes": 1945,
     "cleanBytes": 1132
   },
   {
@@ -1281,7 +1281,7 @@
     "finish": "worn",
     "file": "svg/es.svg",
     "cleanFile": "svg/clean/es.svg",
-    "bytes": 2053,
+    "bytes": 1905,
     "cleanBytes": 1092
   },
   {
@@ -1304,7 +1304,7 @@
     "finish": "worn",
     "file": "svg/us.svg",
     "cleanFile": "svg/clean/us.svg",
-    "bytes": 2477,
+    "bytes": 2329,
     "cleanBytes": 1516
   },
   {
@@ -1324,7 +1324,7 @@
     "finish": "worn",
     "file": "svg/ee.svg",
     "cleanFile": "svg/clean/ee.svg",
-    "bytes": 2178,
+    "bytes": 2030,
     "cleanBytes": 1217
   },
   {
@@ -1347,7 +1347,7 @@
     "finish": "worn",
     "file": "svg/sz.svg",
     "cleanFile": "svg/clean/sz.svg",
-    "bytes": 2144,
+    "bytes": 1996,
     "cleanBytes": 1183
   },
   {
@@ -1370,7 +1370,7 @@
     "finish": "worn",
     "file": "svg/et.svg",
     "cleanFile": "svg/clean/et.svg",
-    "bytes": 2165,
+    "bytes": 2017,
     "cleanBytes": 1204
   },
   {
@@ -1393,7 +1393,7 @@
     "finish": "worn",
     "file": "svg/ph.svg",
     "cleanFile": "svg/clean/ph.svg",
-    "bytes": 2364,
+    "bytes": 2216,
     "cleanBytes": 1403
   },
   {
@@ -1416,7 +1416,7 @@
     "finish": "worn",
     "file": "svg/fi.svg",
     "cleanFile": "svg/clean/fi.svg",
-    "bytes": 2103,
+    "bytes": 1955,
     "cleanBytes": 1142
   },
   {
@@ -1439,7 +1439,7 @@
     "finish": "worn",
     "file": "svg/fj.svg",
     "cleanFile": "svg/clean/fj.svg",
-    "bytes": 2112,
+    "bytes": 1964,
     "cleanBytes": 1151
   },
   {
@@ -1462,7 +1462,7 @@
     "finish": "worn",
     "file": "svg/fr.svg",
     "cleanFile": "svg/clean/fr.svg",
-    "bytes": 2258,
+    "bytes": 2110,
     "cleanBytes": 1297
   },
   {
@@ -1485,7 +1485,7 @@
     "finish": "worn",
     "file": "svg/ga.svg",
     "cleanFile": "svg/clean/ga.svg",
-    "bytes": 2133,
+    "bytes": 1985,
     "cleanBytes": 1172
   },
   {
@@ -1505,7 +1505,7 @@
     "finish": "worn",
     "file": "svg/gm.svg",
     "cleanFile": "svg/clean/gm.svg",
-    "bytes": 2016,
+    "bytes": 1868,
     "cleanBytes": 1055
   },
   {
@@ -1525,7 +1525,7 @@
     "finish": "worn",
     "file": "svg/ge.svg",
     "cleanFile": "svg/clean/ge.svg",
-    "bytes": 2252,
+    "bytes": 2104,
     "cleanBytes": 1291
   },
   {
@@ -1545,7 +1545,7 @@
     "finish": "worn",
     "file": "svg/gh.svg",
     "cleanFile": "svg/clean/gh.svg",
-    "bytes": 2080,
+    "bytes": 1932,
     "cleanBytes": 1119
   },
   {
@@ -1568,7 +1568,7 @@
     "finish": "worn",
     "file": "svg/gd.svg",
     "cleanFile": "svg/clean/gd.svg",
-    "bytes": 2141,
+    "bytes": 1993,
     "cleanBytes": 1180
   },
   {
@@ -1591,7 +1591,7 @@
     "finish": "worn",
     "file": "svg/gr.svg",
     "cleanFile": "svg/clean/gr.svg",
-    "bytes": 2112,
+    "bytes": 1964,
     "cleanBytes": 1151
   },
   {
@@ -1611,7 +1611,7 @@
     "finish": "worn",
     "file": "svg/gt.svg",
     "cleanFile": "svg/clean/gt.svg",
-    "bytes": 2180,
+    "bytes": 2032,
     "cleanBytes": 1219
   },
   {
@@ -1631,7 +1631,7 @@
     "finish": "worn",
     "file": "svg/gn.svg",
     "cleanFile": "svg/clean/gn.svg",
-    "bytes": 2070,
+    "bytes": 1922,
     "cleanBytes": 1109
   },
   {
@@ -1654,7 +1654,7 @@
     "finish": "worn",
     "file": "svg/gq.svg",
     "cleanFile": "svg/clean/gq.svg",
-    "bytes": 2218,
+    "bytes": 2070,
     "cleanBytes": 1257
   },
   {
@@ -1677,7 +1677,7 @@
     "finish": "worn",
     "file": "svg/gw.svg",
     "cleanFile": "svg/clean/gw.svg",
-    "bytes": 2103,
+    "bytes": 1955,
     "cleanBytes": 1142
   },
   {
@@ -1697,7 +1697,7 @@
     "finish": "worn",
     "file": "svg/gy.svg",
     "cleanFile": "svg/clean/gy.svg",
-    "bytes": 2046,
+    "bytes": 1898,
     "cleanBytes": 1085
   },
   {
@@ -1720,7 +1720,7 @@
     "finish": "worn",
     "file": "svg/ht.svg",
     "cleanFile": "svg/clean/ht.svg",
-    "bytes": 2120,
+    "bytes": 1972,
     "cleanBytes": 1159
   },
   {
@@ -1740,7 +1740,7 @@
     "finish": "worn",
     "file": "svg/hn.svg",
     "cleanFile": "svg/clean/hn.svg",
-    "bytes": 2163,
+    "bytes": 2015,
     "cleanBytes": 1202
   },
   {
@@ -1763,7 +1763,7 @@
     "finish": "worn",
     "file": "svg/hu.svg",
     "cleanFile": "svg/clean/hu.svg",
-    "bytes": 2176,
+    "bytes": 2028,
     "cleanBytes": 1215
   },
   {
@@ -1783,7 +1783,7 @@
     "finish": "worn",
     "file": "svg/in.svg",
     "cleanFile": "svg/clean/in.svg",
-    "bytes": 2136,
+    "bytes": 1988,
     "cleanBytes": 1175
   },
   {
@@ -1803,7 +1803,7 @@
     "finish": "worn",
     "file": "svg/id.svg",
     "cleanFile": "svg/clean/id.svg",
-    "bytes": 2133,
+    "bytes": 1985,
     "cleanBytes": 1172
   },
   {
@@ -1826,7 +1826,7 @@
     "finish": "worn",
     "file": "svg/iq.svg",
     "cleanFile": "svg/clean/iq.svg",
-    "bytes": 1996,
+    "bytes": 1848,
     "cleanBytes": 1035
   },
   {
@@ -1849,7 +1849,7 @@
     "finish": "worn",
     "file": "svg/ir.svg",
     "cleanFile": "svg/clean/ir.svg",
-    "bytes": 2114,
+    "bytes": 1966,
     "cleanBytes": 1153
   },
   {
@@ -1872,7 +1872,7 @@
     "finish": "worn",
     "file": "svg/ie.svg",
     "cleanFile": "svg/clean/ie.svg",
-    "bytes": 2004,
+    "bytes": 1856,
     "cleanBytes": 1043
   },
   {
@@ -1895,7 +1895,7 @@
     "finish": "worn",
     "file": "svg/is.svg",
     "cleanFile": "svg/clean/is.svg",
-    "bytes": 2134,
+    "bytes": 1986,
     "cleanBytes": 1173
   },
   {
@@ -1918,7 +1918,7 @@
     "finish": "worn",
     "file": "svg/mh.svg",
     "cleanFile": "svg/clean/mh.svg",
-    "bytes": 2262,
+    "bytes": 2114,
     "cleanBytes": 1301
   },
   {
@@ -1941,7 +1941,7 @@
     "finish": "worn",
     "file": "svg/sb.svg",
     "cleanFile": "svg/clean/sb.svg",
-    "bytes": 2252,
+    "bytes": 2104,
     "cleanBytes": 1291
   },
   {
@@ -1961,7 +1961,7 @@
     "finish": "worn",
     "file": "svg/il.svg",
     "cleanFile": "svg/clean/il.svg",
-    "bytes": 2184,
+    "bytes": 2036,
     "cleanBytes": 1223
   },
   {
@@ -1984,7 +1984,7 @@
     "finish": "worn",
     "file": "svg/it.svg",
     "cleanFile": "svg/clean/it.svg",
-    "bytes": 2481,
+    "bytes": 2333,
     "cleanBytes": 1520
   },
   {
@@ -2004,7 +2004,7 @@
     "finish": "worn",
     "file": "svg/jm.svg",
     "cleanFile": "svg/clean/jm.svg",
-    "bytes": 2166,
+    "bytes": 2018,
     "cleanBytes": 1205
   },
   {
@@ -2027,7 +2027,7 @@
     "finish": "worn",
     "file": "svg/jp.svg",
     "cleanFile": "svg/clean/jp.svg",
-    "bytes": 2298,
+    "bytes": 2150,
     "cleanBytes": 1337
   },
   {
@@ -2050,7 +2050,7 @@
     "finish": "worn",
     "file": "svg/jo.svg",
     "cleanFile": "svg/clean/jo.svg",
-    "bytes": 2141,
+    "bytes": 1993,
     "cleanBytes": 1180
   },
   {
@@ -2073,7 +2073,7 @@
     "finish": "worn",
     "file": "svg/kz.svg",
     "cleanFile": "svg/clean/kz.svg",
-    "bytes": 2217,
+    "bytes": 2069,
     "cleanBytes": 1256
   },
   {
@@ -2096,7 +2096,7 @@
     "finish": "worn",
     "file": "svg/ke.svg",
     "cleanFile": "svg/clean/ke.svg",
-    "bytes": 2112,
+    "bytes": 1964,
     "cleanBytes": 1151
   },
   {
@@ -2119,7 +2119,7 @@
     "finish": "worn",
     "file": "svg/kg.svg",
     "cleanFile": "svg/clean/kg.svg",
-    "bytes": 2064,
+    "bytes": 1916,
     "cleanBytes": 1103
   },
   {
@@ -2139,7 +2139,7 @@
     "finish": "worn",
     "file": "svg/ki.svg",
     "cleanFile": "svg/clean/ki.svg",
-    "bytes": 2012,
+    "bytes": 1864,
     "cleanBytes": 1051
   },
   {
@@ -2159,7 +2159,7 @@
     "finish": "worn",
     "file": "svg/kw.svg",
     "cleanFile": "svg/clean/kw.svg",
-    "bytes": 2094,
+    "bytes": 1946,
     "cleanBytes": 1133
   },
   {
@@ -2179,7 +2179,7 @@
     "finish": "worn",
     "file": "svg/la.svg",
     "cleanFile": "svg/clean/la.svg",
-    "bytes": 2108,
+    "bytes": 1960,
     "cleanBytes": 1147
   },
   {
@@ -2202,7 +2202,7 @@
     "finish": "worn",
     "file": "svg/ls.svg",
     "cleanFile": "svg/clean/ls.svg",
-    "bytes": 2105,
+    "bytes": 1957,
     "cleanBytes": 1144
   },
   {
@@ -2225,7 +2225,7 @@
     "finish": "worn",
     "file": "svg/lv.svg",
     "cleanFile": "svg/clean/lv.svg",
-    "bytes": 2158,
+    "bytes": 2010,
     "cleanBytes": 1197
   },
   {
@@ -2248,7 +2248,7 @@
     "finish": "worn",
     "file": "svg/lb.svg",
     "cleanFile": "svg/clean/lb.svg",
-    "bytes": 1976,
+    "bytes": 1828,
     "cleanBytes": 1015
   },
   {
@@ -2268,7 +2268,7 @@
     "finish": "worn",
     "file": "svg/lr.svg",
     "cleanFile": "svg/clean/lr.svg",
-    "bytes": 2058,
+    "bytes": 1910,
     "cleanBytes": 1097
   },
   {
@@ -2291,7 +2291,7 @@
     "finish": "worn",
     "file": "svg/ly.svg",
     "cleanFile": "svg/clean/ly.svg",
-    "bytes": 2130,
+    "bytes": 1982,
     "cleanBytes": 1169
   },
   {
@@ -2311,7 +2311,7 @@
     "finish": "worn",
     "file": "svg/li.svg",
     "cleanFile": "svg/clean/li.svg",
-    "bytes": 2154,
+    "bytes": 2006,
     "cleanBytes": 1193
   },
   {
@@ -2334,7 +2334,7 @@
     "finish": "worn",
     "file": "svg/lt.svg",
     "cleanFile": "svg/clean/lt.svg",
-    "bytes": 2052,
+    "bytes": 1904,
     "cleanBytes": 1091
   },
   {
@@ -2357,7 +2357,7 @@
     "finish": "worn",
     "file": "svg/lu.svg",
     "cleanFile": "svg/clean/lu.svg",
-    "bytes": 2143,
+    "bytes": 1995,
     "cleanBytes": 1182
   },
   {
@@ -2380,7 +2380,7 @@
     "finish": "worn",
     "file": "svg/mk.svg",
     "cleanFile": "svg/clean/mk.svg",
-    "bytes": 2518,
+    "bytes": 2370,
     "cleanBytes": 1557
   },
   {
@@ -2400,7 +2400,7 @@
     "finish": "worn",
     "file": "svg/mg.svg",
     "cleanFile": "svg/clean/mg.svg",
-    "bytes": 2093,
+    "bytes": 1945,
     "cleanBytes": 1132
   },
   {
@@ -2423,7 +2423,7 @@
     "finish": "worn",
     "file": "svg/my.svg",
     "cleanFile": "svg/clean/my.svg",
-    "bytes": 2068,
+    "bytes": 1920,
     "cleanBytes": 1107
   },
   {
@@ -2446,7 +2446,7 @@
     "finish": "worn",
     "file": "svg/mw.svg",
     "cleanFile": "svg/clean/mw.svg",
-    "bytes": 2074,
+    "bytes": 1926,
     "cleanBytes": 1113
   },
   {
@@ -2469,7 +2469,7 @@
     "finish": "worn",
     "file": "svg/mv.svg",
     "cleanFile": "svg/clean/mv.svg",
-    "bytes": 2114,
+    "bytes": 1966,
     "cleanBytes": 1153
   },
   {
@@ -2489,7 +2489,7 @@
     "finish": "worn",
     "file": "svg/ml.svg",
     "cleanFile": "svg/clean/ml.svg",
-    "bytes": 2158,
+    "bytes": 2010,
     "cleanBytes": 1197
   },
   {
@@ -2509,7 +2509,7 @@
     "finish": "worn",
     "file": "svg/mt.svg",
     "cleanFile": "svg/clean/mt.svg",
-    "bytes": 2131,
+    "bytes": 1983,
     "cleanBytes": 1170
   },
   {
@@ -2532,7 +2532,7 @@
     "finish": "worn",
     "file": "svg/ma.svg",
     "cleanFile": "svg/clean/ma.svg",
-    "bytes": 2027,
+    "bytes": 1879,
     "cleanBytes": 1066
   },
   {
@@ -2555,7 +2555,7 @@
     "finish": "worn",
     "file": "svg/mu.svg",
     "cleanFile": "svg/clean/mu.svg",
-    "bytes": 2203,
+    "bytes": 2055,
     "cleanBytes": 1242
   },
   {
@@ -2575,7 +2575,7 @@
     "finish": "worn",
     "file": "svg/mr.svg",
     "cleanFile": "svg/clean/mr.svg",
-    "bytes": 2176,
+    "bytes": 2028,
     "cleanBytes": 1215
   },
   {
@@ -2598,7 +2598,7 @@
     "finish": "worn",
     "file": "svg/mx.svg",
     "cleanFile": "svg/clean/mx.svg",
-    "bytes": 2124,
+    "bytes": 1976,
     "cleanBytes": 1163
   },
   {
@@ -2618,7 +2618,7 @@
     "finish": "worn",
     "file": "svg/fm.svg",
     "cleanFile": "svg/clean/fm.svg",
-    "bytes": 2114,
+    "bytes": 1966,
     "cleanBytes": 1153
   },
   {
@@ -2641,7 +2641,7 @@
     "finish": "worn",
     "file": "svg/md.svg",
     "cleanFile": "svg/clean/md.svg",
-    "bytes": 2294,
+    "bytes": 2146,
     "cleanBytes": 1333
   },
   {
@@ -2664,7 +2664,7 @@
     "finish": "worn",
     "file": "svg/mc.svg",
     "cleanFile": "svg/clean/mc.svg",
-    "bytes": 2156,
+    "bytes": 2008,
     "cleanBytes": 1195
   },
   {
@@ -2684,7 +2684,7 @@
     "finish": "worn",
     "file": "svg/mn.svg",
     "cleanFile": "svg/clean/mn.svg",
-    "bytes": 2176,
+    "bytes": 2028,
     "cleanBytes": 1215
   },
   {
@@ -2704,7 +2704,7 @@
     "finish": "worn",
     "file": "svg/me.svg",
     "cleanFile": "svg/clean/me.svg",
-    "bytes": 2030,
+    "bytes": 1882,
     "cleanBytes": 1069
   },
   {
@@ -2724,7 +2724,7 @@
     "finish": "worn",
     "file": "svg/mz.svg",
     "cleanFile": "svg/clean/mz.svg",
-    "bytes": 2090,
+    "bytes": 1942,
     "cleanBytes": 1129
   },
   {
@@ -2747,7 +2747,7 @@
     "finish": "worn",
     "file": "svg/mm.svg",
     "cleanFile": "svg/clean/mm.svg",
-    "bytes": 2210,
+    "bytes": 2062,
     "cleanBytes": 1249
   },
   {
@@ -2767,7 +2767,7 @@
     "finish": "worn",
     "file": "svg/na.svg",
     "cleanFile": "svg/clean/na.svg",
-    "bytes": 2165,
+    "bytes": 2017,
     "cleanBytes": 1204
   },
   {
@@ -2787,7 +2787,7 @@
     "finish": "worn",
     "file": "svg/nr.svg",
     "cleanFile": "svg/clean/nr.svg",
-    "bytes": 1996,
+    "bytes": 1848,
     "cleanBytes": 1035
   },
   {
@@ -2807,7 +2807,7 @@
     "finish": "worn",
     "file": "svg/np.svg",
     "cleanFile": "svg/clean/np.svg",
-    "bytes": 2020,
+    "bytes": 1872,
     "cleanBytes": 1059
   },
   {
@@ -2827,7 +2827,7 @@
     "finish": "worn",
     "file": "svg/ni.svg",
     "cleanFile": "svg/clean/ni.svg",
-    "bytes": 2128,
+    "bytes": 1980,
     "cleanBytes": 1167
   },
   {
@@ -2850,7 +2850,7 @@
     "finish": "worn",
     "file": "svg/ne.svg",
     "cleanFile": "svg/clean/ne.svg",
-    "bytes": 2095,
+    "bytes": 1947,
     "cleanBytes": 1134
   },
   {
@@ -2870,7 +2870,7 @@
     "finish": "worn",
     "file": "svg/ng.svg",
     "cleanFile": "svg/clean/ng.svg",
-    "bytes": 2190,
+    "bytes": 2042,
     "cleanBytes": 1229
   },
   {
@@ -2893,7 +2893,7 @@
     "finish": "worn",
     "file": "svg/no.svg",
     "cleanFile": "svg/clean/no.svg",
-    "bytes": 2110,
+    "bytes": 1962,
     "cleanBytes": 1149
   },
   {
@@ -2916,7 +2916,7 @@
     "finish": "worn",
     "file": "svg/nz.svg",
     "cleanFile": "svg/clean/nz.svg",
-    "bytes": 2222,
+    "bytes": 2074,
     "cleanBytes": 1261
   },
   {
@@ -2939,7 +2939,7 @@
     "finish": "worn",
     "file": "svg/om.svg",
     "cleanFile": "svg/clean/om.svg",
-    "bytes": 2090,
+    "bytes": 1942,
     "cleanBytes": 1129
   },
   {
@@ -2962,7 +2962,7 @@
     "finish": "worn",
     "file": "svg/nl.svg",
     "cleanFile": "svg/clean/nl.svg",
-    "bytes": 2051,
+    "bytes": 1903,
     "cleanBytes": 1090
   },
   {
@@ -2985,7 +2985,7 @@
     "finish": "worn",
     "file": "svg/pk.svg",
     "cleanFile": "svg/clean/pk.svg",
-    "bytes": 2141,
+    "bytes": 1993,
     "cleanBytes": 1180
   },
   {
@@ -3008,7 +3008,7 @@
     "finish": "worn",
     "file": "svg/pw.svg",
     "cleanFile": "svg/clean/pw.svg",
-    "bytes": 2137,
+    "bytes": 1989,
     "cleanBytes": 1176
   },
   {
@@ -3031,7 +3031,7 @@
     "finish": "worn",
     "file": "svg/pa.svg",
     "cleanFile": "svg/clean/pa.svg",
-    "bytes": 2144,
+    "bytes": 1996,
     "cleanBytes": 1183
   },
   {
@@ -3054,7 +3054,7 @@
     "finish": "worn",
     "file": "svg/pg.svg",
     "cleanFile": "svg/clean/pg.svg",
-    "bytes": 2360,
+    "bytes": 2212,
     "cleanBytes": 1399
   },
   {
@@ -3074,7 +3074,7 @@
     "finish": "worn",
     "file": "svg/py.svg",
     "cleanFile": "svg/clean/py.svg",
-    "bytes": 2101,
+    "bytes": 1953,
     "cleanBytes": 1140
   },
   {
@@ -3097,7 +3097,7 @@
     "finish": "worn",
     "file": "svg/pe.svg",
     "cleanFile": "svg/clean/pe.svg",
-    "bytes": 2161,
+    "bytes": 2013,
     "cleanBytes": 1200
   },
   {
@@ -3120,7 +3120,7 @@
     "finish": "worn",
     "file": "svg/pl.svg",
     "cleanFile": "svg/clean/pl.svg",
-    "bytes": 2200,
+    "bytes": 2052,
     "cleanBytes": 1239
   },
   {
@@ -3140,7 +3140,7 @@
     "finish": "worn",
     "file": "svg/pt.svg",
     "cleanFile": "svg/clean/pt.svg",
-    "bytes": 2096,
+    "bytes": 1948,
     "cleanBytes": 1135
   },
   {
@@ -3163,7 +3163,7 @@
     "finish": "worn",
     "file": "svg/gb.svg",
     "cleanFile": "svg/clean/gb.svg",
-    "bytes": 2173,
+    "bytes": 2025,
     "cleanBytes": 1212
   },
   {
@@ -3186,7 +3186,7 @@
     "finish": "worn",
     "file": "svg/cf.svg",
     "cleanFile": "svg/clean/cf.svg",
-    "bytes": 2490,
+    "bytes": 2342,
     "cleanBytes": 1529
   },
   {
@@ -3209,7 +3209,7 @@
     "finish": "worn",
     "file": "svg/cd.svg",
     "cleanFile": "svg/clean/cd.svg",
-    "bytes": 2525,
+    "bytes": 2377,
     "cleanBytes": 1564
   },
   {
@@ -3232,7 +3232,7 @@
     "finish": "worn",
     "file": "svg/do.svg",
     "cleanFile": "svg/clean/do.svg",
-    "bytes": 2331,
+    "bytes": 2183,
     "cleanBytes": 1370
   },
   {
@@ -3255,7 +3255,7 @@
     "finish": "worn",
     "file": "svg/rw.svg",
     "cleanFile": "svg/clean/rw.svg",
-    "bytes": 2187,
+    "bytes": 2039,
     "cleanBytes": 1226
   },
   {
@@ -3278,7 +3278,7 @@
     "finish": "worn",
     "file": "svg/ro.svg",
     "cleanFile": "svg/clean/ro.svg",
-    "bytes": 2135,
+    "bytes": 1987,
     "cleanBytes": 1174
   },
   {
@@ -3301,7 +3301,7 @@
     "finish": "worn",
     "file": "svg/ru.svg",
     "cleanFile": "svg/clean/ru.svg",
-    "bytes": 2198,
+    "bytes": 2050,
     "cleanBytes": 1237
   },
   {
@@ -3321,7 +3321,7 @@
     "finish": "worn",
     "file": "svg/ws.svg",
     "cleanFile": "svg/clean/ws.svg",
-    "bytes": 2066,
+    "bytes": 1918,
     "cleanBytes": 1105
   },
   {
@@ -3344,7 +3344,7 @@
     "finish": "worn",
     "file": "svg/kn.svg",
     "cleanFile": "svg/clean/kn.svg",
-    "bytes": 2323,
+    "bytes": 2175,
     "cleanBytes": 1362
   },
   {
@@ -3364,7 +3364,7 @@
     "finish": "worn",
     "file": "svg/sm.svg",
     "cleanFile": "svg/clean/sm.svg",
-    "bytes": 2057,
+    "bytes": 1909,
     "cleanBytes": 1096
   },
   {
@@ -3387,7 +3387,7 @@
     "finish": "worn",
     "file": "svg/vc.svg",
     "cleanFile": "svg/clean/vc.svg",
-    "bytes": 2453,
+    "bytes": 2305,
     "cleanBytes": 1492
   },
   {
@@ -3410,7 +3410,7 @@
     "finish": "worn",
     "file": "svg/lc.svg",
     "cleanFile": "svg/clean/lc.svg",
-    "bytes": 2099,
+    "bytes": 1951,
     "cleanBytes": 1138
   },
   {
@@ -3433,7 +3433,7 @@
     "finish": "worn",
     "file": "svg/st.svg",
     "cleanFile": "svg/clean/st.svg",
-    "bytes": 2301,
+    "bytes": 2153,
     "cleanBytes": 1340
   },
   {
@@ -3453,7 +3453,7 @@
     "finish": "worn",
     "file": "svg/sn.svg",
     "cleanFile": "svg/clean/sn.svg",
-    "bytes": 2182,
+    "bytes": 2034,
     "cleanBytes": 1221
   },
   {
@@ -3473,7 +3473,7 @@
     "finish": "worn",
     "file": "svg/rs.svg",
     "cleanFile": "svg/clean/rs.svg",
-    "bytes": 2124,
+    "bytes": 1976,
     "cleanBytes": 1163
   },
   {
@@ -3493,7 +3493,7 @@
     "finish": "worn",
     "file": "svg/sc.svg",
     "cleanFile": "svg/clean/sc.svg",
-    "bytes": 2186,
+    "bytes": 2038,
     "cleanBytes": 1225
   },
   {
@@ -3516,7 +3516,7 @@
     "finish": "worn",
     "file": "svg/sl.svg",
     "cleanFile": "svg/clean/sl.svg",
-    "bytes": 2196,
+    "bytes": 2048,
     "cleanBytes": 1235
   },
   {
@@ -3539,7 +3539,7 @@
     "finish": "worn",
     "file": "svg/sg.svg",
     "cleanFile": "svg/clean/sg.svg",
-    "bytes": 2116,
+    "bytes": 1968,
     "cleanBytes": 1155
   },
   {
@@ -3562,7 +3562,7 @@
     "finish": "worn",
     "file": "svg/sy.svg",
     "cleanFile": "svg/clean/sy.svg",
-    "bytes": 2033,
+    "bytes": 1885,
     "cleanBytes": 1072
   },
   {
@@ -3582,7 +3582,7 @@
     "finish": "worn",
     "file": "svg/so.svg",
     "cleanFile": "svg/clean/so.svg",
-    "bytes": 2161,
+    "bytes": 2013,
     "cleanBytes": 1200
   },
   {
@@ -3602,7 +3602,7 @@
     "finish": "worn",
     "file": "svg/lk.svg",
     "cleanFile": "svg/clean/lk.svg",
-    "bytes": 2127,
+    "bytes": 1979,
     "cleanBytes": 1166
   },
   {
@@ -3625,7 +3625,7 @@
     "finish": "worn",
     "file": "svg/za.svg",
     "cleanFile": "svg/clean/za.svg",
-    "bytes": 2153,
+    "bytes": 2005,
     "cleanBytes": 1192
   },
   {
@@ -3648,7 +3648,7 @@
     "finish": "worn",
     "file": "svg/sd.svg",
     "cleanFile": "svg/clean/sd.svg",
-    "bytes": 2097,
+    "bytes": 1949,
     "cleanBytes": 1136
   },
   {
@@ -3671,7 +3671,7 @@
     "finish": "worn",
     "file": "svg/ss.svg",
     "cleanFile": "svg/clean/ss.svg",
-    "bytes": 2097,
+    "bytes": 1949,
     "cleanBytes": 1136
   },
   {
@@ -3694,7 +3694,7 @@
     "finish": "worn",
     "file": "svg/se.svg",
     "cleanFile": "svg/clean/se.svg",
-    "bytes": 2069,
+    "bytes": 1921,
     "cleanBytes": 1108
   },
   {
@@ -3717,7 +3717,7 @@
     "finish": "worn",
     "file": "svg/ch.svg",
     "cleanFile": "svg/clean/ch.svg",
-    "bytes": 2098,
+    "bytes": 1950,
     "cleanBytes": 1137
   },
   {
@@ -3740,7 +3740,7 @@
     "finish": "worn",
     "file": "svg/sr.svg",
     "cleanFile": "svg/clean/sr.svg",
-    "bytes": 2246,
+    "bytes": 2098,
     "cleanBytes": 1285
   },
   {
@@ -3763,7 +3763,7 @@
     "finish": "worn",
     "file": "svg/th.svg",
     "cleanFile": "svg/clean/th.svg",
-    "bytes": 2183,
+    "bytes": 2035,
     "cleanBytes": 1222
   },
   {
@@ -3783,7 +3783,7 @@
     "finish": "worn",
     "file": "svg/tz.svg",
     "cleanFile": "svg/clean/tz.svg",
-    "bytes": 2101,
+    "bytes": 1953,
     "cleanBytes": 1140
   },
   {
@@ -3806,7 +3806,7 @@
     "finish": "worn",
     "file": "svg/tj.svg",
     "cleanFile": "svg/clean/tj.svg",
-    "bytes": 2036,
+    "bytes": 1888,
     "cleanBytes": 1075
   },
   {
@@ -3826,7 +3826,7 @@
     "finish": "worn",
     "file": "svg/tl.svg",
     "cleanFile": "svg/clean/tl.svg",
-    "bytes": 2083,
+    "bytes": 1935,
     "cleanBytes": 1122
   },
   {
@@ -3846,7 +3846,7 @@
     "finish": "worn",
     "file": "svg/tg.svg",
     "cleanFile": "svg/clean/tg.svg",
-    "bytes": 2133,
+    "bytes": 1985,
     "cleanBytes": 1172
   },
   {
@@ -3866,7 +3866,7 @@
     "finish": "worn",
     "file": "svg/to.svg",
     "cleanFile": "svg/clean/to.svg",
-    "bytes": 2157,
+    "bytes": 2009,
     "cleanBytes": 1196
   },
   {
@@ -3889,7 +3889,7 @@
     "finish": "worn",
     "file": "svg/tt.svg",
     "cleanFile": "svg/clean/tt.svg",
-    "bytes": 2356,
+    "bytes": 2208,
     "cleanBytes": 1395
   },
   {
@@ -3912,7 +3912,7 @@
     "finish": "worn",
     "file": "svg/tn.svg",
     "cleanFile": "svg/clean/tn.svg",
-    "bytes": 2179,
+    "bytes": 2031,
     "cleanBytes": 1218
   },
   {
@@ -3935,7 +3935,7 @@
     "finish": "worn",
     "file": "svg/tm.svg",
     "cleanFile": "svg/clean/tm.svg",
-    "bytes": 2177,
+    "bytes": 2029,
     "cleanBytes": 1216
   },
   {
@@ -3958,7 +3958,7 @@
     "finish": "worn",
     "file": "svg/tr.svg",
     "cleanFile": "svg/clean/tr.svg",
-    "bytes": 2057,
+    "bytes": 1909,
     "cleanBytes": 1096
   },
   {
@@ -3978,7 +3978,7 @@
     "finish": "worn",
     "file": "svg/tv.svg",
     "cleanFile": "svg/clean/tv.svg",
-    "bytes": 2054,
+    "bytes": 1906,
     "cleanBytes": 1093
   },
   {
@@ -4001,7 +4001,7 @@
     "finish": "worn",
     "file": "svg/ua.svg",
     "cleanFile": "svg/clean/ua.svg",
-    "bytes": 2831,
+    "bytes": 2683,
     "cleanBytes": 1870
   },
   {
@@ -4021,7 +4021,7 @@
     "finish": "worn",
     "file": "svg/ug.svg",
     "cleanFile": "svg/clean/ug.svg",
-    "bytes": 2202,
+    "bytes": 2054,
     "cleanBytes": 1241
   },
   {
@@ -4041,7 +4041,7 @@
     "finish": "worn",
     "file": "svg/uy.svg",
     "cleanFile": "svg/clean/uy.svg",
-    "bytes": 2389,
+    "bytes": 2241,
     "cleanBytes": 1428
   },
   {
@@ -4064,7 +4064,7 @@
     "finish": "worn",
     "file": "svg/uz.svg",
     "cleanFile": "svg/clean/uz.svg",
-    "bytes": 2161,
+    "bytes": 2013,
     "cleanBytes": 1200
   },
   {
@@ -4084,7 +4084,7 @@
     "finish": "worn",
     "file": "svg/vu.svg",
     "cleanFile": "svg/clean/vu.svg",
-    "bytes": 2135,
+    "bytes": 1987,
     "cleanBytes": 1174
   },
   {
@@ -4104,7 +4104,7 @@
     "finish": "worn",
     "file": "svg/ve.svg",
     "cleanFile": "svg/clean/ve.svg",
-    "bytes": 2147,
+    "bytes": 1999,
     "cleanBytes": 1186
   },
   {
@@ -4124,7 +4124,7 @@
     "finish": "worn",
     "file": "svg/vn.svg",
     "cleanFile": "svg/clean/vn.svg",
-    "bytes": 2075,
+    "bytes": 1927,
     "cleanBytes": 1114
   },
   {
@@ -4144,7 +4144,7 @@
     "finish": "worn",
     "file": "svg/ye.svg",
     "cleanFile": "svg/clean/ye.svg",
-    "bytes": 2064,
+    "bytes": 1916,
     "cleanBytes": 1103
   },
   {
@@ -4167,7 +4167,7 @@
     "finish": "worn",
     "file": "svg/dj.svg",
     "cleanFile": "svg/clean/dj.svg",
-    "bytes": 2176,
+    "bytes": 2028,
     "cleanBytes": 1215
   },
   {
@@ -4187,7 +4187,7 @@
     "finish": "worn",
     "file": "svg/zm.svg",
     "cleanFile": "svg/clean/zm.svg",
-    "bytes": 2141,
+    "bytes": 1993,
     "cleanBytes": 1180
   },
   {
@@ -4210,7 +4210,7 @@
     "finish": "worn",
     "file": "svg/zw.svg",
     "cleanFile": "svg/clean/zw.svg",
-    "bytes": 2201,
+    "bytes": 2053,
     "cleanBytes": 1240
   }
 ]

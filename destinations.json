@@ -23,7 +23,7 @@
     "finish": "worn",
     "file": "svg/ar-buenos-aires.svg",
     "cleanFile": "svg/clean/ar-buenos-aires.svg",
-    "bytes": 2118,
+    "bytes": 1970,
     "cleanBytes": 1131
   },
   {
@@ -46,7 +46,7 @@
     "finish": "worn",
     "file": "svg/ar-cordoba.svg",
     "cleanFile": "svg/clean/ar-cordoba.svg",
-    "bytes": 2227,
+    "bytes": 2079,
     "cleanBytes": 1250
   },
   {
@@ -69,7 +69,7 @@
     "finish": "worn",
     "file": "svg/ar-rosario.svg",
     "cleanFile": "svg/clean/ar-rosario.svg",
-    "bytes": 2191,
+    "bytes": 2043,
     "cleanBytes": 1214
   },
   {
@@ -92,7 +92,7 @@
     "finish": "worn",
     "file": "svg/ar-mendoza.svg",
     "cleanFile": "svg/clean/ar-mendoza.svg",
-    "bytes": 2564,
+    "bytes": 2416,
     "cleanBytes": 1587
   },
   {
@@ -115,7 +115,7 @@
     "finish": "worn",
     "file": "svg/ar-mar-del-plata.svg",
     "cleanFile": "svg/clean/ar-mar-del-plata.svg",
-    "bytes": 2247,
+    "bytes": 2099,
     "cleanBytes": 1258
   },
   {
@@ -138,7 +138,7 @@
     "finish": "worn",
     "file": "svg/ar-la-plata.svg",
     "cleanFile": "svg/clean/ar-la-plata.svg",
-    "bytes": 2222,
+    "bytes": 2074,
     "cleanBytes": 1243
   },
   {
@@ -161,7 +161,7 @@
     "finish": "worn",
     "file": "svg/ar-santa-fe.svg",
     "cleanFile": "svg/clean/ar-santa-fe.svg",
-    "bytes": 2140,
+    "bytes": 1992,
     "cleanBytes": 1161
   },
   {
@@ -184,7 +184,7 @@
     "finish": "worn",
     "file": "svg/ar-salta.svg",
     "cleanFile": "svg/clean/ar-salta.svg",
-    "bytes": 2302,
+    "bytes": 2154,
     "cleanBytes": 1329
   },
   {
@@ -207,7 +207,7 @@
     "finish": "worn",
     "file": "svg/ar-san-miguel-de-tucuman.svg",
     "cleanFile": "svg/clean/ar-san-miguel-de-tucuman.svg",
-    "bytes": 2423,
+    "bytes": 2275,
     "cleanBytes": 1418
   },
   {
@@ -230,7 +230,7 @@
     "finish": "worn",
     "file": "svg/ar-purmamarca.svg",
     "cleanFile": "svg/clean/ar-purmamarca.svg",
-    "bytes": 2114,
+    "bytes": 1966,
     "cleanBytes": 1131
   },
   {
@@ -253,7 +253,7 @@
     "finish": "worn",
     "file": "svg/ar-cafayate.svg",
     "cleanFile": "svg/clean/ar-cafayate.svg",
-    "bytes": 2064,
+    "bytes": 1916,
     "cleanBytes": 1085
   },
   {
@@ -277,7 +277,7 @@
     "finish": "worn",
     "file": "svg/ar-puerto-iguazu.svg",
     "cleanFile": "svg/clean/ar-puerto-iguazu.svg",
-    "bytes": 2184,
+    "bytes": 2036,
     "cleanBytes": 1195
   },
   {
@@ -300,7 +300,7 @@
     "finish": "worn",
     "file": "svg/ar-posadas.svg",
     "cleanFile": "svg/clean/ar-posadas.svg",
-    "bytes": 2238,
+    "bytes": 2090,
     "cleanBytes": 1261
   },
   {
@@ -326,7 +326,7 @@
     "finish": "worn",
     "file": "svg/ar-bariloche.svg",
     "cleanFile": "svg/clean/ar-bariloche.svg",
-    "bytes": 2248,
+    "bytes": 2100,
     "cleanBytes": 1267
   },
   {
@@ -349,7 +349,7 @@
     "finish": "worn",
     "file": "svg/ar-san-martin-de-los-andes.svg",
     "cleanFile": "svg/clean/ar-san-martin-de-los-andes.svg",
-    "bytes": 2425,
+    "bytes": 2277,
     "cleanBytes": 1416
   },
   {
@@ -372,7 +372,7 @@
     "finish": "worn",
     "file": "svg/ar-villa-la-angostura.svg",
     "cleanFile": "svg/clean/ar-villa-la-angostura.svg",
-    "bytes": 2410,
+    "bytes": 2262,
     "cleanBytes": 1411
   },
   {
@@ -396,7 +396,7 @@
     "finish": "worn",
     "file": "svg/ar-puerto-madryn.svg",
     "cleanFile": "svg/clean/ar-puerto-madryn.svg",
-    "bytes": 2144,
+    "bytes": 1996,
     "cleanBytes": 1155
   },
   {
@@ -420,7 +420,7 @@
     "finish": "worn",
     "file": "svg/ar-el-calafate.svg",
     "cleanFile": "svg/clean/ar-el-calafate.svg",
-    "bytes": 2266,
+    "bytes": 2118,
     "cleanBytes": 1281
   },
   {
@@ -443,7 +443,7 @@
     "finish": "worn",
     "file": "svg/ar-el-chalten.svg",
     "cleanFile": "svg/clean/ar-el-chalten.svg",
-    "bytes": 2219,
+    "bytes": 2071,
     "cleanBytes": 1236
   },
   {
@@ -467,7 +467,7 @@
     "finish": "worn",
     "file": "svg/ar-ushuaia.svg",
     "cleanFile": "svg/clean/ar-ushuaia.svg",
-    "bytes": 2145,
+    "bytes": 1997,
     "cleanBytes": 1168
   },
   {
@@ -490,7 +490,7 @@
     "finish": "worn",
     "file": "svg/es-madrid.svg",
     "cleanFile": "svg/clean/es-madrid.svg",
-    "bytes": 2306,
+    "bytes": 2158,
     "cleanBytes": 1331
   },
   {
@@ -513,7 +513,7 @@
     "finish": "worn",
     "file": "svg/es-barcelona.svg",
     "cleanFile": "svg/clean/es-barcelona.svg",
-    "bytes": 2146,
+    "bytes": 1998,
     "cleanBytes": 1165
   },
   {
@@ -539,7 +539,7 @@
     "finish": "worn",
     "file": "svg/es-sevilla.svg",
     "cleanFile": "svg/clean/es-sevilla.svg",
-    "bytes": 2187,
+    "bytes": 2039,
     "cleanBytes": 1210
   },
   {
@@ -562,7 +562,7 @@
     "finish": "worn",
     "file": "svg/es-granada.svg",
     "cleanFile": "svg/clean/es-granada.svg",
-    "bytes": 2197,
+    "bytes": 2049,
     "cleanBytes": 1220
   },
   {
@@ -585,7 +585,7 @@
     "finish": "worn",
     "file": "svg/es-cordoba.svg",
     "cleanFile": "svg/clean/es-cordoba.svg",
-    "bytes": 2349,
+    "bytes": 2201,
     "cleanBytes": 1372
   },
   {
@@ -608,7 +608,7 @@
     "finish": "worn",
     "file": "svg/es-valencia.svg",
     "cleanFile": "svg/clean/es-valencia.svg",
-    "bytes": 2033,
+    "bytes": 1885,
     "cleanBytes": 1054
   },
   {
@@ -631,7 +631,7 @@
     "finish": "worn",
     "file": "svg/es-bilbao.svg",
     "cleanFile": "svg/clean/es-bilbao.svg",
-    "bytes": 2064,
+    "bytes": 1916,
     "cleanBytes": 1089
   },
   {
@@ -654,7 +654,7 @@
     "finish": "worn",
     "file": "svg/es-santiago-de-compostela.svg",
     "cleanFile": "svg/clean/es-santiago-de-compostela.svg",
-    "bytes": 2499,
+    "bytes": 2351,
     "cleanBytes": 1492
   },
   {
@@ -677,7 +677,7 @@
     "finish": "worn",
     "file": "svg/es-segovia.svg",
     "cleanFile": "svg/clean/es-segovia.svg",
-    "bytes": 2324,
+    "bytes": 2176,
     "cleanBytes": 1347
   },
   {
@@ -700,7 +700,7 @@
     "finish": "worn",
     "file": "svg/es-toledo.svg",
     "cleanFile": "svg/clean/es-toledo.svg",
-    "bytes": 2100,
+    "bytes": 1952,
     "cleanBytes": 1125
   },
   {
@@ -726,7 +726,7 @@
     "finish": "worn",
     "file": "svg/fr-paris.svg",
     "cleanFile": "svg/clean/fr-paris.svg",
-    "bytes": 2057,
+    "bytes": 1909,
     "cleanBytes": 1084
   },
   {
@@ -749,7 +749,7 @@
     "finish": "worn",
     "file": "svg/fr-lyon.svg",
     "cleanFile": "svg/clean/fr-lyon.svg",
-    "bytes": 2244,
+    "bytes": 2096,
     "cleanBytes": 1273
   },
   {
@@ -776,7 +776,7 @@
     "finish": "worn",
     "file": "svg/fr-marseille.svg",
     "cleanFile": "svg/clean/fr-marseille.svg",
-    "bytes": 2211,
+    "bytes": 2063,
     "cleanBytes": 1230
   },
   {
@@ -803,7 +803,7 @@
     "finish": "worn",
     "file": "svg/fr-bordeaux.svg",
     "cleanFile": "svg/clean/fr-bordeaux.svg",
-    "bytes": 2210,
+    "bytes": 2062,
     "cleanBytes": 1231
   },
   {
@@ -830,7 +830,7 @@
     "finish": "worn",
     "file": "svg/fr-nice.svg",
     "cleanFile": "svg/clean/fr-nice.svg",
-    "bytes": 2110,
+    "bytes": 1962,
     "cleanBytes": 1139
   },
   {
@@ -857,7 +857,7 @@
     "finish": "worn",
     "file": "svg/fr-strasbourg.svg",
     "cleanFile": "svg/clean/fr-strasbourg.svg",
-    "bytes": 2271,
+    "bytes": 2123,
     "cleanBytes": 1288
   },
   {
@@ -884,7 +884,7 @@
     "finish": "worn",
     "file": "svg/fr-avignon.svg",
     "cleanFile": "svg/clean/fr-avignon.svg",
-    "bytes": 2228,
+    "bytes": 2080,
     "cleanBytes": 1251
   },
   {
@@ -911,7 +911,7 @@
     "finish": "worn",
     "file": "svg/fr-carcassonne.svg",
     "cleanFile": "svg/clean/fr-carcassonne.svg",
-    "bytes": 2154,
+    "bytes": 2006,
     "cleanBytes": 1169
   },
   {
@@ -935,7 +935,7 @@
     "finish": "worn",
     "file": "svg/fr-chamonix.svg",
     "cleanFile": "svg/clean/fr-chamonix.svg",
-    "bytes": 2147,
+    "bytes": 1999,
     "cleanBytes": 1168
   },
   {
@@ -961,7 +961,7 @@
     "finish": "worn",
     "file": "svg/fr-mont-saint-michel.svg",
     "cleanFile": "svg/clean/fr-mont-saint-michel.svg",
-    "bytes": 2443,
+    "bytes": 2295,
     "cleanBytes": 1446
   },
   {
@@ -987,7 +987,7 @@
     "finish": "worn",
     "file": "svg/de-berlin.svg",
     "cleanFile": "svg/clean/de-berlin.svg",
-    "bytes": 2189,
+    "bytes": 2041,
     "cleanBytes": 1214
   },
   {
@@ -1015,7 +1015,7 @@
     "finish": "worn",
     "file": "svg/de-munich.svg",
     "cleanFile": "svg/clean/de-munich.svg",
-    "bytes": 2172,
+    "bytes": 2024,
     "cleanBytes": 1197
   },
   {
@@ -1041,7 +1041,7 @@
     "finish": "worn",
     "file": "svg/de-hamburg.svg",
     "cleanFile": "svg/clean/de-hamburg.svg",
-    "bytes": 2275,
+    "bytes": 2127,
     "cleanBytes": 1298
   },
   {
@@ -1069,7 +1069,7 @@
     "finish": "worn",
     "file": "svg/de-cologne.svg",
     "cleanFile": "svg/clean/de-cologne.svg",
-    "bytes": 2235,
+    "bytes": 2087,
     "cleanBytes": 1258
   },
   {
@@ -1096,7 +1096,7 @@
     "finish": "worn",
     "file": "svg/de-frankfurt.svg",
     "cleanFile": "svg/clean/de-frankfurt.svg",
-    "bytes": 2200,
+    "bytes": 2052,
     "cleanBytes": 1219
   },
   {
@@ -1122,7 +1122,7 @@
     "finish": "worn",
     "file": "svg/de-dresden.svg",
     "cleanFile": "svg/clean/de-dresden.svg",
-    "bytes": 2229,
+    "bytes": 2081,
     "cleanBytes": 1252
   },
   {
@@ -1145,7 +1145,7 @@
     "finish": "worn",
     "file": "svg/de-heidelberg.svg",
     "cleanFile": "svg/clean/de-heidelberg.svg",
-    "bytes": 2280,
+    "bytes": 2132,
     "cleanBytes": 1297
   },
   {
@@ -1173,7 +1173,7 @@
     "finish": "worn",
     "file": "svg/de-nuremberg.svg",
     "cleanFile": "svg/clean/de-nuremberg.svg",
-    "bytes": 2127,
+    "bytes": 1979,
     "cleanBytes": 1146
   },
   {
@@ -1199,7 +1199,7 @@
     "finish": "worn",
     "file": "svg/de-lubeck.svg",
     "cleanFile": "svg/clean/de-lubeck.svg",
-    "bytes": 2206,
+    "bytes": 2058,
     "cleanBytes": 1231
   },
   {
@@ -1229,7 +1229,7 @@
     "finish": "worn",
     "file": "svg/de-fussen.svg",
     "cleanFile": "svg/clean/de-fussen.svg",
-    "bytes": 2273,
+    "bytes": 2125,
     "cleanBytes": 1298
   },
   {
@@ -1256,7 +1256,7 @@
     "finish": "worn",
     "file": "svg/it-rome.svg",
     "cleanFile": "svg/clean/it-rome.svg",
-    "bytes": 2430,
+    "bytes": 2282,
     "cleanBytes": 1459
   },
   {
@@ -1284,7 +1284,7 @@
     "finish": "worn",
     "file": "svg/it-florence.svg",
     "cleanFile": "svg/clean/it-florence.svg",
-    "bytes": 2231,
+    "bytes": 2083,
     "cleanBytes": 1252
   },
   {
@@ -1312,7 +1312,7 @@
     "finish": "worn",
     "file": "svg/it-venice.svg",
     "cleanFile": "svg/clean/it-venice.svg",
-    "bytes": 2195,
+    "bytes": 2047,
     "cleanBytes": 1220
   },
   {
@@ -1340,7 +1340,7 @@
     "finish": "worn",
     "file": "svg/it-milan.svg",
     "cleanFile": "svg/clean/it-milan.svg",
-    "bytes": 2239,
+    "bytes": 2091,
     "cleanBytes": 1266
   },
   {
@@ -1363,7 +1363,7 @@
     "finish": "worn",
     "file": "svg/it-pisa.svg",
     "cleanFile": "svg/clean/it-pisa.svg",
-    "bytes": 2292,
+    "bytes": 2144,
     "cleanBytes": 1321
   },
   {
@@ -1391,7 +1391,7 @@
     "finish": "worn",
     "file": "svg/it-naples.svg",
     "cleanFile": "svg/clean/it-naples.svg",
-    "bytes": 2152,
+    "bytes": 2004,
     "cleanBytes": 1177
   },
   {
@@ -1414,7 +1414,7 @@
     "finish": "worn",
     "file": "svg/it-verona.svg",
     "cleanFile": "svg/clean/it-verona.svg",
-    "bytes": 2217,
+    "bytes": 2069,
     "cleanBytes": 1242
   },
   {
@@ -1441,7 +1441,7 @@
     "finish": "worn",
     "file": "svg/it-bologna.svg",
     "cleanFile": "svg/clean/it-bologna.svg",
-    "bytes": 2176,
+    "bytes": 2028,
     "cleanBytes": 1199
   },
   {
@@ -1464,7 +1464,7 @@
     "finish": "worn",
     "file": "svg/it-siena.svg",
     "cleanFile": "svg/clean/it-siena.svg",
-    "bytes": 2144,
+    "bytes": 1996,
     "cleanBytes": 1171
   },
   {
@@ -1487,7 +1487,7 @@
     "finish": "worn",
     "file": "svg/it-alberobello.svg",
     "cleanFile": "svg/clean/it-alberobello.svg",
-    "bytes": 2132,
+    "bytes": 1984,
     "cleanBytes": 1147
   },
   {
@@ -1515,7 +1515,7 @@
     "finish": "worn",
     "file": "svg/pt-lisbon.svg",
     "cleanFile": "svg/clean/pt-lisbon.svg",
-    "bytes": 2127,
+    "bytes": 1979,
     "cleanBytes": 1152
   },
   {
@@ -1543,7 +1543,7 @@
     "finish": "worn",
     "file": "svg/pt-porto.svg",
     "cleanFile": "svg/clean/pt-porto.svg",
-    "bytes": 2214,
+    "bytes": 2066,
     "cleanBytes": 1241
   },
   {
@@ -1571,7 +1571,7 @@
     "finish": "worn",
     "file": "svg/pt-coimbra.svg",
     "cleanFile": "svg/clean/pt-coimbra.svg",
-    "bytes": 2114,
+    "bytes": 1966,
     "cleanBytes": 1137
   },
   {
@@ -1598,7 +1598,7 @@
     "finish": "worn",
     "file": "svg/pt-braga.svg",
     "cleanFile": "svg/clean/pt-braga.svg",
-    "bytes": 2288,
+    "bytes": 2140,
     "cleanBytes": 1315
   },
   {
@@ -1625,7 +1625,7 @@
     "finish": "worn",
     "file": "svg/pt-guimaraes.svg",
     "cleanFile": "svg/clean/pt-guimaraes.svg",
-    "bytes": 2091,
+    "bytes": 1943,
     "cleanBytes": 1110
   },
   {
@@ -1652,7 +1652,7 @@
     "finish": "worn",
     "file": "svg/pt-aveiro.svg",
     "cleanFile": "svg/clean/pt-aveiro.svg",
-    "bytes": 2190,
+    "bytes": 2042,
     "cleanBytes": 1215
   },
   {
@@ -1679,7 +1679,7 @@
     "finish": "worn",
     "file": "svg/pt-evora.svg",
     "cleanFile": "svg/clean/pt-evora.svg",
-    "bytes": 2017,
+    "bytes": 1869,
     "cleanBytes": 1044
   },
   {
@@ -1706,7 +1706,7 @@
     "finish": "worn",
     "file": "svg/pt-faro.svg",
     "cleanFile": "svg/clean/pt-faro.svg",
-    "bytes": 2146,
+    "bytes": 1998,
     "cleanBytes": 1175
   },
   {
@@ -1734,7 +1734,7 @@
     "finish": "worn",
     "file": "svg/gb-london.svg",
     "cleanFile": "svg/clean/gb-london.svg",
-    "bytes": 2139,
+    "bytes": 1991,
     "cleanBytes": 1164
   },
   {
@@ -1762,7 +1762,7 @@
     "finish": "worn",
     "file": "svg/gb-edinburgh.svg",
     "cleanFile": "svg/clean/gb-edinburgh.svg",
-    "bytes": 2296,
+    "bytes": 2148,
     "cleanBytes": 1315
   },
   {
@@ -1789,7 +1789,7 @@
     "finish": "worn",
     "file": "svg/gb-glasgow.svg",
     "cleanFile": "svg/clean/gb-glasgow.svg",
-    "bytes": 2109,
+    "bytes": 1961,
     "cleanBytes": 1132
   },
   {
@@ -1816,7 +1816,7 @@
     "finish": "worn",
     "file": "svg/gb-cardiff.svg",
     "cleanFile": "svg/clean/gb-cardiff.svg",
-    "bytes": 2183,
+    "bytes": 2035,
     "cleanBytes": 1206
   },
   {
@@ -1843,7 +1843,7 @@
     "finish": "worn",
     "file": "svg/gb-belfast.svg",
     "cleanFile": "svg/clean/gb-belfast.svg",
-    "bytes": 2200,
+    "bytes": 2052,
     "cleanBytes": 1223
   },
   {
@@ -1870,7 +1870,7 @@
     "finish": "worn",
     "file": "svg/gb-york.svg",
     "cleanFile": "svg/clean/gb-york.svg",
-    "bytes": 2247,
+    "bytes": 2099,
     "cleanBytes": 1276
   },
   {
@@ -1897,7 +1897,7 @@
     "finish": "worn",
     "file": "svg/gb-bath.svg",
     "cleanFile": "svg/clean/gb-bath.svg",
-    "bytes": 2211,
+    "bytes": 2063,
     "cleanBytes": 1240
   },
   {
@@ -1924,7 +1924,7 @@
     "finish": "worn",
     "file": "svg/gb-oxford.svg",
     "cleanFile": "svg/clean/gb-oxford.svg",
-    "bytes": 2223,
+    "bytes": 2075,
     "cleanBytes": 1248
   },
   {
@@ -1951,7 +1951,7 @@
     "finish": "worn",
     "file": "svg/gb-cambridge.svg",
     "cleanFile": "svg/clean/gb-cambridge.svg",
-    "bytes": 2228,
+    "bytes": 2080,
     "cleanBytes": 1247
   },
   {
@@ -1978,7 +1978,7 @@
     "finish": "worn",
     "file": "svg/gb-liverpool.svg",
     "cleanFile": "svg/clean/gb-liverpool.svg",
-    "bytes": 2250,
+    "bytes": 2102,
     "cleanBytes": 1269
   },
   {
@@ -2005,7 +2005,7 @@
     "finish": "worn",
     "file": "svg/gb-manchester.svg",
     "cleanFile": "svg/clean/gb-manchester.svg",
-    "bytes": 2233,
+    "bytes": 2085,
     "cleanBytes": 1250
   },
   {
@@ -2032,7 +2032,7 @@
     "finish": "worn",
     "file": "svg/gb-bristol.svg",
     "cleanFile": "svg/clean/gb-bristol.svg",
-    "bytes": 2291,
+    "bytes": 2143,
     "cleanBytes": 1314
   },
   {
@@ -2060,7 +2060,7 @@
     "finish": "worn",
     "file": "svg/ie-dublin.svg",
     "cleanFile": "svg/clean/ie-dublin.svg",
-    "bytes": 2208,
+    "bytes": 2060,
     "cleanBytes": 1233
   },
   {
@@ -2087,7 +2087,7 @@
     "finish": "worn",
     "file": "svg/ie-cork.svg",
     "cleanFile": "svg/clean/ie-cork.svg",
-    "bytes": 2142,
+    "bytes": 1994,
     "cleanBytes": 1171
   },
   {
@@ -2114,7 +2114,7 @@
     "finish": "worn",
     "file": "svg/ie-galway.svg",
     "cleanFile": "svg/clean/ie-galway.svg",
-    "bytes": 2073,
+    "bytes": 1925,
     "cleanBytes": 1098
   },
   {
@@ -2141,7 +2141,7 @@
     "finish": "worn",
     "file": "svg/ie-kilkenny.svg",
     "cleanFile": "svg/clean/ie-kilkenny.svg",
-    "bytes": 2127,
+    "bytes": 1979,
     "cleanBytes": 1148
   },
   {
@@ -2168,7 +2168,7 @@
     "finish": "worn",
     "file": "svg/ie-limerick.svg",
     "cleanFile": "svg/clean/ie-limerick.svg",
-    "bytes": 2110,
+    "bytes": 1962,
     "cleanBytes": 1131
   },
   {
@@ -2196,7 +2196,7 @@
     "finish": "worn",
     "file": "svg/nl-amsterdam.svg",
     "cleanFile": "svg/clean/nl-amsterdam.svg",
-    "bytes": 2240,
+    "bytes": 2092,
     "cleanBytes": 1259
   },
   {
@@ -2224,7 +2224,7 @@
     "finish": "worn",
     "file": "svg/nl-rotterdam.svg",
     "cleanFile": "svg/clean/nl-rotterdam.svg",
-    "bytes": 2138,
+    "bytes": 1990,
     "cleanBytes": 1157
   },
   {
@@ -2251,7 +2251,7 @@
     "finish": "worn",
     "file": "svg/nl-utrecht.svg",
     "cleanFile": "svg/clean/nl-utrecht.svg",
-    "bytes": 2181,
+    "bytes": 2033,
     "cleanBytes": 1204
   },
   {
@@ -2279,7 +2279,7 @@
     "finish": "worn",
     "file": "svg/nl-the-hague.svg",
     "cleanFile": "svg/clean/nl-the-hague.svg",
-    "bytes": 2131,
+    "bytes": 1983,
     "cleanBytes": 1150
   },
   {
@@ -2306,7 +2306,7 @@
     "finish": "worn",
     "file": "svg/nl-delft.svg",
     "cleanFile": "svg/clean/nl-delft.svg",
-    "bytes": 2148,
+    "bytes": 2000,
     "cleanBytes": 1175
   },
   {
@@ -2333,7 +2333,7 @@
     "finish": "worn",
     "file": "svg/nl-leiden.svg",
     "cleanFile": "svg/clean/nl-leiden.svg",
-    "bytes": 2171,
+    "bytes": 2023,
     "cleanBytes": 1196
   },
   {
@@ -2360,7 +2360,7 @@
     "finish": "worn",
     "file": "svg/nl-maastricht.svg",
     "cleanFile": "svg/clean/nl-maastricht.svg",
-    "bytes": 2188,
+    "bytes": 2040,
     "cleanBytes": 1205
   },
   {
@@ -2388,7 +2388,7 @@
     "finish": "worn",
     "file": "svg/be-brussels.svg",
     "cleanFile": "svg/clean/be-brussels.svg",
-    "bytes": 2240,
+    "bytes": 2092,
     "cleanBytes": 1261
   },
   {
@@ -2416,7 +2416,7 @@
     "finish": "worn",
     "file": "svg/be-bruges.svg",
     "cleanFile": "svg/clean/be-bruges.svg",
-    "bytes": 2091,
+    "bytes": 1943,
     "cleanBytes": 1116
   },
   {
@@ -2444,7 +2444,7 @@
     "finish": "worn",
     "file": "svg/be-ghent.svg",
     "cleanFile": "svg/clean/be-ghent.svg",
-    "bytes": 2064,
+    "bytes": 1916,
     "cleanBytes": 1091
   },
   {
@@ -2472,7 +2472,7 @@
     "finish": "worn",
     "file": "svg/be-antwerp.svg",
     "cleanFile": "svg/clean/be-antwerp.svg",
-    "bytes": 2184,
+    "bytes": 2036,
     "cleanBytes": 1207
   },
   {
@@ -2500,7 +2500,7 @@
     "finish": "worn",
     "file": "svg/be-leuven.svg",
     "cleanFile": "svg/clean/be-leuven.svg",
-    "bytes": 2302,
+    "bytes": 2154,
     "cleanBytes": 1327
   },
   {
@@ -2528,7 +2528,7 @@
     "finish": "worn",
     "file": "svg/lu-luxembourg.svg",
     "cleanFile": "svg/clean/lu-luxembourg.svg",
-    "bytes": 2209,
+    "bytes": 2061,
     "cleanBytes": 1226
   },
   {
@@ -2556,7 +2556,7 @@
     "finish": "worn",
     "file": "svg/ch-lucerne.svg",
     "cleanFile": "svg/clean/ch-lucerne.svg",
-    "bytes": 2103,
+    "bytes": 1955,
     "cleanBytes": 1126
   },
   {
@@ -2584,7 +2584,7 @@
     "finish": "worn",
     "file": "svg/ch-zurich.svg",
     "cleanFile": "svg/clean/ch-zurich.svg",
-    "bytes": 2185,
+    "bytes": 2037,
     "cleanBytes": 1210
   },
   {
@@ -2612,7 +2612,7 @@
     "finish": "worn",
     "file": "svg/ch-bern.svg",
     "cleanFile": "svg/clean/ch-bern.svg",
-    "bytes": 2142,
+    "bytes": 1994,
     "cleanBytes": 1171
   },
   {
@@ -2640,7 +2640,7 @@
     "finish": "worn",
     "file": "svg/ch-geneva.svg",
     "cleanFile": "svg/clean/ch-geneva.svg",
-    "bytes": 2067,
+    "bytes": 1919,
     "cleanBytes": 1092
   },
   {
@@ -2668,7 +2668,7 @@
     "finish": "worn",
     "file": "svg/ch-basel.svg",
     "cleanFile": "svg/clean/ch-basel.svg",
-    "bytes": 2192,
+    "bytes": 2044,
     "cleanBytes": 1219
   },
   {
@@ -2695,7 +2695,7 @@
     "finish": "worn",
     "file": "svg/ch-lugano.svg",
     "cleanFile": "svg/clean/ch-lugano.svg",
-    "bytes": 2119,
+    "bytes": 1971,
     "cleanBytes": 1144
   },
   {
@@ -2723,7 +2723,7 @@
     "finish": "worn",
     "file": "svg/at-vienna.svg",
     "cleanFile": "svg/clean/at-vienna.svg",
-    "bytes": 2327,
+    "bytes": 2179,
     "cleanBytes": 1352
   },
   {
@@ -2751,7 +2751,7 @@
     "finish": "worn",
     "file": "svg/at-salzburg.svg",
     "cleanFile": "svg/clean/at-salzburg.svg",
-    "bytes": 2197,
+    "bytes": 2049,
     "cleanBytes": 1218
   },
   {
@@ -2778,7 +2778,7 @@
     "finish": "worn",
     "file": "svg/at-innsbruck.svg",
     "cleanFile": "svg/clean/at-innsbruck.svg",
-    "bytes": 2152,
+    "bytes": 2004,
     "cleanBytes": 1171
   },
   {
@@ -2805,7 +2805,7 @@
     "finish": "worn",
     "file": "svg/at-graz.svg",
     "cleanFile": "svg/clean/at-graz.svg",
-    "bytes": 2098,
+    "bytes": 1950,
     "cleanBytes": 1127
   },
   {
@@ -2832,7 +2832,7 @@
     "finish": "worn",
     "file": "svg/at-linz.svg",
     "cleanFile": "svg/clean/at-linz.svg",
-    "bytes": 2160,
+    "bytes": 2012,
     "cleanBytes": 1189
   },
   {
@@ -2860,7 +2860,7 @@
     "finish": "worn",
     "file": "svg/cz-prague.svg",
     "cleanFile": "svg/clean/cz-prague.svg",
-    "bytes": 2212,
+    "bytes": 2064,
     "cleanBytes": 1237
   },
   {
@@ -2887,7 +2887,7 @@
     "finish": "worn",
     "file": "svg/cz-brno.svg",
     "cleanFile": "svg/clean/cz-brno.svg",
-    "bytes": 2140,
+    "bytes": 1992,
     "cleanBytes": 1169
   },
   {
@@ -2914,7 +2914,7 @@
     "finish": "worn",
     "file": "svg/cz-cesky-krumlov.svg",
     "cleanFile": "svg/clean/cz-cesky-krumlov.svg",
-    "bytes": 2103,
+    "bytes": 1955,
     "cleanBytes": 1114
   },
   {
@@ -2941,7 +2941,7 @@
     "finish": "worn",
     "file": "svg/cz-karlovy-vary.svg",
     "cleanFile": "svg/clean/cz-karlovy-vary.svg",
-    "bytes": 2132,
+    "bytes": 1984,
     "cleanBytes": 1145
   },
   {
@@ -2969,7 +2969,7 @@
     "finish": "worn",
     "file": "svg/pl-krakow.svg",
     "cleanFile": "svg/clean/pl-krakow.svg",
-    "bytes": 2131,
+    "bytes": 1983,
     "cleanBytes": 1156
   },
   {
@@ -2997,7 +2997,7 @@
     "finish": "worn",
     "file": "svg/pl-warsaw.svg",
     "cleanFile": "svg/clean/pl-warsaw.svg",
-    "bytes": 2131,
+    "bytes": 1983,
     "cleanBytes": 1156
   },
   {
@@ -3024,7 +3024,7 @@
     "finish": "worn",
     "file": "svg/pl-gdansk.svg",
     "cleanFile": "svg/clean/pl-gdansk.svg",
-    "bytes": 2187,
+    "bytes": 2039,
     "cleanBytes": 1212
   },
   {
@@ -3052,7 +3052,7 @@
     "finish": "worn",
     "file": "svg/pl-wroclaw.svg",
     "cleanFile": "svg/clean/pl-wroclaw.svg",
-    "bytes": 2081,
+    "bytes": 1933,
     "cleanBytes": 1104
   },
   {
@@ -3079,7 +3079,7 @@
     "finish": "worn",
     "file": "svg/pl-poznan.svg",
     "cleanFile": "svg/clean/pl-poznan.svg",
-    "bytes": 2246,
+    "bytes": 2098,
     "cleanBytes": 1271
   },
   {
@@ -3106,7 +3106,7 @@
     "finish": "worn",
     "file": "svg/pl-torun.svg",
     "cleanFile": "svg/clean/pl-torun.svg",
-    "bytes": 2189,
+    "bytes": 2041,
     "cleanBytes": 1216
   },
   {
@@ -3133,7 +3133,7 @@
     "finish": "worn",
     "file": "svg/hu-budapest.svg",
     "cleanFile": "svg/clean/hu-budapest.svg",
-    "bytes": 2264,
+    "bytes": 2116,
     "cleanBytes": 1285
   },
   {
@@ -3160,7 +3160,7 @@
     "finish": "worn",
     "file": "svg/hu-eger.svg",
     "cleanFile": "svg/clean/hu-eger.svg",
-    "bytes": 2142,
+    "bytes": 1994,
     "cleanBytes": 1171
   },
   {
@@ -3187,7 +3187,7 @@
     "finish": "worn",
     "file": "svg/hu-pecs.svg",
     "cleanFile": "svg/clean/hu-pecs.svg",
-    "bytes": 2233,
+    "bytes": 2085,
     "cleanBytes": 1262
   },
   {
@@ -3214,7 +3214,7 @@
     "finish": "worn",
     "file": "svg/sk-bratislava.svg",
     "cleanFile": "svg/clean/sk-bratislava.svg",
-    "bytes": 2232,
+    "bytes": 2084,
     "cleanBytes": 1249
   },
   {
@@ -3241,7 +3241,7 @@
     "finish": "worn",
     "file": "svg/sk-kosice.svg",
     "cleanFile": "svg/clean/sk-kosice.svg",
-    "bytes": 2188,
+    "bytes": 2040,
     "cleanBytes": 1213
   },
   {
@@ -3268,7 +3268,7 @@
     "finish": "worn",
     "file": "svg/sk-banska-stiavnica.svg",
     "cleanFile": "svg/clean/sk-banska-stiavnica.svg",
-    "bytes": 2593,
+    "bytes": 2445,
     "cleanBytes": 1598
   },
   {
@@ -3296,7 +3296,7 @@
     "finish": "worn",
     "file": "svg/si-ljubljana.svg",
     "cleanFile": "svg/clean/si-ljubljana.svg",
-    "bytes": 2216,
+    "bytes": 2068,
     "cleanBytes": 1235
   },
   {
@@ -3323,7 +3323,7 @@
     "finish": "worn",
     "file": "svg/si-maribor.svg",
     "cleanFile": "svg/clean/si-maribor.svg",
-    "bytes": 2321,
+    "bytes": 2173,
     "cleanBytes": 1344
   },
   {
@@ -3350,7 +3350,7 @@
     "finish": "worn",
     "file": "svg/si-piran.svg",
     "cleanFile": "svg/clean/si-piran.svg",
-    "bytes": 2327,
+    "bytes": 2179,
     "cleanBytes": 1354
   },
   {
@@ -3377,7 +3377,7 @@
     "finish": "worn",
     "file": "svg/hr-dubrovnik.svg",
     "cleanFile": "svg/clean/hr-dubrovnik.svg",
-    "bytes": 2263,
+    "bytes": 2115,
     "cleanBytes": 1282
   },
   {
@@ -3404,7 +3404,7 @@
     "finish": "worn",
     "file": "svg/hr-split.svg",
     "cleanFile": "svg/clean/hr-split.svg",
-    "bytes": 2189,
+    "bytes": 2041,
     "cleanBytes": 1216
   },
   {
@@ -3431,7 +3431,7 @@
     "finish": "worn",
     "file": "svg/hr-zagreb.svg",
     "cleanFile": "svg/clean/hr-zagreb.svg",
-    "bytes": 2131,
+    "bytes": 1983,
     "cleanBytes": 1156
   },
   {
@@ -3458,7 +3458,7 @@
     "finish": "worn",
     "file": "svg/hr-zadar.svg",
     "cleanFile": "svg/clean/hr-zadar.svg",
-    "bytes": 2100,
+    "bytes": 1952,
     "cleanBytes": 1127
   },
   {
@@ -3485,7 +3485,7 @@
     "finish": "worn",
     "file": "svg/hr-rovinj.svg",
     "cleanFile": "svg/clean/hr-rovinj.svg",
-    "bytes": 2323,
+    "bytes": 2175,
     "cleanBytes": 1348
   },
   {
@@ -3512,7 +3512,7 @@
     "finish": "worn",
     "file": "svg/me-kotor.svg",
     "cleanFile": "svg/clean/me-kotor.svg",
-    "bytes": 2250,
+    "bytes": 2102,
     "cleanBytes": 1277
   },
   {
@@ -3539,7 +3539,7 @@
     "finish": "worn",
     "file": "svg/me-budva.svg",
     "cleanFile": "svg/clean/me-budva.svg",
-    "bytes": 2249,
+    "bytes": 2101,
     "cleanBytes": 1276
   },
   {
@@ -3566,7 +3566,7 @@
     "finish": "worn",
     "file": "svg/me-cetinje.svg",
     "cleanFile": "svg/clean/me-cetinje.svg",
-    "bytes": 2187,
+    "bytes": 2039,
     "cleanBytes": 1210
   },
   {
@@ -3593,7 +3593,7 @@
     "finish": "worn",
     "file": "svg/ba-mostar.svg",
     "cleanFile": "svg/clean/ba-mostar.svg",
-    "bytes": 2150,
+    "bytes": 2002,
     "cleanBytes": 1175
   },
   {
@@ -3620,7 +3620,7 @@
     "finish": "worn",
     "file": "svg/ba-sarajevo.svg",
     "cleanFile": "svg/clean/ba-sarajevo.svg",
-    "bytes": 2119,
+    "bytes": 1971,
     "cleanBytes": 1140
   },
   {
@@ -3648,7 +3648,7 @@
     "finish": "worn",
     "file": "svg/rs-belgrade.svg",
     "cleanFile": "svg/clean/rs-belgrade.svg",
-    "bytes": 2127,
+    "bytes": 1979,
     "cleanBytes": 1148
   },
   {
@@ -3675,7 +3675,7 @@
     "finish": "worn",
     "file": "svg/rs-novi-sad.svg",
     "cleanFile": "svg/clean/rs-novi-sad.svg",
-    "bytes": 2110,
+    "bytes": 1962,
     "cleanBytes": 1131
   },
   {
@@ -3702,7 +3702,7 @@
     "finish": "worn",
     "file": "svg/al-tirana.svg",
     "cleanFile": "svg/clean/al-tirana.svg",
-    "bytes": 2369,
+    "bytes": 2221,
     "cleanBytes": 1394
   },
   {
@@ -3729,7 +3729,7 @@
     "finish": "worn",
     "file": "svg/al-berat.svg",
     "cleanFile": "svg/clean/al-berat.svg",
-    "bytes": 2127,
+    "bytes": 1979,
     "cleanBytes": 1154
   },
   {
@@ -3756,7 +3756,7 @@
     "finish": "worn",
     "file": "svg/al-gjirokaster.svg",
     "cleanFile": "svg/clean/al-gjirokaster.svg",
-    "bytes": 2142,
+    "bytes": 1994,
     "cleanBytes": 1157
   },
   {
@@ -3784,7 +3784,7 @@
     "finish": "worn",
     "file": "svg/mk-skopje.svg",
     "cleanFile": "svg/clean/mk-skopje.svg",
-    "bytes": 2316,
+    "bytes": 2168,
     "cleanBytes": 1341
   },
   {
@@ -3811,7 +3811,7 @@
     "finish": "worn",
     "file": "svg/mk-ohrid.svg",
     "cleanFile": "svg/clean/mk-ohrid.svg",
-    "bytes": 2265,
+    "bytes": 2117,
     "cleanBytes": 1292
   },
   {
@@ -3839,7 +3839,7 @@
     "finish": "worn",
     "file": "svg/gr-athens.svg",
     "cleanFile": "svg/clean/gr-athens.svg",
-    "bytes": 2111,
+    "bytes": 1963,
     "cleanBytes": 1136
   },
   {
@@ -3867,7 +3867,7 @@
     "finish": "worn",
     "file": "svg/gr-thessaloniki.svg",
     "cleanFile": "svg/clean/gr-thessaloniki.svg",
-    "bytes": 2213,
+    "bytes": 2065,
     "cleanBytes": 1226
   },
   {
@@ -3895,7 +3895,7 @@
     "finish": "worn",
     "file": "svg/gr-nafplio.svg",
     "cleanFile": "svg/clean/gr-nafplio.svg",
-    "bytes": 2313,
+    "bytes": 2165,
     "cleanBytes": 1336
   },
   {
@@ -3923,7 +3923,7 @@
     "finish": "worn",
     "file": "svg/gr-chania.svg",
     "cleanFile": "svg/clean/gr-chania.svg",
-    "bytes": 2330,
+    "bytes": 2182,
     "cleanBytes": 1355
   },
   {
@@ -3951,7 +3951,7 @@
     "finish": "worn",
     "file": "svg/gr-rhodes.svg",
     "cleanFile": "svg/clean/gr-rhodes.svg",
-    "bytes": 2251,
+    "bytes": 2103,
     "cleanBytes": 1276
   },
   {
@@ -3979,7 +3979,7 @@
     "finish": "worn",
     "file": "svg/mt-valletta.svg",
     "cleanFile": "svg/clean/mt-valletta.svg",
-    "bytes": 2254,
+    "bytes": 2106,
     "cleanBytes": 1275
   },
   {
@@ -4006,7 +4006,7 @@
     "finish": "worn",
     "file": "svg/mt-mdina.svg",
     "cleanFile": "svg/clean/mt-mdina.svg",
-    "bytes": 2149,
+    "bytes": 2001,
     "cleanBytes": 1176
   },
   {
@@ -4033,7 +4033,7 @@
     "finish": "worn",
     "file": "svg/mt-birgu.svg",
     "cleanFile": "svg/clean/mt-birgu.svg",
-    "bytes": 2227,
+    "bytes": 2079,
     "cleanBytes": 1254
   },
   {
@@ -4061,7 +4061,7 @@
     "finish": "worn",
     "file": "svg/ro-bucharest.svg",
     "cleanFile": "svg/clean/ro-bucharest.svg",
-    "bytes": 2149,
+    "bytes": 2001,
     "cleanBytes": 1168
   },
   {
@@ -4088,7 +4088,7 @@
     "finish": "worn",
     "file": "svg/ro-brasov.svg",
     "cleanFile": "svg/clean/ro-brasov.svg",
-    "bytes": 2162,
+    "bytes": 2014,
     "cleanBytes": 1187
   },
   {
@@ -4115,7 +4115,7 @@
     "finish": "worn",
     "file": "svg/ro-sibiu.svg",
     "cleanFile": "svg/clean/ro-sibiu.svg",
-    "bytes": 2149,
+    "bytes": 2001,
     "cleanBytes": 1176
   },
   {
@@ -4142,7 +4142,7 @@
     "finish": "worn",
     "file": "svg/ro-sighisoara.svg",
     "cleanFile": "svg/clean/ro-sighisoara.svg",
-    "bytes": 2191,
+    "bytes": 2043,
     "cleanBytes": 1208
   },
   {
@@ -4170,7 +4170,7 @@
     "finish": "worn",
     "file": "svg/bg-sofia.svg",
     "cleanFile": "svg/clean/bg-sofia.svg",
-    "bytes": 2079,
+    "bytes": 1931,
     "cleanBytes": 1106
   },
   {
@@ -4197,7 +4197,7 @@
     "finish": "worn",
     "file": "svg/bg-plovdiv.svg",
     "cleanFile": "svg/clean/bg-plovdiv.svg",
-    "bytes": 2194,
+    "bytes": 2046,
     "cleanBytes": 1217
   },
   {
@@ -4224,7 +4224,7 @@
     "finish": "worn",
     "file": "svg/bg-varna.svg",
     "cleanFile": "svg/clean/bg-varna.svg",
-    "bytes": 2229,
+    "bytes": 2081,
     "cleanBytes": 1256
   },
   {
@@ -4251,7 +4251,7 @@
     "finish": "worn",
     "file": "svg/bg-veliko-tarnovo.svg",
     "cleanFile": "svg/clean/bg-veliko-tarnovo.svg",
-    "bytes": 2358,
+    "bytes": 2210,
     "cleanBytes": 1367
   },
   {
@@ -4279,7 +4279,7 @@
     "finish": "worn",
     "file": "svg/dk-copenhagen.svg",
     "cleanFile": "svg/clean/dk-copenhagen.svg",
-    "bytes": 2300,
+    "bytes": 2152,
     "cleanBytes": 1317
   },
   {
@@ -4306,7 +4306,7 @@
     "finish": "worn",
     "file": "svg/dk-aarhus.svg",
     "cleanFile": "svg/clean/dk-aarhus.svg",
-    "bytes": 2176,
+    "bytes": 2028,
     "cleanBytes": 1201
   },
   {
@@ -4333,7 +4333,7 @@
     "finish": "worn",
     "file": "svg/dk-odense.svg",
     "cleanFile": "svg/clean/dk-odense.svg",
-    "bytes": 2112,
+    "bytes": 1964,
     "cleanBytes": 1137
   },
   {
@@ -4361,7 +4361,7 @@
     "finish": "worn",
     "file": "svg/se-stockholm.svg",
     "cleanFile": "svg/clean/se-stockholm.svg",
-    "bytes": 2150,
+    "bytes": 2002,
     "cleanBytes": 1169
   },
   {
@@ -4389,7 +4389,7 @@
     "finish": "worn",
     "file": "svg/se-gothenburg.svg",
     "cleanFile": "svg/clean/se-gothenburg.svg",
-    "bytes": 2171,
+    "bytes": 2023,
     "cleanBytes": 1188
   },
   {
@@ -4416,7 +4416,7 @@
     "finish": "worn",
     "file": "svg/se-malmo.svg",
     "cleanFile": "svg/clean/se-malmo.svg",
-    "bytes": 2173,
+    "bytes": 2025,
     "cleanBytes": 1200
   },
   {
@@ -4443,7 +4443,7 @@
     "finish": "worn",
     "file": "svg/se-uppsala.svg",
     "cleanFile": "svg/clean/se-uppsala.svg",
-    "bytes": 2225,
+    "bytes": 2077,
     "cleanBytes": 1248
   },
   {
@@ -4470,7 +4470,7 @@
     "finish": "worn",
     "file": "svg/no-bergen.svg",
     "cleanFile": "svg/clean/no-bergen.svg",
-    "bytes": 2237,
+    "bytes": 2089,
     "cleanBytes": 1262
   },
   {
@@ -4497,7 +4497,7 @@
     "finish": "worn",
     "file": "svg/no-oslo.svg",
     "cleanFile": "svg/clean/no-oslo.svg",
-    "bytes": 2150,
+    "bytes": 2002,
     "cleanBytes": 1179
   },
   {
@@ -4524,7 +4524,7 @@
     "finish": "worn",
     "file": "svg/no-trondheim.svg",
     "cleanFile": "svg/clean/no-trondheim.svg",
-    "bytes": 2136,
+    "bytes": 1988,
     "cleanBytes": 1155
   },
   {
@@ -4551,7 +4551,7 @@
     "finish": "worn",
     "file": "svg/no-stavanger.svg",
     "cleanFile": "svg/clean/no-stavanger.svg",
-    "bytes": 2192,
+    "bytes": 2044,
     "cleanBytes": 1211
   },
   {
@@ -4578,7 +4578,7 @@
     "finish": "worn",
     "file": "svg/no-tromso.svg",
     "cleanFile": "svg/clean/no-tromso.svg",
-    "bytes": 2062,
+    "bytes": 1914,
     "cleanBytes": 1087
   },
   {
@@ -4605,7 +4605,7 @@
     "finish": "worn",
     "file": "svg/fi-helsinki.svg",
     "cleanFile": "svg/clean/fi-helsinki.svg",
-    "bytes": 2107,
+    "bytes": 1959,
     "cleanBytes": 1128
   },
   {
@@ -4632,7 +4632,7 @@
     "finish": "worn",
     "file": "svg/fi-turku.svg",
     "cleanFile": "svg/clean/fi-turku.svg",
-    "bytes": 2127,
+    "bytes": 1979,
     "cleanBytes": 1154
   },
   {
@@ -4659,7 +4659,7 @@
     "finish": "worn",
     "file": "svg/fi-tampere.svg",
     "cleanFile": "svg/clean/fi-tampere.svg",
-    "bytes": 2193,
+    "bytes": 2045,
     "cleanBytes": 1216
   },
   {
@@ -4686,7 +4686,7 @@
     "finish": "worn",
     "file": "svg/fi-porvoo.svg",
     "cleanFile": "svg/clean/fi-porvoo.svg",
-    "bytes": 2255,
+    "bytes": 2107,
     "cleanBytes": 1280
   },
   {
@@ -4713,7 +4713,7 @@
     "finish": "worn",
     "file": "svg/fi-rovaniemi.svg",
     "cleanFile": "svg/clean/fi-rovaniemi.svg",
-    "bytes": 2343,
+    "bytes": 2195,
     "cleanBytes": 1362
   },
   {
@@ -4741,7 +4741,7 @@
     "finish": "worn",
     "file": "svg/is-reykjavik.svg",
     "cleanFile": "svg/clean/is-reykjavik.svg",
-    "bytes": 2226,
+    "bytes": 2078,
     "cleanBytes": 1245
   },
   {
@@ -4768,7 +4768,7 @@
     "finish": "worn",
     "file": "svg/is-akureyri.svg",
     "cleanFile": "svg/clean/is-akureyri.svg",
-    "bytes": 2189,
+    "bytes": 2041,
     "cleanBytes": 1210
   },
   {
@@ -4796,7 +4796,7 @@
     "finish": "worn",
     "file": "svg/ee-tallinn.svg",
     "cleanFile": "svg/clean/ee-tallinn.svg",
-    "bytes": 2236,
+    "bytes": 2088,
     "cleanBytes": 1259
   },
   {
@@ -4823,7 +4823,7 @@
     "finish": "worn",
     "file": "svg/ee-tartu.svg",
     "cleanFile": "svg/clean/ee-tartu.svg",
-    "bytes": 2105,
+    "bytes": 1957,
     "cleanBytes": 1132
   },
   {
@@ -4850,7 +4850,7 @@
     "finish": "worn",
     "file": "svg/lv-riga.svg",
     "cleanFile": "svg/clean/lv-riga.svg",
-    "bytes": 2098,
+    "bytes": 1950,
     "cleanBytes": 1127
   },
   {
@@ -4877,7 +4877,7 @@
     "finish": "worn",
     "file": "svg/lv-cesis.svg",
     "cleanFile": "svg/clean/lv-cesis.svg",
-    "bytes": 2162,
+    "bytes": 2014,
     "cleanBytes": 1189
   },
   {
@@ -4905,7 +4905,7 @@
     "finish": "worn",
     "file": "svg/lt-vilnius.svg",
     "cleanFile": "svg/clean/lt-vilnius.svg",
-    "bytes": 2163,
+    "bytes": 2015,
     "cleanBytes": 1186
   },
   {
@@ -4932,7 +4932,7 @@
     "finish": "worn",
     "file": "svg/lt-kaunas.svg",
     "cleanFile": "svg/clean/lt-kaunas.svg",
-    "bytes": 2016,
+    "bytes": 1868,
     "cleanBytes": 1041
   },
   {
@@ -4959,7 +4959,7 @@
     "finish": "worn",
     "file": "svg/ad-andorra-la-vella.svg",
     "cleanFile": "svg/clean/ad-andorra-la-vella.svg",
-    "bytes": 2390,
+    "bytes": 2242,
     "cleanBytes": 1395
   },
   {
@@ -4986,7 +4986,7 @@
     "finish": "worn",
     "file": "svg/li-vaduz.svg",
     "cleanFile": "svg/clean/li-vaduz.svg",
-    "bytes": 2327,
+    "bytes": 2179,
     "cleanBytes": 1354
   },
   {
@@ -5014,7 +5014,7 @@
     "finish": "worn",
     "file": "svg/sm-san-marino.svg",
     "cleanFile": "svg/clean/sm-san-marino.svg",
-    "bytes": 2212,
+    "bytes": 2064,
     "cleanBytes": 1229
   },
   {
@@ -5042,7 +5042,7 @@
     "finish": "worn",
     "file": "svg/mc-monaco.svg",
     "cleanFile": "svg/clean/mc-monaco.svg",
-    "bytes": 2215,
+    "bytes": 2067,
     "cleanBytes": 1240
   },
   {
@@ -5069,7 +5069,7 @@
     "finish": "worn",
     "file": "svg/es-malaga.svg",
     "cleanFile": "svg/clean/es-malaga.svg",
-    "bytes": 2063,
+    "bytes": 1915,
     "cleanBytes": 1088
   },
   {
@@ -5096,7 +5096,7 @@
     "finish": "worn",
     "file": "svg/es-san-sebastian.svg",
     "cleanFile": "svg/clean/es-san-sebastian.svg",
-    "bytes": 2230,
+    "bytes": 2082,
     "cleanBytes": 1241
   },
   {
@@ -5123,7 +5123,7 @@
     "finish": "worn",
     "file": "svg/es-salamanca.svg",
     "cleanFile": "svg/clean/es-salamanca.svg",
-    "bytes": 2135,
+    "bytes": 1987,
     "cleanBytes": 1154
   },
   {
@@ -5150,7 +5150,7 @@
     "finish": "worn",
     "file": "svg/es-cadiz.svg",
     "cleanFile": "svg/clean/es-cadiz.svg",
-    "bytes": 2249,
+    "bytes": 2101,
     "cleanBytes": 1276
   },
   {
@@ -5177,7 +5177,7 @@
     "finish": "worn",
     "file": "svg/es-zaragoza.svg",
     "cleanFile": "svg/clean/es-zaragoza.svg",
-    "bytes": 2387,
+    "bytes": 2239,
     "cleanBytes": 1408
   },
   {
@@ -5204,7 +5204,7 @@
     "finish": "worn",
     "file": "svg/es-burgos.svg",
     "cleanFile": "svg/clean/es-burgos.svg",
-    "bytes": 2201,
+    "bytes": 2053,
     "cleanBytes": 1226
   },
   {
@@ -5231,7 +5231,7 @@
     "finish": "worn",
     "file": "svg/es-girona.svg",
     "cleanFile": "svg/clean/es-girona.svg",
-    "bytes": 2283,
+    "bytes": 2135,
     "cleanBytes": 1308
   },
   {
@@ -5258,7 +5258,7 @@
     "finish": "worn",
     "file": "svg/es-tarragona.svg",
     "cleanFile": "svg/clean/es-tarragona.svg",
-    "bytes": 2136,
+    "bytes": 1988,
     "cleanBytes": 1155
   },
   {
@@ -5285,7 +5285,7 @@
     "finish": "worn",
     "file": "svg/es-palma.svg",
     "cleanFile": "svg/clean/es-palma.svg",
-    "bytes": 2111,
+    "bytes": 1963,
     "cleanBytes": 1138
   },
   {
@@ -5312,7 +5312,7 @@
     "finish": "worn",
     "file": "svg/es-alicante.svg",
     "cleanFile": "svg/clean/es-alicante.svg",
-    "bytes": 2217,
+    "bytes": 2069,
     "cleanBytes": 1238
   },
   {
@@ -5339,7 +5339,7 @@
     "finish": "worn",
     "file": "svg/es-santander.svg",
     "cleanFile": "svg/clean/es-santander.svg",
-    "bytes": 2090,
+    "bytes": 1942,
     "cleanBytes": 1109
   },
   {
@@ -5366,7 +5366,7 @@
     "finish": "worn",
     "file": "svg/es-oviedo.svg",
     "cleanFile": "svg/clean/es-oviedo.svg",
-    "bytes": 2183,
+    "bytes": 2035,
     "cleanBytes": 1208
   },
   {
@@ -5393,7 +5393,7 @@
     "finish": "worn",
     "file": "svg/fr-annecy.svg",
     "cleanFile": "svg/clean/fr-annecy.svg",
-    "bytes": 2212,
+    "bytes": 2064,
     "cleanBytes": 1237
   },
   {
@@ -5420,7 +5420,7 @@
     "finish": "worn",
     "file": "svg/fr-toulouse.svg",
     "cleanFile": "svg/clean/fr-toulouse.svg",
-    "bytes": 2189,
+    "bytes": 2041,
     "cleanBytes": 1210
   },
   {
@@ -5447,7 +5447,7 @@
     "finish": "worn",
     "file": "svg/fr-reims.svg",
     "cleanFile": "svg/clean/fr-reims.svg",
-    "bytes": 2191,
+    "bytes": 2043,
     "cleanBytes": 1218
   },
   {
@@ -5474,7 +5474,7 @@
     "finish": "worn",
     "file": "svg/fr-lille.svg",
     "cleanFile": "svg/clean/fr-lille.svg",
-    "bytes": 2203,
+    "bytes": 2055,
     "cleanBytes": 1230
   },
   {
@@ -5501,7 +5501,7 @@
     "finish": "worn",
     "file": "svg/fr-nantes.svg",
     "cleanFile": "svg/clean/fr-nantes.svg",
-    "bytes": 2413,
+    "bytes": 2265,
     "cleanBytes": 1438
   },
   {
@@ -5528,7 +5528,7 @@
     "finish": "worn",
     "file": "svg/fr-rennes.svg",
     "cleanFile": "svg/clean/fr-rennes.svg",
-    "bytes": 2164,
+    "bytes": 2016,
     "cleanBytes": 1189
   },
   {
@@ -5555,7 +5555,7 @@
     "finish": "worn",
     "file": "svg/fr-dijon.svg",
     "cleanFile": "svg/clean/fr-dijon.svg",
-    "bytes": 2273,
+    "bytes": 2125,
     "cleanBytes": 1300
   },
   {
@@ -5582,7 +5582,7 @@
     "finish": "worn",
     "file": "svg/fr-rouen.svg",
     "cleanFile": "svg/clean/fr-rouen.svg",
-    "bytes": 2132,
+    "bytes": 1984,
     "cleanBytes": 1159
   },
   {
@@ -5609,7 +5609,7 @@
     "finish": "worn",
     "file": "svg/fr-aix-en-provence.svg",
     "cleanFile": "svg/clean/fr-aix-en-provence.svg",
-    "bytes": 2398,
+    "bytes": 2250,
     "cleanBytes": 1405
   },
   {
@@ -5636,7 +5636,7 @@
     "finish": "worn",
     "file": "svg/fr-saint-malo.svg",
     "cleanFile": "svg/clean/fr-saint-malo.svg",
-    "bytes": 2207,
+    "bytes": 2059,
     "cleanBytes": 1224
   },
   {
@@ -5663,7 +5663,7 @@
     "finish": "worn",
     "file": "svg/fr-tours.svg",
     "cleanFile": "svg/clean/fr-tours.svg",
-    "bytes": 2116,
+    "bytes": 1968,
     "cleanBytes": 1143
   },
   {
@@ -5690,7 +5690,7 @@
     "finish": "worn",
     "file": "svg/fr-montpellier.svg",
     "cleanFile": "svg/clean/fr-montpellier.svg",
-    "bytes": 2175,
+    "bytes": 2027,
     "cleanBytes": 1190
   },
   {
@@ -5717,7 +5717,7 @@
     "finish": "worn",
     "file": "svg/de-bamberg.svg",
     "cleanFile": "svg/clean/de-bamberg.svg",
-    "bytes": 2314,
+    "bytes": 2166,
     "cleanBytes": 1337
   },
   {
@@ -5744,7 +5744,7 @@
     "finish": "worn",
     "file": "svg/de-rothenburg-ob-der-tauber.svg",
     "cleanFile": "svg/clean/de-rothenburg-ob-der-tauber.svg",
-    "bytes": 2490,
+    "bytes": 2342,
     "cleanBytes": 1479
   },
   {
@@ -5771,7 +5771,7 @@
     "finish": "worn",
     "file": "svg/de-bremen.svg",
     "cleanFile": "svg/clean/de-bremen.svg",
-    "bytes": 2265,
+    "bytes": 2117,
     "cleanBytes": 1290
   },
   {
@@ -5798,7 +5798,7 @@
     "finish": "worn",
     "file": "svg/de-leipzig.svg",
     "cleanFile": "svg/clean/de-leipzig.svg",
-    "bytes": 2082,
+    "bytes": 1934,
     "cleanBytes": 1105
   },
   {
@@ -5825,7 +5825,7 @@
     "finish": "worn",
     "file": "svg/de-stuttgart.svg",
     "cleanFile": "svg/clean/de-stuttgart.svg",
-    "bytes": 2040,
+    "bytes": 1892,
     "cleanBytes": 1059
   },
   {
@@ -5852,7 +5852,7 @@
     "finish": "worn",
     "file": "svg/de-bonn.svg",
     "cleanFile": "svg/clean/de-bonn.svg",
-    "bytes": 2212,
+    "bytes": 2064,
     "cleanBytes": 1241
   },
   {
@@ -5880,7 +5880,7 @@
     "finish": "worn",
     "file": "svg/de-aachen.svg",
     "cleanFile": "svg/clean/de-aachen.svg",
-    "bytes": 2119,
+    "bytes": 1971,
     "cleanBytes": 1144
   },
   {
@@ -5907,7 +5907,7 @@
     "finish": "worn",
     "file": "svg/de-potsdam.svg",
     "cleanFile": "svg/clean/de-potsdam.svg",
-    "bytes": 2061,
+    "bytes": 1913,
     "cleanBytes": 1084
   },
   {
@@ -5935,7 +5935,7 @@
     "finish": "worn",
     "file": "svg/de-regensburg.svg",
     "cleanFile": "svg/clean/de-regensburg.svg",
-    "bytes": 2227,
+    "bytes": 2079,
     "cleanBytes": 1244
   },
   {
@@ -5963,7 +5963,7 @@
     "finish": "worn",
     "file": "svg/de-wurzburg.svg",
     "cleanFile": "svg/clean/de-wurzburg.svg",
-    "bytes": 2328,
+    "bytes": 2180,
     "cleanBytes": 1349
   },
   {
@@ -5991,7 +5991,7 @@
     "finish": "worn",
     "file": "svg/de-trier.svg",
     "cleanFile": "svg/clean/de-trier.svg",
-    "bytes": 2258,
+    "bytes": 2110,
     "cleanBytes": 1285
   },
   {
@@ -6019,7 +6019,7 @@
     "finish": "worn",
     "file": "svg/de-freiburg.svg",
     "cleanFile": "svg/clean/de-freiburg.svg",
-    "bytes": 2136,
+    "bytes": 1988,
     "cleanBytes": 1157
   },
   {
@@ -6047,7 +6047,7 @@
     "finish": "worn",
     "file": "svg/it-turin.svg",
     "cleanFile": "svg/clean/it-turin.svg",
-    "bytes": 2153,
+    "bytes": 2005,
     "cleanBytes": 1180
   },
   {
@@ -6075,7 +6075,7 @@
     "finish": "worn",
     "file": "svg/it-genoa.svg",
     "cleanFile": "svg/clean/it-genoa.svg",
-    "bytes": 2062,
+    "bytes": 1914,
     "cleanBytes": 1089
   },
   {
@@ -6102,7 +6102,7 @@
     "finish": "worn",
     "file": "svg/it-palermo.svg",
     "cleanFile": "svg/clean/it-palermo.svg",
-    "bytes": 2294,
+    "bytes": 2146,
     "cleanBytes": 1317
   },
   {
@@ -6129,7 +6129,7 @@
     "finish": "worn",
     "file": "svg/it-matera.svg",
     "cleanFile": "svg/clean/it-matera.svg",
-    "bytes": 2184,
+    "bytes": 2036,
     "cleanBytes": 1209
   },
   {
@@ -6157,7 +6157,7 @@
     "finish": "worn",
     "file": "svg/it-bergamo.svg",
     "cleanFile": "svg/clean/it-bergamo.svg",
-    "bytes": 2304,
+    "bytes": 2156,
     "cleanBytes": 1327
   },
   {
@@ -6184,7 +6184,7 @@
     "finish": "worn",
     "file": "svg/it-padua.svg",
     "cleanFile": "svg/clean/it-padua.svg",
-    "bytes": 2231,
+    "bytes": 2083,
     "cleanBytes": 1258
   },
   {
@@ -6211,7 +6211,7 @@
     "finish": "worn",
     "file": "svg/it-lucca.svg",
     "cleanFile": "svg/clean/it-lucca.svg",
-    "bytes": 2232,
+    "bytes": 2084,
     "cleanBytes": 1259
   },
   {
@@ -6239,7 +6239,7 @@
     "finish": "worn",
     "file": "svg/it-ravenna.svg",
     "cleanFile": "svg/clean/it-ravenna.svg",
-    "bytes": 2171,
+    "bytes": 2023,
     "cleanBytes": 1194
   },
   {
@@ -6266,7 +6266,7 @@
     "finish": "worn",
     "file": "svg/it-lecce.svg",
     "cleanFile": "svg/clean/it-lecce.svg",
-    "bytes": 2231,
+    "bytes": 2083,
     "cleanBytes": 1258
   },
   {
@@ -6293,7 +6293,7 @@
     "finish": "worn",
     "file": "svg/it-catania.svg",
     "cleanFile": "svg/clean/it-catania.svg",
-    "bytes": 2332,
+    "bytes": 2184,
     "cleanBytes": 1355
   },
   {
@@ -6321,7 +6321,7 @@
     "finish": "worn",
     "file": "svg/it-siracusa.svg",
     "cleanFile": "svg/clean/it-siracusa.svg",
-    "bytes": 2136,
+    "bytes": 1988,
     "cleanBytes": 1157
   },
   {
@@ -6348,7 +6348,7 @@
     "finish": "worn",
     "file": "svg/it-cagliari.svg",
     "cleanFile": "svg/clean/it-cagliari.svg",
-    "bytes": 2079,
+    "bytes": 1931,
     "cleanBytes": 1100
   }
 ]

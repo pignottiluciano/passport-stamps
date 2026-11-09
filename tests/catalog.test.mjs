@@ -77,8 +77,10 @@ test('each catalog asset exists, is self-contained, and stays below 10 KiB', asy
       const ids = [...svg.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
       assert.equal(ids.length, new Set(ids).size, file);
       for (const ref of svg.matchAll(/url\(#([^)]+)\)/g)) assert.ok(ids.includes(ref[1]), file);
-      if (file === c.file) assert.match(svg, /<feTurbulence\b/);
-      else assert.doesNotMatch(svg, /<filter\b/);
+      if (file === c.file) {
+        assert.match(svg, /<feTurbulence\b/);
+        assert.doesNotMatch(svg, /<(?:feGaussianBlur|feDisplacementMap)\b/);
+      } else assert.doesNotMatch(svg, /<filter\b/);
     }
   }
 });
