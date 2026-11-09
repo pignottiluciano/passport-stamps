@@ -73,6 +73,12 @@ Dates are calendar strings, not timestamps. No timezone conversion occurs. Omitt
 
 Components load a single design module on demand. Build tools may emit multiple lazy chunks, but only requested designs load at runtime. Each image uses an isolated SVG data URL, so repeated stamps do not share filter IDs. Sites with a Content Security Policy must allow `data:` in their image policy. Components do not require a CDN or public asset-copy configuration.
 
+## Host static SVGs on your own origin
+
+Copy the package's `svg/` directory into a public directory. Set `assetBaseUrl="/travel/assets/stamps"` on either component to load an undated stamp from that directory. For example, clean Mendoza resolves to `/travel/assets/stamps/svg/clean/ar-mendoza.svg`. HTTP and HTTPS URLs also work.
+
+The default uses a data URL. A nonempty `date` combined with `assetBaseUrl` reports `STATIC_DATE_UNSUPPORTED` because the hosted file has a fixed design. A missing city follows the same fallback or strict matching rules in both modes.
+
 ## Plain HTML, Vue, or direct SVG assets
 
 Copy only the files you need into your public assets:

@@ -20,6 +20,10 @@ export interface StampOptions {
   dateFormat?: StampDateFormat;
   variant?: StampVariant;
 }
+export interface StampImageOptions extends StampOptions {
+  /** Directory containing the published svg/ folder, as a root-relative or HTTP(S) URL. */
+  assetBaseUrl?: string;
+}
 export interface StampImage {
   id: string;
   src: string;
@@ -27,7 +31,7 @@ export interface StampImage {
   fallback: boolean;
 }
 export class PassportStampError extends Error {
-  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_CITY' | 'INVALID_DATE' | 'INVALID_DATE_FORMAT' | 'INVALID_VARIANT' | 'INVALID_SIZE', message: string) {
+  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_CITY' | 'INVALID_DATE' | 'INVALID_DATE_FORMAT' | 'INVALID_VARIANT' | 'INVALID_SIZE' | 'INVALID_ASSET_BASE_URL' | 'STATIC_DATE_UNSUPPORTED', message: string) {
     super(message);
     this.name = 'PassportStampError';
   }
@@ -110,28 +114,58 @@ export function resolveStamp(options: StampOptions) {
   return { stamp: city ?? country, date: formatStampDate(options.date, options.dateFormat), variant, fallback: Boolean(query && !city) };
 }
 
-async function renderStamp(options: StampOptions) {
-  const { stamp, date, variant, fallback } = resolveStamp(options);
+async function renderStamp({ stamp, date, variant }: ReturnType<typeof resolveStamp>) {
   const load = loaders[stamp.id];
   if (!load) throw new PassportStampError('INVALID_COUNTRY', 'The requested artwork is unavailable.');
   const { artwork } = await load();
   const template = date ? (variant === 'worn' ? artwork.datedWorn : artwork.datedClean) : artwork[variant];
-  const svg = date ? template.replaceAll('__PASSPORT_DATE__', date) : template;
-  return {
-    id: stamp.id,
-    svg,
-    alt: `${stamp.name} — ${stamp.iconLabel} passport stamp${date ? ', ' + date : ''}`,
-    fallback
-  };
+  return date ? template.replaceAll('__PASSPORT_DATE__', date) : template;
 }
 
 /** Returns standalone SVG markup for saving or downloading a stamp. */
 export async function createStampSvg(options: StampOptions): Promise<string> {
-  return (await renderStamp(options)).svg;
+  return renderStamp(resolveStamp(options));
 }
 
-/** Loads one design on demand and returns an isolated SVG data URL suitable for an img element. */
-export async function createStampImage(options: StampOptions): Promise<StampImage> {
-  const { svg, ...metadata } = await renderStamp(options);
-  return { ...metadata, src: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg) };
+function hostedStampUrl(base: string, path: string): string {
+  const rootRelative = base.startsWith('/') && !base.startsWith('//');
+  const referenceOrigin = 'https://passport-stamps.invalid';
+  const invalidBase = () => new PassportStampError(
+    'INVALID_ASSET_BASE_URL',
+    'assetBaseUrl must be a root-relative path or an HTTP(S) URL without credentials, query or fragment.'
+  );
+  let url: URL;
+  try {
+    url = new URL(base, referenceOrigin);
+  } catch {
+    throw invalidBase();
+  }
+  if ((!rootRelative && !/^https?:\/\//i.test(base)) || /[\\?#]/.test(base) ||
+      url.username || url.password ||
+      (rootRelative && (url.origin !== referenceOrigin || url.pathname.startsWith('//')))) {
+    throw invalidBase();
+  }
+  url.pathname = url.pathname.replace(/\/+$/, '') + '/' + path;
+  return rootRelative ? url.pathname : url.href;
+}
+
+/** Returns an SVG data URL or a hosted URL for an undated stamp. */
+export async function createStampImage(options: StampImageOptions): Promise<StampImage> {
+  const resolved = resolveStamp(options);
+  const { stamp, date, variant, fallback } = resolved;
+  let src: string;
+  if (options.assetBaseUrl !== undefined) {
+    if (date) throw new PassportStampError('STATIC_DATE_UNSUPPORTED', 'Hosted SVG files do not support a printed date.');
+    const file = variant === 'clean' ? `svg/clean/${stamp.id}.svg` : `svg/${stamp.id}.svg`;
+    src = hostedStampUrl(options.assetBaseUrl, file);
+  } else {
+    const svg = await renderStamp(resolved);
+    src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+  return {
+    id: stamp.id,
+    src,
+    alt: `${stamp.name} — ${stamp.iconLabel} passport stamp${date ? ', ' + date : ''}`,
+    fallback
+  };
 }

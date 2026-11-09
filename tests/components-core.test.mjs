@@ -91,3 +91,24 @@ test('numeric date format preserves the calendar day in exported artwork', async
   assert.match(decode(image), /<text[^>]*>07\/11\/2026<\/text>/);
   assert.match(image.alt, /07\/11\/2026/);
 });
+
+test('hosted SVG URLs use the resolved artwork and finish', async () => {
+  const city = await createStampImage({
+    country: 'AR', city: 'Mendoza', variant: 'clean', assetBaseUrl: '/travel/assets/stamps/'
+  });
+  assert.equal(city.src, '/travel/assets/stamps/svg/clean/ar-mendoza.svg');
+  const fallback = await createStampImage({
+    country: 'ES', city: 'Mendoza', assetBaseUrl: 'https://example.test/stamps'
+  });
+  assert.equal(fallback.src, 'https://example.test/stamps/svg/es.svg');
+  assert.equal(fallback.fallback, true);
+});
+
+test('hosted SVGs reject dates and invalid base URLs', async () => {
+  await assert.rejects(createStampImage({
+    country: 'AR', date: '2026-11-07', assetBaseUrl: '/stamps'
+  }), { code: 'STATIC_DATE_UNSUPPORTED' });
+  for (const assetBaseUrl of ['', 'stamps', '//example.test/stamps', '/.//example.test/stamps', '/\t/example.test/stamps', 'javascript:alert(1)', 'https://example.test/?x=1', 'https://user@example.test/']) {
+    await assert.rejects(createStampImage({ country: 'AR', assetBaseUrl }), { code: 'INVALID_ASSET_BASE_URL' });
+  }
+});

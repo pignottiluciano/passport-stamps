@@ -15,13 +15,14 @@ export class PassportStampComponent {
   readonly strictCity = input(false);
   readonly date = input<string>();
   readonly dateFormat = input<StampDateFormat>('text');
+  readonly assetBaseUrl = input<string>();
   readonly variant = input<StampVariant>('worn');
   readonly size = input(240);
   readonly alt = input<string>();
   private readonly sizeError = computed(() => getStampSizeError(this.size()));
   protected readonly width = computed(() => this.sizeError() ? 240 : this.size());
   protected readonly image = resource({
-    params: () => ({ country: this.country(), city: this.city(), strictCity: this.strictCity(), date: this.date(), dateFormat: this.dateFormat(), variant: this.variant() }),
+    params: () => ({ country: this.country(), city: this.city(), strictCity: this.strictCity(), date: this.date(), dateFormat: this.dateFormat(), assetBaseUrl: this.assetBaseUrl(), variant: this.variant() }),
     loader: ({params}) => createStampImage(params)
   });
   protected readonly errorMessage = computed(() => {

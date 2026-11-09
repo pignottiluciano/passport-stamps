@@ -62,4 +62,12 @@ describe('Angular PassportStampComponent',()=>{
     expect(fixture.nativeElement.style.width).toBe('320px');
     expect(fixture.nativeElement.querySelector('[role=alert]')).toBeNull();
   });
+  it('renders a hosted undated stamp without a data URL', async () => {
+    TestBed.configureTestingModule({ imports: [PassportStampComponent], providers: [provideZonelessChangeDetection()] });
+    const fixture = TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country', 'AR');
+    fixture.componentRef.setInput('assetBaseUrl', '/travel/assets');
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').getAttribute('src')).toBe('/travel/assets/svg/ar.svg');
+  });
 });

@@ -38,4 +38,9 @@ describe('React PassportStamp',()=>{
     expect(image.parentElement?.style.width).toBe('320px');
     expect(screen.queryByRole('alert')).toBeNull();
   });
+  it('renders a hosted undated stamp without a data URL', async () => {
+    render(<PassportStamp country="AR" city="Mendoza" assetBaseUrl="/travel/assets" variant="clean" />);
+    const img = await screen.findByRole('img', { name: /Mendoza/ });
+    expect(img.getAttribute('src')).toBe('/travel/assets/svg/clean/ar-mendoza.svg');
+  });
 });
