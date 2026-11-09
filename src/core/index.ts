@@ -100,8 +100,7 @@ export function resolveStamp(options: StampOptions) {
   return { stamp: city ?? country, date: formatStampDate(options.date), variant, fallback: Boolean(query && !city) };
 }
 
-/** Loads one design on demand and returns an isolated SVG data URL suitable for an img element. */
-export async function createStampImage(options: StampOptions): Promise<StampImage> {
+async function renderStamp(options: StampOptions) {
   const { stamp, date, variant, fallback } = resolveStamp(options);
   const load = loaders[stamp.id];
   if (!load) throw new PassportStampError('INVALID_COUNTRY', 'The requested artwork is unavailable.');
@@ -110,8 +109,19 @@ export async function createStampImage(options: StampOptions): Promise<StampImag
   const svg = date ? template.replaceAll('__PASSPORT_DATE__', date) : template;
   return {
     id: stamp.id,
-    src: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg),
+    svg,
     alt: `${stamp.name} — ${stamp.iconLabel} passport stamp${date ? ', ' + date : ''}`,
     fallback
   };
+}
+
+/** Returns standalone SVG markup for saving or downloading a stamp. */
+export async function createStampSvg(options: StampOptions): Promise<string> {
+  return (await renderStamp(options)).svg;
+}
+
+/** Loads one design on demand and returns an isolated SVG data URL suitable for an img element. */
+export async function createStampImage(options: StampOptions): Promise<StampImage> {
+  const { svg, ...metadata } = await renderStamp(options);
+  return { ...metadata, src: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg) };
 }

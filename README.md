@@ -102,6 +102,16 @@ const image = await createStampImage({
 // Assign image.src and image.alt to an img element.
 ```
 
+Use `createStampSvg(options)` when you need standalone SVG markup to save or download. It accepts the same country, city, date and finish options as `createStampImage()`.
+
+```js
+import { writeFile } from 'node:fs/promises';
+import { createStampSvg } from '@lucianopignotti/passport-stamps';
+
+const svg = await createStampSvg({ country: 'AR', city: 'Mendoza', date: '2026-11-07' });
+await writeFile('mendoza.svg', svg);
+```
+
 `resolveStamp()` supports synchronous selection and validation; `formatStampDate()` validates date strings. Rendering does not require DOM access.
 
 ## Package contents

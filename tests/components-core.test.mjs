@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {createStampImage, resolveStamp, formatStampDate, stampSize, getCountries, getCities} from '../dist/core/index.js';
+import {createStampSvg, createStampImage, resolveStamp, formatStampDate, stampSize, getCountries, getCities} from '../dist/core/index.js';
 const decode = image => decodeURIComponent(image.src.split(',').slice(1).join(','));
 test('country and city lists provide stable selector options', () => {
   const countries = getCountries();
@@ -67,5 +67,18 @@ test('date is embedded in SVG text, including for country-only stamps', async ()
     assert.doesNotMatch(svg,/__PASSPORT_DATE__/);
     assert.match(image.alt,/07 NOV 2026/);
     assert.equal(/<filter/.test(svg),options.variant!=='clean');
+  }
+});
+
+test('SVG export includes the date and preserves the selected ink finish', async () => {
+  for (const variant of ['worn', 'clean']) {
+    const options = { country: 'AR', city: 'Mendoza', variant };
+    assert.equal(await createStampSvg(options), await readFile(`svg/${variant === 'clean' ? 'clean/' : ''}ar-mendoza.svg`, 'utf8'));
+    const dated = { ...options, date: '2026-11-07' };
+    const svg = await createStampSvg(dated);
+    assert.equal(svg, decode(await createStampImage(dated)));
+    assert.match(svg, /<title[^>]*>.*07 NOV 2026<\/title>/);
+    assert.match(svg, /<text[^>]*>07 NOV 2026<\/text>/);
+    assert.equal(/<filter\b/.test(svg), variant === 'worn');
   }
 });
