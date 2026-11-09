@@ -42,4 +42,21 @@ describe('Angular PassportStampComponent',()=>{
     await fixture.whenStable();
     expect(fixture.nativeElement.querySelector('[role=alert]').textContent).toContain('Unknown city in France: Mendoza');
   });
+  it('shows an accessible size error and recovers with the latest properties', async () => {
+    TestBed.configureTestingModule({ imports: [PassportStampComponent], providers: [provideZonelessChangeDetection()] });
+    const fixture = TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country', 'AR');
+    await fixture.whenStable();
+    fixture.componentRef.setInput('country', 'FR');
+    fixture.componentRef.setInput('size', -1);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('[role=alert]').textContent).toContain('positive finite number');
+    expect(fixture.nativeElement.querySelector('img')).toBeNull();
+    fixture.componentRef.setInput('country', 'ES');
+    fixture.componentRef.setInput('size', 320);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').alt).toContain('Spain');
+    expect(fixture.nativeElement.style.width).toBe('320px');
+    expect(fixture.nativeElement.querySelector('[role=alert]')).toBeNull();
+  });
 });

@@ -25,4 +25,15 @@ describe('React PassportStamp',()=>{
     rerender(<PassportStamp country="FR" city="Mendoza" strictCity />);
     expect((await screen.findByRole('alert')).textContent).toContain('Unknown city in France: Mendoza');
   });
+  it('shows an accessible size error and recovers with the latest properties', async () => {
+    const { rerender } = render(<PassportStamp country="AR" />);
+    await screen.findByRole('img', { name: /Argentina/ });
+    rerender(<PassportStamp country="FR" size={-1} />);
+    expect(screen.getByRole('alert').textContent).toContain('positive finite number');
+    expect(screen.queryByRole('img')).toBeNull();
+    rerender(<PassportStamp country="ES" size={320} />);
+    const image = await screen.findByRole('img', { name: /Spain/ });
+    expect(image.parentElement?.style.width).toBe('320px');
+    expect(screen.queryByRole('alert')).toBeNull();
+  });
 });

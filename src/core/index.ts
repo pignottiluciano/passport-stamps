@@ -73,8 +73,17 @@ export function formatStampDate(value?: string): string | undefined {
   return `${match[3]} ${months[month - 1]} ${match[1]}`;
 }
 
+/** Returns a validation error that a component can display without throwing during rendering. */
+export function getStampSizeError(value: number): PassportStampError | undefined {
+  if (!Number.isFinite(value) || value <= 0) {
+    return new PassportStampError('INVALID_SIZE', 'size must be a positive finite number of pixels.');
+  }
+  return undefined;
+}
+
 export function stampSize(value = 240): number {
-  if (!Number.isFinite(value) || value <= 0) throw new PassportStampError('INVALID_SIZE', 'size must be a positive finite number of pixels.');
+  const error = getStampSizeError(value);
+  if (error) throw error;
   return value;
 }
 
