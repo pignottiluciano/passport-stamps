@@ -60,12 +60,13 @@ Props can come from state or your application's data. The component is a client 
 | --- | --- | --- | --- |
 | `country` | `string` | Required | ISO alpha-2 code recommended, such as `AR`. Country names and known aliases also work. |
 | `city` | `string` | None | Destination name, slug, alias, or full ID such as `ar-mendoza`. |
+| `strictCity` | `boolean` | `false` | Reject a city that is unavailable for the selected country. |
 | `date` | `string` | None | Valid calendar date in `YYYY-MM-DD` format, printed inside the stamp as `07 NOV 2026`. |
 | `variant` | `'worn'` or `'clean'` | `'worn'` | Ink treatment. |
 | `size` | `number` | `240` | Width in pixels; height follows the 4:3 viewBox. In Angular, bind numbers with `[size]="280"`. |
 | `alt` | `string` | Generated description | Optional accessible image text. |
 
-Without a city, the country stamp is used. A city must belong to the selected country; an unknown city falls back to the country stamp. Unknown countries, invalid dates, and invalid variants produce explicit errors. Size must be positive and finite. The core error type, `PassportStampError`, includes a stable `code`.
+Without a city, the country stamp is used. A city must belong to the selected country; an unknown city falls back to the country stamp by default. Enable `strictCity` in React or `[strictCity]="true"` in Angular to show an error instead. The core reports this as `INVALID_CITY`. Unknown countries, invalid dates, and invalid variants produce explicit errors. Size must be positive and finite. The core error type, `PassportStampError`, includes a stable `code`.
 
 Dates are calendar strings, not timestamps. No timezone conversion occurs. Omitting the date preserves the original artwork. A date selects an adapted composition with a dedicated date row inside the frame; dated country compositions may differ from their original undated layouts.
 

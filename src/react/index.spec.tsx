@@ -19,4 +19,10 @@ describe('React PassportStamp',()=>{
     rerender(<PassportStamp country="FR" date="2026-02-30" />);
     await waitFor(()=>expect(screen.getByRole('alert').textContent).toContain('valid calendar date'));
   });
+  it('applies strict city matching when the prop changes', async () => {
+    const { rerender } = render(<PassportStamp country="FR" city="Mendoza" />);
+    await screen.findByRole('img', { name: /France/ });
+    rerender(<PassportStamp country="FR" city="Mendoza" strictCity />);
+    expect((await screen.findByRole('alert')).textContent).toContain('Unknown city in France: Mendoza');
+  });
 });

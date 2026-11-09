@@ -31,4 +31,15 @@ describe('Angular PassportStampComponent',()=>{
     fixture.componentRef.setInput('country','FR');await fixture.whenStable();
     expect(fixture.nativeElement.querySelector('img').alt).toContain('France');
   });
+  it('applies strict city matching when the input changes', async () => {
+    TestBed.configureTestingModule({ imports: [PassportStampComponent], providers: [provideZonelessChangeDetection()] });
+    const fixture = TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country', 'FR');
+    fixture.componentRef.setInput('city', 'Mendoza');
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').alt).toContain('France');
+    fixture.componentRef.setInput('strictCity', true);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('[role=alert]').textContent).toContain('Unknown city in France: Mendoza');
+  });
 });

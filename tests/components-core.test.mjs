@@ -27,6 +27,15 @@ test('city names, slugs and IDs are restricted to the selected country', () => {
   const fallback=resolveStamp({country:'FR',city:'Mendoza'});
   assert.equal(fallback.stamp.id,'fr');assert.equal(fallback.fallback,true);
 });
+test('strict city matching rejects unknown and cross-country cities', () => {
+  assert.equal(resolveStamp({ country: 'AR', city: 'Mendoza', strictCity: true }).stamp.id, 'ar-mendoza');
+  assert.equal(resolveStamp({ country: 'AR', strictCity: true }).stamp.id, 'ar');
+  assert.equal(resolveStamp({ country: 'AR', city: '  ', strictCity: true }).stamp.id, 'ar');
+  for (const city of ['Mendoza', 'Unknown city']) {
+    assert.throws(() => resolveStamp({ country: 'FR', city, strictCity: true }), { code: 'INVALID_CITY' });
+  }
+});
+
 test('invalid countries fail explicitly rather than creating a guessed file path', () => {
   assert.throws(()=>resolveStamp({country:'../invalid'}),{code:'INVALID_COUNTRY'});
 });

@@ -12,13 +12,14 @@ import { createStampImage, stampSize, type StampVariant } from '@lucianopignotti
 export class PassportStampComponent {
   readonly country = input.required<string>();
   readonly city = input<string>();
+  readonly strictCity = input(false);
   readonly date = input<string>();
   readonly variant = input<StampVariant>('worn');
   readonly size = input(240);
   readonly alt = input<string>();
   protected readonly width = computed(() => stampSize(this.size()));
   protected readonly image = resource({
-    params: () => ({ country: this.country(), city: this.city(), date: this.date(), variant: this.variant() }),
+    params: () => ({ country: this.country(), city: this.city(), strictCity: this.strictCity(), date: this.date(), variant: this.variant() }),
     loader: ({params}) => createStampImage(params)
   });
   protected readonly errorMessage = computed(() => {

@@ -67,6 +67,7 @@ export function Example() {
 <div class="properties-scroll"><table class="properties"><thead><tr><th>Property</th><th>Example</th><th>Behavior</th></tr></thead><tbody>
 <tr><td>country</td><td><code>"AR"</code></td><td>Required. ISO alpha-2 code recommended. Country names and known aliases also work.</td></tr>
 <tr><td>city</td><td><code>"Mendoza"</code></td><td>Optional. Name, slug, alias, or destination ID. Without it, show the country stamp.</td></tr>
+<tr><td>strictCity</td><td><code>true</code></td><td>Optional. Report an error when the selected country does not have the requested city. Defaults to false.</td></tr>
 <tr><td>date</td><td><code>"2026-11-07"</code></td><td>Optional calendar date in YYYY-MM-DD format. Printed inside the stamp as 07 NOV 2026.</td></tr>
 <tr><td>variant</td><td><code>"worn"</code></td><td>Worn by default. Set to <code>"clean"</code> to remove ink effects.</td></tr>
 <tr><td>size</td><td><code>280</code></td><td>Width in pixels, default 240. Height follows the 4:3 artwork ratio.</td></tr>

@@ -7,6 +7,8 @@ export interface StampOptions {
   country: string;
   /** City name, slug, alias, or full destination ID. Unknown cities use the country stamp. */
   city?: string;
+  /** Reject an unknown city instead of using the country stamp. */
+  strictCity?: boolean;
   /** Calendar date in YYYY-MM-DD format. No timezone conversion is performed. */
   date?: string;
   variant?: StampVariant;
@@ -18,7 +20,7 @@ export interface StampImage {
   fallback: boolean;
 }
 export class PassportStampError extends Error {
-  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_DATE' | 'INVALID_VARIANT' | 'INVALID_SIZE', message: string) {
+  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_CITY' | 'INVALID_DATE' | 'INVALID_VARIANT' | 'INVALID_SIZE', message: string) {
     super(message);
     this.name = 'PassportStampError';
   }
@@ -81,6 +83,9 @@ export function resolveStamp(options: StampOptions) {
   const query = normalize(options.city ?? '');
   const city = query ? catalog.find(stamp => stamp.kind === 'destination' && stamp.code === country.code &&
     matches(query, [stamp.id, stamp.id.slice(3), stamp.name, stamp.label, ...stamp.aliases])) : undefined;
+  if (query && !city && options.strictCity) {
+    throw new PassportStampError('INVALID_CITY', `Unknown city in ${country.name}: ${options.city}`);
+  }
   const variant = options.variant ?? 'worn';
   if (variant !== 'worn' && variant !== 'clean') throw new PassportStampError('INVALID_VARIANT', 'variant must be worn or clean.');
   return { stamp: city ?? country, date: formatStampDate(options.date), variant, fallback: Boolean(query && !city) };
