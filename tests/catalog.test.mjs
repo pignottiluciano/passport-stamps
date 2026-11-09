@@ -1,3 +1,4 @@
+import { validateCatalogAliases } from '../scripts/validate-catalog.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
@@ -88,4 +89,11 @@ test('SVG inventory has no missing or orphaned files', async () => {
     const actual = (await readdir(fileURLToPath(new URL(path, base)))).filter(f => f.endsWith('.svg')).sort();
     assert.deepEqual(actual, expected);
   }
+});
+
+test('catalog alias validation rejects normalized collisions in the same country', () => {
+  const first = { kind: 'destination', code: 'AR', id: 'ar-first', name: 'Córdoba', label: 'First' };
+  const second = { kind: 'destination', code: 'AR', id: 'ar-second', name: 'Second', label: 'Second', aliases: [' cordoba '] };
+  assert.throws(() => validateCatalogAliases([first, second]), /Ambiguous catalog alias.*AR: ar-first and ar-second/);
+  assert.doesNotThrow(() => validateCatalogAliases([first, { ...second, code: 'ES', id: 'es-second' }]));
 });

@@ -6,3 +6,5 @@ work/
 dist/
 src/core/art/
 src/core/generated/
+
+/.plans/

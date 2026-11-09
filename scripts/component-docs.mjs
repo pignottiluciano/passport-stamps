@@ -3,7 +3,7 @@ export function componentDocs(countries) {
   return `<section class="get-started" aria-label="Installation and components">
 <div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps">npm ↗</a></div>
 <p class="component-intro">One component. Country, city, and an optional date — all through properties.</p>
-<p class="release-note">The Angular and React components are available in <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps/v/0.1.1">version 0.1.1 on npm</a>.</p>
+<p class="release-note">The examples below use the 0.2.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
 <details><summary>Angular 20+ · &lt;passport-stamp&gt;</summary>
 <p>Import the standalone component. No NgModule, image copying, or assets configuration is needed.</p>
 <pre><code>${escape(`import { Component } from '@angular/core';
@@ -60,13 +60,16 @@ export function Example() {
 <div class="properties-scroll"><table class="properties"><thead><tr><th>Property</th><th>Example</th><th>Behavior</th></tr></thead><tbody>
 <tr><td>country</td><td><code>"AR"</code></td><td>Required. ISO alpha-2 code recommended. Country names and known aliases also work.</td></tr>
 <tr><td>city</td><td><code>"Mendoza"</code></td><td>Optional. Name, slug, alias, or destination ID. Without it, show the country stamp.</td></tr>
+<tr><td>strictCity</td><td><code>true</code></td><td>Optional. Report an error when the selected country does not have the requested city. Defaults to false.</td></tr>
 <tr><td>date</td><td><code>"2026-11-07"</code></td><td>Optional calendar date in YYYY-MM-DD format. Printed inside the stamp as 07 NOV 2026.</td></tr>
+<tr><td>dateFormat</td><td><code>"numeric"</code></td><td>Print 07/11/2026. The default, text, prints 07 NOV 2026.</td></tr>
 <tr><td>variant</td><td><code>"worn"</code></td><td>Worn by default. Set to <code>"clean"</code> to remove ink effects.</td></tr>
+<tr><td>assetBaseUrl</td><td><code>"/travel/assets/stamps"</code></td><td>Optional directory containing svg/ for undated stamps. Copy the package SVGs there first.</td></tr>
 <tr><td>size</td><td><code>280</code></td><td>Width in pixels, default 240. Height follows the 4:3 artwork ratio.</td></tr>
 <tr><td>alt</td><td><code>"My visit to Mendoza"</code></td><td>Optional image description. Otherwise generated from the selected stamp and date.</td></tr>
 </tbody></table></div>
 <p>If a city is not in the selected country's catalog, the component uses the country stamp. Unknown countries and invalid dates show an explicit error. Dates do not undergo timezone conversion. A dated layout reserves a dedicated row inside the frame so the date does not cover existing lettering.</p>
-<p>Artwork loads on demand from the package, without a CDN. Components use isolated SVG data URLs, so repeated stamps do not share filter IDs. If your site sets a Content Security Policy, its image policy must allow <code>data:</code> images.</p>
+<p>Artwork loads on demand from the package, without a CDN. Components use isolated SVG data URLs, so repeated stamps do not share filter IDs. If your site sets a Content Security Policy, allow <code>data:</code> images or use <code>assetBaseUrl</code> for undated stamps.</p>
 </details>
 <details><summary>Plain HTML and direct SVG files</summary>
 <p>Download a file from the gallery, or copy it from the npm package into your public/stamps folder.</p>

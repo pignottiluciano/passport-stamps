@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022", "module": "NodeNext", "moduleResolution": "NodeNext",
-    "strict": true, "declaration": true, "skipLibCheck": true,
+    "strict": true, "allowJs": true, "checkJs": true, "declaration": true, "skipLibCheck": true,
     "rootDir": "src/core", "outDir": "dist/core"
   },
   "include": ["src/core/**/*.ts"]

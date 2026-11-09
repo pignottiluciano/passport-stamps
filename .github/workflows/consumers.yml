@@ -1,0 +1,46 @@
+name: Packed consumer compatibility
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: |
+          mkdir -p work/packed
+          npm pack --pack-destination work/packed
+          node scripts/check-package-size.mjs work/packed/*.tgz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: passport-stamps-package
+          path: work/packed/*.tgz
+          if-no-files-found: error
+  consumers:
+    needs: package
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        consumer: [angular-20, angular-21, angular-22, react-18, react-19, svg]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.22.3'
+      - uses: actions/download-artifact@v4
+        with:
+          name: passport-stamps-package
+          path: work/packed
+      - run: node scripts/check-consumer.mjs "${{ matrix.consumer }}" work/packed/*.tgz

@@ -1,5 +1,5 @@
-@if (image.error()) {
-  <span role="alert">{{ errorMessage() }}</span>
+@if (errorMessage(); as error) {
+  <span role="alert">{{ error }}</span>
 } @else if (image.value(); as stamp) {
   <img [src]="stamp.src" [alt]="alt() ?? stamp.alt" width="400" height="300">
 } @else {

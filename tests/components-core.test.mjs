@@ -1,8 +1,22 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {createStampImage, resolveStamp, formatStampDate, stampSize} from '../dist/core/index.js';
+import {createStampSvg, createStampImage, resolveStamp, formatStampDate, stampSize, getCountries, getCities} from '../dist/core/index.js';
 const decode = image => decodeURIComponent(image.src.split(',').slice(1).join(','));
+test('country and city lists provide stable selector options', () => {
+  const countries = getCountries();
+  assert.equal(countries.length, 193);
+  assert.deepEqual(countries.find(country => country.code === 'AR'), { id: 'ar', code: 'AR', name: 'Argentina' });
+  const cities = getCities('Argentina');
+  assert.deepEqual(cities, getCities(' ar '));
+  assert.equal(cities.length, 20);
+  assert.ok(cities.every(city => city.code === 'AR'));
+  assert.ok(cities.some(city => city.id === 'ar-mendoza'));
+  assert.ok(cities.every((city, i) => i === 0 || cities[i - 1].name.localeCompare(city.name, 'en') <= 0));
+  assert.deepEqual(getCities('JP'), []);
+  assert.throws(() => getCities('ZZ'), { code: 'INVALID_COUNTRY' });
+});
+
 test('country codes and names resolve without a city', () => {
   for(const country of ['AR','ar','Argentina']) assert.equal(resolveStamp({country}).stamp.id,'ar');
 });
@@ -13,6 +27,15 @@ test('city names, slugs and IDs are restricted to the selected country', () => {
   const fallback=resolveStamp({country:'FR',city:'Mendoza'});
   assert.equal(fallback.stamp.id,'fr');assert.equal(fallback.fallback,true);
 });
+test('strict city matching rejects unknown and cross-country cities', () => {
+  assert.equal(resolveStamp({ country: 'AR', city: 'Mendoza', strictCity: true }).stamp.id, 'ar-mendoza');
+  assert.equal(resolveStamp({ country: 'AR', strictCity: true }).stamp.id, 'ar');
+  assert.equal(resolveStamp({ country: 'AR', city: '  ', strictCity: true }).stamp.id, 'ar');
+  for (const city of ['Mendoza', 'Unknown city']) {
+    assert.throws(() => resolveStamp({ country: 'FR', city, strictCity: true }), { code: 'INVALID_CITY' });
+  }
+});
+
 test('invalid countries fail explicitly rather than creating a guessed file path', () => {
   assert.throws(()=>resolveStamp({country:'../invalid'}),{code:'INVALID_COUNTRY'});
 });
@@ -44,5 +67,48 @@ test('date is embedded in SVG text, including for country-only stamps', async ()
     assert.doesNotMatch(svg,/__PASSPORT_DATE__/);
     assert.match(image.alt,/07 NOV 2026/);
     assert.equal(/<filter/.test(svg),options.variant!=='clean');
+  }
+});
+
+test('SVG export includes the date and preserves the selected ink finish', async () => {
+  for (const variant of ['worn', 'clean']) {
+    const options = { country: 'AR', city: 'Mendoza', variant };
+    assert.equal(await createStampSvg(options), await readFile(`svg/${variant === 'clean' ? 'clean/' : ''}ar-mendoza.svg`, 'utf8'));
+    const dated = { ...options, date: '2026-11-07' };
+    const svg = await createStampSvg(dated);
+    assert.equal(svg, decode(await createStampImage(dated)));
+    assert.match(svg, /<title[^>]*>.*07 NOV 2026<\/title>/);
+    assert.match(svg, /<text[^>]*>07 NOV 2026<\/text>/);
+    assert.equal(/<filter\b/.test(svg), variant === 'worn');
+  }
+});
+
+test('numeric date format preserves the calendar day in exported artwork', async () => {
+  assert.equal(formatStampDate('2024-02-29', 'numeric'), '29/02/2024');
+  assert.throws(() => formatStampDate('2026-02-29', 'numeric'), { code: 'INVALID_DATE' });
+  assert.throws(() => formatStampDate('2026-11-07', 'invalid'), { code: 'INVALID_DATE_FORMAT' });
+  const image = await createStampImage({ country: 'AR', city: 'Mendoza', date: '2026-11-07', dateFormat: 'numeric' });
+  assert.match(decode(image), /<text[^>]*>07\/11\/2026<\/text>/);
+  assert.match(image.alt, /07\/11\/2026/);
+});
+
+test('hosted SVG URLs use the resolved artwork and finish', async () => {
+  const city = await createStampImage({
+    country: 'AR', city: 'Mendoza', variant: 'clean', assetBaseUrl: '/travel/assets/stamps/'
+  });
+  assert.equal(city.src, '/travel/assets/stamps/svg/clean/ar-mendoza.svg');
+  const fallback = await createStampImage({
+    country: 'ES', city: 'Mendoza', assetBaseUrl: 'https://example.test/stamps'
+  });
+  assert.equal(fallback.src, 'https://example.test/stamps/svg/es.svg');
+  assert.equal(fallback.fallback, true);
+});
+
+test('hosted SVGs reject dates and invalid base URLs', async () => {
+  await assert.rejects(createStampImage({
+    country: 'AR', date: '2026-11-07', assetBaseUrl: '/stamps'
+  }), { code: 'STATIC_DATE_UNSUPPORTED' });
+  for (const assetBaseUrl of ['', 'stamps', '//example.test/stamps', '/.//example.test/stamps', '/\t/example.test/stamps', 'javascript:alert(1)', 'https://example.test/?x=1', 'https://user@example.test/']) {
+    await assert.rejects(createStampImage({ country: 'AR', assetBaseUrl }), { code: 'INVALID_ASSET_BASE_URL' });
   }
 });

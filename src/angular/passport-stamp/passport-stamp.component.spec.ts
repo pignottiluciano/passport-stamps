@@ -22,6 +22,9 @@ describe('Angular PassportStampComponent',()=>{
     expect(decodeURIComponent(img.src)).toContain('>07 NOV 2026</text>');
     expect(decodeURIComponent(img.src)).not.toContain('<filter');
     expect(fixture.nativeElement.style.width).toBe('320px');
+    fixture.componentRef.setInput('dateFormat', 'numeric');
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').alt).toContain('07/11/2026');
   });
   it('shows errors and recovers when the invalid input is corrected',async()=>{
     TestBed.configureTestingModule({imports:[PassportStampComponent],providers:[provideZonelessChangeDetection()]});
@@ -30,5 +33,41 @@ describe('Angular PassportStampComponent',()=>{
     expect(fixture.nativeElement.querySelector('[role=alert]').textContent).toContain('Unknown country');
     fixture.componentRef.setInput('country','FR');await fixture.whenStable();
     expect(fixture.nativeElement.querySelector('img').alt).toContain('France');
+  });
+  it('applies strict city matching when the input changes', async () => {
+    TestBed.configureTestingModule({ imports: [PassportStampComponent], providers: [provideZonelessChangeDetection()] });
+    const fixture = TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country', 'FR');
+    fixture.componentRef.setInput('city', 'Mendoza');
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').alt).toContain('France');
+    fixture.componentRef.setInput('strictCity', true);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('[role=alert]').textContent).toContain('Unknown city in France: Mendoza');
+  });
+  it('shows an accessible size error and recovers with the latest properties', async () => {
+    TestBed.configureTestingModule({ imports: [PassportStampComponent], providers: [provideZonelessChangeDetection()] });
+    const fixture = TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country', 'AR');
+    await fixture.whenStable();
+    fixture.componentRef.setInput('country', 'FR');
+    fixture.componentRef.setInput('size', -1);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('[role=alert]').textContent).toContain('positive finite number');
+    expect(fixture.nativeElement.querySelector('img')).toBeNull();
+    fixture.componentRef.setInput('country', 'ES');
+    fixture.componentRef.setInput('size', 320);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').alt).toContain('Spain');
+    expect(fixture.nativeElement.style.width).toBe('320px');
+    expect(fixture.nativeElement.querySelector('[role=alert]')).toBeNull();
+  });
+  it('renders a hosted undated stamp without a data URL', async () => {
+    TestBed.configureTestingModule({ imports: [PassportStampComponent], providers: [provideZonelessChangeDetection()] });
+    const fixture = TestBed.createComponent(PassportStampComponent);
+    fixture.componentRef.setInput('country', 'AR');
+    fixture.componentRef.setInput('assetBaseUrl', '/travel/assets');
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').getAttribute('src')).toBe('/travel/assets/svg/ar.svg');
   });
 });
