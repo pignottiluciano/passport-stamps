@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, resource } from '@angular/core';
-import { createStampImage, getStampSizeError, type StampVariant } from '@lucianopignotti/passport-stamps';
+import { createStampImage, getStampSizeError, type StampDateFormat, type StampVariant } from '@lucianopignotti/passport-stamps';
 
 /** Displays a country or destination stamp with an optional date integrated into the artwork. */
 @Component({
@@ -14,13 +14,14 @@ export class PassportStampComponent {
   readonly city = input<string>();
   readonly strictCity = input(false);
   readonly date = input<string>();
+  readonly dateFormat = input<StampDateFormat>('text');
   readonly variant = input<StampVariant>('worn');
   readonly size = input(240);
   readonly alt = input<string>();
   private readonly sizeError = computed(() => getStampSizeError(this.size()));
   protected readonly width = computed(() => this.sizeError() ? 240 : this.size());
   protected readonly image = resource({
-    params: () => ({ country: this.country(), city: this.city(), strictCity: this.strictCity(), date: this.date(), variant: this.variant() }),
+    params: () => ({ country: this.country(), city: this.city(), strictCity: this.strictCity(), date: this.date(), dateFormat: this.dateFormat(), variant: this.variant() }),
     loader: ({params}) => createStampImage(params)
   });
   protected readonly errorMessage = computed(() => {

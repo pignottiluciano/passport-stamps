@@ -62,6 +62,7 @@ Props can come from state or your application's data. The component is a client 
 | `city` | `string` | None | Destination name, slug, alias, or full ID such as `ar-mendoza`. |
 | `strictCity` | `boolean` | `false` | Reject a city that is unavailable for the selected country. |
 | `date` | `string` | None | Valid calendar date in `YYYY-MM-DD` format, printed inside the stamp as `07 NOV 2026`. |
+| `dateFormat` | `'text'` or `'numeric'` | `'text'` | Choose `07 NOV 2026` or `07/11/2026` for the printed date. |
 | `variant` | `'worn'` or `'clean'` | `'worn'` | Ink treatment. |
 | `size` | `number` | `240` | Width in pixels; height follows the 4:3 viewBox. In Angular, bind numbers with `[size]="280"`. |
 | `alt` | `string` | Generated description | Optional accessible image text. |

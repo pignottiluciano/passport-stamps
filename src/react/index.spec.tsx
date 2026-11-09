@@ -12,6 +12,8 @@ describe('React PassportStamp',()=>{
     expect(decodeURIComponent(img.src)).toContain('>07 NOV 2026</text>');
     expect(decodeURIComponent(img.src)).not.toContain('<filter');
     expect(img.parentElement?.style.width).toBe('320px');
+    rerender(<PassportStamp country="AR" city="Mendoza" date="2026-11-07" dateFormat="numeric" variant="clean" size={320} />);
+    await screen.findByRole('img', { name: /Mendoza.*07\/11\/2026/ });
   });
   it('falls back to a country for unknown cities and exposes invalid dates',async()=>{
     const {rerender}=render(<PassportStamp country="FR" city="Unknown city" />);

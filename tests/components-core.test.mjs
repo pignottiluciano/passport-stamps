@@ -82,3 +82,12 @@ test('SVG export includes the date and preserves the selected ink finish', async
     assert.equal(/<filter\b/.test(svg), variant === 'worn');
   }
 });
+
+test('numeric date format preserves the calendar day in exported artwork', async () => {
+  assert.equal(formatStampDate('2024-02-29', 'numeric'), '29/02/2024');
+  assert.throws(() => formatStampDate('2026-02-29', 'numeric'), { code: 'INVALID_DATE' });
+  assert.throws(() => formatStampDate('2026-11-07', 'invalid'), { code: 'INVALID_DATE_FORMAT' });
+  const image = await createStampImage({ country: 'AR', city: 'Mendoza', date: '2026-11-07', dateFormat: 'numeric' });
+  assert.match(decode(image), /<text[^>]*>07\/11\/2026<\/text>/);
+  assert.match(image.alt, /07\/11\/2026/);
+});
