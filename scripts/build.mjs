@@ -1,3 +1,4 @@
+import { validateCatalogAliases } from './validate-catalog.mjs';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
@@ -90,6 +91,7 @@ const manifest = stamps.map(c => {
   }
   return {...c, finish:'worn', file:`svg/${filename}.svg`, cleanFile:`svg/clean/${filename}.svg`, bytes:Buffer.byteLength(textured), cleanBytes:Buffer.byteLength(clean)};
 });
+validateCatalogAliases(manifest);
 const countries = manifest.filter(c => c.kind === 'country');
 const destinations = manifest.filter(c => c.kind === 'destination');
 const compactCatalog = manifest.map(c=>({id:c.id,code:c.code,kind:c.kind,name:c.name,label:c.label,iconLabel:c.iconLabel,aliases:c.aliases??[]}));

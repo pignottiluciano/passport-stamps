@@ -208,6 +208,8 @@ Update source files rather than generated SVGs:
 - `scripts/gallery-client.js`: clipboard actions and shareable gallery state, copied to `preview/gallery.js` by the build.
 - `tests/catalog.test.mjs`: coverage, metadata, resource, and size contracts.
 
+Names, aliases and slugs must resolve unambiguously within a country. The generator reports both IDs when their normalized names collide. Names shared by cities in different countries are allowed.
+
 Run `npm run build` and `npm run check`, then inspect your artwork in the gallery. Preserve stable IDs and paths, transparent backgrounds, accessible titles, clean alternatives, and the 10 KiB limit. Keep documentation and descriptive metadata in English; local-language artwork labels and proper names are intentional.
 
 The primary catalog must match the verified UN membership reference exactly. Add cities and other destinations to the separate destination catalog. Update the membership reference explicitly before changing country coverage.
