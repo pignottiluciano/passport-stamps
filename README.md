@@ -135,6 +135,22 @@ await writeFile('mendoza.svg', svg);
 
 `resolveStamp()` supports synchronous selection and validation; `formatStampDate()` validates date strings. Rendering does not require DOM access.
 
+## Render a stamp on the server
+
+For React pages that need the image in the initial HTML, call `createStampImage()` on the server and render the returned `src` and `alt` with an ordinary `img`. The framework component remains useful when visitors change the stamp interactively.
+
+```jsx
+import { createStampImage } from '@lucianopignotti/passport-stamps';
+
+const stamp = await createStampImage({
+  country: 'AR', city: 'Mendoza', date: '2026-11-07'
+});
+const image = <img src={stamp.src} alt={stamp.alt} width={320} height={240} />;
+// Render image with your server framework or React DOM's server renderer.
+```
+
+Run the [React server example](examples/react-ssr.mjs) from the repository with `npm run build` and `node examples/react-ssr.mjs`. Open `http://127.0.0.1:4175/`. The page uses server-generated HTML and a content security policy that blocks scripts.
+
 ## Package contents
 
 | Path | Contents |
