@@ -1,4 +1,5 @@
-import { countryNames, destinationNames, normalize } from './catalog-matching.mjs';
+import { normalize } from './catalog-matching.mjs';
+import { createCatalogIndex } from './catalog-index.js';
 import { catalog } from './generated/catalog.js';
 import { loaders } from './generated/loaders.js';
 import type { CountryCode, StampId } from './generated/ids.js';
@@ -37,7 +38,8 @@ export class PassportStampError extends Error {
   }
 }
 const countries = catalog.filter(stamp => stamp.kind === 'country');
-const matches = (value: string, names: readonly string[]): boolean => names.some(name => normalize(name) === value);
+let catalogIndex: ReturnType<typeof createCatalogIndex> | undefined;
+const getCatalogIndex = () => catalogIndex ??= createCatalogIndex(catalog);
 
 export interface StampCatalogEntry {
   readonly id: StampId;
@@ -47,7 +49,7 @@ export interface StampCatalogEntry {
 
 function findCountry(value: string) {
   const query = normalize(value);
-  const country = countries.find(stamp => matches(query, countryNames(stamp)));
+  const country = getCatalogIndex().countries.get(query);
   if (!country) throw new PassportStampError('INVALID_COUNTRY', `Unknown country: ${value}`);
   return country;
 }
@@ -104,8 +106,7 @@ export function stampSize(value = 240): number {
 export function resolveStamp(options: StampOptions) {
   const country = findCountry(options.country);
   const query = normalize(options.city ?? '');
-  const city = query ? catalog.find(stamp => stamp.kind === 'destination' && stamp.code === country.code &&
-    matches(query, destinationNames(stamp))) : undefined;
+  const city = query ? getCatalogIndex().destinations.get(country.code)?.get(query) : undefined;
   if (query && !city && options.strictCity) {
     throw new PassportStampError('INVALID_CITY', `Unknown city in ${country.name}: ${options.city}`);
   }

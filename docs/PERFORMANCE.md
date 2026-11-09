@@ -22,3 +22,9 @@ The baseline loads 20,744 gzip bytes of shared code. The split prototype loads 2
 | 50 | clean | yes | 80,951 → 60,878 | 33.2 → 33.2 | 16.6 → 15.9 |
 
 Keep one lazy module per design. The split prototype increased cold transfer for one stamp by 3.8–4.2 kB, even though it reduced the bytes for the 50-stamp grid. These timings represent one browser and device on a local connection.
+
+## Catalog lookup
+
+Run `node --expose-gc scripts/benchmark-catalog.mjs` after building. The script checks 2,116 equivalent queries across IDs, codes, names, aliases and misses before measuring. On the same Mac with Node.js 24.14.0, the median of seven batches of 16,928 lookups fell from 461.99 ms to 2.96 ms. The first index construction took 0.95 ms. Median construction took 0.23 ms after warmup, with approximately 60 kB of retained heap per index. The heap estimate averages 100 retained copies and varies by engine.
+
+Build the index on the first lookup so applications that only enumerate countries or use the raw SVG files avoid that cost. Reuse the normalized names validated during the asset build.
