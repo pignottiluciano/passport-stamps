@@ -2,7 +2,7 @@
 
 Original, lightweight passport-style SVG stamps for **193 UN member states and 238 destinations**. Worn ink, transparent backgrounds, and a clean alternative for every stamp.
 
-[Browse the gallery](https://pignottiluciano.github.io/passport-stamps/) · [Destinations](https://pignottiluciano.github.io/passport-stamps/preview/?collection=destinations) · [Source code](https://github.com/pignottiluciano/passport-stamps)
+[Browse the gallery](https://pignottiluciano.github.io/passport-stamps/) · [Destinations](https://pignottiluciano.github.io/passport-stamps/preview/?collection=destinations) · [Source code](https://github.com/pignottiluciano/passport-stamps) · [Changelog](CHANGELOG.md)
 
 ## Install
 

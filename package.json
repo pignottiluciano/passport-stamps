@@ -1,6 +1,6 @@
 {
   "name": "@lucianopignotti/passport-stamps",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "193 countries and 238 destinations as lightweight passport-style SVG stamps",
   "type": "module",
   "license": "MIT",
@@ -9,6 +9,7 @@
     "manifest.json",
     "destinations.json",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE",
     "docs/SOURCES.md",
     "data/un-members.json",
