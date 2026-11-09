@@ -1,0 +1,24 @@
+# Stamp performance
+
+## Module loading and rendering
+
+Baseline revision `8e9047e`. The npm tarball was 314.4 kB compressed. Measurements used Chrome 156 on macOS (Apple M3 Pro), with local HTTP and gzip.
+
+Run `npm run build` and `node scripts/benchmark-stamps.mjs`, then open `http://127.0.0.1:4176/` and click **Run benchmark**. Keep the tab active. Each case measures the median of three runs using the same 96 px artwork, starting with Argentina. The 50-stamp grid adds the first 49 other countries from the manifest.
+
+Cold runs use fresh module URLs. Warm runs reuse the loaded JavaScript modules in the same page. Gzip bytes exclude response headers. The elapsed time covers module loading, SVG creation, image decoding and two animation frames. It is a local page-readiness measure and includes frame scheduling.
+
+The baseline loads 20,744 gzip bytes of shared code. The split prototype loads 25,194 gzip bytes of shared code because it has four loader entries per design. Warm runs reported zero transferred module bytes.
+
+| Stamps | Finish | Date | Cold gzip B, baseline → split | Cold ms, baseline → split | Warm ms, baseline → split |
+| ---: | --- | --- | ---: | ---: | ---: |
+| 1 | worn | no | 22,169 → 26,406 | 17.3 → 16.5 | 16.6 → 16.7 |
+| 1 | worn | yes | 22,169 → 26,375 | 16.6 → 16.6 | 16.6 → 16.6 |
+| 1 | clean | no | 22,169 → 26,037 | 16.6 → 16.5 | 16.5 → 16.7 |
+| 1 | clean | yes | 22,169 → 26,004 | 16.6 → 16.6 | 16.8 → 16.6 |
+| 50 | worn | no | 80,951 → 77,828 | 49.4 → 31.2 | 26.1 → 32.1 |
+| 50 | worn | yes | 80,951 → 79,630 | 48.6 → 35.1 | 19.2 → 24.4 |
+| 50 | clean | no | 80,951 → 59,101 | 33.3 → 33.1 | 16.5 → 16.1 |
+| 50 | clean | yes | 80,951 → 60,878 | 33.2 → 33.2 | 16.6 → 15.9 |
+
+Keep one lazy module per design. The split prototype increased cold transfer for one stamp by 3.8–4.2 kB, even though it reduced the bytes for the 50-stamp grid. These timings represent one browser and device on a local connection.
