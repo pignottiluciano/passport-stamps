@@ -49,3 +49,7 @@ npm publication and website deployment are independent. This document is not evi
 ## Travel journal design
 
 The gallery uses the selected Travel journal layout and Warm Stone palette, with a stamp composition in the hero, country/destination catalog, framework code switcher, and complete Angular/React documentation. Browser checks confirmed React snippet switching, code and SVG copy feedback, destination search, stamp permalinks, documentation navigation, and the live dated preview. The existing asset paths and library component behavior are unchanged.
+
+## Packed consumer compatibility
+
+The compatibility workflow installs the same tarball in isolated Angular 20, 21 and 22 and React 18 and 19 projects. Each framework compiles a typed consumer and renders a dated Mendoza stamp. The SVG-only check verifies that neither optional framework is installed. Run the checks locally with `node scripts/check-consumer.mjs angular-20 path/to/package.tgz` after packing the library. The Angular 22 case uses TypeScript 6 and Node.js 22.22.3 in CI. See the [Angular version compatibility table](https://angular.dev/reference/versions).
