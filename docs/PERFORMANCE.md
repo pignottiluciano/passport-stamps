@@ -28,3 +28,11 @@ Keep one lazy module per design. The split prototype increased cold transfer for
 Run `node --expose-gc scripts/benchmark-catalog.mjs` after building. The script checks 2,116 equivalent queries across IDs, codes, names, aliases and misses before measuring. On the same Mac with Node.js 24.14.0, the median of seven batches of 16,928 lookups fell from 461.99 ms to 2.96 ms. The first index construction took 0.95 ms. Median construction took 0.23 ms after warmup, with approximately 60 kB of retained heap per index. The heap estimate averages 100 retained copies and varies by engine.
 
 Build the index on the first lookup so applications that only enumerate countries or use the raw SVG files avoid that cost. Reuse the normalized names validated during the asset build.
+
+## Small stamp legibility
+
+Run `node scripts/review-stamp-legibility.mjs` after building. Serve the repository with `npm run preview` and open `http://127.0.0.1:4173/work/stamp-legibility.html`. The sheet compares six frames and long labels at 64, 96 and 140 CSS pixels. Dated examples show the previous worn artwork alongside the updated worn and clean versions.
+
+The date row now uses a 16-unit font instead of 11, moved up four units and constrained to 96 units of width. Dropping the final Gaussian blur in dated worn stamps preserves the grain and makes the lettering sharper in Safari. The review confirmed that the date fits inside each sampled frame. For 64 px icons, use the clean finish and show the place or date separately if it must be readable. At 96 px, clean artwork improves the name, while dates and long names can still be hard to read. Start at 140 px when the date is important and check the actual design on the target display.
+
+The follow-up Chrome measurement used the same procedure after the catalog index and date changes. A cold dated stamp transferred 22,448 gzip body bytes versus 22,169 in the earlier baseline. The dated grid transferred 81,448 versus 80,951. Worn cold times were 16.6 ms for one stamp and 55.4 ms for 50, versus 16.6 and 48.6 ms earlier. Clean times were 16.3 and 41.9 ms, versus 16.6 and 33.2 ms. These short local runs include frame timing and both code changes, so they do not isolate the effect of the artwork adjustment.

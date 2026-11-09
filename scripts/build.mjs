@@ -67,12 +67,14 @@ function datedComposition(c) {
   // Reserve a separate date row inside every frame. Existing undated artwork is unchanged.
   const base = standardComposition({...c, kind:'destination'}, c.kind === 'country' ? c.code : c.countryLabel);
   // Shift and compress only the composition, leaving the frame and date at full size.
-  return `<g transform="translate(0 -2) scale(1 .9)">${base}</g>` + label('__PASSPORT_DATE__',239,11,'font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1"');
+  return `<g transform="translate(0 -2) scale(1 .9)">${base}</g>` + label('__PASSPORT_DATE__',235,16,'font-family="Arial,Helvetica,sans-serif" font-weight="700" textLength="96" lengthAdjust="spacingAndGlyphs"');
 }
 function stamp(c, dated = false) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-labelledby="title-${c.id}"><title id="title-${c.id}">${xml(c.name)} — ${xml(c.iconLabel)} passport stamp${dated ? ", __PASSPORT_DATE__" : ""}</title><g color="${c.color}" fill="currentColor" font-family="Arial,Helvetica,sans-serif" text-anchor="middle"><g fill="none" stroke="currentColor">${dated ? frames[c.shape].replace("M43 67H357M43 233H357", "M43 67H357") : frames[c.shape]}</g>${dated ? datedComposition(c) : composition(c)}</g></svg>\n`;
 }
 const wornStyle = styles.find(style => style.key === 'worn');
+// WebKit blurs small lettering when the final Gaussian blur is applied.
+const datedWornStyle = { ...wornStyle, blur: undefined };
 const files = new Map();
 const seen = new Set();
 const manifest = stamps.map(c => {
@@ -82,7 +84,7 @@ const manifest = stamps.map(c => {
   const filename = c.id;
   const clean = stamp(c);
   const datedClean = stamp(c, true);
-  const datedWorn = finish(datedClean, c, wornStyle);
+  const datedWorn = finish(datedClean, c, datedWornStyle);
   files.set(`src/core/art/${c.id}.ts`, 'export const artwork = ' + JSON.stringify({clean, worn:finish(clean,c,wornStyle), datedClean, datedWorn}) + ';\n');
   const textured = finish(clean, c, wornStyle);
   for (const [path, content] of [[`svg/${filename}.svg`,textured],[`svg/clean/${filename}.svg`,clean]]) {
@@ -113,7 +115,7 @@ files.set('docs/DESTINATIONS.md', `# Destination catalog\n\n${destinations.lengt
 files.set('preview/index.html', galleryPage(countries, destinations));
 files.set('preview/gallery.css', await readFile(resolve(root, 'scripts/gallery.css'), 'utf8'));
 const heroStamp = stamps.find(c=>c.id==='ar-mendoza');
-files.set('preview/hero-mendoza.svg', finish(stamp(heroStamp,true), heroStamp, wornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
+files.set('preview/hero-mendoza.svg', finish(stamp(heroStamp,true), heroStamp, datedWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
 files.set('preview/gallery.js', await readFile(resolve(root, 'scripts/gallery-client.js'), 'utf8'));
 for (const [path, content] of files) {
   const full = resolve(root,path);

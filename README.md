@@ -186,6 +186,8 @@ Artwork uses six frame families and original architectural, cultural, and natura
 
 Text remains editable and uses system fonts, including Arial/Helvetica, Georgia, and an available Japanese font. It is not converted to outlines, so typography can vary between platforms.
 
+For small stamps, start with the clean finish. At 64 px, put important dates and long place names in adjacent text. At 140 px, the larger date row is easier to read. See the [visual comparison procedure](docs/PERFORMANCE.md#small-stamp-legibility).
+
 Worn SVGs use deterministic filters to simulate pores, uneven pressure, and ink absorption. Small file size does not guarantee low rendering cost; performance has not been benchmarked across all devices. Clean variants omit these effects.
 
 SVG files displayed with `<img>` do not inherit page text color. If you inline the same SVG more than once, assign unique IDs to titles, filters, and their references. Each `<img>` otherwise has its own document.
