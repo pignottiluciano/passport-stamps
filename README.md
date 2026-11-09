@@ -81,6 +81,14 @@ Copy only the files you need into your public assets:
 
 Vite also supports importing `@lucianopignotti/passport-stamps/svg/ar-mendoza.svg` as an asset URL. Direct SVG files retain their existing paths; dynamic dates belong to the component and renderer API.
 
+## Build a country and city selector
+
+Import `getCountries` and `getCities` from `@lucianopignotti/passport-stamps`. Both return entries with `id`, `code`, and `name`, ordered by English display name. Use `code` for a country option, `id` for a city option, and `name` for either label. The helpers do not load SVG artwork.
+
+In Angular, use `const countries = getCountries()` for the country options and `computed(() => getCities(selectedCountry()))` for the city options, where `selectedCountry` is a signal holding a valid country code. In React, use `getCountries()` and derive the city options with `getCities(selectedCountry)` from your current state. Clear the selected city when the country changes.
+
+A country with no destinations returns an empty list. An unknown country throws `PassportStampError` with code `INVALID_COUNTRY`.
+
 ## Framework-independent renderer
 
 ```js

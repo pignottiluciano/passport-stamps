@@ -27,6 +27,35 @@ const normalize = (value: string): string => value.trim().normalize('NFD').repla
 const countries = catalog.filter(stamp => stamp.kind === 'country');
 const matches = (value: string, names: readonly string[]): boolean => names.some(name => normalize(name) === value);
 
+export interface StampCatalogEntry {
+  readonly id: string;
+  readonly code: string;
+  readonly name: string;
+}
+
+function findCountry(value: string) {
+  const query = normalize(value);
+  const country = countries.find(stamp => matches(query, [stamp.id, stamp.code, stamp.name, ...stamp.aliases]));
+  if (!country) throw new PassportStampError('INVALID_COUNTRY', `Unknown country: ${value}`);
+  return country;
+}
+
+function catalogEntries(stamps: readonly StampCatalogEntry[]): readonly StampCatalogEntry[] {
+  return stamps.map(({ id, code, name }) => ({ id, code, name }))
+    .sort((a, b) => a.name.localeCompare(b.name, 'en') || a.id.localeCompare(b.id, 'en'));
+}
+
+/** Lists countries in English display-name order without loading artwork. */
+export function getCountries(): readonly StampCatalogEntry[] {
+  return catalogEntries(countries);
+}
+
+/** Lists destinations for a country code, name, or alias without loading artwork. */
+export function getCities(country: string): readonly StampCatalogEntry[] {
+  const { code } = findCountry(country);
+  return catalogEntries(catalog.filter(stamp => stamp.kind === 'destination' && stamp.code === code));
+}
+
 export function formatStampDate(value?: string): string | undefined {
   if (value === undefined || value === '') return undefined;
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
@@ -48,9 +77,7 @@ export function stampSize(value = 240): number {
 }
 
 export function resolveStamp(options: StampOptions) {
-  const countryQuery = normalize(options.country);
-  const country = countries.find(stamp => matches(countryQuery, [stamp.id, stamp.code, stamp.name, ...stamp.aliases]));
-  if (!country) throw new PassportStampError('INVALID_COUNTRY', `Unknown country: ${options.country}`);
+  const country = findCountry(options.country);
   const query = normalize(options.city ?? '');
   const city = query ? catalog.find(stamp => stamp.kind === 'destination' && stamp.code === country.code &&
     matches(query, [stamp.id, stamp.id.slice(3), stamp.name, stamp.label, ...stamp.aliases])) : undefined;

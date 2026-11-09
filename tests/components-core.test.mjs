@@ -1,8 +1,22 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {createStampImage, resolveStamp, formatStampDate, stampSize} from '../dist/core/index.js';
+import {createStampImage, resolveStamp, formatStampDate, stampSize, getCountries, getCities} from '../dist/core/index.js';
 const decode = image => decodeURIComponent(image.src.split(',').slice(1).join(','));
+test('country and city lists provide stable selector options', () => {
+  const countries = getCountries();
+  assert.equal(countries.length, 193);
+  assert.deepEqual(countries.find(country => country.code === 'AR'), { id: 'ar', code: 'AR', name: 'Argentina' });
+  const cities = getCities('Argentina');
+  assert.deepEqual(cities, getCities(' ar '));
+  assert.equal(cities.length, 20);
+  assert.ok(cities.every(city => city.code === 'AR'));
+  assert.ok(cities.some(city => city.id === 'ar-mendoza'));
+  assert.ok(cities.every((city, i) => i === 0 || cities[i - 1].name.localeCompare(city.name, 'en') <= 0));
+  assert.deepEqual(getCities('JP'), []);
+  assert.throws(() => getCities('ZZ'), { code: 'INVALID_COUNTRY' });
+});
+
 test('country codes and names resolve without a city', () => {
   for(const country of ['AR','ar','Argentina']) assert.equal(resolveStamp({country}).stamp.id,'ar');
 });
