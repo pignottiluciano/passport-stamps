@@ -21,6 +21,7 @@ jobs:
       - run: |
           mkdir -p work/packed
           npm pack --pack-destination work/packed
+          node scripts/check-package-size.mjs work/packed/*.tgz
       - uses: actions/upload-artifact@v4
         with:
           name: passport-stamps-package

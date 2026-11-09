@@ -42,3 +42,15 @@ The follow-up Chrome measurement used the same procedure after the catalog index
 The same comparison sheet was reviewed in Chrome and Safari on macOS. The clean samples showed matching line breaks and fit across the six sampled frames. The large difference in the original worn samples came from Safari's rendering of the Gaussian blur, reproduced by toggling only that filter primitive on the Mendoza stamp. The updated dated filter keeps the worn texture and improves its clarity in Safari.
 
 Keep the existing text and font families. Converting labels to paths was unnecessary for the observed difference and would require a separate measurement of the resulting file sizes. Fonts may still vary across operating systems. The legacy undated worn files retain their original filter, which can appear softer in Safari. Use clean artwork when small lettering matters.
+
+## Package size budgets
+
+Pack the library with `npm pack --pack-destination work/packed` after creating that directory. Run `node scripts/check-package-size.mjs work/packed/*.tgz` on the resulting archive. The packed consumer workflow enforces these limits before running the framework matrix.
+
+| Metric | Measured | Limit |
+| --- | ---: | ---: |
+| npm tarball | 315,388 B | 350 KiB |
+| Shared core JS, gzip per module | 21,051 B | 24 KiB |
+| Largest packaged SVG | 2,831 B | 10 KiB |
+
+Shared core size includes all packaged JS outside the lazy artwork directory. The caps leave room for catalog growth and are intentionally above this measured build. The generator also checks the dated SVG templates against the individual SVG limit. A fixture with an inflated core module and SVG verified that the gate fails and identifies the exceeded limits.

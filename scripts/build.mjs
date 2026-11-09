@@ -85,12 +85,14 @@ const manifest = stamps.map(c => {
   const clean = stamp(c);
   const datedClean = stamp(c, true);
   const datedWorn = finish(datedClean, c, datedWornStyle);
-  files.set(`src/core/art/${c.id}.ts`, 'export const artwork = ' + JSON.stringify({clean, worn:finish(clean,c,wornStyle), datedClean, datedWorn}) + ';\n');
   const textured = finish(clean, c, wornStyle);
-  for (const [path, content] of [[`svg/${filename}.svg`,textured],[`svg/clean/${filename}.svg`,clean]]) {
-    if (Buffer.byteLength(content) > 10240) throw Error(`${path} exceeds the 10 KiB budget`);
-    files.set(path, content);
+  const artwork = { clean, worn: textured, datedClean, datedWorn };
+  for (const [variant, svg] of Object.entries(artwork)) {
+    if (Buffer.byteLength(svg) > 10240) throw Error(`${c.id} (${variant}) exceeds the 10 KiB budget`);
   }
+  files.set(`src/core/art/${c.id}.ts`, 'export const artwork = ' + JSON.stringify(artwork) + ';\n');
+  files.set(`svg/${filename}.svg`, textured);
+  files.set(`svg/clean/${filename}.svg`, clean);
   return {...c, finish:'worn', file:`svg/${filename}.svg`, cleanFile:`svg/clean/${filename}.svg`, bytes:Buffer.byteLength(textured), cleanBytes:Buffer.byteLength(clean)};
 });
 validateCatalogAliases(manifest);
