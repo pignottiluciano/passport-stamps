@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+### Fixed
+
+- Sharpened worn SVGs with and without dates, especially in Safari. The ink grain stays visible while lettering, borders, and illustrations keep clearer contours.
+- Repositioned the Paris, Japan, and Mendoza stamps on the gallery cover so their names are easier to read on desktop and mobile.
+
 ## 0.2.0
 
 ### Added
