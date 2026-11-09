@@ -10,7 +10,7 @@ Original, lightweight passport-style SVG stamps for **193 UN member states and 2
 npm install @lucianopignotti/passport-stamps
 ```
 
-The package provides standalone SVG assets, a framework-independent renderer, and optional Angular and React components. Import only the entry point you need; Angular and React are optional peers. This component API is prepared for the next npm release and has not been published yet.
+The package provides standalone SVG assets, a framework-independent renderer, and optional Angular and React components. Import only the entry point you need; Angular and React are optional peers.
 
 ## Angular 20+
 
