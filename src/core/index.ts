@@ -1,5 +1,8 @@
 import { catalog } from './generated/catalog.js';
 import { loaders } from './generated/loaders.js';
+import type { CountryCode, StampId } from './generated/ids.js';
+
+export type { CountryCode, StampId, DestinationId } from './generated/ids.js';
 
 export type StampVariant = 'worn' | 'clean';
 export interface StampOptions {
@@ -30,8 +33,8 @@ const countries = catalog.filter(stamp => stamp.kind === 'country');
 const matches = (value: string, names: readonly string[]): boolean => names.some(name => normalize(name) === value);
 
 export interface StampCatalogEntry {
-  readonly id: string;
-  readonly code: string;
+  readonly id: StampId;
+  readonly code: CountryCode;
   readonly name: string;
 }
 

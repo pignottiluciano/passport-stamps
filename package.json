@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs && node scripts/build-library.mjs",
-    "check": "node scripts/build.mjs --check && node --test tests/catalog.test.mjs tests/components-core.test.mjs && vitest run",
+    "check": "node scripts/build.mjs --check && tsc --noEmit --strict --module NodeNext --skipLibCheck tests/catalog-types.ts && node --test tests/catalog.test.mjs tests/components-core.test.mjs && vitest run",
     "preview": "python3 -m http.server 4173 --bind 127.0.0.1",
     "prepack": "npm run build && npm run check"
   },

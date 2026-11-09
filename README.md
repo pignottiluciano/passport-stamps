@@ -90,6 +90,20 @@ In Angular, use `const countries = getCountries()` for the country options and `
 
 A country with no destinations returns an empty list. An unknown country throws `PassportStampError` with code `INVALID_COUNTRY`.
 
+## Catalog types in TypeScript
+
+Import `CountryCode`, `StampId` or `DestinationId` to autocomplete and validate IDs in your own data.
+
+```ts
+import { getCities, type CountryCode, type DestinationId } from '@lucianopignotti/passport-stamps';
+
+const country: CountryCode = 'AR';
+const city: DestinationId = 'ar-mendoza';
+const options = getCities(country);
+```
+
+The renderer and component properties also accept country and city names and aliases as strings.
+
 ## Framework-independent renderer
 
 ```js
