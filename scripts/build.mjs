@@ -2,7 +2,8 @@ import { validateCatalogAliases } from './validate-catalog.mjs';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
-import { catalogWornStyle, finish } from './ink.mjs';
+import { catalogWornStyle, finish } from '../src/core/ink.mjs';
+import { assembleStamp, frames } from '../src/core/stamp-svg.mjs';
 import { icons as countryIcons } from './icons.mjs';
 import { destinationIcons } from './destination-icons.mjs';
 import { europeIcons } from './europe-icons.mjs';
@@ -19,14 +20,6 @@ const actualMembers = stamps.filter(c => c.kind === 'country');
 if (expectedMembers.size !== 193 || actualMembers.length !== 193 || actualMembers.some(c => !expectedMembers.has(c.code)) || new Set(actualMembers.map(c => c.code)).size !== 193) throw Error('Country catalog must match the 193 verified UN members exactly.');
 if (actualMembers.some(c => 'city' in c || c.serial !== `${c.code} · PASSPORT`)) throw Error('Country stamps must not contain cities or airport codes.');
 const xml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
-const frames = {
-  ticket: '<rect x="24" y="47" width="352" height="206" rx="27" stroke-width="5"/><rect x="33" y="56" width="334" height="188" rx="19" stroke-width="1.6"/><path d="M43 67H357M43 233H357" stroke-dasharray="1 11" stroke-linecap="round" stroke-width="3"/>',
-  oval: '<ellipse cx="200" cy="150" rx="179" ry="115" stroke-width="5"/><ellipse cx="200" cy="150" rx="170" ry="106" stroke-width="1.5"/><ellipse cx="200" cy="150" rx="160" ry="97" stroke-dasharray="12 8" stroke-width="1.3"/>',
-  round: '<circle cx="200" cy="150" r="130" stroke-width="6"/><circle cx="200" cy="150" r="120" stroke-width="1.5"/><circle cx="200" cy="150" r="113" stroke-dasharray="2 7" stroke-width="1"/>',
-  square: '<rect x="81" y="23" width="238" height="254" rx="9" stroke-width="5"/><rect x="90" y="32" width="220" height="236" rx="3" stroke-width="1.5"/><path d="M99 64V42H121M279 42H301V64M99 236V258H121M279 258H301V236" stroke-width="3"/>',
-  hexagon: '<path d="M200 17L354 75V225L200 283L46 225V75Z" stroke-width="5"/><path d="M200 27L344 82V218L200 273L56 218V82Z" stroke-width="1.5"/>',
-  diamond: '<path d="M184 19Q200 8 216 19L365 134Q384 150 365 166L216 281Q200 292 184 281L35 166Q16 150 35 134Z" stroke-width="5"/><path d="M188 28Q200 20 212 28L357 140Q369 150 357 160L212 272Q200 280 188 272L43 160Q31 150 43 140Z" stroke-width="1.3"/>'
-};
 const text = (value, x, y, size, extra = '') => `<text x="${x}" y="${y}" font-size="${size}" ${extra}>${xml(value)}</text>`;
 const label = (value, y, size = 14, extra = '') => text(value, 200, y, size, extra);
 const line = (y, x1 = 105, x2 = 295) => `<path d="M${x1} ${y}H${x2}" fill="none" stroke="currentColor" stroke-width="1.5"/>`;
@@ -63,15 +56,16 @@ function composition(c) {
     default: if (c.kind === 'country') return standardComposition(c); if (c.kind === 'destination') return standardComposition(c, c.countryLabel); throw Error(`Missing composition: ${c.id}`);
   }
 }
-function datedComposition(c) {
-  // Reserve a separate date row inside every frame. Existing undated artwork is unchanged.
-  const base = standardComposition({...c, kind:'destination'}, c.kind === 'country' ? c.code : c.countryLabel);
-  // Shift and compress only the composition, leaving the frame and date at full size.
-  return `<g transform="translate(0 -2) scale(1 .9)">${base}</g>` + label('__PASSPORT_DATE__',235,16,'font-family="Arial,Helvetica,sans-serif" font-weight="700" textLength="96" lengthAdjust="spacingAndGlyphs"');
+// Dated stamps reserve a separate date row inside every frame; assembleStamp() adds the row and scaling.
+// Existing undated artwork is unchanged.
+function stampArt(c) {
+  const b = composition(c);
+  const d = standardComposition({...c, kind:'destination'}, c.kind === 'country' ? c.code : c.countryLabel);
+  return {c:c.color, s:c.shape, t:`${xml(c.name)} — ${xml(c.iconLabel)}`, b, ...(d === b ? {} : {d})};
 }
-function stamp(c, dated = false) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-labelledby="title-${c.id}"><title id="title-${c.id}">${xml(c.name)} — ${xml(c.iconLabel)} passport stamp${dated ? ", __PASSPORT_DATE__" : ""}</title><g color="${c.color}" fill="currentColor" font-family="Arial,Helvetica,sans-serif" text-anchor="middle"><g fill="none" stroke="currentColor">${dated ? frames[c.shape].replace("M43 67H357M43 233H357", "M43 67H357") : frames[c.shape]}</g>${dated ? datedComposition(c) : composition(c)}</g></svg>\n`;
-}
+// Single-quoted literals avoid escaping every attribute quote; JSON handles anything unusual.
+const literal = value => typeof value === 'string' && !/['\\\n\r\u2028\u2029]/.test(value) ? `'${value}'` : JSON.stringify(value);
+const artModule = art => 'export const art = {' + Object.entries(art).map(([key, value]) => `${key}:${literal(value)}`).join(',') + '};\n';
 const files = new Map();
 const seen = new Set();
 const manifest = stamps.map(c => {
@@ -79,15 +73,16 @@ const manifest = stamps.map(c => {
   if (c.kind === 'destination' && (!expectedMembers.has(c.code) || !c.countryLabel || !c.label)) throw Error(`Invalid destination metadata: ${c.id}`);
   seen.add(c.id);
   const filename = c.id;
-  const clean = stamp(c);
-  const datedClean = stamp(c, true);
+  const art = stampArt(c);
+  const clean = assembleStamp(c.id, art);
+  const datedClean = assembleStamp(c.id, art, true);
   const datedWorn = finish(datedClean, c, catalogWornStyle);
   const textured = finish(clean, c, catalogWornStyle);
   const artwork = { clean, worn: textured, datedClean, datedWorn };
   for (const [variant, svg] of Object.entries(artwork)) {
     if (Buffer.byteLength(svg) > 10240) throw Error(`${c.id} (${variant}) exceeds the 10 KiB budget`);
   }
-  files.set(`src/core/art/${c.id}.ts`, 'export const artwork = ' + JSON.stringify(artwork) + ';\n');
+  files.set(`src/core/art/${c.id}.ts`, artModule(art));
   files.set(`svg/${filename}.svg`, textured);
   files.set(`svg/clean/${filename}.svg`, clean);
   return {...c, finish:'worn', file:`svg/${filename}.svg`, cleanFile:`svg/clean/${filename}.svg`, bytes:Buffer.byteLength(textured), cleanBytes:Buffer.byteLength(clean)};
@@ -103,7 +98,7 @@ files.set('src/core/generated/ids.ts', [
   `export type DestinationId = ${literalUnion(destinations.map(destination => destination.id))};`
 ].join('\n') + '\n');
 files.set('src/core/generated/catalog.ts', 'import type { CountryCode, StampId } from "./ids.js";\nexport const catalog: ReadonlyArray<{id:StampId;code:CountryCode;kind:string;name:string;label:string;iconLabel:string;aliases:readonly string[]}> = '+JSON.stringify(compactCatalog)+';\n');
-files.set('src/core/generated/loaders.ts', 'export const loaders: Record<string, () => Promise<{artwork:{clean:string;worn:string;datedClean:string;datedWorn:string}}>> = {\n'+manifest.map(c=>JSON.stringify(c.id)+': () => import("../art/'+c.id+'.js")').join(',\n')+'\n};\n');
+files.set('src/core/generated/loaders.ts', 'import type { StampArt } from "../stamp-svg.mjs";\nexport const loaders: Record<string, () => Promise<{art:StampArt}>> = {\n'+manifest.map(c=>JSON.stringify(c.id)+': () => import("../art/'+c.id+'.js")').join(',\n')+'\n};\n');
 files.set('manifest.json', JSON.stringify(countries,null,2)+'\n');
 files.set('destinations.json', JSON.stringify(destinations,null,2)+'\n');
 const destinationGroups = [...new Set(destinations.map(c=>c.code))];
@@ -114,7 +109,7 @@ files.set('docs/DESTINATIONS.md', `# Destination catalog\n\n${destinations.lengt
 files.set('preview/index.html', galleryPage(countries, destinations));
 files.set('preview/gallery.css', await readFile(resolve(root, 'scripts/gallery.css'), 'utf8'));
 const heroStamp = stamps.find(c=>c.id==='ar-mendoza');
-files.set('preview/hero-mendoza.svg', finish(stamp(heroStamp,true), heroStamp, catalogWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
+files.set('preview/hero-mendoza.svg', finish(assembleStamp(heroStamp.id, stampArt(heroStamp), true), heroStamp, catalogWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
 files.set('preview/gallery.js', await readFile(resolve(root, 'scripts/gallery-client.js'), 'utf8'));
 for (const [path, content] of files) {
   const full = resolve(root,path);

@@ -1,4 +1,6 @@
 import { normalize } from './catalog-matching.mjs';
+import { catalogWornStyle, finish } from './ink.mjs';
+import { assembleStamp, DATE_PLACEHOLDER } from './stamp-svg.mjs';
 import { createCatalogIndex } from './catalog-index.js';
 import { catalog } from './generated/catalog.js';
 import { loaders } from './generated/loaders.js';
@@ -118,9 +120,10 @@ export function resolveStamp(options: StampOptions) {
 async function renderStamp({ stamp, date, variant }: ReturnType<typeof resolveStamp>) {
   const load = loaders[stamp.id];
   if (!load) throw new PassportStampError('INVALID_COUNTRY', 'The requested artwork is unavailable.');
-  const { artwork } = await load();
-  const template = date ? (variant === 'worn' ? artwork.datedWorn : artwork.datedClean) : artwork[variant];
-  return date ? template.replaceAll('__PASSPORT_DATE__', date) : template;
+  const { art } = await load();
+  const clean = assembleStamp(stamp.id, art, Boolean(date));
+  const svg = variant === 'worn' ? finish(clean, stamp, catalogWornStyle) : clean;
+  return date ? svg.replaceAll(DATE_PLACEHOLDER, date) : svg;
 }
 
 /** Returns standalone SVG markup for saving or downloading a stamp. */

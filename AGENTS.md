@@ -4,7 +4,7 @@ This repository is a framework-independent SVG asset library. Keep the asset gen
 
 - Country data lives in `data/stamps.json`; layouts live in `scripts/build.mjs`, country motifs in `scripts/icons.mjs`, destination motifs in `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`, and the gallery in `scripts/gallery.mjs` and `scripts/gallery-client.js`.
 - Generated SVGs, the manifest and preview are checked into Git. Run `npm run build` after editing sources, then `npm run check`.
-- Keep each SVG below 10 KiB. Use the approved worn treatment from `scripts/ink.mjs` for main SVGs; retain clean alternatives. Avoid embedded images or external resources.
+- Keep each SVG below 10 KiB. Use the approved worn treatment from `src/core/ink.mjs` (re-exported by `scripts/ink.mjs`) for main SVGs; retain clean alternatives. Avoid embedded images or external resources.
 - Preserve transparent backgrounds and accessible SVG titles. Avoid external resources.
 - Check new artwork visually in the preview. Keep country compositions distinct.
 - Do not publish or push unless requested.

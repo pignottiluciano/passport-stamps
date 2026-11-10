@@ -224,7 +224,8 @@ Update source files rather than generated SVGs:
 - `scripts/icons.mjs`: country motifs.
 - `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`: destination motifs.
 - `scripts/build.mjs`: layouts, SVG generation, catalogs, and destination documentation.
-- `scripts/ink.mjs`: deterministic ink treatment.
+- `src/core/ink.mjs`: deterministic ink treatment, shared by the build and the renderer. `scripts/ink.mjs` re-exports it.
+- `src/core/stamp-svg.mjs`: frames, header and date row that assemble each stamp from its per-stamp artwork module.
 - `src/core/index.ts`: shared typed selection, date validation, and lazy rendering.
 - `src/angular/`: standalone Angular component and packaging configuration.
 - `src/react/`: React component.

@@ -37,6 +37,20 @@ The date row now uses a 16-unit font instead of 11, moved up four units and cons
 
 The follow-up Chrome measurement used the same procedure after the catalog index and date changes. A cold dated stamp transferred 22,448 gzip body bytes versus 22,169 in the earlier baseline. The dated grid transferred 81,448 versus 80,951. Worn cold times were 16.6 ms for one stamp and 55.4 ms for 50, versus 16.6 and 48.6 ms earlier. Clean times were 16.3 and 41.9 ms, versus 16.6 and 33.2 ms. These short local runs include frame timing and both code changes, so they do not isolate the effect of the artwork adjustment.
 
+## Composed artwork modules
+
+Artwork modules now hold only each stamp's color, frame name, title and compositions. The core assembles the frame, header, date row and worn filter with `src/core/stamp-svg.mjs` and `src/core/ink.mjs`, which the asset build also uses. Output for all 431 stamps in both finishes, with and without a date, matched the previous renderer byte for byte.
+
+| Metric | Before | After |
+| --- | ---: | ---: |
+| Lazy artwork JS, raw | 3,265,879 B | 415,512 B |
+| Lazy artwork JS, gzip per module | 491,514 B | 205,110 B |
+| Mendoza module, raw | 9,061 B | 1,920 B |
+| Shared core JS, gzip per module | 21,051 B | 23,754 B |
+| Unpacked package | 5,163,766 B | 2,307,443 B |
+
+One cold stamp now transfers about 2 kB more gzip because the shared assembler loads with the core. From about five distinct stamps onward, the smaller artwork modules outweigh it. The benchmark page measures the current build only; the four-module split prototype was retired. Browser timings have not been rerun for this change.
+
 ## Typography across browsers
 
 The same comparison sheet was reviewed in Chrome and Safari on macOS. The clean samples showed matching line breaks and fit across the six sampled frames. The large difference in the original worn samples came from Safari's rendering of the Gaussian blur, reproduced by toggling only that filter primitive on the Mendoza stamp. The updated dated filter keeps the worn texture and improves its clarity in Safari.
@@ -49,8 +63,8 @@ Pack the library with `npm pack --pack-destination work/packed` after creating t
 
 | Metric | Measured | Limit |
 | --- | ---: | ---: |
-| npm tarball | 315,388 B | 350 KiB |
-| Shared core JS, gzip per module | 21,051 B | 24 KiB |
+| npm tarball | 253,309 B | 350 KiB |
+| Shared core JS, gzip per module | 23,754 B | 24 KiB |
 | Largest packaged SVG | 2,831 B | 10 KiB |
 
 Shared core size includes all packaged JS outside the lazy artwork directory. The caps leave room for catalog growth and are intentionally above this measured build. The generator also checks the dated SVG templates against the individual SVG limit. A fixture with an inflated core module and SVG verified that the gate fails and identifies the exceeded limits.
