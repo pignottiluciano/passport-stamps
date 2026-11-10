@@ -1,5 +1,5 @@
 const escape = value => value.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
-export function componentDocs(countries) {
+export function componentDocs() {
   return `<section class="get-started" aria-label="Installation and components">
 <div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps">npm ↗</a></div>
 <p class="component-intro">One component. Country, city, and an optional date — all through properties.</p>
@@ -76,15 +76,94 @@ export function Example() {
 <pre><code>&lt;img src="/stamps/ar-mendoza.svg" alt="Mendoza — grapes and Andes Mountains" width="400" height="300"&gt;</code></pre>
 <p>Static SVG files remain available at the same paths. Dynamic dates are provided by the components and core renderer.</p>
 </details>
-<details class="js-only" id="component-demo"><summary>Try the properties · live preview</summary>
-<p>This preview uses the same renderer as the Angular and React components.</p>
-<form id="stamp-demo" class="demo-controls">
-<label>Country<select id="demo-country">${countries.map(c=>`<option value="${c.code}"${c.code==='AR'?' selected':''}>${escape(c.name)} (${c.code})</option>`).join('')}</select></label>
-<label>City (optional)<input id="demo-city" value="Mendoza" placeholder="Leave empty for country stamp" list="demo-cities" autocomplete="off"><datalist id="demo-cities"></datalist></label>
-<label>Date (optional)<input id="demo-date" type="date" value="2026-11-07" min="0001-01-01" max="9999-12-31"></label>
-<label>Variant<select id="demo-variant"><option value="worn">Worn</option><option value="clean">Clean</option></select></label>
-<button type="submit">Update stamp</button>
-</form>
-<div class="demo-result"><img id="demo-image" width="400" height="300" alt="Stamp preview" hidden><p id="demo-status" role="status" aria-live="polite">Open this preview to load a stamp.</p></div>
-</details></section>`;
+<p id="component-demo"><a href="#workshop">Try the stamp workshop</a> using the same renderer as the Angular and React components.</p>
+</section>`;
+}
+
+export function stampWorkshop(countries, destinations) {
+  const initial = destinations.find(stamp => stamp.id === 'ar-mendoza');
+  const downloadLink = `<a data-workshop-download class="button" href="hero-mendoza.svg" download="ar-mendoza-2026-11-07.svg">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4"/></svg>
+      Download SVG
+    </a>`;
+  return `<section id="workshop" class="workshop" aria-labelledby="workshop-heading">
+  <div class="section-heading">
+    <h2 id="workshop-heading">Make a stamp.</h2>
+    <p>Choose a destination, add a date, and make it yours.</p>
+  </div>
+  <div class="workshop-editor">
+    <form id="workshop-form" class="workshop-controls js-only">
+      <h3>Customize</h3>
+      <div class="workshop-fields">
+        <div class="workshop-field"><label for="workshop-country">Country</label><select id="workshop-country">${countries.map(country => `<option value="${country.code}"${country.code === initial.code ? ' selected' : ''}>${escape(country.name)}</option>`).join('')}</select></div>
+        <div class="workshop-field"><label for="workshop-city">City <span>(optional)</span></label><select id="workshop-city"><option value="">Country stamp</option><option value="${initial.id}" selected>${escape(initial.name)}</option></select></div>
+        <div class="workshop-field"><label for="workshop-date">Date <span>(optional)</span></label><input id="workshop-date" type="date" value="2026-11-07" min="0001-01-01" max="9999-12-31"></div>
+        <fieldset class="workshop-finish">
+          <legend>Ink finish</legend>
+          <div class="workshop-ink-options">
+            <label><input type="radio" name="workshop-finish" value="worn" checked><span>Worn</span></label>
+            <label><input type="radio" name="workshop-finish" value="clean"><span>Clean</span></label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="workshop-actions">
+        <button id="workshop-open-paper" class="workshop-preview-button" type="button" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-2-2-5-3-9-2v13c4-1 7 0 9 2 2-2 5-3 9-2V5c-4-1-7 0-9 2zm0 0v13"/></svg>
+          Preview on paper
+        </button>
+        ${downloadLink}
+      </div>
+    </form>
+    <div class="workshop-live">
+      <p class="workshop-live-label">Live preview</p>
+      <div class="workshop-canvas">
+        <img id="workshop-image" src="hero-mendoza.svg" width="400" height="300" alt="Mendoza passport stamp, 07 NOV 2026">
+      </div>
+      <div class="workshop-live-caption">
+        <strong id="workshop-caption">${escape(initial.name)}, ${escape(initial.countryName)}</strong>
+        <span>SVG · Transparent background</span>
+      </div>
+    </div>
+  </div>
+  <p id="workshop-status" class="workshop-status" role="status"></p>
+  <noscript><p>Enable JavaScript to customize a stamp, or download an SVG from the collection.</p></noscript>
+  <dialog id="workshop-paper" class="workshop-paper" aria-labelledby="workshop-paper-heading" aria-describedby="workshop-paper-caption">
+    <form method="dialog">
+      <div class="workshop-paper-header">
+        <div>
+          <h2 id="workshop-paper-heading">Preview on paper</h2>
+          <p id="workshop-paper-caption">${escape(initial.name)}, ${escape(initial.countryName)} · 07 NOV 2026 · Worn ink</p>
+        </div>
+        <button type="submit" class="workshop-paper-close" aria-label="Close preview" autofocus>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <div class="workshop-stage">
+        <div class="workshop-book">
+          <div class="workshop-page workshop-entry">
+            <span class="workshop-imprint">Travel journal</span>
+            <h3><span id="workshop-place">${escape(initial.name)}</span><span id="workshop-place-country">, <br>${escape(initial.countryName)}</span></h3>
+            <dl class="workshop-details">
+              <div><dt>Visit date</dt><dd id="workshop-printed-date">07 Nov 2026</dd></div>
+              <div><dt>Motif</dt><dd id="workshop-motif">${escape(initial.iconLabel)}</dd></div>
+            </dl>
+            <span class="workshop-page-number" aria-hidden="true">01 · Destination</span>
+          </div>
+          <div class="workshop-page workshop-art">
+            <span class="workshop-visa" aria-hidden="true">Visa / <span id="workshop-visa-country">${escape(initial.countryName)}</span></span>
+            <img id="workshop-paper-image" width="400" height="300" alt="Mendoza passport stamp, 07 NOV 2026">
+            <span class="workshop-page-number" aria-hidden="true">02 · Arrival</span>
+          </div>
+        </div>
+      </div>
+      <div class="workshop-paper-footer">
+        <p>SVG export has a transparent background.</p>
+        <div class="workshop-actions">
+          <button type="submit" class="workshop-back-button">Back to editor</button>
+          ${downloadLink}
+        </div>
+      </div>
+    </form>
+  </dialog>
+</section>`;
 }

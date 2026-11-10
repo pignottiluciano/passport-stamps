@@ -149,39 +149,106 @@ document.querySelector('#catalog').addEventListener('click', async event => {
 });
 restoreLocation();
 
-// The interactive example uses the same lazy core renderer as both framework adapters.
-const demo = document.querySelector('#stamp-demo');
-const demoCountry = document.querySelector('#demo-country');
-function updateCitySuggestions() {
-  document.querySelector('#demo-cities').replaceChildren(...articles
-    .filter(card => card.dataset.kind === 'destination' && card.dataset.code === demoCountry.value)
-    .map(card => new Option(card.querySelector('.stamp-name').textContent.slice(5))));
-}
-let demoRequest = 0;
-async function updateDemo(event) {
-  event?.preventDefault();
-  const request = ++demoRequest;
-  const message = document.querySelector('#demo-status');
-  const image = document.querySelector('#demo-image');
-  const button = demo.querySelector('button');
-  image.hidden = true;
-  button.disabled = true;
-  message.textContent = 'Loading stamp…';
-  try {
-    const {createStampImage} = await import('../dist/core/index.js');
-    const result = await createStampImage({country:demoCountry.value,city:document.querySelector('#demo-city').value,date:document.querySelector('#demo-date').value,variant:document.querySelector('#demo-variant').value});
-    if (request !== demoRequest) return;
-    image.src = result.src;
-    image.alt = result.alt;
-    image.hidden = false;
-    message.textContent = result.fallback ? 'This city is not in the catalog yet. Showing the country stamp.' : result.alt;
-  } catch (error) {
-    if (request === demoRequest) message.textContent = error instanceof Error ? error.message : 'Could not load the stamp.';
-  } finally {
-    if (request === demoRequest) button.disabled = false;
+// The workshop loads artwork through the same renderer as the framework adapters.
+const workshop = document.querySelector('#workshop');
+const workshopForm = document.querySelector('#workshop-form');
+const workshopPaper = document.querySelector('#workshop-paper');
+const workshopOpenPaper = document.querySelector('#workshop-open-paper');
+const workshopCountry = document.querySelector('#workshop-country');
+const workshopCity = document.querySelector('#workshop-city');
+const workshopDate = document.querySelector('#workshop-date');
+const workshopFinish = workshopForm.elements.namedItem('workshop-finish');
+const workshopImage = document.querySelector('#workshop-image');
+const workshopDownloads = workshop.querySelectorAll('[data-workshop-download]');
+const workshopStatus = document.querySelector('#workshop-status');
+let workshopRequest = 0;
+function clearWorkshopDownload() {
+  const previous = workshopDownloads[0].href;
+  if (previous.startsWith('blob:')) URL.revokeObjectURL(previous);
+  workshopOpenPaper.disabled = true;
+  for (const link of workshopDownloads) {
+    link.removeAttribute('href');
+    link.setAttribute('aria-disabled', 'true');
   }
 }
-demo.addEventListener('submit', updateDemo);
-demoCountry.addEventListener('change',()=>{document.querySelector('#demo-city').value='';updateCitySuggestions();});
-document.querySelector('#component-demo').addEventListener('toggle',event=>{if(event.target.open && !demoRequest) updateDemo();});
-updateCitySuggestions();
+
+function updateWorkshopCities(selected = '') {
+  const cities = articles.filter(card => card.dataset.kind === 'destination' && card.dataset.code === workshopCountry.value)
+    .map(card => new Option(card.querySelector('.stamp-name').textContent.slice(5), card.dataset.id))
+    .sort((a, b) => a.text.localeCompare(b.text, 'en'));
+  workshopCity.replaceChildren(new Option('Country stamp', ''), ...cities);
+  workshopCity.value = selected;
+  workshopCity.disabled = cities.length === 0;
+}
+
+async function updateWorkshop() {
+  const request = ++workshopRequest;
+  const options = {
+    country: workshopCountry.value,
+    city: workshopCity.value,
+    date: workshopDate.value,
+    variant: workshopFinish.value
+  };
+  const countryName = workshopCountry.selectedOptions[0].text;
+  clearWorkshopDownload();
+
+  if (!workshopDate.validity.valid) {
+    workshopImage.hidden = true;
+    workshopStatus.textContent = 'Enter a valid date or clear it to make a stamp without a date.';
+    return;
+  }
+
+  workshopStatus.textContent = 'Updating stamp…';
+  try {
+    const {createStampSvg, resolveStamp} = await import('../dist/core/index.js');
+    const {stamp, date} = resolveStamp(options);
+    const svg = await createStampSvg(options);
+    if (request !== workshopRequest) return;
+    const svgUrl = URL.createObjectURL(new Blob([svg], {type: 'image/svg+xml'}));
+    workshopImage.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    workshopImage.alt = stamp.name + ' — ' + stamp.iconLabel + ' passport stamp' + (date ? ', ' + date : '');
+    workshopImage.hidden = false;
+    const place = stamp.kind === 'country' ? stamp.name : stamp.name + ', ' + countryName;
+    document.querySelector('#workshop-caption').textContent = place;
+    const ink = options.variant === 'clean' ? 'Clean ink' : 'Worn ink';
+    document.querySelector('#workshop-paper-caption').textContent = [place, date ?? 'Undated', ink].join(' · ');
+    document.querySelector('#workshop-place').textContent = stamp.name;
+    const placeCountry = document.querySelector('#workshop-place-country');
+    placeCountry.hidden = stamp.kind === 'country';
+    placeCountry.replaceChildren(', ', document.createElement('br'), countryName);
+    document.querySelector('#workshop-printed-date').textContent = date ?? 'Undated';
+    document.querySelector('#workshop-motif').textContent = stamp.iconLabel;
+    document.querySelector('#workshop-visa-country').textContent = countryName;
+    const suffix = (options.date ? '-' + options.date : '') + (options.variant === 'clean' ? '-clean' : '');
+    for (const link of workshopDownloads) {
+      link.href = svgUrl;
+      link.download = stamp.id + suffix + '.svg';
+      link.removeAttribute('aria-disabled');
+    }
+    workshopOpenPaper.disabled = false;
+    workshopStatus.textContent = '';
+  } catch {
+    if (request !== workshopRequest) return;
+    workshopImage.hidden = true;
+    workshopStatus.textContent = 'Could not load the stamp preview. Reload the page to try again.';
+  }
+}
+
+updateWorkshopCities(workshopCity.value);
+workshopForm.addEventListener('input', () => {
+  workshopRequest++;
+  clearWorkshopDownload();
+});
+workshopForm.addEventListener('change', event => {
+  if (event.target === workshopCountry) updateWorkshopCities();
+  updateWorkshop();
+});
+workshopForm.addEventListener('submit', event => event.preventDefault());
+
+workshopOpenPaper.addEventListener('click', () => {
+  const paperImage = document.querySelector('#workshop-paper-image');
+  paperImage.src = workshopImage.src;
+  paperImage.alt = workshopImage.alt;
+  workshopPaper.showModal();
+});
+workshopPaper.addEventListener('close', () => workshopOpenPaper.focus());
