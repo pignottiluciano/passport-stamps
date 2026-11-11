@@ -7,7 +7,7 @@ import { assembleStamp, frames } from '../src/core/stamp-svg.mjs';
 import { icons as countryIcons } from './icons.mjs';
 import { destinationIcons } from './destination-icons.mjs';
 import { europeIcons } from './europe-icons.mjs';
-import { galleryPage } from './gallery.mjs';
+import { galleryData, galleryPage, sitemap, stampIndexPage, stampPage } from './gallery.mjs';
 
 const icons = {...countryIcons, ...destinationIcons, ...europeIcons};
 
@@ -114,6 +114,12 @@ files.set('docs/DESTINATIONS.md', `# Destination catalog\n\n${destinations.lengt
   return `## ${group[0].countryName} (${group.length})\n\n| Destination | Symbol | Worn | Clean |\n| --- | --- | --- | --- |\n`+group.map(c=>`| ${c.name} | ${c.iconLabel} | [SVG](../${c.file}) | [SVG](../${c.cleanFile}) |`).join('\n');
 }).join('\n\n') + '\n\n## Surrounding-area references\n\n' + destinations.filter(c=>c.associationNote).map(c=>`- **${c.name}:** ${c.associationNote}`).join('\n') + '\n\nMont-Saint-Michel is classified as a landmark destination. Drawings are simplified interpretations; some landmarks represent the surrounding tourist area rather than the city center. See [sources](SOURCES.md).\n');
 files.set('preview/index.html', galleryPage(countries, destinations));
+files.set('preview/stamps.json', galleryData(countries, destinations));
+files.set('preview/stamps/index.html', stampIndexPage(countries, destinations));
+for (const c of manifest) files.set(`preview/stamps/${c.id}.html`, stampPage(c, manifest));
+files.set('preview/sitemap.xml', sitemap(manifest));
+files.set('preview/snippets.js', await readFile(resolve(root, 'scripts/gallery-snippets.mjs'), 'utf8'));
+files.set('preview/analytics.js', await readFile(resolve(root, 'scripts/analytics.js'), 'utf8'));
 files.set('preview/gallery.css', await readFile(resolve(root, 'scripts/gallery.css'), 'utf8'));
 const heroStamp = stamps.find(c=>c.id==='ar-mendoza');
 files.set('preview/hero-mendoza.svg', finish(assembleStamp(heroStamp.id, stampArt(heroStamp), true), heroStamp, catalogWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
@@ -133,6 +139,8 @@ if (check) {
     const expected = stamps.map(c=>c.id+'.svg').sort();
     if (JSON.stringify(actual) !== JSON.stringify(expected)) throw Error(`Unexpected SVG inventory in ${directory}`);
   }
+  const pages = (await readdir(resolve(root,'preview/stamps'))).sort();
+  if (JSON.stringify(pages) !== JSON.stringify(['index.html', ...stamps.map(c=>c.id+'.html')].sort())) throw Error('Unexpected stamp page inventory in preview/stamps');
 }
 const bytes = countries.map(c => c.bytes);
 console.log(`Countries: ${countries.length}; worn SVGs: ${Math.min(...bytes)}–${Math.max(...bytes)} B; total: ${bytes.reduce((a,b)=>a+b,0)} B.`);

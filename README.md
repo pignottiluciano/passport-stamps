@@ -80,6 +80,19 @@ Copy the package's `svg/` directory into a public directory. Set `assetBaseUrl="
 
 The default uses a data URL. A nonempty `date` combined with `assetBaseUrl` reports `STATIC_DATE_UNSUPPORTED` because the hosted file has a fixed design. A missing city follows the same fallback or strict matching rules in both modes.
 
+## Web Component: Vue, Svelte, Astro, or plain HTML
+
+```html
+<script type="module">
+  import { definePassportStamp } from '@lucianopignotti/passport-stamps/element';
+  definePassportStamp(); // registers <passport-stamp>
+</script>
+
+<passport-stamp country="AR" city="Mendoza" date="2026-11-07" size="280"></passport-stamp>
+```
+
+Attributes mirror the properties below in kebab case: `strict-city`, `date-format` and `asset-base-url`. Registration is explicit, so importing the module has no side effects. Pass another tag name, for example `definePassportStamp('travel-stamp')`, when `passport-stamp` is already used, such as by the Angular component in the same page. `PassportStampElement` is also exported for subclassing.
+
 ## Plain HTML, Vue, or direct SVG assets
 
 Copy only the files you need into your public assets:
@@ -231,8 +244,12 @@ Update source files rather than generated SVGs:
 - `src/angular/`: standalone Angular component and packaging configuration.
 - `src/react/`: React component.
 - `scripts/build-library.mjs`: component compiler. Generated `dist/` and core artwork modules are rebuilt and are not checked into Git.
-- `scripts/gallery.mjs`: static gallery markup and styles.
-- `scripts/gallery-client.js`: clipboard actions and shareable gallery state, copied to `preview/gallery.js` by the build.
+- `src/element/`: framework-free custom element.
+- `scripts/gallery.mjs`: gallery page, static stamp pages, all-stamps index, sitemap and the compact `preview/stamps.json` collection data.
+- `scripts/gallery-client.js`: collection paging, stamp dialog, clipboard actions, workshop and PNG export, copied to `preview/gallery.js` by the build.
+- `scripts/analytics.js`: anonymous, cookie-free PostHog (EU) events on the public gallery only, copied to `preview/analytics.js`. Set `localStorage['passport-stamps-analytics'] = 'on'` to test it locally.
+- `scripts/gallery-snippets.mjs`: usage snippets shared by stamp pages and the dialog, copied to `preview/snippets.js`.
+- `scripts/og-image.html`: source of `preview/og-image.png`, the 1200 × 630 social preview. Regenerate it from the repository root with Chrome: `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars --allow-file-access-from-files --window-size=1200,630 --screenshot=preview/og-image.png scripts/og-image.html`.
 - `tests/catalog.test.mjs`: coverage, metadata, resource, and size contracts.
 
 Names, aliases and slugs must resolve unambiguously within a country. The generator reports both IDs when their normalized names collide. Names shared by cities in different countries are allowed.

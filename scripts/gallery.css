@@ -333,71 +333,44 @@ input::placeholder {
   min-width:0;
   overflow:hidden
 }
-.meta {
-  padding:16px 16px 8px;
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  font-size:11px;
-  color:var(--color-muted);
-  min-height:52px
+.card-open {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:4px 12px;
+  padding:12px 16px 16px;
+  height:100%;
+  text-decoration:none;
+  border-radius:4px
 }
-.meta span:last-child {
-  white-space:nowrap
+.card-open:hover {
+  background:#f1ece2
 }
 .art {
-  padding:0 8px
+  grid-column:1/-1;
+  display:block;
+  padding:0 0 8px
 }
 .art img {
   display:block;
   width:100%;
   height:auto
 }
-.stamp-card footer {
+.card-text {
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  border-top:1px solid var(--color-soft);
-  margin:0 16px;
-  padding:12px 0;
-  font-size:11px;
-  min-height:58px
+  flex-direction:column;
+  min-width:0
 }
-.stamp-card footer>span {
-  max-width:48%;
+.stamp-name {
+  font-size:14px;
+  font-weight:600
+}
+.stamp-motif,.stamp-code {
+  font-size:11px;
   color:var(--color-muted)
 }
-.stamp-card footer div {
-  display:flex;
-  gap:12px
-}
-.card-actions {
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:8px;
-  border-top:1px solid var(--color-soft);
-  margin:0 16px;
-  padding:10px 0;
-  font-size:11px
-}
-.card-actions select {
-  width:auto;
-  margin:0;
-  padding:7px;
-  font-size:11px;
-  min-height:36px
-}
-.card-actions button {
-  padding:7px 10px;
-  font-size:11px;
-  min-height:36px;
-  background:var(--color-surface);
-  color:var(--color-text)
-}
-.card-actions a {
-  margin-left:auto
+.stamp-code {
+  align-self:start;
+  letter-spacing:1px
 }
 .view-tools {
   display:flex;
@@ -410,13 +383,6 @@ input::placeholder {
   background:var(--color-surface);
   color:var(--color-text);
   font-size:12px
-}
-.stamp-selection {
-  font-size:13px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap
 }
 .action-status:empty {
   display:none
@@ -899,10 +865,7 @@ dialog.workshop-paper {
   padding:12px;
   background:var(--color-soft)
 }
-body.no-js .stamp-card {
-  display:block!important
-}
-body.no-js .card-actions,body.no-js .js-only {
+body.no-js .js-only {
   display:none!important
 }
 dialog {
@@ -930,10 +893,6 @@ dialog textarea {
   min-height:180px;
   margin:14px 0;
   font:12px monospace
-}
-.stamp-card:target {
-  outline:2px solid var(--color-focus);
-  outline-offset:3px
 }
 @media(max-width:1000px) {
   h1 {
@@ -1006,9 +965,6 @@ dialog textarea {
   .pagination button {
     padding:9px 12px
   }
-  .meta {
-    min-height:0
-  }
   .bottom {
     flex-direction:column
   }
@@ -1027,5 +983,209 @@ dialog textarea {
 @media(prefers-reduced-motion:reduce) {
   html {
     scroll-behavior:auto
+  }
+}
+.all-stamps-link {
+  margin-top:18px;
+  font-size:13px
+}
+dialog.stamp-dialog {
+  width:min(980px,calc(100% - 32px));
+  max-width:none;
+  max-height:calc(100% - 32px);
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 22px 70px #22191252
+}
+.stamp-dialog-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+  gap:12px;
+  margin-bottom:14px
+}
+.stamp-dialog-header p {
+  margin-top:2px
+}
+.stamp-dialog-kicker {
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase
+}
+.stamp-dialog-close {
+  min-width:42px;
+  padding:9px;
+  background:var(--color-surface);
+  color:var(--color-text)
+}
+.stamp-dialog-body {
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+  gap:22px;
+  align-items:start
+}
+.stamp-dialog-art {
+  border:1px solid var(--color-soft);
+  border-radius:8px;
+  padding:12px;
+  background:#fff
+}
+.stamp-dialog-art img {
+  display:block;
+  width:100%;
+  height:auto
+}
+.stamp-dialog-side {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  min-width:0
+}
+.stamp-dialog-finish {
+  display:flex;
+  gap:16px;
+  border:0;
+  padding:0;
+  margin:0;
+  font-size:13px
+}
+.stamp-dialog-finish legend {
+  font-size:12px;
+  color:var(--color-muted);
+  margin-bottom:4px
+}
+.stamp-dialog-finish label {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  min-height:32px
+}
+.stamp-dialog-actions,.stamp-dialog-links,.snippet-switch {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center
+}
+.stamp-dialog-actions button,.stamp-dialog-links button,.snippet-switch button {
+  background:var(--color-surface);
+  color:var(--color-text)
+}
+.snippet-switch button {
+  min-height:34px;
+  padding:6px 12px;
+  font-size:12px
+}
+.snippet-switch button[aria-pressed=true] {
+  background:var(--color-text);
+  color:var(--color-bg)
+}
+.stamp-dialog pre,.stamp-detail-code pre {
+  margin:0;
+  padding:12px;
+  overflow:auto;
+  background:#292823;
+  color:#faf8f3;
+  border-radius:6px;
+  font-size:12px;
+  line-height:1.5;
+  min-height:96px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere
+}
+.stamp-dialog-links {
+  font-size:13px;
+  gap:14px
+}
+.stamp-detail {
+  padding-top:28px;
+  padding-bottom:60px
+}
+.breadcrumb {
+  font-size:13px;
+  color:var(--color-muted);
+  margin-bottom:24px
+}
+.stamp-detail h1 {
+  font-size:48px;
+  letter-spacing:-1px;
+  margin:6px 0 4px
+}
+.stamp-detail-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+  gap:40px;
+  align-items:center
+}
+.stamp-detail-art img {
+  display:block;
+  width:100%;
+  height:auto
+}
+.stamp-facts {
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  margin:20px 0 24px;
+  font-size:13px
+}
+.stamp-facts dt {
+  color:var(--color-muted);
+  font-size:11px
+}
+.stamp-facts dd {
+  margin:0
+}
+.stamp-detail-workshop {
+  margin-top:18px;
+  font-size:14px
+}
+.stamp-detail-code,.stamp-related,.stamp-detail section {
+  margin-top:48px
+}
+.stamp-detail-code h3 {
+  margin:22px 0 8px;
+  font-size:14px
+}
+.stamp-detail-code > p {
+  margin-top:8px
+}
+.stamp-related ul {
+  list-style:none;
+  padding:0;
+  margin:18px 0 0;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:14px
+}
+.stamp-related a {
+  display:block;
+  text-decoration:none;
+  font-size:13px
+}
+.stamp-related img {
+  display:block;
+  width:100%;
+  height:auto
+}
+.stamp-index {
+  columns:4 180px;
+  padding:0;
+  margin:10px 0 0;
+  list-style:none;
+  font-size:14px;
+  line-height:2
+}
+.stamp-detail h3 {
+  margin-top:24px
+}
+@media(max-width:760px) {
+  .stamp-dialog-body,.stamp-detail-grid {
+    grid-template-columns:1fr
+  }
+  dialog.stamp-dialog {
+    padding:14px
+  }
+  .stamp-detail h1 {
+    font-size:36px
   }
 }

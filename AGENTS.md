@@ -2,7 +2,7 @@
 
 This repository is a framework-independent SVG asset library. Keep the asset generator dependency-free; optional framework adapters use the locked development tools. The static preview is documentation, not an application.
 
-- Country data lives in `data/stamps.json`; layouts live in `scripts/build.mjs`, country motifs in `scripts/icons.mjs`, destination motifs in `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`, and the gallery in `scripts/gallery.mjs` and `scripts/gallery-client.js`.
+- Country data lives in `data/stamps.json`; layouts live in `scripts/build.mjs`, country motifs in `scripts/icons.mjs`, destination motifs in `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`, and the gallery in `scripts/gallery.mjs`, `scripts/gallery-client.js` and `scripts/gallery-snippets.mjs`. The build also generates one static page per stamp in `preview/stamps/`, a sitemap and `preview/stamps.json`. `scripts/analytics.js` sends anonymous PostHog (EU) events only on the public site: keep it cookie-free, without autocapture or recordings, and loaded after the page is idle. Tag new user actions with `data-track` attributes or `track()` in the gallery client.
 - Generated SVGs, the manifest and preview are checked into Git. Run `npm run build` after editing sources, then `npm run check`.
 - Keep each SVG below 10 KiB. Use the approved worn treatment from `src/core/ink.mjs` (re-exported by `scripts/ink.mjs`) for main SVGs; retain clean alternatives. Avoid embedded images or external resources.
 - Preserve transparent backgrounds and accessible SVG titles. Avoid external resources.
@@ -17,4 +17,4 @@ The primary `manifest.json` must contain exactly the 193 countries verified in `
 
 Keep public documentation, gallery controls, descriptive catalog metadata, and accessible SVG titles in English. Local-language artwork labels, proper place names, and multilingual search aliases are intentional.
 
-Framework adapters live in src/angular and src/react and share the typed renderer in src/core. Run npm ci, npm run build, and npm run check for a clean checkout. Keep all existing asset paths and undated SVG output stable. Generated dist and core artwork sources are ignored and rebuilt. Dates must use the dated composition, never overlap original lettering.
+Framework adapters live in src/angular, src/react and src/element and share the typed renderer in src/core. Run npm ci, npm run build, and npm run check for a clean checkout. Keep all existing asset paths and undated SVG output stable. Generated dist and core artwork sources are ignored and rebuilt. Dates must use the dated composition, never overlap original lettering.

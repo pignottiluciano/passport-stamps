@@ -1,9 +1,9 @@
 const escape = value => value.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 export function componentDocs() {
   return `<section class="get-started" aria-label="Installation and components">
-<div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps">npm ↗</a></div>
+<div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps" data-track="outbound" data-track-target="github">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps" data-track="outbound" data-track-target="npm">npm ↗</a></div>
 <p class="component-intro">One component. Country, city, and an optional date — all through properties.</p>
-<p class="release-note">The examples below use the 0.2.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
+<p class="release-note">The Web Component is not yet published. The other examples use the 0.3.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
 <details><summary>Angular 20+ · &lt;passport-stamp&gt;</summary>
 <p>Import the standalone component. No NgModule, image copying, or assets configuration is needed.</p>
 <pre><code>${escape(`import { Component } from '@angular/core';
@@ -71,6 +71,16 @@ export function Example() {
 <p>If a city is not in the selected country's catalog, the component uses the country stamp. Unknown countries and invalid dates show an explicit error. Dates do not undergo timezone conversion. A dated layout reserves a dedicated row inside the frame so the date does not cover existing lettering.</p>
 <p>Artwork loads on demand from the package, without a CDN. Components use isolated SVG data URLs, so repeated stamps do not share filter IDs. If your site sets a Content Security Policy, allow <code>data:</code> images or use <code>assetBaseUrl</code> for undated stamps.</p>
 </details>
+<details><summary>Web Component · Vue, Svelte, Astro and plain HTML</summary>
+<p>Register the element once, then use it like any HTML tag. Attributes use kebab case, for example <code>date-format</code>, <code>strict-city</code> and <code>asset-base-url</code>.</p>
+<pre><code>${escape(`<script type="module">
+  import { definePassportStamp } from '@lucianopignotti/passport-stamps/element';
+  definePassportStamp(); // or definePassportStamp('travel-stamp')
+</script>
+
+<passport-stamp country="AR" city="Mendoza" date="2026-11-07" size="280"></passport-stamp>`)}</code></pre>
+<p>Registration is explicit, so importing the module has no side effects. Pass another tag name if <code>passport-stamp</code> is already used, for example by the Angular component in the same page.</p>
+</details>
 <details><summary>Plain HTML and direct SVG files</summary>
 <p>Download a file from the gallery, or copy it from the npm package into your public/stamps folder.</p>
 <pre><code>&lt;img src="/stamps/ar-mendoza.svg" alt="Mendoza — grapes and Andes Mountains" width="400" height="300"&gt;</code></pre>
@@ -82,7 +92,7 @@ export function Example() {
 
 export function stampWorkshop(countries, destinations) {
   const initial = destinations.find(stamp => stamp.id === 'ar-mendoza');
-  const downloadLink = `<a data-workshop-download class="button" href="hero-mendoza.svg" download="ar-mendoza-2026-11-07.svg">
+  const downloadLink = `<a data-workshop-download class="button" href="hero-mendoza.svg" download="ar-mendoza-2026-11-07.svg" data-track="svg_downloaded" data-track-source="workshop" data-track-id="ar-mendoza" data-track-finish="worn">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4"/></svg>
       Download SVG
     </a>`;
@@ -112,6 +122,14 @@ export function stampWorkshop(countries, destinations) {
           Preview on paper
         </button>
         ${downloadLink}
+        <button id="workshop-png" class="workshop-preview-button" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>
+          Save image
+        </button>
+        <button id="workshop-share" class="workshop-preview-button" type="button" hidden>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3m-4 4 4-4 4 4M5 12v8h14v-8"/></svg>
+          Share
+        </button>
       </div>
     </form>
     <div class="workshop-live">
