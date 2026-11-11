@@ -22,6 +22,11 @@ describe('Angular PassportStampComponent',()=>{
     expect(decodeURIComponent(img.src)).toContain('>07 NOV 2026</text>');
     expect(decodeURIComponent(img.src)).not.toContain('<filter');
     expect(fixture.nativeElement.style.width).toBe('320px');
+    expect(img.getAttribute('loading')).toBe('lazy');
+    expect(img.getAttribute('decoding')).toBe('async');
+    fixture.componentRef.setInput('loading', 'eager');
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('img').getAttribute('loading')).toBe('eager');
     fixture.componentRef.setInput('dateFormat', 'numeric');
     await fixture.whenStable();
     expect(fixture.nativeElement.querySelector('img').alt).toContain('07/11/2026');

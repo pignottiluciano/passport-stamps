@@ -19,6 +19,8 @@ export class PassportStampComponent {
   readonly variant = input<StampVariant>('worn');
   readonly size = input(240);
   readonly alt = input<string>();
+  /** Native image loading. Use eager for a stamp that is visible on first paint. */
+  readonly loading = input<'lazy' | 'eager'>('lazy');
   private readonly sizeError = computed(() => getStampSizeError(this.size()));
   protected readonly width = computed(() => this.sizeError() ? 240 : this.size());
   protected readonly image = resource({

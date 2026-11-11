@@ -66,7 +66,7 @@ export function Example() {
 <tr><td>variant</td><td><code>"worn"</code></td><td>Worn by default. Set to <code>"clean"</code> to remove ink effects.</td></tr>
 <tr><td>assetBaseUrl</td><td><code>"/travel/assets/stamps"</code></td><td>Optional directory containing svg/ for undated stamps. Copy the package SVGs there first.</td></tr>
 <tr><td>size</td><td><code>280</code></td><td>Width in pixels, default 240. Height follows the 4:3 artwork ratio.</td></tr>
-<tr><td>alt</td><td><code>"My visit to Mendoza"</code></td><td>Optional image description. Otherwise generated from the selected stamp and date.</td></tr>
+<tr><td>alt</td><td><code>"My visit to Mendoza"</code></td><td>Optional image description. Otherwise generated from the selected stamp and date.</td></tr><tr><td>loading</td><td><code>"eager"</code></td><td>Native image loading, default lazy. Use eager for a stamp visible on first paint.</td></tr>
 </tbody></table></div>
 <p>If a city is not in the selected country's catalog, the component uses the country stamp. Unknown countries and invalid dates show an explicit error. Dates do not undergo timezone conversion. A dated layout reserves a dedicated row inside the frame so the date does not cover existing lettering.</p>
 <p>Artwork loads on demand from the package, without a CDN. Components use isolated SVG data URLs, so repeated stamps do not share filter IDs. If your site sets a Content Security Policy, allow <code>data:</code> images or use <code>assetBaseUrl</code> for undated stamps.</p>

@@ -62,6 +62,10 @@ On its own, this change added about 2 kB gzip to one cold stamp because the shar
 
 The catalog lookup benchmark reported 2.87 ms for the indexed batch, in line with the earlier measurement.
 
+## Worn grain octaves
+
+Reducing the grain turbulence from three octaves to two was compared on all 431 worn stamps. Two octaves look slightly coarser, with less fine porosity on thick borders and large lettering. In Chrome, 50 worn stamps at 140 px gave medians of 108 ms with two octaves and 120 ms with three, but individual runs ranged from 46 to 146 ms, so the difference was within noise. The approved three-octave treatment was kept, and published SVGs are unchanged.
+
 ## Typography across browsers
 
 The same comparison sheet was reviewed in Chrome and Safari on macOS. The clean samples showed matching line breaks and fit across the six sampled frames. The large difference in the original worn samples came from Safari's rendering of the Gaussian blur, reproduced by toggling only that filter primitive on the Mendoza stamp. The updated dated filter keeps the worn texture and improves its clarity in Safari.

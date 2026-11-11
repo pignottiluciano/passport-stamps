@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- React and Angular images use `decoding="async"` and native lazy loading by default. Set `loading` to `'eager'` for a stamp visible on first paint.
+
 ### Changed
 
 - Artwork modules store only the parts unique to each stamp. The renderer adds the shared frame, header, date row and worn ink filter at runtime with the same code the asset build uses. Rendered SVGs are byte-for-byte identical to 0.2.1.
