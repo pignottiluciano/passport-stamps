@@ -117,7 +117,26 @@ export function resolveStamp(options: StampOptions) {
   return { stamp: city ?? country, date: formatStampDate(options.date, options.dateFormat), variant, fallback: Boolean(query && !city) };
 }
 
-async function renderStamp({ stamp, date, variant }: ReturnType<typeof resolveStamp>) {
+// Repeated stamps (lists, re-renders, React StrictMode) share one render, including requests in flight.
+// ponytail: insertion-order LRU capped at 100 because dates are unbounded; raise the cap if long timelines miss.
+const renderCache = new Map<string, Promise<string>>();
+const renderCacheLimit = 100;
+
+function renderStamp(resolved: ReturnType<typeof resolveStamp>): Promise<string> {
+  const key = `${resolved.stamp.id}|${resolved.variant}|${resolved.date ?? ''}`;
+  let svg = renderCache.get(key);
+  if (svg) renderCache.delete(key);
+  else {
+    svg = buildStamp(resolved);
+    // A failed module load must not be cached, so a later request can retry it.
+    svg.catch(() => { if (renderCache.get(key) === svg) renderCache.delete(key); });
+  }
+  renderCache.set(key, svg);
+  if (renderCache.size > renderCacheLimit) renderCache.delete(renderCache.keys().next().value!);
+  return svg;
+}
+
+async function buildStamp({ stamp, date, variant }: ReturnType<typeof resolveStamp>) {
   const load = loaders[stamp.id];
   if (!load) throw new PassportStampError('INVALID_COUNTRY', 'The requested artwork is unavailable.');
   const { art } = await load();

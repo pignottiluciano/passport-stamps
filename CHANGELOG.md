@@ -6,6 +6,7 @@
 
 - Artwork modules store only the parts unique to each stamp. The renderer adds the shared frame, header, date row and worn ink filter at runtime with the same code the asset build uses. Rendered SVGs are byte-for-byte identical to 0.2.1.
 - The unpacked package shrinks from 5.2 MB to 2.3 MB, and the tarball from 313 kB to 253 kB. Each lazy artwork module is about 80% smaller, so grids of stamps transfer much less. Shared core code grows by about 2.7 kB gzip.
+- `createStampImage()` and `createStampSvg()` reuse the 100 most recent renders, including requests still in flight. Lists and re-renders with the same stamp, finish and date build the SVG once. Failed artwork loads are not cached.
 
 ## 0.2.1
 
