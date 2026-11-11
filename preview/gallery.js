@@ -14,6 +14,8 @@ const copyText = $('#copy-text');
 const filterOptions = JSON.parse($('#filter-options').textContent);
 const normalize = value => value.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const pageSize = 24;
+// Analytics are optional: scripts/analytics.js defines psTrack on the public site only.
+const track = (event, properties) => window.psTrack?.(event, properties);
 const byId = new Map();
 let stamps = [];
 let kind = 'country';
@@ -63,7 +65,7 @@ function restoreLocation() {
   page = Number.isSafeInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
   render();
   const requestedStamp = byId.get(params.get('stamp') ?? '');
-  if (requestedStamp) openStamp(requestedStamp);
+  if (requestedStamp) openStamp(requestedStamp, 'link');
   else if (dialog.open) dialog.close();
 }
 
@@ -134,7 +136,10 @@ async function copy(value, description) {
 }
 
 $('#copy-view').addEventListener('click', () => copy(location.href, 'View link'));
-$('#copy-install').addEventListener('click', () => copy('npm install @lucianopignotti/passport-stamps', 'Install command'));
+$('#copy-install').addEventListener('click', () => {
+  track('install_copied');
+  copy('npm install @lucianopignotti/passport-stamps', 'Install command');
+});
 const quickExamples = {
   angular: "import { PassportStampComponent } from\n  '@lucianopignotti/passport-stamps/angular';\n\n// Add PassportStampComponent to imports.\n<passport-stamp\n  country=\"AR\"\n  city=\"Mendoza\"\n  date=\"2026-11-07\"\n  [size]=\"280\"\n/>",
   react: "import { PassportStamp } from\n  '@lucianopignotti/passport-stamps/react';\n\n<PassportStamp\n  country=\"AR\"\n  city=\"Mendoza\"\n  date=\"2026-11-07\"\n  size={280}\n/>",
@@ -144,7 +149,10 @@ for (const button of document.querySelectorAll('[data-framework]')) button.addEv
   $('#quick-example').textContent = quickExamples[button.dataset.framework];
   for (const other of document.querySelectorAll('[data-framework]')) other.setAttribute('aria-pressed', String(other === button));
 });
-$('#copy-example').addEventListener('click', () => copy($('#quick-example').textContent, 'Code example'));
+$('#copy-example').addEventListener('click', () => {
+  track('example_copied', {framework: $('[data-framework][aria-pressed="true"]').dataset.framework});
+  copy($('#quick-example').textContent, 'Code example');
+});
 $('#copy-close').addEventListener('click', () => copyDialog.close());
 
 // Stamp details: one dialog for preview, downloads, copying and framework snippets.
@@ -164,6 +172,8 @@ function updateDialogArt() {
   dialogImage.alt = current.name + ' — ' + current.iconLabel + ' passport stamp, ' + finish + ' ink';
   dialogDownload.href = dialogImage.getAttribute('src');
   dialogDownload.download = current.id + (finish === 'clean' ? '-clean' : '') + '.svg';
+  dialogDownload.dataset.trackId = current.id;
+  dialogDownload.dataset.trackFinish = finish;
 }
 
 async function updateSnippet() {
@@ -173,7 +183,8 @@ async function updateSnippet() {
   if (stamp === current) dialogCode.textContent = stampSnippets(stamp)[snippetKind];
 }
 
-function openStamp(stamp) {
+function openStamp(stamp, source) {
+  if (current !== stamp) track('stamp_opened', {id: stamp.id, kind: stamp.kind, source});
   current = stamp;
   $('#stamp-dialog-kicker').textContent = stamp.kind === 'country' ? 'Country · ' + stamp.region : 'Destination · ' + stamp.countryName;
   $('#stamp-dialog-name').textContent = stamp.name;
@@ -194,7 +205,7 @@ catalog.addEventListener('click', event => {
   if (!stamp) return;
   event.preventDefault();
   opener = link;
-  openStamp(stamp);
+  openStamp(stamp, 'card');
 });
 for (const radio of document.querySelectorAll('input[name="stamp-dialog-finish"]')) radio.addEventListener('change', updateDialogArt);
 for (const button of document.querySelectorAll('[data-snippet]')) button.addEventListener('click', () => {
@@ -218,6 +229,7 @@ $('#stamp-dialog-copy-svg').addEventListener('click', async event => {
   try {
     const response = await fetch(dialogImage.getAttribute('src'));
     if (!response.ok) throw new Error('SVG request failed');
+    track('svg_copied', {id: current.id, finish: dialogFinish()});
     await copy(await response.text(), dialogFinish() === 'clean' ? 'Clean SVG' : 'Worn SVG');
   } catch {
     status.textContent = 'Could not load the SVG. Try again or use the download link.';
@@ -225,14 +237,20 @@ $('#stamp-dialog-copy-svg').addEventListener('click', async event => {
     button.disabled = false;
   }
 });
-$('#stamp-dialog-copy-link').addEventListener('click', () => copy(new URL('stamps/' + current.id + '.html', location.href).href, 'Stamp link'));
-$('#stamp-dialog-copy-code').addEventListener('click', () => copy(dialogCode.textContent, 'Code example'));
+$('#stamp-dialog-copy-link').addEventListener('click', () => {
+  track('link_copied', {id: current.id});
+  copy(new URL('stamps/' + current.id + '.html', location.href).href, 'Stamp link');
+});
+$('#stamp-dialog-copy-code').addEventListener('click', () => {
+  track('snippet_copied', {id: current.id, framework: snippetKind});
+  copy(dialogCode.textContent, 'Code example');
+});
 $('#stamp-dialog-workshop').addEventListener('click', event => {
   event.preventDefault();
   const stamp = current;
   opener = undefined;
   dialog.close();
-  makeInWorkshop(stamp);
+  makeInWorkshop(stamp, 'dialog');
 });
 
 // The workshop loads artwork through the same renderer as the framework adapters.
@@ -251,6 +269,7 @@ const workshopShare = $('#workshop-share');
 const workshopStatus = $('#workshop-status');
 let workshopRequest = 0;
 let workshopName = 'ar-mendoza-2026-11-07';
+let workshopTrack = {id: 'ar-mendoza', dated: true};
 let workshopPlace = 'Mendoza, Argentina';
 function clearWorkshopDownload() {
   const previous = workshopDownloads[0].href;
@@ -312,9 +331,12 @@ async function updateWorkshop() {
     $('#workshop-motif').textContent = stamp.iconLabel;
     $('#workshop-visa-country').textContent = countryName;
     workshopName = stamp.id + (options.date ? '-' + options.date : '') + (options.variant === 'clean' ? '-clean' : '');
+    workshopTrack = {id: stamp.id, dated: Boolean(date)};
     for (const link of workshopDownloads) {
       link.href = svgUrl;
       link.download = workshopName + '.svg';
+      link.dataset.trackId = stamp.id;
+      link.dataset.trackFinish = options.variant;
       link.removeAttribute('aria-disabled');
     }
     workshopOpenPaper.disabled = false;
@@ -328,7 +350,8 @@ async function updateWorkshop() {
   }
 }
 
-function makeInWorkshop(stamp) {
+function makeInWorkshop(stamp, source) {
+  track('workshop_started', {id: stamp.id, source});
   workshopCountry.value = stamp.code;
   updateWorkshopCities(stamp.kind === 'destination' ? stamp.id : '');
   updateWorkshop();
@@ -357,6 +380,7 @@ workshopPng.addEventListener('click', async () => {
     link.download = file.name;
     link.click();
     setTimeout(() => URL.revokeObjectURL(link.href), 10000);
+    track('workshop_png_saved', workshopTrack);
     workshopStatus.textContent = 'Image saved.';
   } catch {
     workshopStatus.textContent = 'Could not create the image. Download the SVG instead.';
@@ -368,6 +392,7 @@ workshopShare.addEventListener('click', async () => {
   try {
     const file = await workshopPngFile();
     await navigator.share({files: [file], title: workshopPlace + ' passport stamp'});
+    track('workshop_shared', workshopTrack);
   } catch (error) {
     if (error?.name !== 'AbortError') workshopStatus.textContent = 'Could not share the image. Use Save image instead.';
   }
@@ -396,7 +421,7 @@ ready.then(() => {
   const make = byId.get(new URLSearchParams(location.search).get('make') ?? '');
   updateWorkshopCities(workshopCity.value);
   restoreLocation();
-  if (make) makeInWorkshop(make);
+  if (make) makeInWorkshop(make, 'page');
 }).catch(() => {
   status.textContent = 'Could not load the collection. Reload the page or browse all stamps on one page.';
 });

@@ -119,6 +119,7 @@ files.set('preview/stamps/index.html', stampIndexPage(countries, destinations));
 for (const c of manifest) files.set(`preview/stamps/${c.id}.html`, stampPage(c, manifest));
 files.set('preview/sitemap.xml', sitemap(manifest));
 files.set('preview/snippets.js', await readFile(resolve(root, 'scripts/gallery-snippets.mjs'), 'utf8'));
+files.set('preview/analytics.js', await readFile(resolve(root, 'scripts/analytics.js'), 'utf8'));
 files.set('preview/gallery.css', await readFile(resolve(root, 'scripts/gallery.css'), 'utf8'));
 const heroStamp = stamps.find(c=>c.id==='ar-mendoza');
 files.set('preview/hero-mendoza.svg', finish(assembleStamp(heroStamp.id, stampArt(heroStamp), true), heroStamp, catalogWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));

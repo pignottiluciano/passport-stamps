@@ -2,7 +2,7 @@
 
 This repository is a framework-independent SVG asset library. Keep the asset generator dependency-free; optional framework adapters use the locked development tools. The static preview is documentation, not an application.
 
-- Country data lives in `data/stamps.json`; layouts live in `scripts/build.mjs`, country motifs in `scripts/icons.mjs`, destination motifs in `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`, and the gallery in `scripts/gallery.mjs`, `scripts/gallery-client.js` and `scripts/gallery-snippets.mjs`. The build also generates one static page per stamp in `preview/stamps/`, a sitemap and `preview/stamps.json`.
+- Country data lives in `data/stamps.json`; layouts live in `scripts/build.mjs`, country motifs in `scripts/icons.mjs`, destination motifs in `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`, and the gallery in `scripts/gallery.mjs`, `scripts/gallery-client.js` and `scripts/gallery-snippets.mjs`. The build also generates one static page per stamp in `preview/stamps/`, a sitemap and `preview/stamps.json`. `scripts/analytics.js` sends anonymous PostHog (EU) events only on the public site: keep it cookie-free, without autocapture or recordings, and loaded after the page is idle. Tag new user actions with `data-track` attributes or `track()` in the gallery client.
 - Generated SVGs, the manifest and preview are checked into Git. Run `npm run build` after editing sources, then `npm run check`.
 - Keep each SVG below 10 KiB. Use the approved worn treatment from `src/core/ink.mjs` (re-exported by `scripts/ink.mjs`) for main SVGs; retain clean alternatives. Avoid embedded images or external resources.
 - Preserve transparent backgrounds and accessible SVG titles. Avoid external resources.

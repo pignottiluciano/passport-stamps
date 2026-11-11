@@ -1,7 +1,7 @@
 const escape = value => value.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 export function componentDocs() {
   return `<section class="get-started" aria-label="Installation and components">
-<div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps">npm ↗</a></div>
+<div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps" data-track="outbound" data-track-target="github">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps" data-track="outbound" data-track-target="npm">npm ↗</a></div>
 <p class="component-intro">One component. Country, city, and an optional date — all through properties.</p>
 <p class="release-note">The Web Component is not yet published. The other examples use the 0.3.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
 <details><summary>Angular 20+ · &lt;passport-stamp&gt;</summary>
@@ -92,7 +92,7 @@ export function Example() {
 
 export function stampWorkshop(countries, destinations) {
   const initial = destinations.find(stamp => stamp.id === 'ar-mendoza');
-  const downloadLink = `<a data-workshop-download class="button" href="hero-mendoza.svg" download="ar-mendoza-2026-11-07.svg">
+  const downloadLink = `<a data-workshop-download class="button" href="hero-mendoza.svg" download="ar-mendoza-2026-11-07.svg" data-track="svg_downloaded" data-track-source="workshop" data-track-id="ar-mendoza" data-track-finish="worn">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4"/></svg>
       Download SVG
     </a>`;

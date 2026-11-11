@@ -8,7 +8,7 @@
 
 ### Changed
 
-- The gallery loads 40 kB of HTML instead of 511 kB and fetches the collection as compact JSON. Each stamp opens a detail dialog with downloads, copying and framework snippets, and has its own static page with social preview metadata, listed in a sitemap. The workshop saves and shares PNG images.
+- The gallery loads 40 kB of HTML instead of 511 kB and fetches the collection as compact JSON. Each stamp opens a detail dialog with downloads, copying and framework snippets, and has its own static page with social preview metadata, listed in a sitemap. The workshop saves and shares PNG images. The published gallery records anonymous, cookie-free usage events with PostHog (EU) after the page is idle.
 
 ## 0.3.0
 
