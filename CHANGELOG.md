@@ -1,26 +1,18 @@
 # Changelog
 
-## Unreleased
-
-### Added
-
-- Use stamps in Vue, Svelte, Astro or plain HTML with the Web Component from `@lucianopignotti/passport-stamps/element`. Call `definePassportStamp()` to register `<passport-stamp>` or pass another tag name.
-
-### Changed
-
-- The gallery loads 40 kB of HTML instead of 511 kB and fetches the collection as compact JSON. Each stamp opens a detail dialog with downloads, copying and framework snippets, and has its own static page with social preview metadata, listed in a sitemap. The workshop saves and shares PNG images. The published gallery records anonymous, cookie-free usage events with PostHog (EU) after the page is idle.
-
 ## 0.3.0
 
 ### Added
 
+- Use stamps in Vue, Svelte, Astro or plain HTML with the Web Component from `@lucianopignotti/passport-stamps/element`. Call `definePassportStamp()` to register `<passport-stamp>` or pass another tag name.
 - React and Angular images use `decoding="async"` and native lazy loading by default. Set `loading` to `'eager'` for a stamp visible on first paint.
 - Try the interactive stamp workshop in the gallery: choose a country, city, date and ink finish, preview the stamp on a passport page, and download the SVG.
 
 ### Changed
 
+- The gallery loads 40 kB of HTML instead of 511 kB and fetches the collection as compact JSON. Each stamp opens a detail dialog with downloads, copying and framework snippets, and has its own static page with social preview metadata, listed in a sitemap. The workshop saves and shares PNG images. The published gallery records anonymous, cookie-free usage events with PostHog (EU) after the page is idle.
 - Artwork modules store only the parts unique to each stamp. The renderer adds the shared frame, header, date row and worn ink filter at runtime with the same code the asset build uses. Rendered SVGs are byte-for-byte identical to 0.2.1.
-- The unpacked package shrinks from 5.2 MB to 2.3 MB, and the tarball from 313 kB to 251 kB. Each lazy artwork module is about 80% smaller, so grids of stamps transfer much less.
+- The unpacked package shrinks from 5.2 MB to 2.3 MB, and the tarball from 313 kB to 252 kB. Each lazy artwork module is about 80% smaller, so grids of stamps transfer much less.
 - `createStampImage()` and `createStampSvg()` reuse the 100 most recent renders, including requests still in flight. Lists and re-renders with the same stamp, finish and date build the SVG once. Failed artwork loads are not cached.
 - The runtime catalog ships as compact rows. Country codes and kinds come from the IDs, and artwork labels are omitted when they are the uppercase name. Shared core code drops from 24.1 kB to 19.6 kB gzip, below 0.2.1. Catalog lookups and `resolveStamp()` results are unchanged.
 
