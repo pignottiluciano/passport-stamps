@@ -1,7 +1,26 @@
 import { countryNames, destinationNames, normalize } from './catalog-matching.mjs';
-import type { catalog } from './generated/catalog.js';
+import type { CountryCode, StampId } from './generated/ids.js';
 
-type CatalogStamp = typeof catalog[number];
+/** Compact generated row: id, name, icon label, then optional aliases and artwork label. */
+export type CatalogRow = readonly [id: StampId, name: string, iconLabel: string, aliases?: readonly string[], label?: string];
+
+export interface CatalogStamp {
+  readonly id: StampId;
+  readonly code: CountryCode;
+  readonly kind: 'country' | 'destination';
+  readonly name: string;
+  readonly label: string;
+  readonly iconLabel: string;
+  readonly aliases: readonly string[];
+}
+
+/** Restores the fields the build omits; the build validates that ids encode code and kind. */
+export function expandCatalog(rows: readonly CatalogRow[]): readonly CatalogStamp[] {
+  return rows.map(([id, name, iconLabel, aliases = [], label = name.toUpperCase()]) => ({
+    id, code: id.slice(0, 2).toUpperCase() as CountryCode, kind: id.length === 2 ? 'country' : 'destination',
+    name, label, iconLabel, aliases
+  }));
+}
 
 export function createCatalogIndex(stamps: readonly CatalogStamp[]) {
   const countries = new Map<string, CatalogStamp>();

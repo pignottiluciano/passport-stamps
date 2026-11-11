@@ -1,8 +1,8 @@
 import { normalize } from './catalog-matching.mjs';
 import { catalogWornStyle, finish } from './ink.mjs';
 import { assembleStamp, DATE_PLACEHOLDER } from './stamp-svg.mjs';
-import { createCatalogIndex } from './catalog-index.js';
-import { catalog } from './generated/catalog.js';
+import { createCatalogIndex, expandCatalog } from './catalog-index.js';
+import { catalogRows } from './generated/catalog.js';
 import { loaders } from './generated/loaders.js';
 import type { CountryCode, StampId } from './generated/ids.js';
 
@@ -39,6 +39,7 @@ export class PassportStampError extends Error {
     this.name = 'PassportStampError';
   }
 }
+const catalog = expandCatalog(catalogRows);
 const countries = catalog.filter(stamp => stamp.kind === 'country');
 let catalogIndex: ReturnType<typeof createCatalogIndex> | undefined;
 const getCatalogIndex = () => catalogIndex ??= createCatalogIndex(catalog);

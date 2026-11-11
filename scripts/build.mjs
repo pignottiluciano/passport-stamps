@@ -90,14 +90,21 @@ const manifest = stamps.map(c => {
 validateCatalogAliases(manifest);
 const countries = manifest.filter(c => c.kind === 'country');
 const destinations = manifest.filter(c => c.kind === 'destination');
-const compactCatalog = manifest.map(c=>({id:c.id,code:c.code,kind:c.kind,name:c.name,label:c.label,iconLabel:c.iconLabel,aliases:c.aliases??[]}));
+// Runtime rows omit what expandCatalog() derives: code and kind from the validated id, and label when it is the uppercase name.
+const catalogRows = manifest.map(c => {
+  const row = [c.id, c.name, c.iconLabel];
+  const aliases = c.aliases ?? [];
+  if (c.label !== c.name.toUpperCase()) row.push(aliases, c.label);
+  else if (aliases.length) row.push(aliases);
+  return row;
+});
 const literalUnion = entries => entries.map(entry => JSON.stringify(entry)).sort().join(' | ');
 files.set('src/core/generated/ids.ts', [
   `export type CountryCode = ${literalUnion(countries.map(country => country.code))};`,
   `export type StampId = ${literalUnion(manifest.map(stamp => stamp.id))};`,
   `export type DestinationId = ${literalUnion(destinations.map(destination => destination.id))};`
 ].join('\n') + '\n');
-files.set('src/core/generated/catalog.ts', 'import type { CountryCode, StampId } from "./ids.js";\nexport const catalog: ReadonlyArray<{id:StampId;code:CountryCode;kind:string;name:string;label:string;iconLabel:string;aliases:readonly string[]}> = '+JSON.stringify(compactCatalog)+';\n');
+files.set('src/core/generated/catalog.ts', 'import type { CatalogRow } from "../catalog-index.js";\nexport const catalogRows: readonly CatalogRow[] = '+JSON.stringify(catalogRows)+';\n');
 files.set('src/core/generated/loaders.ts', 'import type { StampArt } from "../stamp-svg.mjs";\nexport const loaders: Record<string, () => Promise<{art:StampArt}>> = {\n'+manifest.map(c=>JSON.stringify(c.id)+': () => import("../art/'+c.id+'.js")').join(',\n')+'\n};\n');
 files.set('manifest.json', JSON.stringify(countries,null,2)+'\n');
 files.set('destinations.json', JSON.stringify(destinations,null,2)+'\n');

@@ -49,7 +49,18 @@ Artwork modules now hold only each stamp's color, frame name, title and composit
 | Shared core JS, gzip per module | 21,051 B | 23,754 B |
 | Unpacked package | 5,163,766 B | 2,307,443 B |
 
-One cold stamp now transfers about 2 kB more gzip because the shared assembler loads with the core. From about five distinct stamps onward, the smaller artwork modules outweigh it. The benchmark page measures the current build only; the four-module split prototype was retired. Browser timings have not been rerun for this change.
+On its own, this change added about 2 kB gzip to one cold stamp because the shared assembler loads with the core. The compact catalog below more than offsets it, so a single cold stamp now transfers less than in 0.2.1. The benchmark page measures the current build only; the four-module split prototype was retired. Browser timings have not been rerun for this change.
+
+## Compact runtime catalog
+
+`generated/catalog.js` stores one row per stamp: ID, name, icon label, then aliases and the artwork label only when needed. `expandCatalog()` derives the country code and kind from the validated ID and restores an omitted label as the uppercase name. The expanded catalog, `resolveStamp()` results and both list helpers matched the previous build exactly.
+
+| Metric | Before | After |
+| --- | ---: | ---: |
+| Catalog module, gzip | 14,835 B | 10,204 B |
+| Shared core JS, gzip per module | 24,085 B | 19,610 B |
+
+The catalog lookup benchmark reported 2.87 ms for the indexed batch, in line with the earlier measurement.
 
 ## Typography across browsers
 
@@ -63,8 +74,8 @@ Pack the library with `npm pack --pack-destination work/packed` after creating t
 
 | Metric | Measured | Limit |
 | --- | ---: | ---: |
-| npm tarball | 253,309 B | 350 KiB |
-| Shared core JS, gzip per module | 23,754 B | 24 KiB |
+| npm tarball | 249,110 B | 350 KiB |
+| Shared core JS, gzip per module | 19,610 B | 24 KiB |
 | Largest packaged SVG | 2,831 B | 10 KiB |
 
 Shared core size includes all packaged JS outside the lazy artwork directory. The caps leave room for catalog growth and are intentionally above this measured build. The generator also checks the dated SVG templates against the individual SVG limit. A fixture with an inflated core module and SVG verified that the gate fails and identifies the exceeded limits.
