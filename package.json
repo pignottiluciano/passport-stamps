@@ -25,6 +25,10 @@
       "types": "./dist/react/index.d.ts",
       "default": "./dist/react/index.js"
     },
+    "./element": {
+      "types": "./dist/element/index.d.ts",
+      "default": "./dist/element/index.js"
+    },
     "./angular": {
       "types": "./dist/angular/index.d.ts",
       "default": "./dist/angular/fesm2022/lucianopignotti-passport-stamps-angular-build.mjs"
