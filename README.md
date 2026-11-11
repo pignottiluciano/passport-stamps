@@ -247,7 +247,7 @@ Update source files rather than generated SVGs:
 - `src/element/`: framework-free custom element.
 - `scripts/gallery.mjs`: gallery page, static stamp pages, all-stamps index, sitemap and the compact `preview/stamps.json` collection data.
 - `scripts/gallery-client.js`: collection paging, stamp dialog, clipboard actions, workshop and PNG export, copied to `preview/gallery.js` by the build.
-- `scripts/analytics.js`: anonymous, cookie-free PostHog (EU) events on the public gallery only, copied to `preview/analytics.js`. Set `localStorage['passport-stamps-analytics'] = 'on'` to test it locally.
+- `scripts/analytics.js`: anonymous, cookie-free PostHog (EU) events (with approximate country and city from the IP address) on the public gallery only, copied to `preview/analytics.js`. Set `localStorage['passport-stamps-analytics'] = 'on'` to test it locally.
 - `scripts/gallery-snippets.mjs`: usage snippets shared by stamp pages and the dialog, copied to `preview/snippets.js`.
 - `scripts/og-image.html`: source of `preview/og-image.png`, the 1200 × 630 social preview. Regenerate it from the repository root with Chrome: `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars --allow-file-access-from-files --window-size=1200,630 --screenshot=preview/og-image.png scripts/og-image.html`.
 - `tests/catalog.test.mjs`: coverage, metadata, resource, and size contracts.
