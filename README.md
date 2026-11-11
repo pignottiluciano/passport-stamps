@@ -66,6 +66,7 @@ Props can come from state or your application's data. The component is a client 
 | `variant` | `'worn'` or `'clean'` | `'worn'` | Ink treatment. |
 | `size` | `number` | `240` | Width in pixels; height follows the 4:3 viewBox. In Angular, bind numbers with `[size]="280"`. |
 | `alt` | `string` | Generated description | Optional accessible image text. |
+| `loading` | `'lazy'` or `'eager'` | `'lazy'` | Native image loading. Use `'eager'` for a stamp visible on first paint. Images always decode asynchronously. |
 
 Without a city, the country stamp is used. A city must belong to the selected country; an unknown city falls back to the country stamp by default. Enable `strictCity` in React or `[strictCity]="true"` in Angular to show an error instead. The core reports this as `INVALID_CITY`. Unknown countries, invalid dates, and invalid variants produce explicit errors. Size must be positive and finite. Both components display a validation message for an invalid size and recover when the size is corrected. The core error type, `PassportStampError`, includes a stable `code`.
 
@@ -224,7 +225,8 @@ Update source files rather than generated SVGs:
 - `scripts/icons.mjs`: country motifs.
 - `scripts/destination-icons.mjs` and `scripts/europe-icons.mjs`: destination motifs.
 - `scripts/build.mjs`: layouts, SVG generation, catalogs, and destination documentation.
-- `scripts/ink.mjs`: deterministic ink treatment.
+- `src/core/ink.mjs`: deterministic ink treatment, shared by the build and the renderer. `scripts/ink.mjs` re-exports it.
+- `src/core/stamp-svg.mjs`: frames, header and date row that assemble each stamp from its per-stamp artwork module.
 - `src/core/index.ts`: shared typed selection, date validation, and lazy rendering.
 - `src/angular/`: standalone Angular component and packaging configuration.
 - `src/react/`: React component.

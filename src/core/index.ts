@@ -1,6 +1,8 @@
 import { normalize } from './catalog-matching.mjs';
-import { createCatalogIndex } from './catalog-index.js';
-import { catalog } from './generated/catalog.js';
+import { catalogWornStyle, finish } from './ink.mjs';
+import { assembleStamp, DATE_PLACEHOLDER } from './stamp-svg.mjs';
+import { createCatalogIndex, expandCatalog } from './catalog-index.js';
+import { catalogRows } from './generated/catalog.js';
 import { loaders } from './generated/loaders.js';
 import type { CountryCode, StampId } from './generated/ids.js';
 
@@ -37,6 +39,7 @@ export class PassportStampError extends Error {
     this.name = 'PassportStampError';
   }
 }
+const catalog = expandCatalog(catalogRows);
 const countries = catalog.filter(stamp => stamp.kind === 'country');
 let catalogIndex: ReturnType<typeof createCatalogIndex> | undefined;
 const getCatalogIndex = () => catalogIndex ??= createCatalogIndex(catalog);
@@ -115,12 +118,32 @@ export function resolveStamp(options: StampOptions) {
   return { stamp: city ?? country, date: formatStampDate(options.date, options.dateFormat), variant, fallback: Boolean(query && !city) };
 }
 
-async function renderStamp({ stamp, date, variant }: ReturnType<typeof resolveStamp>) {
+// Repeated stamps (lists, re-renders, React StrictMode) share one render, including requests in flight.
+// ponytail: insertion-order LRU capped at 100 because dates are unbounded; raise the cap if long timelines miss.
+const renderCache = new Map<string, Promise<string>>();
+const renderCacheLimit = 100;
+
+function renderStamp(resolved: ReturnType<typeof resolveStamp>): Promise<string> {
+  const key = `${resolved.stamp.id}|${resolved.variant}|${resolved.date ?? ''}`;
+  let svg = renderCache.get(key);
+  if (svg) renderCache.delete(key);
+  else {
+    svg = buildStamp(resolved);
+    // A failed module load must not be cached, so a later request can retry it.
+    svg.catch(() => { if (renderCache.get(key) === svg) renderCache.delete(key); });
+  }
+  renderCache.set(key, svg);
+  if (renderCache.size > renderCacheLimit) renderCache.delete(renderCache.keys().next().value!);
+  return svg;
+}
+
+async function buildStamp({ stamp, date, variant }: ReturnType<typeof resolveStamp>) {
   const load = loaders[stamp.id];
   if (!load) throw new PassportStampError('INVALID_COUNTRY', 'The requested artwork is unavailable.');
-  const { artwork } = await load();
-  const template = date ? (variant === 'worn' ? artwork.datedWorn : artwork.datedClean) : artwork[variant];
-  return date ? template.replaceAll('__PASSPORT_DATE__', date) : template;
+  const { art } = await load();
+  const clean = assembleStamp(stamp.id, art, Boolean(date));
+  const svg = variant === 'worn' ? finish(clean, stamp, catalogWornStyle) : clean;
+  return date ? svg.replaceAll(DATE_PLACEHOLDER, date) : svg;
 }
 
 /** Returns standalone SVG markup for saving or downloading a stamp. */

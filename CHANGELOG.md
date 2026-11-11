@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- React and Angular images use `decoding="async"` and native lazy loading by default. Set `loading` to `'eager'` for a stamp visible on first paint.
+
+### Changed
+
+- Artwork modules store only the parts unique to each stamp. The renderer adds the shared frame, header, date row and worn ink filter at runtime with the same code the asset build uses. Rendered SVGs are byte-for-byte identical to 0.2.1.
+- The unpacked package shrinks from 5.2 MB to 2.3 MB, and the tarball from 313 kB to 253 kB. Each lazy artwork module is about 80% smaller, so grids of stamps transfer much less.
+- `createStampImage()` and `createStampSvg()` reuse the 100 most recent renders, including requests still in flight. Lists and re-renders with the same stamp, finish and date build the SVG once. Failed artwork loads are not cached.
+- The runtime catalog ships as compact rows. Country codes and kinds come from the IDs, and artwork labels are omitted when they are the uppercase name. Shared core code drops from 24.1 kB to 19.6 kB gzip, below 0.2.1. Catalog lookups and `resolveStamp()` results are unchanged.
+
 ## 0.2.1
 
 ### Fixed

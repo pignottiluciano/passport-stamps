@@ -50,7 +50,7 @@
     let run = Date.now();
     try {
       for (const count of [1, 50]) for (const variant of ['worn', 'clean']) for (const dated of [false, true]) {
-        for (const build of ['baseline', 'split']) {
+        for (const build of ['current']) {
           const cold = [], warm = [];
           for (let repeat = 0; repeat < 3; repeat++) {
             results.textContent = `Measuring ${build}, ${count} images, ${variant}, ${dated ? 'dated' : 'undated'} (${repeat + 1}/3)…`;

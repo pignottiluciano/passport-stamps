@@ -1,7 +1,7 @@
 @if (errorMessage(); as error) {
   <span role="alert">{{ error }}</span>
 } @else if (image.value(); as stamp) {
-  <img [src]="stamp.src" [alt]="alt() ?? stamp.alt" width="400" height="300">
+  <img [src]="stamp.src" [alt]="alt() ?? stamp.alt" [attr.loading]="loading()" decoding="async" width="400" height="300">
 } @else {
   <span role="status">Loading stamp…</span>
 }

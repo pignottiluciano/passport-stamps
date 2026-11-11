@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import { performance } from 'node:perf_hooks';
-import { catalog } from '../dist/core/generated/catalog.js';
+import { catalogRows } from '../dist/core/generated/catalog.js';
 import { countryNames, destinationNames, normalize } from '../dist/core/catalog-matching.mjs';
-import { createCatalogIndex } from '../dist/core/catalog-index.js';
+import { createCatalogIndex, expandCatalog } from '../dist/core/catalog-index.js';
+
+const catalog = expandCatalog(catalogRows);
 
 const countries = catalog.filter(stamp => stamp.kind === 'country');
 function linear(country, city) {

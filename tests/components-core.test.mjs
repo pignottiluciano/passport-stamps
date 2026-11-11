@@ -113,3 +113,16 @@ test('hosted SVGs reject dates and invalid base URLs', async () => {
     await assert.rejects(createStampImage({ country: 'AR', assetBaseUrl }), { code: 'INVALID_ASSET_BASE_URL' });
   }
 });
+test('repeated and concurrent renders share cached artwork without stale results', async () => {
+  const [first, second] = await Promise.all([1, 2].map(() => createStampImage({country: 'AR', city: 'Mendoza', date: '2026-11-07'})));
+  assert.deepEqual(first, second);
+  // Fill past the cache limit, then confirm an evicted stamp renders the same way again.
+  for (let day = 1; day <= 28; day++) for (const month of ['01', '02', '03', '04']) {
+    await createStampSvg({country: 'FR', date: `2026-${month}-${String(day).padStart(2, '0')}`});
+  }
+  assert.equal(await createStampSvg({country: 'AR', city: 'Mendoza', date: '2026-11-07'}), decode(first));
+  // Same artwork, different city query: the fallback flag and alt still follow the request.
+  const fallback = await createStampImage({country: 'FR', city: 'Mendoza'});
+  assert.equal(fallback.fallback, true);
+  assert.equal(fallback.src, (await createStampImage({country: 'FR'})).src);
+});

@@ -7,10 +7,12 @@ export interface PassportStampProps extends StampImageOptions {
   size?: number;
   alt?: string;
   className?: string;
+  /** Native image loading. Use eager for a stamp that is visible on first paint. */
+  loading?: 'lazy' | 'eager';
 }
 
 /** Resolves a country or city stamp and optionally prints a calendar date inside it. */
-export function PassportStamp({ country, city, strictCity = false, date, dateFormat, assetBaseUrl, variant = 'worn', size = 240, alt, className }: PassportStampProps) {
+export function PassportStamp({ country, city, strictCity = false, date, dateFormat, assetBaseUrl, variant = 'worn', size = 240, alt, className, loading = 'lazy' }: PassportStampProps) {
   const key = JSON.stringify([country, city, strictCity, date, dateFormat, assetBaseUrl, variant]);
   const [state, setState] = useState<{key: string; image?: StampImage; error?: string}>();
   useEffect(() => {
@@ -36,6 +38,8 @@ export function PassportStamp({ country, city, strictCity = false, date, dateFor
           alt={alt ?? current.image.alt}
           width={400}
           height={300}
+          loading={loading}
+          decoding="async"
           style={{ display: 'block', width: '100%', height: 'auto' }}
         />
       ) : <span role="status">Loading stamp…</span>}
