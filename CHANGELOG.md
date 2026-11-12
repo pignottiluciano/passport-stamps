@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0
+
+### Added
+
+- Added a circular passport seal with an interlocking PS monogram. The repository includes clean and worn SVGs and a transparent PNG export.
+- Added browser favicons, an Apple touch icon, and web manifest icons for the gallery and individual stamp pages.
+
+### Changed
+
+- The gallery and stamp pages use the PS monogram in the header.
+
 ## 0.3.0
 
 ### Added

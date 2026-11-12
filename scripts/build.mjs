@@ -124,10 +124,20 @@ files.set('preview/gallery.css', await readFile(resolve(root, 'scripts/gallery.c
 const heroStamp = stamps.find(c=>c.id==='ar-mendoza');
 files.set('preview/hero-mendoza.svg', finish(assembleStamp(heroStamp.id, stampArt(heroStamp), true), heroStamp, catalogWornStyle).replaceAll('__PASSPORT_DATE__','07 NOV 2026'));
 files.set('preview/gallery.js', await readFile(resolve(root, 'scripts/gallery-client.js'), 'utf8'));
+// Brand masters and raster exports stay separate from the country catalog.
+const brandLogo = finish(await readFile(resolve(root, 'brand/logo-clean.svg'), 'utf8'), {id:'brand', code:'PS'}, catalogWornStyle);
+files.set('brand/logo.svg', brandLogo);
+files.set('preview/brand/logo.svg', brandLogo);
+for (const name of ['logo-clean.svg', 'mark.svg', 'favicon.svg', 'favicon.ico', 'favicon-16.png', 'favicon-32.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'logo.png', 'site.webmanifest']) {
+  const content = await readFile(resolve(root, 'brand', name));
+  if (name.endsWith('.svg') && content.length > 10240) throw Error(`Brand asset exceeds 10 KiB: ${name}`);
+  files.set(`preview/brand/${name}`, content);
+}
+if (Buffer.byteLength(brandLogo) > 10240) throw Error('Brand logo exceeds 10 KiB');
 for (const [path, content] of files) {
   const full = resolve(root,path);
   if (check) {
-    if (await readFile(full,'utf8') !== content) throw Error(`Stale generated file: ${path}. Run npm run build.`);
+    if (!(await readFile(full)).equals(Buffer.from(content))) throw Error(`Stale generated file: ${path}. Run npm run build.`);
   } else {
     await mkdir(dirname(full),{recursive:true});
     await writeFile(full,content);

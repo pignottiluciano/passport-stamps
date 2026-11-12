@@ -3,7 +3,7 @@ export function componentDocs() {
   return `<section class="get-started" aria-label="Installation and components">
 <div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps" data-track="outbound" data-track-target="github">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps" data-track="outbound" data-track-target="npm">npm ↗</a></div>
 <p class="component-intro">One component. Country, city, and an optional date — all through properties.</p>
-<p class="release-note">The examples below use the 0.3.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
+<p class="release-note">The examples below use the 0.4.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
 <details><summary>Angular 20+ · &lt;passport-stamp&gt;</summary>
 <p>Import the standalone component. No NgModule, image copying, or assets configuration is needed.</p>
 <pre><code>${escape(`import { Component } from '@angular/core';
