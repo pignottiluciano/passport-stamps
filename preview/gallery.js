@@ -263,6 +263,10 @@ const workshopCity = $('#workshop-city');
 const workshopDate = $('#workshop-date');
 const workshopFinish = workshopForm.elements.namedItem('workshop-finish');
 const workshopImage = $('#workshop-image');
+const workshopColor = $('#workshop-color');
+const workshopRandomColor = $('#workshop-random-color');
+const workshopOriginalColor = $('#workshop-original-color');
+let workshopSelectedColor;
 const workshopDownloads = workshop.querySelectorAll('[data-workshop-download]');
 const workshopPng = $('#workshop-png');
 const workshopShare = $('#workshop-share');
@@ -298,7 +302,8 @@ async function updateWorkshop() {
     country: workshopCountry.value,
     city: workshopCity.value,
     date: workshopDate.value,
-    variant: workshopFinish.value
+    variant: workshopFinish.value,
+    color: workshopSelectedColor
   };
   const countryName = workshopCountry.selectedOptions[0].text;
   clearWorkshopDownload();
@@ -319,6 +324,8 @@ async function updateWorkshop() {
     workshopImage.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
     workshopImage.alt = stamp.name + ' — ' + stamp.iconLabel + ' passport stamp' + (date ? ', ' + date : '');
     workshopImage.hidden = false;
+    workshopColor.value = new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('g[color]').getAttribute('color');
+    workshopOriginalColor.disabled = options.color === undefined;
     workshopPlace = stamp.kind === 'country' ? stamp.name : stamp.name + ', ' + countryName;
     $('#workshop-caption').textContent = workshopPlace;
     const ink = options.variant === 'clean' ? 'Clean ink' : 'Worn ink';
@@ -404,9 +411,32 @@ workshopForm.addEventListener('input', () => {
 });
 workshopForm.addEventListener('change', event => {
   if (event.target === workshopCountry) updateWorkshopCities();
+  if (event.target === workshopColor) {
+    workshopSelectedColor = workshopColor.value;
+    track('workshop_color_changed', {source: 'picker'});
+  }
   updateWorkshop();
 });
 workshopForm.addEventListener('submit', event => event.preventDefault());
+workshopRandomColor.addEventListener('click', async () => {
+  const request = ++workshopRequest;
+  clearWorkshopDownload();
+  try {
+    const {pickStampColor} = await import('../dist/core/index.js');
+    if (request !== workshopRequest) return;
+    workshopSelectedColor = pickStampColor();
+    track('workshop_color_changed', {source: 'random'});
+    updateWorkshop();
+  } catch {
+    if (request !== workshopRequest) return;
+    workshopStatus.textContent = 'Could not choose an ink color. Try again.';
+  }
+});
+workshopOriginalColor.addEventListener('click', () => {
+  workshopSelectedColor = undefined;
+  track('workshop_color_changed', {source: 'original'});
+  updateWorkshop();
+});
 
 workshopOpenPaper.addEventListener('click', () => {
   const paperImage = $('#workshop-paper-image');

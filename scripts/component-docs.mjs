@@ -64,6 +64,8 @@ export function Example() {
 <tr><td>date</td><td><code>"2026-11-07"</code></td><td>Optional calendar date in YYYY-MM-DD format. Printed inside the stamp as 07 NOV 2026.</td></tr>
 <tr><td>dateFormat</td><td><code>"numeric"</code></td><td>Print 07/11/2026. The default, text, prints 07 NOV 2026.</td></tr>
 <tr><td>variant</td><td><code>"worn"</code></td><td>Worn by default. Set to <code>"clean"</code> to remove ink effects.</td></tr>
+<tr><td>color</td><td><code>"#8B2252"</code></td><td>Override ink with a #RGB or #RRGGBB color. Takes priority over randomColor.</td></tr>
+<tr><td>randomColor</td><td><code>true</code></td><td>Choose a palette color once per component instance. Defaults to false.</td></tr>
 <tr><td>assetBaseUrl</td><td><code>"/travel/assets/stamps"</code></td><td>Optional directory containing svg/ for undated stamps. Copy the package SVGs there first.</td></tr>
 <tr><td>size</td><td><code>280</code></td><td>Width in pixels, default 240. Height follows the 4:3 artwork ratio.</td></tr>
 <tr><td>alt</td><td><code>"My visit to Mendoza"</code></td><td>Optional image description. Otherwise generated from the selected stamp and date.</td></tr><tr><td>loading</td><td><code>"eager"</code></td><td>Native image loading, default lazy. Use eager for a stamp visible on first paint.</td></tr>
@@ -115,6 +117,14 @@ export function stampWorkshop(countries, destinations) {
             <label><input type="radio" name="workshop-finish" value="clean"><span>Clean</span></label>
           </div>
         </fieldset>
+        <div class="workshop-field workshop-color-field">
+          <label for="workshop-color">Ink color</label>
+          <div class="workshop-color-options">
+            <input id="workshop-color" type="color" value="${initial.color}">
+            <button id="workshop-random-color" type="button">Random ink</button>
+            <button id="workshop-original-color" type="button" disabled>Original ink</button>
+          </div>
+        </div>
       </div>
       <div class="workshop-actions">
         <button id="workshop-open-paper" class="workshop-preview-button" type="button" aria-haspopup="dialog">

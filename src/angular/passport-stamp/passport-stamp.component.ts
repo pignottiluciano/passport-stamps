@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, resource } from '@angular/core';
-import { createStampImage, getStampSizeError, type StampDateFormat, type StampVariant } from '@lucianopignotti/passport-stamps';
+import { createStampImage, getStampSizeError, pickStampColor, type StampDateFormat, type StampVariant } from '@lucianopignotti/passport-stamps';
 
 /** Displays a country or destination stamp with an optional date integrated into the artwork. */
 @Component({
@@ -17,6 +17,9 @@ export class PassportStampComponent {
   readonly dateFormat = input<StampDateFormat>('text');
   readonly assetBaseUrl = input<string>();
   readonly variant = input<StampVariant>('worn');
+  readonly color = input<string>();
+  readonly randomColor = input(false);
+  private readonly randomInk = computed(() => pickStampColor());
   readonly size = input(240);
   readonly alt = input<string>();
   /** Native image loading. Use eager for a stamp that is visible on first paint. */
@@ -24,7 +27,7 @@ export class PassportStampComponent {
   private readonly sizeError = computed(() => getStampSizeError(this.size()));
   protected readonly width = computed(() => this.sizeError() ? 240 : this.size());
   protected readonly image = resource({
-    params: () => ({ country: this.country(), city: this.city(), strictCity: this.strictCity(), date: this.date(), dateFormat: this.dateFormat(), assetBaseUrl: this.assetBaseUrl(), variant: this.variant() }),
+    params: () => ({ country: this.country(), city: this.city(), strictCity: this.strictCity(), date: this.date(), dateFormat: this.dateFormat(), assetBaseUrl: this.assetBaseUrl(), variant: this.variant(), color: this.color() ?? (this.randomColor() ? this.randomInk() : undefined) }),
     loader: ({params}) => createStampImage(params)
   });
   protected readonly errorMessage = computed(() => {

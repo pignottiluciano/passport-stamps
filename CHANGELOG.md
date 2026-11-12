@@ -4,6 +4,8 @@
 
 ### Added
 
+- Customize stamp ink with `color` or choose a curated random ink with `randomColor` in the core renderer, Angular, React, and Web Component. The workshop includes an ink picker, Random ink, and Original ink controls, with the selected color preserved in SVG and PNG exports.
+
 - Added a circular passport seal with an interlocking PS monogram. The repository includes clean and worn SVGs and a transparent PNG export.
 - Added browser favicons, an Apple touch icon, and web manifest icons for the gallery and individual stamp pages.
 
