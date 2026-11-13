@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.0
+
+### Added
+
+- Compose a passport page with up to six dated or undated stamps using `createPassportPageSvg()`. The workshop lets you collect stamps with their selected ink colors and finishes and download the full page as SVG or PNG.
+- Customize stamp ink with `color` or choose a curated random ink with `randomColor` in the core renderer, Angular, React, and Web Component. The workshop offers original ink, curated ink swatches and a custom color picker, with the selected color preserved in SVG and PNG exports.
+- Added a circular passport seal with an interlocking PS monogram. The repository includes clean and worn SVGs and a transparent PNG export.
+- Added browser favicons, an Apple touch icon, and web manifest icons for the gallery and individual stamp pages.
+
+### Changed
+
+- The gallery and stamp pages use the PS monogram in the header.
+- The workshop places the stamp editor beside a larger passport page on desktop and landscape tablets, and stacks them on smaller screens. Stamps on the page appear as thumbnails with remove buttons and open slots. Dropdowns and the date field have a refined style, and buttons use a ticket design.
+
 ## 0.3.0
 
 ### Added

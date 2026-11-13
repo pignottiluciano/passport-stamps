@@ -75,4 +75,24 @@ describe('Angular PassportStampComponent',()=>{
     await fixture.whenStable();
     expect(fixture.nativeElement.querySelector('img').getAttribute('src')).toBe('/travel/assets/svg/ar.svg');
   });
+  it('keeps random ink across input updates and explicit overrides', async () => {
+    TestBed.configureTestingModule({ imports: [PassportStampComponent], providers: [provideZonelessChangeDetection()] });
+    const fixture = TestBed.createComponent(PassportStampComponent);
+    const ink = () => decodeURIComponent(fixture.nativeElement.querySelector('img').src).match(/<g[^>]* color="([^"]+)"/)?.[1];
+    fixture.componentRef.setInput('country', 'AR');
+    fixture.componentRef.setInput('randomColor', true);
+    await fixture.whenStable();
+    const original = ink();
+    expect(original).toMatch(/^#[0-9a-f]{6}$/i);
+    fixture.componentRef.setInput('country', 'FR');
+    await fixture.whenStable();
+    expect(ink()).toBe(original);
+    fixture.componentRef.setInput('color', '#123456');
+    await fixture.whenStable();
+    expect(ink()).toBe('#123456');
+    fixture.componentRef.setInput('color', undefined);
+    await fixture.whenStable();
+    expect(ink()).toBe(original);
+  });
+
 });

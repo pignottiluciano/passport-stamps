@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {createStampSvg, createStampImage, resolveStamp, formatStampDate, stampSize, getCountries, getCities} from '../dist/core/index.js';
+import {createPassportPageSvg, createStampSvg, createStampImage, resolveStamp, formatStampDate, stampSize, getCountries, getCities} from '../dist/core/index.js';
 const decode = image => decodeURIComponent(image.src.split(',').slice(1).join(','));
 test('country and city lists provide stable selector options', () => {
   const countries = getCountries();
@@ -125,4 +125,73 @@ test('repeated and concurrent renders share cached artwork without stale results
   const fallback = await createStampImage({country: 'FR', city: 'Mendoza'});
   assert.equal(fallback.fallback, true);
   assert.equal(fallback.src, (await createStampImage({country: 'FR'})).src);
+});
+
+test('custom ink normalizes hex, preserves artwork and partitions the render cache', async () => {
+  for (const variant of ['clean', 'worn']) {
+    const options = {country: 'AR', city: 'Mendoza', date: '2026-11-07', variant};
+    const original = await createStampSvg(options);
+    const [red, blue] = await Promise.all([
+      createStampSvg({...options, color:'#B23'}),
+      createStampSvg({...options, color:'#24558a'})
+    ]);
+    assert.equal(red, original.replace(/color="#[a-fA-F0-9]+"/, 'color="#bb2233"'));
+    assert.equal(blue, original.replace(/color="#[a-fA-F0-9]+"/, 'color="#24558a"'));
+    assert.equal(await createStampSvg({...options, color:'#BB2233'}), red);
+    assert.equal(await createStampSvg(options), original);
+    assert.equal(decode(await createStampImage({...options, color:'#B23'})), red);
+  }
+});
+
+test('random ink uses the palette and explicit color takes priority', async () => {
+  const {stampInkColors, pickStampColor} = await import('../dist/core/index.js');
+  assert.ok(stampInkColors.includes(pickStampColor()));
+  const resolved = resolveStamp({country:'AR', randomColor:true});
+  assert.ok(stampInkColors.includes(resolved.color));
+  const svg = await createStampSvg({country:'AR', randomColor:true});
+  assert.ok(stampInkColors.some(color => svg.includes(`color="${color}"`)));
+  assert.equal(resolveStamp({country:'AR', color:'#123', randomColor:true}).color, '#112233');
+});
+
+test('invalid colors and hosted color overrides report explicit errors', async () => {
+  for (const color of ['', 'red', '#1234', 'var(--ink)', '#fff" onload="alert(1)', null, 123]) {
+    await assert.rejects(createStampSvg({country:'AR', color}), {code:'INVALID_COLOR'});
+  }
+  for (const options of [{color:'#123'}, {randomColor:true}]) {
+    await assert.rejects(createStampImage({country:'AR', assetBaseUrl:'/assets', ...options}), {code:'STATIC_COLOR_UNSUPPORTED'});
+  }
+});
+
+test('passport pages preserve stamp order, ink colors and accessible descriptions', async () => {
+  const stamps = [
+    {country: 'AG', date: '2026-11-07', color: '#123'},
+    {country: 'AG', date: '2026-11-08', color: '#abcdef'},
+    {country: 'AR', city: 'Mendoza', variant: 'clean'}
+  ];
+  const page = await createPassportPageSvg(stamps);
+  assert.equal(await createPassportPageSvg(stamps), page);
+  assert.match(page, /^<svg[^>]+viewBox="0 0 800 1000"/);
+  assert.match(page, /<desc[^>]*>Antigua &amp; Barbuda[^<]+07 NOV 2026; Antigua &amp; Barbuda[^<]+08 NOV 2026; Mendoza[^<]+<\/desc>/);
+  assert.match(page, /color="#112233"[\s\S]+color="#abcdef"/);
+  assert.doesNotMatch(page, /<image\b|\bhref=/);
+  const ids = Array.from(page.matchAll(/\bid="([^"]+)"/g), match => match[1]);
+  assert.equal(new Set(ids).size, ids.length);
+  const filterRefs = Array.from(page.matchAll(/\bfilter="url\(#([^"]+)\)"/g), match => match[1]);
+  assert.deepEqual(filterRefs, ['stamp-1-ink-ag-worn', 'stamp-2-ink-ag-worn']);
+  for (const id of filterRefs) assert.ok(ids.includes(id));
+  for (const match of page.matchAll(/\baria-(?:labelledby|describedby)="([^"]+)"/g)) {
+    assert.ok(ids.includes(match[1]));
+  }
+});
+
+test('passport pages accept one through six stamps and report invalid inputs', async () => {
+  const stamps = Array.from({length: 7}, () => ({country: 'AR'}));
+  for (let count = 1; count <= 6; count++) {
+    const page = await createPassportPageSvg(stamps.slice(0, count));
+    assert.equal(Array.from(page.matchAll(/<title\b/g)).length, count + 1);
+  }
+  for (const invalid of [[], stamps, null]) {
+    await assert.rejects(createPassportPageSvg(invalid), {code: 'INVALID_PAGE_STAMPS'});
+  }
+  await assert.rejects(createPassportPageSvg([{country: 'AR', date: '2026-02-29'}]), {code: 'INVALID_DATE'});
 });

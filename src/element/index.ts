@@ -1,6 +1,6 @@
-import { createStampImage, getStampSizeError, type StampDateFormat, type StampVariant } from '@lucianopignotti/passport-stamps';
+import { createStampImage, getStampSizeError, pickStampColor, type StampDateFormat, type StampVariant } from '@lucianopignotti/passport-stamps';
 
-const observed = ['country', 'city', 'strict-city', 'date', 'date-format', 'asset-base-url', 'variant', 'size', 'alt', 'loading'];
+const observed = ['country', 'city', 'strict-city', 'date', 'date-format', 'asset-base-url', 'variant', 'color', 'random-color', 'size', 'alt', 'loading'];
 
 /**
  * Framework-free stamp element for Vue, Svelte, Astro, plain HTML and other hosts.
@@ -9,6 +9,7 @@ const observed = ['country', 'city', 'strict-city', 'date', 'date-format', 'asse
 export class PassportStampElement extends HTMLElement {
   static readonly observedAttributes = observed;
   #request = 0;
+  #randomInk?: string;
 
   connectedCallback(): void {
     void this.#render();
@@ -34,7 +35,8 @@ export class PassportStampElement extends HTMLElement {
         date: this.getAttribute('date') ?? undefined,
         dateFormat: (this.getAttribute('date-format') ?? 'text') as StampDateFormat,
         assetBaseUrl: this.getAttribute('asset-base-url') ?? undefined,
-        variant: (this.getAttribute('variant') ?? 'worn') as StampVariant
+        variant: (this.getAttribute('variant') ?? 'worn') as StampVariant,
+        color: this.getAttribute('color') ?? (this.hasAttribute('random-color') ? (this.#randomInk ??= pickStampColor()) : undefined)
       });
       if (request !== this.#request) return;
       const img = document.createElement('img');

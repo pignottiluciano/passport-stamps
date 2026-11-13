@@ -45,4 +45,17 @@ describe('React PassportStamp',()=>{
     const img = await screen.findByRole('img', { name: /Mendoza/ });
     expect(img.getAttribute('src')).toBe('/travel/assets/svg/clean/ar-mendoza.svg');
   });
+  it('keeps random ink stable and lets explicit color override it', async () => {
+    const { rerender } = render(<PassportStamp country="AR" randomColor />);
+    const ink = (image: HTMLElement) => decodeURIComponent(image.getAttribute('src')!).match(/<g[^>]* color="([^"]+)"/)?.[1];
+    const original = ink(await screen.findByRole('img', { name: /Argentina/ }));
+    expect(original).toMatch(/^#[0-9a-f]{6}$/i);
+    rerender(<PassportStamp country="FR" randomColor />);
+    expect(ink(await screen.findByRole('img', { name: /France/ }))).toBe(original);
+    rerender(<PassportStamp country="FR" randomColor color="#123456" />);
+    await waitFor(() => expect(ink(screen.getByRole('img'))).toBe('#123456'));
+    rerender(<PassportStamp country="FR" randomColor />);
+    await waitFor(() => expect(ink(screen.getByRole('img'))).toBe(original));
+  });
+
 });

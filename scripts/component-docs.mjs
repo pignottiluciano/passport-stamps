@@ -3,7 +3,7 @@ export function componentDocs() {
   return `<section class="get-started" aria-label="Installation and components">
 <div class="install-row"><code>npm install @lucianopignotti/passport-stamps</code><button type="button" id="copy-install" class="js-only">Copy command</button><a href="https://github.com/pignottiluciano/passport-stamps" data-track="outbound" data-track-target="github">GitHub ↗</a><a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps" data-track="outbound" data-track-target="npm">npm ↗</a></div>
 <p class="component-intro">One component. Country, city, and an optional date — all through properties.</p>
-<p class="release-note">The examples below use the 0.3.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
+<p class="release-note">The examples below use the 0.4.0 API. Check <a href="https://www.npmjs.com/package/@lucianopignotti/passport-stamps?activeTab=versions">npm</a> for published versions.</p>
 <details><summary>Angular 20+ · &lt;passport-stamp&gt;</summary>
 <p>Import the standalone component. No NgModule, image copying, or assets configuration is needed.</p>
 <pre><code>${escape(`import { Component } from '@angular/core';
@@ -64,6 +64,8 @@ export function Example() {
 <tr><td>date</td><td><code>"2026-11-07"</code></td><td>Optional calendar date in YYYY-MM-DD format. Printed inside the stamp as 07 NOV 2026.</td></tr>
 <tr><td>dateFormat</td><td><code>"numeric"</code></td><td>Print 07/11/2026. The default, text, prints 07 NOV 2026.</td></tr>
 <tr><td>variant</td><td><code>"worn"</code></td><td>Worn by default. Set to <code>"clean"</code> to remove ink effects.</td></tr>
+<tr><td>color</td><td><code>"#8B2252"</code></td><td>Override ink with a #RGB or #RRGGBB color. Takes priority over randomColor.</td></tr>
+<tr><td>randomColor</td><td><code>true</code></td><td>Choose a palette color once per component instance. Defaults to false.</td></tr>
 <tr><td>assetBaseUrl</td><td><code>"/travel/assets/stamps"</code></td><td>Optional directory containing svg/ for undated stamps. Copy the package SVGs there first.</td></tr>
 <tr><td>size</td><td><code>280</code></td><td>Width in pixels, default 240. Height follows the 4:3 artwork ratio.</td></tr>
 <tr><td>alt</td><td><code>"My visit to Mendoza"</code></td><td>Optional image description. Otherwise generated from the selected stamp and date.</td></tr><tr><td>loading</td><td><code>"eager"</code></td><td>Native image loading, default lazy. Use eager for a stamp visible on first paint.</td></tr>
@@ -101,49 +103,78 @@ export function stampWorkshop(countries, destinations) {
     <h2 id="workshop-heading">Make a stamp.</h2>
     <p>Choose a destination, add a date, and make it yours.</p>
   </div>
-  <div class="workshop-editor">
-    <form id="workshop-form" class="workshop-controls js-only">
-      <h3>Customize</h3>
-      <div class="workshop-fields">
-        <div class="workshop-field"><label for="workshop-country">Country</label><select id="workshop-country">${countries.map(country => `<option value="${country.code}"${country.code === initial.code ? ' selected' : ''}>${escape(country.name)}</option>`).join('')}</select></div>
-        <div class="workshop-field"><label for="workshop-city">City <span>(optional)</span></label><select id="workshop-city"><option value="">Country stamp</option><option value="${initial.id}" selected>${escape(initial.name)}</option></select></div>
-        <div class="workshop-field"><label for="workshop-date">Date <span>(optional)</span></label><input id="workshop-date" type="date" value="2026-11-07" min="0001-01-01" max="9999-12-31"></div>
-        <fieldset class="workshop-finish">
-          <legend>Ink finish</legend>
-          <div class="workshop-ink-options">
-            <label><input type="radio" name="workshop-finish" value="worn" checked><span>Worn</span></label>
-            <label><input type="radio" name="workshop-finish" value="clean"><span>Clean</span></label>
+  <div class="workshop-desk">
+    <div class="workshop-pad">
+      <div class="workshop-editor">
+      <div class="workshop-live">
+        <p class="workshop-live-label">Live preview</p>
+        <div class="workshop-canvas">
+          <img id="workshop-image" src="hero-mendoza.svg" width="400" height="300" alt="Mendoza passport stamp, 07 NOV 2026">
+        </div>
+        <div class="workshop-live-caption">
+          <strong id="workshop-caption">${escape(initial.name)}, ${escape(initial.countryName)}</strong>
+          <span>SVG · Transparent background</span>
+        </div>
+      </div>
+      <form id="workshop-form" class="workshop-controls js-only">
+        <h3>Your stamp</h3>
+        <div class="workshop-fields">
+          <div class="workshop-field"><label for="workshop-country">Country</label><select id="workshop-country">${countries.map(country => `<option value="${country.code}"${country.code === initial.code ? ' selected' : ''}>${escape(country.name)}</option>`).join('')}</select></div>
+          <div class="workshop-field"><label for="workshop-city">City <span>(optional)</span></label><select id="workshop-city"><option value="">Country stamp</option><option value="${initial.id}" selected>${escape(initial.name)}</option></select></div>
+          <div class="workshop-field"><label for="workshop-date">Date <span>(optional)</span></label><input id="workshop-date" type="date" value="2026-11-07" min="0001-01-01" max="9999-12-31"></div>
+          <fieldset class="workshop-finish">
+            <legend>Ink finish</legend>
+            <div class="workshop-ink-options">
+              <label><input type="radio" name="workshop-finish" value="worn" checked><span>Worn</span></label>
+              <label><input type="radio" name="workshop-finish" value="clean"><span>Clean</span></label>
+            </div>
+          </fieldset>
+          <div class="workshop-field workshop-color-field">
+            <span class="workshop-color-label" id="workshop-color-label">Ink color</span>
+            <div class="workshop-color-options" role="group" aria-labelledby="workshop-color-label">
+              <label class="workshop-swatch" title="Original ink"><input type="radio" name="workshop-ink" value="" checked aria-label="Original ink"><i id="workshop-original-swatch" style="background:${initial.color}"></i></label>
+              <span id="workshop-ink-swatches" class="workshop-swatches"></span>
+              <input id="workshop-color" type="color" value="${initial.color}" title="Custom ink" aria-label="Custom ink color">
+            </div>
           </div>
-        </fieldset>
+        </div>
+        <button id="workshop-add-stamp" class="workshop-add" type="button" aria-controls="passport-page" disabled>Stamp passport</button>
+        <div class="workshop-actions">
+          <button id="workshop-open-paper" class="workshop-preview-button" type="button" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-2-2-5-3-9-2v13c4-1 7 0 9 2 2-2 5-3 9-2V5c-4-1-7 0-9 2zm0 0v13"/></svg>
+            Preview on paper
+          </button>
+          ${downloadLink}
+          <button id="workshop-png" class="workshop-preview-button" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>
+            Save image
+          </button>
+          <button id="workshop-share" class="workshop-preview-button" type="button" hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3m-4 4 4-4 4 4M5 12v8h14v-8"/></svg>
+            Share
+          </button>
+        </div>
+      </form>
       </div>
-      <div class="workshop-actions">
-        <button id="workshop-open-paper" class="workshop-preview-button" type="button" aria-haspopup="dialog">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-2-2-5-3-9-2v13c4-1 7 0 9 2 2-2 5-3 9-2V5c-4-1-7 0-9 2zm0 0v13"/></svg>
-          Preview on paper
-        </button>
-        ${downloadLink}
-        <button id="workshop-png" class="workshop-preview-button" type="button">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg>
-          Save image
-        </button>
-        <button id="workshop-share" class="workshop-preview-button" type="button" hidden>
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3m-4 4 4-4 4 4M5 12v8h14v-8"/></svg>
-          Share
-        </button>
-      </div>
-    </form>
-    <div class="workshop-live">
-      <p class="workshop-live-label">Live preview</p>
-      <div class="workshop-canvas">
-        <img id="workshop-image" src="hero-mendoza.svg" width="400" height="300" alt="Mendoza passport stamp, 07 NOV 2026">
-      </div>
-      <div class="workshop-live-caption">
-        <strong id="workshop-caption">${escape(initial.name)}, ${escape(initial.countryName)}</strong>
-        <span>SVG · Transparent background</span>
-      </div>
+      <p id="workshop-status" class="workshop-status" role="status"></p>
     </div>
+    <section id="passport-page" class="passport-composer js-only" aria-labelledby="passport-page-heading">
+      <div class="passport-composer-head">
+        <h3 id="passport-page-heading">Passport page</h3>
+        <p id="passport-page-status" class="passport-composer-count" role="status">0 of 6</p>
+      </div>
+      <div class="passport-composer-preview">
+        <img id="passport-page-empty" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect width='800' height='1000' fill='%23f7edda'/%3E%3Crect x='24' y='24' width='752' height='952' rx='18' fill='none' stroke='%23c2ac87' stroke-width='2'/%3E%3Cpath d='M92 120H708M92 932H708' stroke='%23c2ac87'/%3E%3Ctext x='400' y='96' text-anchor='middle' fill='%23584934' font-family='Georgia,serif' font-size='24' letter-spacing='6'%3EPASSPORT STAMPS%3C/text%3E%3C/svg%3E" width="800" height="1000" alt="Empty passport page">
+        <img id="passport-page-image" width="800" height="1000" alt="Composed passport page" hidden>
+      </div>
+      <ol id="passport-page-stamps" class="passport-film" aria-label="Stamps on this page"></ol>
+      <div class="workshop-actions">
+        <button id="passport-page-clear" class="workshop-back-button" type="button" disabled>Clear page</button>
+        <a id="passport-page-svg" class="button" download="passport-page.svg" aria-disabled="true">Download page SVG</a>
+        <button id="passport-page-png" class="workshop-preview-button" type="button" disabled>Save page PNG</button>
+      </div>
+    </section>
   </div>
-  <p id="workshop-status" class="workshop-status" role="status"></p>
   <noscript><p>Enable JavaScript to customize a stamp, or download an SVG from the collection.</p></noscript>
   <dialog id="workshop-paper" class="workshop-paper" aria-labelledby="workshop-paper-heading" aria-describedby="workshop-paper-caption">
     <form method="dialog">

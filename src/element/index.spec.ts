@@ -42,4 +42,18 @@ describe('passport stamp custom element',()=>{
     definePassportStamp('other-passport-stamp');
     expect(customElements.get('other-passport-stamp')).toBeDefined();
   });
+  it('keeps random ink across attribute updates and explicit overrides', async () => {
+    const element = mount({ country: 'AR', 'random-color': '' });
+    const ink = () => decodeURIComponent(element.querySelector('img')?.src ?? '').match(/<g[^>]* color="([^"]+)"/)?.[1];
+    await waitFor(() => expect(ink()).toMatch(/^#[0-9a-f]{6}$/i));
+    const original = ink();
+    element.setAttribute('country', 'FR');
+    await waitFor(() => expect(element.querySelector('img')?.alt).toContain('France'));
+    expect(ink()).toBe(original);
+    element.setAttribute('color', '#123456');
+    await waitFor(() => expect(ink()).toBe('#123456'));
+    element.removeAttribute('color');
+    await waitFor(() => expect(ink()).toBe(original));
+  });
+
 });

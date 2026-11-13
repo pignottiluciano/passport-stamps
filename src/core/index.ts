@@ -1,6 +1,7 @@
 import { normalize } from './catalog-matching.mjs';
 import { catalogWornStyle, finish } from './ink.mjs';
 import { assembleStamp, DATE_PLACEHOLDER } from './stamp-svg.mjs';
+import { composePassportPage } from './passport-page.js';
 import { createCatalogIndex, expandCatalog } from './catalog-index.js';
 import { catalogRows } from './generated/catalog.js';
 import { loaders } from './generated/loaders.js';
@@ -22,6 +23,10 @@ export interface StampOptions {
   /** Controls the printed date. Defaults to text, for example 07 NOV 2026. */
   dateFormat?: StampDateFormat;
   variant?: StampVariant;
+  /** Ink override as #RGB or #RRGGBB. Takes priority over randomColor. */
+  color?: string;
+  /** Pick an ink color per core call. Components retain their choice per instance. */
+  randomColor?: boolean;
 }
 export interface StampImageOptions extends StampOptions {
   /** Directory containing the published svg/ folder, as a root-relative or HTTP(S) URL. */
@@ -34,11 +39,29 @@ export interface StampImage {
   fallback: boolean;
 }
 export class PassportStampError extends Error {
-  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_CITY' | 'INVALID_DATE' | 'INVALID_DATE_FORMAT' | 'INVALID_VARIANT' | 'INVALID_SIZE' | 'INVALID_ASSET_BASE_URL' | 'STATIC_DATE_UNSUPPORTED', message: string) {
+  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_CITY' | 'INVALID_DATE' | 'INVALID_DATE_FORMAT' | 'INVALID_VARIANT' | 'INVALID_SIZE' | 'INVALID_ASSET_BASE_URL' | 'STATIC_DATE_UNSUPPORTED' | 'STATIC_COLOR_UNSUPPORTED' | 'INVALID_COLOR' | 'INVALID_PAGE_STAMPS', message: string) {
     super(message);
     this.name = 'PassportStampError';
   }
 }
+/** Curated dark inks suitable for light paper backgrounds. */
+export const stampInkColors: readonly string[] = Object.freeze([
+  '#8b2252', '#24558a', '#286346', '#643c83', '#9a4132', '#292823'
+]);
+
+export function pickStampColor(): string {
+  return stampInkColors[Math.floor(Math.random() * stampInkColors.length)]!;
+}
+
+function resolveColor(options: StampOptions): string | undefined {
+  if (options.color === undefined) return options.randomColor ? pickStampColor() : undefined;
+  if (typeof options.color !== 'string' || !/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(options.color)) {
+    throw new PassportStampError('INVALID_COLOR', 'color must be a hexadecimal color in #RGB or #RRGGBB format.');
+  }
+  const color = options.color.toLowerCase();
+  return color.length === 4 ? '#' + [...color.slice(1)].map(character => character.repeat(2)).join('') : color;
+}
+
 const catalog = expandCatalog(catalogRows);
 const countries = catalog.filter(stamp => stamp.kind === 'country');
 let catalogIndex: ReturnType<typeof createCatalogIndex> | undefined;
@@ -115,7 +138,7 @@ export function resolveStamp(options: StampOptions) {
   }
   const variant = options.variant ?? 'worn';
   if (variant !== 'worn' && variant !== 'clean') throw new PassportStampError('INVALID_VARIANT', 'variant must be worn or clean.');
-  return { stamp: city ?? country, date: formatStampDate(options.date, options.dateFormat), variant, fallback: Boolean(query && !city) };
+  return { color: resolveColor(options), stamp: city ?? country, date: formatStampDate(options.date, options.dateFormat), variant, fallback: Boolean(query && !city) };
 }
 
 // Repeated stamps (lists, re-renders, React StrictMode) share one render, including requests in flight.
@@ -124,7 +147,7 @@ const renderCache = new Map<string, Promise<string>>();
 const renderCacheLimit = 100;
 
 function renderStamp(resolved: ReturnType<typeof resolveStamp>): Promise<string> {
-  const key = `${resolved.stamp.id}|${resolved.variant}|${resolved.date ?? ''}`;
+  const key = `${resolved.stamp.id}|${resolved.variant}|${resolved.date ?? ''}|${resolved.color ?? ''}`;
   let svg = renderCache.get(key);
   if (svg) renderCache.delete(key);
   else {
@@ -137,11 +160,11 @@ function renderStamp(resolved: ReturnType<typeof resolveStamp>): Promise<string>
   return svg;
 }
 
-async function buildStamp({ stamp, date, variant }: ReturnType<typeof resolveStamp>) {
+async function buildStamp({ stamp, date, variant, color }: ReturnType<typeof resolveStamp>) {
   const load = loaders[stamp.id];
   if (!load) throw new PassportStampError('INVALID_COUNTRY', 'The requested artwork is unavailable.');
   const { art } = await load();
-  const clean = assembleStamp(stamp.id, art, Boolean(date));
+  const clean = assembleStamp(stamp.id, color ? { ...art, c: color } : art, Boolean(date));
   const svg = variant === 'worn' ? finish(clean, stamp, catalogWornStyle) : clean;
   return date ? svg.replaceAll(DATE_PLACEHOLDER, date) : svg;
 }
@@ -149,6 +172,14 @@ async function buildStamp({ stamp, date, variant }: ReturnType<typeof resolveSta
 /** Returns standalone SVG markup for saving or downloading a stamp. */
 export async function createStampSvg(options: StampOptions): Promise<string> {
   return renderStamp(resolveStamp(options));
+}
+
+/** Composes one to six stamps, in input order, into a standalone 800 × 1000 SVG page. */
+export async function createPassportPageSvg(stamps: readonly StampOptions[]): Promise<string> {
+  if (!Array.isArray(stamps) || stamps.length < 1 || stamps.length > 6) {
+    throw new PassportStampError('INVALID_PAGE_STAMPS', 'A passport page must contain one to six stamps.');
+  }
+  return composePassportPage(await Promise.all(stamps.map(createStampSvg)));
 }
 
 function hostedStampUrl(base: string, path: string): string {
@@ -180,6 +211,7 @@ export async function createStampImage(options: StampImageOptions): Promise<Stam
   let src: string;
   if (options.assetBaseUrl !== undefined) {
     if (date) throw new PassportStampError('STATIC_DATE_UNSUPPORTED', 'Hosted SVG files do not support a printed date.');
+    if (resolved.color) throw new PassportStampError('STATIC_COLOR_UNSUPPORTED', 'Hosted SVG files do not support custom ink colors.');
     const file = variant === 'clean' ? `svg/clean/${stamp.id}.svg` : `svg/${stamp.id}.svg`;
     src = hostedStampUrl(options.assetBaseUrl, file);
   } else {

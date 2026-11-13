@@ -64,11 +64,17 @@ Props can come from state or your application's data. The component is a client 
 | `date` | `string` | None | Valid calendar date in `YYYY-MM-DD` format, printed inside the stamp as `07 NOV 2026`. |
 | `dateFormat` | `'text'` or `'numeric'` | `'text'` | Choose `07 NOV 2026` or `07/11/2026` for the printed date. |
 | `variant` | `'worn'` or `'clean'` | `'worn'` | Ink treatment. |
+| `color` | `string` | Original ink | Override ink with `#RGB` or `#RRGGBB`. Takes priority over `randomColor`. |
+| `randomColor` | `boolean` | `false` | Choose a curated ink color once per component instance. |
 | `size` | `number` | `240` | Width in pixels; height follows the 4:3 viewBox. In Angular, bind numbers with `[size]="280"`. |
 | `alt` | `string` | Generated description | Optional accessible image text. |
 | `loading` | `'lazy'` or `'eager'` | `'lazy'` | Native image loading. Use `'eager'` for a stamp visible on first paint. Images always decode asynchronously. |
 
 Without a city, the country stamp is used. A city must belong to the selected country; an unknown city falls back to the country stamp by default. Enable `strictCity` in React or `[strictCity]="true"` in Angular to show an error instead. The core reports this as `INVALID_CITY`. Unknown countries, invalid dates, and invalid variants produce explicit errors. Size must be positive and finite. Both components display a validation message for an invalid size and recover when the size is corrected. The core error type, `PassportStampError`, includes a stable `code`.
+
+Use `color="#8B2252"` in Angular, React, or the Web Component to customize the ink. Angular accepts `[randomColor]="true"`, React accepts `randomColor`, and the Web Component accepts the `random-color` attribute. Components retain their chosen random ink while other properties change. Both clean and worn finishes preserve their transparent backgrounds.
+
+The core renderer accepts the same options. Each call with `randomColor: true` can choose a new color. For matching previews and exports, call `pickStampColor()` once and pass the returned value as `color` to each render. The exported `stampInkColors` palette provides the available random inks. Invalid hex colors report `INVALID_COLOR`. A custom or random color combined with `assetBaseUrl` reports `STATIC_COLOR_UNSUPPORTED`, because the hosted SVG has fixed ink.
 
 Dates are calendar strings, not timestamps. No timezone conversion occurs. Omitting the date preserves the original artwork. A date selects an adapted composition with a dedicated date row inside the frame; dated country compositions may differ from their original undated layouts.
 
@@ -147,7 +153,24 @@ const svg = await createStampSvg({ country: 'AR', city: 'Mendoza', date: '2026-1
 await writeFile('mendoza.svg', svg);
 ```
 
-`resolveStamp()` supports synchronous selection and validation; `formatStampDate()` validates date strings. Rendering does not require DOM access.
+`resolveStamp()` supports synchronous selection and validation. `formatStampDate()` validates date strings. Rendering does not require DOM access.
+
+### Compose a passport page
+
+Use `createPassportPageSvg()` to arrange one to six stamps in a single standalone SVG. Each stamp accepts the same options as `createStampSvg()`, including its own date, ink color, and finish.
+
+```js
+import { createPassportPageSvg } from '@lucianopignotti/passport-stamps';
+
+const page = await createPassportPageSvg([
+  { country: 'AR', city: 'Mendoza', date: '2026-11-07', color: '#8b2252' },
+  { country: 'FR', city: 'Paris', date: '2026-11-12', variant: 'clean' },
+]);
+```
+
+The page preserves input order. With explicit colors or the original inks, the same inputs produce the same layout and artwork. If you want to keep a randomly selected color across exports, call `pickStampColor()` once and pass the result as `color`. An empty list or more than six stamps reports `INVALID_PAGE_STAMPS`.
+
+In the gallery workshop, customize a stamp and add it to the page. Each addition keeps the settings from that moment. You can remove individual stamps and download the page as SVG or PNG.
 
 ## Render a stamp on the server
 
