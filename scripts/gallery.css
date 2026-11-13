@@ -500,16 +500,27 @@ pre code {
   --workshop-page:#f8efd9;
   --workshop-print:#6d503c;
   --workshop-line:#d7caba;
-  max-width:980px;
+  max-width:1160px;
   margin:48px auto 56px
 }
 .workshop .section-heading h2 {
   font-size:clamp(34px,5vw,48px);
   letter-spacing:-.035em
 }
+.workshop-desk {
+  display:grid;
+  grid-template-columns:minmax(300px,380px) minmax(0,1fr);
+  gap:20px;
+  align-items:start
+}
+.workshop-pad {
+  position:sticky;
+  top:16px;
+  min-width:0
+}
 .workshop-editor {
   display:grid;
-  grid-template-columns:1fr 1.05fr;
+  grid-template-columns:1fr;
   border:1px solid var(--workshop-line);
   border-radius:8px;
   overflow:hidden;
@@ -536,14 +547,39 @@ pre code {
   font-weight:400
 }
 .workshop-controls select,.workshop-controls input[type=date] {
+  appearance:none;
   min-width:0;
   width:100%;
-  height:42px;
+  height:44px;
   margin-top:4px;
-  padding:7px 10px;
-  border-color:#b3a58e;
-  background:#fffdf8;
-  font-weight:500
+  padding:0 36px 0 12px;
+  border:1px solid #b3a58e;
+  border-radius:8px;
+  background:#fffdf8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23292823' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E") no-repeat right 12px center/16px;
+  box-shadow:inset 0 1px 2px #29282310;
+  font-weight:500;
+  transition:border-color .15s,box-shadow .15s
+}
+.workshop-controls input[type=date] {
+  padding-right:8px;
+  background-image:none
+}
+.workshop-controls input[type=date]::-webkit-calendar-picker-indicator {
+  opacity:.6;
+  cursor:pointer
+}
+.workshop-controls :is(select,input[type=date]):hover:not(:disabled) {
+  border-color:var(--color-muted)
+}
+.workshop-controls :is(select,input[type=date]):focus-visible {
+  outline:0;
+  border-color:var(--workshop-ink);
+  box-shadow:0 0 0 3px #753b5233
+}
+.workshop-controls select:disabled {
+  background-color:var(--color-soft);
+  color:var(--color-muted);
+  cursor:not-allowed
 }
 .workshop-color-field {
   grid-column:1 / -1
@@ -555,17 +591,46 @@ pre code {
   gap:8px;
   margin-top:4px
 }
-.workshop-color-options input[type=color] {
-  width:48px;
-  height:42px;
-  padding:3px;
-  border:1px solid #b3a58e;
-  border-radius:4px;
-  background:#fffdf8;
+.workshop-color-label {
+  font-weight:600
+}
+.workshop-swatches {
+  display:contents
+}
+.workshop-swatch {
+  position:relative;
+  display:block
+}
+.workshop-swatch input {
+  position:absolute;
+  inset:0;
+  margin:0;
+  opacity:0;
   cursor:pointer
 }
-.workshop-color-options button {
-  padding:8px 10px
+.workshop-swatch i {
+  display:block;
+  width:32px;
+  height:32px;
+  border:3px solid #fffdf8;
+  border-radius:50%;
+  box-shadow:0 0 0 1px #b3a58e
+}
+.workshop-swatch input:checked + i {
+  box-shadow:0 0 0 2px var(--color-text)
+}
+.workshop-swatch input:focus-visible + i {
+  outline:2px solid var(--workshop-ink);
+  outline-offset:3px
+}
+.workshop-color-options input[type=color] {
+  width:32px;
+  height:32px;
+  padding:2px;
+  border:1px dashed #746e63;
+  border-radius:50%;
+  background:#fffdf8;
+  cursor:pointer
 }
 .workshop-finish {
   min-width:0;
@@ -581,10 +646,11 @@ pre code {
 .workshop-ink-options {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  height:42px;
+  height:44px;
   margin-top:4px;
+  overflow:hidden;
   border:1px solid #b3a58e;
-  border-radius:4px
+  border-radius:8px
 }
 .workshop-ink-options label {
   position:relative;
@@ -608,12 +674,12 @@ pre code {
   font-weight:650
 }
 .workshop-ink-options input:checked + span {
-  background:#ede3e7;
+  background:#f2e9ed;
   color:var(--workshop-ink)
 }
 .workshop-ink-options input:focus-visible + span {
-  outline:2px solid var(--color-focus);
-  outline-offset:-2px
+  outline:0;
+  box-shadow:inset 0 0 0 2px var(--workshop-ink)
 }
 .workshop-actions {
   display:flex;
@@ -637,23 +703,57 @@ pre code {
   background:#f2e9ed;
   color:var(--workshop-ink)
 }
-.workshop [data-workshop-download][href] {
-  background:var(--workshop-ink);
-  border-color:var(--workshop-ink)
-}
-.workshop [data-workshop-download][href]:hover {
-  background:#552c3e
-}
-.workshop [data-workshop-download]:not([href]) {
-  background:var(--color-soft);
-  color:var(--color-muted);
-  border-color:var(--workshop-line)
-}
 .workshop-live {
   display:grid;
   grid-template-rows:auto 1fr auto;
   min-width:0;
-  border-left:1px solid var(--workshop-line)
+  border-bottom:1px solid var(--workshop-line)
+}
+.workshop-add {
+  width:100%;
+  min-height:54px;
+  margin-top:16px;
+  border:0;
+  border-radius:6px;
+  background:var(--workshop-ink);
+  color:#fffaf7;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.04em;
+  /* Ticket notches on both short edges. */
+  -webkit-mask:radial-gradient(circle 7px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle 7px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat
+}
+.workshop-add:hover:not(:disabled) {
+  background:#552c3e
+}
+.workshop-add:focus-visible {
+  outline:0;
+  background:#552c3e;
+  box-shadow:inset 0 0 0 2px #fffaf7,inset 0 0 0 4px #552c3e
+}
+.workshop-add:disabled {
+  background:#d9cfc2;
+  color:var(--color-muted);
+  cursor:not-allowed
+}
+/* Ticket secondaries: dashed perforation, solid on hover. */
+.workshop .workshop-actions :is(button,.button) {
+  min-height:44px;
+  border:1px dashed #b3a58e;
+  border-radius:6px;
+  background:transparent;
+  color:var(--color-text);
+  font-weight:600
+}
+.workshop .workshop-actions :is(button,.button[href]):hover:not(:disabled) {
+  border-style:solid;
+  background:#fffdf8
+}
+.workshop .workshop-actions :is(button:disabled,.button:not([href])) {
+  color:var(--color-muted);
+  opacity:.6;
+  cursor:not-allowed
 }
 body.no-js .workshop-live {
   grid-column:1 / -1;
@@ -690,9 +790,107 @@ body.no-js .workshop-live {
   width:min(316px,86%);
   height:auto
 }
+@keyframes workshop-thunk {
+  40% {
+    transform:scale(.92) rotate(-2deg)
+  }
+}
+.workshop-canvas.is-stamping img {
+  animation:workshop-thunk .28s ease-out
+}
 .workshop-status {
   margin-top:8px;
   font-size:13px
+}
+.passport-composer {
+  display:grid;
+  gap:14px;
+  min-width:0;
+  padding:16px;
+  border:1px solid var(--workshop-line);
+  border-radius:8px;
+  background:#eae5dc
+}
+.passport-composer-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:8px
+}
+.passport-composer-head h3 {
+  font:24px/1.2 'Iowan Old Style','Palatino Linotype',Palatino,serif
+}
+.passport-composer-count {
+  font-size:13px;
+  color:var(--color-muted);
+  white-space:nowrap
+}
+.passport-composer-preview {
+  display:grid;
+  place-items:center;
+  min-width:0
+}
+.passport-composer-preview img {
+  width:min(100%,420px);
+  height:auto;
+  border-radius:6px;
+  box-shadow:0 1px 0 var(--workshop-line),0 12px 30px -18px #22191270
+}
+.passport-film {
+  display:flex;
+  gap:8px;
+  margin:0;
+  padding:0 0 4px;
+  list-style:none;
+  overflow-x:auto
+}
+.passport-film li {
+  position:relative;
+  flex:none;
+  width:112px;
+  padding:6px;
+  border-radius:6px;
+  background:#f6f1e8
+}
+.passport-film img {
+  display:block;
+  width:100%;
+  height:auto
+}
+.passport-film small {
+  display:block;
+  overflow:hidden;
+  font-size:11px;
+  color:#635b50;
+  text-align:center;
+  white-space:nowrap;
+  text-overflow:ellipsis
+}
+.passport-film-remove {
+  position:absolute;
+  top:2px;
+  right:2px;
+  width:32px;
+  height:32px;
+  padding:0;
+  border:0;
+  border-radius:6px;
+  background:#fffdf8;
+  color:#635b50;
+  font-size:15px;
+  line-height:1
+}
+.passport-film-remove:hover {
+  background:#eae5dc
+}
+li.passport-film-slot {
+  display:grid;
+  place-items:center;
+  min-height:96px;
+  border:1px dashed #b3a58e;
+  background:transparent;
+  color:#635b50;
+  font-size:12px
 }
 dialog.workshop-paper {
   width:min(910px,calc(100% - 32px));
@@ -820,16 +1018,17 @@ dialog.workshop-paper {
   position:absolute;
   top:21px
 }
-@media(max-width:640px) {
-  .workshop-editor {
-    grid-template-columns:1fr
+@media(max-width:900px) {
+  .workshop-desk {
+    grid-template-columns:minmax(0,1fr)
   }
+  .workshop-pad {
+    position:static
+  }
+}
+@media(max-width:640px) {
   .workshop-controls {
     padding:16px
-  }
-  .workshop-live {
-    border-left:0;
-    border-top:1px solid var(--workshop-line)
   }
   dialog.workshop-paper {
     padding:12px
@@ -1002,6 +1201,9 @@ dialog textarea {
 @media(prefers-reduced-motion:reduce) {
   html {
     scroll-behavior:auto
+  }
+  .workshop-canvas.is-stamping img {
+    animation:none
   }
 }
 .all-stamps-link {

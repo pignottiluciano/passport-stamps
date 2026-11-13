@@ -1,6 +1,7 @@
 import { normalize } from './catalog-matching.mjs';
 import { catalogWornStyle, finish } from './ink.mjs';
 import { assembleStamp, DATE_PLACEHOLDER } from './stamp-svg.mjs';
+import { composePassportPage } from './passport-page.js';
 import { createCatalogIndex, expandCatalog } from './catalog-index.js';
 import { catalogRows } from './generated/catalog.js';
 import { loaders } from './generated/loaders.js';
@@ -38,7 +39,7 @@ export interface StampImage {
   fallback: boolean;
 }
 export class PassportStampError extends Error {
-  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_CITY' | 'INVALID_DATE' | 'INVALID_DATE_FORMAT' | 'INVALID_VARIANT' | 'INVALID_SIZE' | 'INVALID_ASSET_BASE_URL' | 'STATIC_DATE_UNSUPPORTED' | 'STATIC_COLOR_UNSUPPORTED' | 'INVALID_COLOR', message: string) {
+  constructor(public readonly code: 'INVALID_COUNTRY' | 'INVALID_CITY' | 'INVALID_DATE' | 'INVALID_DATE_FORMAT' | 'INVALID_VARIANT' | 'INVALID_SIZE' | 'INVALID_ASSET_BASE_URL' | 'STATIC_DATE_UNSUPPORTED' | 'STATIC_COLOR_UNSUPPORTED' | 'INVALID_COLOR' | 'INVALID_PAGE_STAMPS', message: string) {
     super(message);
     this.name = 'PassportStampError';
   }
@@ -171,6 +172,14 @@ async function buildStamp({ stamp, date, variant, color }: ReturnType<typeof res
 /** Returns standalone SVG markup for saving or downloading a stamp. */
 export async function createStampSvg(options: StampOptions): Promise<string> {
   return renderStamp(resolveStamp(options));
+}
+
+/** Composes one to six stamps, in input order, into a standalone 800 × 1000 SVG page. */
+export async function createPassportPageSvg(stamps: readonly StampOptions[]): Promise<string> {
+  if (!Array.isArray(stamps) || stamps.length < 1 || stamps.length > 6) {
+    throw new PassportStampError('INVALID_PAGE_STAMPS', 'A passport page must contain one to six stamps.');
+  }
+  return composePassportPage(await Promise.all(stamps.map(createStampSvg)));
 }
 
 function hostedStampUrl(base: string, path: string): string {

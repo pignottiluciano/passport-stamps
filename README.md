@@ -153,7 +153,24 @@ const svg = await createStampSvg({ country: 'AR', city: 'Mendoza', date: '2026-1
 await writeFile('mendoza.svg', svg);
 ```
 
-`resolveStamp()` supports synchronous selection and validation; `formatStampDate()` validates date strings. Rendering does not require DOM access.
+`resolveStamp()` supports synchronous selection and validation. `formatStampDate()` validates date strings. Rendering does not require DOM access.
+
+### Compose a passport page
+
+Use `createPassportPageSvg()` to arrange one to six stamps in a single standalone SVG. Each stamp accepts the same options as `createStampSvg()`, including its own date, ink color, and finish.
+
+```js
+import { createPassportPageSvg } from '@lucianopignotti/passport-stamps';
+
+const page = await createPassportPageSvg([
+  { country: 'AR', city: 'Mendoza', date: '2026-11-07', color: '#8b2252' },
+  { country: 'FR', city: 'Paris', date: '2026-11-12', variant: 'clean' },
+]);
+```
+
+The page preserves input order. With explicit colors or the original inks, the same inputs produce the same layout and artwork. If you want to keep a randomly selected color across exports, call `pickStampColor()` once and pass the result as `color`. An empty list or more than six stamps reports `INVALID_PAGE_STAMPS`.
+
+In the gallery workshop, customize a stamp and add it to the page. Each addition keeps the settings from that moment. You can remove individual stamps and download the page as SVG or PNG.
 
 ## Render a stamp on the server
 

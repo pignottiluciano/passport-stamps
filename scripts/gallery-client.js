@@ -264,13 +264,14 @@ const workshopDate = $('#workshop-date');
 const workshopFinish = workshopForm.elements.namedItem('workshop-finish');
 const workshopImage = $('#workshop-image');
 const workshopColor = $('#workshop-color');
-const workshopRandomColor = $('#workshop-random-color');
-const workshopOriginalColor = $('#workshop-original-color');
+const workshopSwatches = $('#workshop-ink-swatches');
 let workshopSelectedColor;
 const workshopDownloads = workshop.querySelectorAll('[data-workshop-download]');
 const workshopPng = $('#workshop-png');
 const workshopShare = $('#workshop-share');
 const workshopStatus = $('#workshop-status');
+const addStamp = $('#workshop-add-stamp');
+let currentStamp;
 let workshopRequest = 0;
 let workshopName = 'ar-mendoza-2026-11-07';
 let workshopTrack = {id: 'ar-mendoza', dated: true};
@@ -281,6 +282,8 @@ function clearWorkshopDownload() {
   workshopOpenPaper.disabled = true;
   workshopPng.disabled = true;
   workshopShare.disabled = true;
+  currentStamp = undefined;
+  updateAddStamp();
   for (const link of workshopDownloads) {
     link.removeAttribute('href');
     link.setAttribute('aria-disabled', 'true');
@@ -325,7 +328,7 @@ async function updateWorkshop() {
     workshopImage.alt = stamp.name + ' — ' + stamp.iconLabel + ' passport stamp' + (date ? ', ' + date : '');
     workshopImage.hidden = false;
     workshopColor.value = new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('g[color]').getAttribute('color');
-    workshopOriginalColor.disabled = options.color === undefined;
+    $('#workshop-original-swatch').style.background = stamp.color;
     workshopPlace = stamp.kind === 'country' ? stamp.name : stamp.name + ', ' + countryName;
     $('#workshop-caption').textContent = workshopPlace;
     const ink = options.variant === 'clean' ? 'Clean ink' : 'Worn ink';
@@ -339,6 +342,8 @@ async function updateWorkshop() {
     $('#workshop-visa-country').textContent = countryName;
     workshopName = stamp.id + (options.date ? '-' + options.date : '') + (options.variant === 'clean' ? '-clean' : '');
     workshopTrack = {id: stamp.id, dated: Boolean(date)};
+    currentStamp = {options, src: workshopImage.src, place: workshopPlace, label: [workshopPlace, date].filter(Boolean).join(' · ')};
+    updateAddStamp();
     for (const link of workshopDownloads) {
       link.href = svgUrl;
       link.download = workshopName + '.svg';
@@ -366,27 +371,35 @@ function makeInWorkshop(stamp, source) {
   workshopDate.focus({preventScroll: true});
 }
 
-// Social apps accept PNG, not SVG: rasterize at 3× with a transparent background.
-async function workshopPngFile() {
+async function pngFile(src, name, width, height) {
   const image = new Image();
-  image.src = workshopImage.src;
+  image.src = src;
   await image.decode();
   const canvas = document.createElement('canvas');
-  canvas.width = 1200;
-  canvas.height = 900;
+  canvas.width = width;
+  canvas.height = height;
   canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
   const blob = await new Promise((resolve, reject) => canvas.toBlob(result => result ? resolve(result) : reject(new Error('PNG export failed')), 'image/png'));
-  return new File([blob], workshopName + '.png', {type: 'image/png'});
+  return new File([blob], name + '.png', {type: 'image/png'});
+}
+
+function workshopPngFile() {
+  return pngFile(workshopImage.src, workshopName, 1200, 900);
+}
+
+function saveFile(file) {
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(file);
+  link.href = url;
+  link.download = file.name;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
 }
 
 workshopPng.addEventListener('click', async () => {
   try {
     const file = await workshopPngFile();
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(file);
-    link.download = file.name;
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(link.href), 10000);
+    saveFile(file);
     track('workshop_png_saved', workshopTrack);
     workshopStatus.textContent = 'Image saved.';
   } catch {
@@ -413,31 +426,16 @@ workshopForm.addEventListener('change', event => {
   if (event.target === workshopCountry) updateWorkshopCities();
   if (event.target === workshopColor) {
     workshopSelectedColor = workshopColor.value;
+    for (const swatch of workshopForm.querySelectorAll('[name=workshop-ink]')) swatch.checked = false;
     track('workshop_color_changed', {source: 'picker'});
+  }
+  if (event.target.name === 'workshop-ink') {
+    workshopSelectedColor = event.target.value || undefined;
+    track('workshop_color_changed', {source: event.target.value ? 'swatch' : 'original'});
   }
   updateWorkshop();
 });
 workshopForm.addEventListener('submit', event => event.preventDefault());
-workshopRandomColor.addEventListener('click', async () => {
-  const request = ++workshopRequest;
-  clearWorkshopDownload();
-  try {
-    const {pickStampColor} = await import('../dist/core/index.js');
-    if (request !== workshopRequest) return;
-    workshopSelectedColor = pickStampColor();
-    track('workshop_color_changed', {source: 'random'});
-    updateWorkshop();
-  } catch {
-    if (request !== workshopRequest) return;
-    workshopStatus.textContent = 'Could not choose an ink color. Try again.';
-  }
-});
-workshopOriginalColor.addEventListener('click', () => {
-  workshopSelectedColor = undefined;
-  track('workshop_color_changed', {source: 'original'});
-  updateWorkshop();
-});
-
 workshopOpenPaper.addEventListener('click', () => {
   const paperImage = $('#workshop-paper-image');
   paperImage.src = workshopImage.src;
@@ -446,12 +444,154 @@ workshopOpenPaper.addEventListener('click', () => {
 });
 workshopPaper.addEventListener('close', () => workshopOpenPaper.focus());
 
+const pageLimit = 6;
+const pageStamps = [];
+const pageList = $('#passport-page-stamps');
+const pageClear = $('#passport-page-clear');
+const pageStatus = $('#passport-page-status');
+const pageImage = $('#passport-page-image');
+const pageEmpty = $('#passport-page-empty');
+const pageSvg = $('#passport-page-svg');
+const pagePng = $('#passport-page-png');
+let pageRequest = 0;
+
+function updateAddStamp() {
+  const full = pageStamps.length >= pageLimit;
+  addStamp.disabled = !currentStamp || full;
+  addStamp.textContent = full ? 'Page full' : 'Stamp passport';
+}
+
+// Filmstrip under the page: one thumbnail per stamp, then the free slots.
+function renderPageList() {
+  const items = pageStamps.map(({src, place, label}, index) => {
+    const item = document.createElement('li');
+    const image = document.createElement('img');
+    image.src = src;
+    image.alt = '';
+    const name = document.createElement('small');
+    name.textContent = place;
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'passport-film-remove';
+    remove.textContent = '×';
+    remove.setAttribute('aria-label', `Remove stamp ${index + 1}: ${label}`);
+    remove.addEventListener('click', () => {
+      pageStamps.splice(index, 1);
+      track('passport_page_stamp_removed', {count: pageStamps.length});
+      void updatePassportPage();
+      (pageList.querySelectorAll('button')[Math.min(index, pageStamps.length - 1)] ?? addStamp).focus();
+    });
+    item.append(image, name, remove);
+    return item;
+  });
+  for (let index = pageStamps.length; index < pageLimit; index++) {
+    const slot = document.createElement('li');
+    slot.className = 'passport-film-slot';
+    slot.setAttribute('aria-hidden', 'true');
+    if (index === pageStamps.length) slot.textContent = 'Next stamp';
+    items.push(slot);
+  }
+  pageList.replaceChildren(...items);
+}
+
+async function updatePassportPage() {
+  const request = ++pageRequest;
+  const stamps = pageStamps.map(({options}) => options);
+  updateAddStamp();
+  renderPageList();
+  if (pageSvg.href.startsWith('blob:')) URL.revokeObjectURL(pageSvg.href);
+  pageSvg.removeAttribute('href');
+  pageSvg.setAttribute('aria-disabled', 'true');
+  pagePng.disabled = true;
+  pageClear.disabled = stamps.length === 0;
+  pageImage.hidden = true;
+  pageImage.removeAttribute('src');
+  pageEmpty.hidden = stamps.length > 0;
+  const count = `${stamps.length} of ${pageLimit}`;
+  pageStatus.textContent = count;
+  if (!stamps.length) return;
+  pageStatus.textContent += ' · Updating page…';
+  try {
+    const {createPassportPageSvg} = await import('../dist/core/index.js');
+    const svg = await createPassportPageSvg(stamps);
+    if (request !== pageRequest) return;
+    pageImage.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    pageImage.alt = `Passport page with ${pageStamps.map(({label}) => label).join('; ')}`;
+    pageImage.hidden = false;
+    pageSvg.href = URL.createObjectURL(new Blob([svg], {type: 'image/svg+xml'}));
+    pageSvg.removeAttribute('aria-disabled');
+    pagePng.disabled = false;
+    pageStatus.textContent = count;
+  } catch {
+    if (request !== pageRequest) return;
+    pageStatus.textContent = 'Could not compose the passport page. Try removing a stamp and adding it again.';
+  }
+}
+
+addStamp.addEventListener('click', () => {
+  if (!currentStamp || pageStamps.length >= pageLimit) return;
+  pageStamps.push(currentStamp);
+  track('passport_page_stamp_added', {count: pageStamps.length});
+  // Restart the stamp "thunk" animation on every press.
+  const canvas = $('.workshop-canvas');
+  canvas.classList.remove('is-stamping');
+  void canvas.offsetWidth;
+  canvas.classList.add('is-stamping');
+  void updatePassportPage();
+  if (addStamp.disabled) pageList.querySelector('button')?.focus();
+});
+pageClear.addEventListener('click', () => {
+  pageStamps.length = 0;
+  track('passport_page_cleared');
+  void updatePassportPage();
+  if (addStamp.disabled) workshopDate.focus();
+  else addStamp.focus();
+});
+pageSvg.addEventListener('click', () => {
+  if (pageSvg.hasAttribute('href')) track('passport_page_svg_downloaded', {count: pageStamps.length});
+});
+pagePng.addEventListener('click', async () => {
+  const request = pageRequest;
+  pagePng.disabled = true;
+  try {
+    const file = await pngFile(pageImage.src, 'passport-page', 1600, 2000);
+    if (request !== pageRequest) return;
+    saveFile(file);
+    track('passport_page_png_saved', {count: pageStamps.length});
+    pageStatus.textContent = 'Page image saved.';
+  } catch {
+    if (request === pageRequest) pageStatus.textContent = 'Could not create the image. Download the page SVG instead.';
+  } finally {
+    if (request === pageRequest) pagePng.disabled = false;
+  }
+});
+
+// Curated inks come from the core so the swatches match pickStampColor().
+import('../dist/core/index.js').then(({stampInkColors}) => {
+  workshopSwatches.replaceChildren(...stampInkColors.map(color => {
+    const label = document.createElement('label');
+    label.className = 'workshop-swatch';
+    label.title = color;
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'workshop-ink';
+    input.value = color;
+    input.setAttribute('aria-label', `Ink ${color}`);
+    const dot = document.createElement('i');
+    dot.style.background = color;
+    label.append(input, dot);
+    return label;
+  }));
+}).catch(() => {});
+
 ready.then(() => {
+  void updatePassportPage();
   // Read before restoreLocation() rewrites the query string; stamp pages link here with ?make=<id>.
   const make = byId.get(new URLSearchParams(location.search).get('make') ?? '');
   updateWorkshopCities(workshopCity.value);
   restoreLocation();
   if (make) makeInWorkshop(make, 'page');
+  else updateWorkshop();
 }).catch(() => {
   status.textContent = 'Could not load the collection. Reload the page or browse all stamps on one page.';
 });
